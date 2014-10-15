@@ -1,0 +1,42 @@
+;; Object python-environment/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "python-environment/"
+  :tables
+  (list
+    (semanticdb-table "python-environment.el"
+      :major-mode 'emacs-lisp-mode
+      :tags 
+        '( ("cl" include nil nil [1016 1029])
+            ("deferred" include nil nil [1031 1050])
+            ("python-environment-version" variable
+               (:constant-flag t
+                :default-value "0.0.2alpha0")
+                nil [1052 1103])
+            ("python-environment-directory" variable (:default-value (locate-user-emacs-file ".python-environments")) nil [1105 1488])
+            ("python-environment-default-root-name" variable (:default-value "default") nil [1490 1849])
+            ("python-environment-virtualenv" variable (:default-value (list "virtualenv" "--system-site-packages" "--quiet")) nil [1851 2767])
+            ("python-environment--verbose" variable nil nil [2769 2809])
+            ("python-environment--deferred-process" function (:arguments ("msg" "command")) nil [2811 3142])
+            ("python-environment--blocking-process" function (:arguments ("msg" "command")) nil [3144 3864])
+            ("python-environment-root-path" function (:arguments ("root")) nil [3867 4037])
+            ("python-environment--make-with-runner" function (:arguments ("proc-runner" "root" "virtualenv")) nil [4039 4635])
+            ("python-environment-make" function (:arguments ("root" "virtualenv")) nil [4637 5495])
+            ("python-environment-make-block" function (:arguments ("root" "virtualenv")) nil [5497 5824])
+            ("python-environment-exists-p" function (:arguments ("root")) nil [5826 6077])
+            ("python-environment--existing" function (:arguments ("root" "paths")) nil [6079 6400])
+            ("python-environment-bin" function (:arguments ("path" "root")) nil [6402 6925])
+            ("python-environment-lib" function (:arguments ("path" "root")) nil [6927 7316])
+            ("python-environment--run-with-runner" function (:arguments ("proc-runner" "command" "root")) nil [7318 7573])
+            ("python-environment--run-1" function (:arguments ("command" "root")) nil [7575 7731])
+            ("python-environment--run-block-1" function (:arguments ("command" "root")) nil [7733 7885])
+            ("python-environment-run" function (:arguments ("command" "root" "virtualenv")) nil [7887 8744])
+            ("python-environment-run-block" function (:arguments ("command" "root" "virtualenv")) nil [8746 9160])
+            ("python-environment" package nil nil [9162 9191]))          
+      :file "python-environment.el"
+      :pointmax 9300
+      :fsize 9299
+      :lastmodtime '(21490 23903 298447 634000)
+      :unmatched-syntax '((close-paren 1029 . 1030) (symbol 998 . 1015) (open-paren 997 . 998))))
+  :file "!home!edgar!.emacs.d!el-get!python-environment!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

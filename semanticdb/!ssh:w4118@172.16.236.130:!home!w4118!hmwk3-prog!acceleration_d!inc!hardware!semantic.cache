@@ -1,0 +1,1032 @@
+;; Object hardware/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "hardware/"
+  :tables
+  (list
+    (semanticdb-table "sensors.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("ANDROID_SENSORS_INTERFACE_H" variable (:constant-flag t) nil [666 693])
+            ("stdint.h" include (:system-flag t) nil [695 714])
+            ("sys/cdefs.h" include (:system-flag t) nil [715 737])
+            ("sys/types.h" include (:system-flag t) nil [738 760])
+            ("hardware/hardware.h" include (:system-flag t) nil [762 792])
+            ("cutils/native_handle.h" include (:system-flag t) nil [793 826])
+            ("sensors_close" function
+               (:type "int"
+                :arguments 
+                  ( ("device" variable
+                       (:pointer 1
+                        :type ("sensors_poll_device_t" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [15312 15349]))                  
+                :typemodifiers ("extern" "\"C\"" "static" "inline"))
+                (reparse-symbol extern-c-contents) [15280 15403])
+            ("sensors_open" function
+               (:type "int"
+                :arguments 
+                  ( ("module" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("hw_module_t" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [15087 15120])
+                    ("device" variable
+                       (:pointer 2
+                        :type ("sensors_poll_device_t" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [15129 15167]))                  
+                :typemodifiers ("extern" "\"C\"" "static" "inline"))
+                (reparse-symbol extern-c-contents) [15056 15278])
+            ("sensors_poll_device_t" type
+               (:typemodifiers ("extern" "\"C\"")
+                :type "struct"
+                :members 
+                  ( ("common" variable (:type ("hw_device_t" type
+                         (:prototype t
+                          :type "struct")
+                          nil nil)) (reparse-symbol classsubparts) [13812 13838])
+                    ("activate" function
+                       (:prototype-flag t
+                        :function-pointer t
+                        :arguments 
+                          ( ("dev" variable
+                               (:pointer 1
+                                :type ("sensors_poll_device_t" type
+                                     (:prototype t
+                                      :type "struct")
+                                      nil nil))
+                                (reparse-symbol arg-sub-list) [14111 14145])
+                            ("handle" variable (:type "int") (reparse-symbol arg-sub-list) [14158 14169])
+                            ("enabled" variable (:type "int") (reparse-symbol arg-sub-list) [14170 14182]))                          
+                        :type "int")
+                        (reparse-symbol classsubparts) [14095 14183])
+                    ("setDelay" function
+                       (:prototype-flag t
+                        :function-pointer t
+                        :arguments 
+                          ( ("dev" variable
+                               (:pointer 1
+                                :type ("sensors_poll_device_t" type
+                                     (:prototype t
+                                      :type "struct")
+                                      nil nil))
+                                (reparse-symbol arg-sub-list) [14555 14589])
+                            ("handle" variable (:type "int") (reparse-symbol arg-sub-list) [14602 14613])
+                            ("ns" variable (:type ("int64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [14614 14625]))                          
+                        :type "int")
+                        (reparse-symbol classsubparts) [14539 14626])
+                    ("poll" function
+                       (:prototype-flag t
+                        :function-pointer t
+                        :arguments 
+                          ( ("dev" variable
+                               (:pointer 1
+                                :type ("sensors_poll_device_t" type
+                                     (:prototype t
+                                      :type "struct")
+                                      nil nil))
+                                (reparse-symbol arg-sub-list) [14913 14947])
+                            ("data" variable
+                               (:pointer 1
+                                :type ("sensors_event_t" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [14960 14982])
+                            ("count" variable (:type "int") (reparse-symbol arg-sub-list) [14983 14993]))                          
+                        :type "int")
+                        (reparse-symbol classsubparts) [14901 14994]))                  )
+                (reparse-symbol extern-c-contents) [13777 14997])
+            ("sensor_t" type
+               (:typemodifiers ("extern" "\"C\"")
+                :type "struct"
+                :members 
+                  ( ("name" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol classsubparts) [12386 12407])
+                    ("vendor" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol classsubparts) [12450 12473])
+                    ("version" variable (:type "int") (reparse-symbol classsubparts) [12745 12769])
+                    ("handle" variable (:type "int") (reparse-symbol classsubparts) [12968 12991])
+                    ("type" variable (:type "int") (reparse-symbol classsubparts) [13026 13047])
+                    ("maxRange" variable (:type "float") (reparse-symbol classsubparts) [13112 13137])
+                    ("resolution" variable (:type "float") (reparse-symbol classsubparts) [13215 13242])
+                    ("power" variable (:type "float") (reparse-symbol classsubparts) [13313 13335])
+                    ("minDelay" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [13544 13569])
+                    ("reserved" variable
+                       (:pointer 1
+                        :dereference 1
+                        :type "void")
+                        (reparse-symbol classsubparts) [13614 13642]))                  )
+                (reparse-symbol extern-c-contents) [12333 13645])
+            ("sensors_module_t" type
+               (:typemodifiers ("extern" "\"C\"")
+                :type "struct"
+                :members 
+                  ( ("common" variable (:type ("hw_module_t" type
+                         (:prototype t
+                          :type "struct")
+                          nil nil)) (reparse-symbol classsubparts) [12064 12090])
+                    ("get_sensors_list" function
+                       (:prototype-flag t
+                        :function-pointer t
+                        :arguments 
+                          ( ("module" variable
+                               (:pointer 1
+                                :type ("sensors_module_t" type
+                                     (:prototype t
+                                      :type "struct")
+                                      nil nil))
+                                (reparse-symbol arg-sub-list) [12253 12285])
+                            ("list" variable
+                               (:pointer 2
+                                :constant-flag t
+                                :type ("sensor_t" type
+                                     (:prototype t
+                                      :type "struct")
+                                      nil nil))
+                                (reparse-symbol arg-sub-list) [12298 12327]))                          
+                        :type "int")
+                        (reparse-symbol classsubparts) [12229 12328]))                  )
+                (reparse-symbol extern-c-contents) [12034 12331])
+            ("sensor_t" type
+               (:typemodifiers ("extern" "\"C\"")
+                :type "struct"
+                :prototype t)
+                (reparse-symbol extern-c-contents) [11817 11833])
+            ("sensors_event_t" type
+               (:typemodifiers ("extern" "\"C\"")
+                :type "typedef"
+                :typedef ("sensors_event_t" type (:type "struct") nil nil))
+                (reparse-symbol extern-c-contents) [10636 11813])
+            ("sensors_event_t" type
+               (:typemodifiers ("extern" "\"C\"")
+                :type "struct"
+                :members 
+                  ( ("version" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [10722 10738])
+                    ("sensor" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [10772 10787])
+                    ("type" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [10815 10828])
+                    ("reserved0" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [10853 10871])
+                    ("timestamp" variable (:type ("int64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [10909 10927])
+                    ("" type
+                       (:members 
+                          ( ("data" variable
+                               (:dereference 1
+                                :type "float")
+                                (reparse-symbol classsubparts) [10949 10974])
+                            ("acceleration" variable (:type ("sensors_vec_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [11061 11090])
+                            ("magnetic" variable (:type ("sensors_vec_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [11161 11186])
+                            ("orientation" variable (:type ("sensors_vec_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [11244 11272])
+                            ("gyro" variable (:type ("sensors_vec_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [11326 11347])
+                            ("temperature" variable (:type "float") (reparse-symbol classsubparts) [11418 11446])
+                            ("distance" variable (:type "float") (reparse-symbol classsubparts) [11494 11519])
+                            ("light" variable (:type "float") (reparse-symbol classsubparts) [11565 11587])
+                            ("pressure" variable (:type "float") (reparse-symbol classsubparts) [11641 11666])
+                            ("relative_humidity" variable (:type "float") (reparse-symbol classsubparts) [11719 11753]))                          
+                        :type "union")
+                        (reparse-symbol classsubparts) [10933 11760])
+                    ("reserved1" variable
+                       (:dereference 1
+                        :type ("uint32_t" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [11765 11794]))                  )
+                (reparse-symbol extern-c-contents) [10636 11813])
+            ("sensors_vec_t" type
+               (:typemodifiers ("extern" "\"C\"")
+                :type "typedef"
+                :typedef ("" type
+                     (:members 
+                        ( ("" type
+                             (:members 
+                                ( ("v" variable
+                                     (:dereference 1
+                                      :type "float")
+                                      (reparse-symbol classsubparts) [10282 10293])
+                                  ("" type
+                                     (:members 
+                                        ( ("x" variable (:type "float") (reparse-symbol classsubparts) [10323 10331])
+                                          ("y" variable (:type "float") (reparse-symbol classsubparts) [10344 10352])
+                                          ("z" variable (:type "float") (reparse-symbol classsubparts) [10365 10373]))                                        
+                                      :type "struct")
+                                      (reparse-symbol classsubparts) [10302 10384])
+                                  ("" type
+                                     (:members 
+                                        ( ("azimuth" variable (:type "float") (reparse-symbol classsubparts) [10414 10428])
+                                          ("pitch" variable (:type "float") (reparse-symbol classsubparts) [10441 10453])
+                                          ("roll" variable (:type "float") (reparse-symbol classsubparts) [10466 10477]))                                        
+                                      :type "struct")
+                                      (reparse-symbol classsubparts) [10393 10488]))                                
+                              :type "union")
+                              (reparse-symbol classsubparts) [10266 10495])
+                          ("status" variable (:type ("int8_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [10500 10514])
+                          ("reserved" variable
+                             (:dereference 1
+                              :type ("uint8_t" type (:type "class") nil nil))
+                              (reparse-symbol classsubparts) [10519 10539]))                        
+                      :type "struct")
+                      nil nil))
+                (reparse-symbol extern-c-contents) [10245 10556])
+            ("SENSOR_STATUS_ACCURACY_HIGH" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [2562 2589])
+            ("SENSOR_STATUS_ACCURACY_MEDIUM" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [2520 2549])
+            ("SENSOR_STATUS_ACCURACY_LOW" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [2478 2504])
+            ("SENSOR_STATUS_UNRELIABLE" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [2436 2460])
+            ("MAGNETIC_FIELD_EARTH_MIN" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [2356 2380])
+            ("MAGNETIC_FIELD_EARTH_MAX" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [2262 2286])
+            ("GRAVITY_EARTH" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [2169 2182])
+            ("GRAVITY_SUN" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [2128 2139])
+            ("SENSOR_TYPE_AMBIENT_TEMPERATURE" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1959 1990])
+            ("SENSOR_TYPE_RELATIVE_HUMIDITY" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1916 1945])
+            ("SENSOR_TYPE_ROTATION_VECTOR" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1873 1900])
+            ("SENSOR_TYPE_LINEAR_ACCELERATION" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1830 1861])
+            ("SENSOR_TYPE_GRAVITY" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1788 1807])
+            ("SENSOR_TYPE_PROXIMITY" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1746 1767])
+            ("SENSOR_TYPE_TEMPERATURE" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1688 1711])
+            ("SENSOR_TYPE_PRESSURE" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1646 1666])
+            ("SENSOR_TYPE_LIGHT" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1604 1621])
+            ("SENSOR_TYPE_GYROSCOPE" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1562 1583])
+            ("SENSOR_TYPE_ORIENTATION" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1520 1543])
+            ("SENSOR_TYPE_MAGNETIC_FIELD" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1478 1504])
+            ("SENSOR_TYPE_ACCELEROMETER" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1436 1461])
+            ("SENSORS_HANDLE_COUNT" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1345 1365])
+            ("SENSORS_HANDLE_BITS" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1303 1322])
+            ("SENSORS_HANDLE_BASE" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1261 1280])
+            ("SENSORS_HARDWARE_POLL" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [976 997])
+            ("SENSORS_HARDWARE_MODULE_ID" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [884 910])
+            ("sensors_close" function
+               (:type "int"
+                :arguments 
+                  ( ("device" variable
+                       (:pointer 1
+                        :type ("sensors_poll_device_t" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [15312 15349]))                  
+                :typemodifiers ("extern" "\"C\"" "static" "inline"))
+                (reparse-symbol extern-c-contents) [15280 15403])
+            ("sensors_open" function
+               (:type "int"
+                :arguments 
+                  ( ("module" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("hw_module_t" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [15087 15120])
+                    ("device" variable
+                       (:pointer 2
+                        :type ("sensors_poll_device_t" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [15129 15167]))                  
+                :typemodifiers ("extern" "\"C\"" "static" "inline"))
+                (reparse-symbol extern-c-contents) [15056 15278])
+            ("sensors_poll_device_t" type
+               (:typemodifiers ("extern" "\"C\"")
+                :type "struct"
+                :members 
+                  ( ("common" variable (:type ("hw_device_t" type
+                         (:prototype t
+                          :type "struct")
+                          nil nil)) (reparse-symbol classsubparts) [13812 13838])
+                    ("activate" function
+                       (:prototype-flag t
+                        :function-pointer t
+                        :arguments 
+                          ( ("dev" variable
+                               (:pointer 1
+                                :type ("sensors_poll_device_t" type
+                                     (:prototype t
+                                      :type "struct")
+                                      nil nil))
+                                (reparse-symbol arg-sub-list) [14111 14145])
+                            ("handle" variable (:type "int") (reparse-symbol arg-sub-list) [14158 14169])
+                            ("enabled" variable (:type "int") (reparse-symbol arg-sub-list) [14170 14182]))                          
+                        :type "int")
+                        (reparse-symbol classsubparts) [14095 14183])
+                    ("setDelay" function
+                       (:prototype-flag t
+                        :function-pointer t
+                        :arguments 
+                          ( ("dev" variable
+                               (:pointer 1
+                                :type ("sensors_poll_device_t" type
+                                     (:prototype t
+                                      :type "struct")
+                                      nil nil))
+                                (reparse-symbol arg-sub-list) [14555 14589])
+                            ("handle" variable (:type "int") (reparse-symbol arg-sub-list) [14602 14613])
+                            ("ns" variable (:type ("int64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [14614 14625]))                          
+                        :type "int")
+                        (reparse-symbol classsubparts) [14539 14626])
+                    ("poll" function
+                       (:prototype-flag t
+                        :function-pointer t
+                        :arguments 
+                          ( ("dev" variable
+                               (:pointer 1
+                                :type ("sensors_poll_device_t" type
+                                     (:prototype t
+                                      :type "struct")
+                                      nil nil))
+                                (reparse-symbol arg-sub-list) [14913 14947])
+                            ("data" variable
+                               (:pointer 1
+                                :type ("sensors_event_t" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [14960 14982])
+                            ("count" variable (:type "int") (reparse-symbol arg-sub-list) [14983 14993]))                          
+                        :type "int")
+                        (reparse-symbol classsubparts) [14901 14994]))                  )
+                (reparse-symbol extern-c-contents) [13777 14997])
+            ("sensor_t" type
+               (:typemodifiers ("extern" "\"C\"")
+                :type "struct"
+                :members 
+                  ( ("name" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol classsubparts) [12386 12407])
+                    ("vendor" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol classsubparts) [12450 12473])
+                    ("version" variable (:type "int") (reparse-symbol classsubparts) [12745 12769])
+                    ("handle" variable (:type "int") (reparse-symbol classsubparts) [12968 12991])
+                    ("type" variable (:type "int") (reparse-symbol classsubparts) [13026 13047])
+                    ("maxRange" variable (:type "float") (reparse-symbol classsubparts) [13112 13137])
+                    ("resolution" variable (:type "float") (reparse-symbol classsubparts) [13215 13242])
+                    ("power" variable (:type "float") (reparse-symbol classsubparts) [13313 13335])
+                    ("minDelay" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [13544 13569])
+                    ("reserved" variable
+                       (:pointer 1
+                        :dereference 1
+                        :type "void")
+                        (reparse-symbol classsubparts) [13614 13642]))                  )
+                (reparse-symbol extern-c-contents) [12333 13645])
+            ("sensors_module_t" type
+               (:typemodifiers ("extern" "\"C\"")
+                :type "struct"
+                :members 
+                  ( ("common" variable (:type ("hw_module_t" type
+                         (:prototype t
+                          :type "struct")
+                          nil nil)) (reparse-symbol classsubparts) [12064 12090])
+                    ("get_sensors_list" function
+                       (:prototype-flag t
+                        :function-pointer t
+                        :arguments 
+                          ( ("module" variable
+                               (:pointer 1
+                                :type ("sensors_module_t" type
+                                     (:prototype t
+                                      :type "struct")
+                                      nil nil))
+                                (reparse-symbol arg-sub-list) [12253 12285])
+                            ("list" variable
+                               (:pointer 2
+                                :constant-flag t
+                                :type ("sensor_t" type
+                                     (:prototype t
+                                      :type "struct")
+                                      nil nil))
+                                (reparse-symbol arg-sub-list) [12298 12327]))                          
+                        :type "int")
+                        (reparse-symbol classsubparts) [12229 12328]))                  )
+                (reparse-symbol extern-c-contents) [12034 12331])
+            ("sensor_t" type
+               (:typemodifiers ("extern" "\"C\"")
+                :type "struct"
+                :prototype t)
+                (reparse-symbol extern-c-contents) [11817 11833])
+            ("sensors_event_t" type
+               (:typemodifiers ("extern" "\"C\"")
+                :type "typedef"
+                :typedef ("sensors_event_t" type (:type "struct") nil nil))
+                (reparse-symbol extern-c-contents) [10636 11813])
+            ("sensors_event_t" type
+               (:typemodifiers ("extern" "\"C\"")
+                :type "struct"
+                :members 
+                  ( ("version" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [10722 10738])
+                    ("sensor" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [10772 10787])
+                    ("type" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [10815 10828])
+                    ("reserved0" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [10853 10871])
+                    ("timestamp" variable (:type ("int64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [10909 10927])
+                    ("" type
+                       (:members 
+                          ( ("data" variable
+                               (:dereference 1
+                                :type "float")
+                                (reparse-symbol classsubparts) [10949 10974])
+                            ("acceleration" variable (:type ("sensors_vec_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [11061 11090])
+                            ("magnetic" variable (:type ("sensors_vec_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [11161 11186])
+                            ("orientation" variable (:type ("sensors_vec_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [11244 11272])
+                            ("gyro" variable (:type ("sensors_vec_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [11326 11347])
+                            ("temperature" variable (:type "float") (reparse-symbol classsubparts) [11418 11446])
+                            ("distance" variable (:type "float") (reparse-symbol classsubparts) [11494 11519])
+                            ("light" variable (:type "float") (reparse-symbol classsubparts) [11565 11587])
+                            ("pressure" variable (:type "float") (reparse-symbol classsubparts) [11641 11666])
+                            ("relative_humidity" variable (:type "float") (reparse-symbol classsubparts) [11719 11753]))                          
+                        :type "union")
+                        (reparse-symbol classsubparts) [10933 11760])
+                    ("reserved1" variable
+                       (:dereference 1
+                        :type ("uint32_t" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [11765 11794]))                  )
+                (reparse-symbol extern-c-contents) [10636 11813])
+            ("sensors_vec_t" type
+               (:typemodifiers ("extern" "\"C\"")
+                :type "typedef"
+                :typedef ("" type
+                     (:members 
+                        ( ("" type
+                             (:members 
+                                ( ("v" variable
+                                     (:dereference 1
+                                      :type "float")
+                                      (reparse-symbol classsubparts) [10282 10293])
+                                  ("" type
+                                     (:members 
+                                        ( ("x" variable (:type "float") (reparse-symbol classsubparts) [10323 10331])
+                                          ("y" variable (:type "float") (reparse-symbol classsubparts) [10344 10352])
+                                          ("z" variable (:type "float") (reparse-symbol classsubparts) [10365 10373]))                                        
+                                      :type "struct")
+                                      (reparse-symbol classsubparts) [10302 10384])
+                                  ("" type
+                                     (:members 
+                                        ( ("azimuth" variable (:type "float") (reparse-symbol classsubparts) [10414 10428])
+                                          ("pitch" variable (:type "float") (reparse-symbol classsubparts) [10441 10453])
+                                          ("roll" variable (:type "float") (reparse-symbol classsubparts) [10466 10477]))                                        
+                                      :type "struct")
+                                      (reparse-symbol classsubparts) [10393 10488]))                                
+                              :type "union")
+                              (reparse-symbol classsubparts) [10266 10495])
+                          ("status" variable (:type ("int8_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [10500 10514])
+                          ("reserved" variable
+                             (:dereference 1
+                              :type ("uint8_t" type (:type "class") nil nil))
+                              (reparse-symbol classsubparts) [10519 10539]))                        
+                      :type "struct")
+                      nil nil))
+                (reparse-symbol extern-c-contents) [10245 10556])
+            ("SENSOR_STATUS_ACCURACY_HIGH" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [2562 2589])
+            ("SENSOR_STATUS_ACCURACY_MEDIUM" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [2520 2549])
+            ("SENSOR_STATUS_ACCURACY_LOW" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [2478 2504])
+            ("SENSOR_STATUS_UNRELIABLE" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [2436 2460])
+            ("MAGNETIC_FIELD_EARTH_MIN" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [2356 2380])
+            ("MAGNETIC_FIELD_EARTH_MAX" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [2262 2286])
+            ("GRAVITY_EARTH" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [2169 2182])
+            ("GRAVITY_SUN" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [2128 2139])
+            ("SENSOR_TYPE_AMBIENT_TEMPERATURE" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1959 1990])
+            ("SENSOR_TYPE_RELATIVE_HUMIDITY" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1916 1945])
+            ("SENSOR_TYPE_ROTATION_VECTOR" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1873 1900])
+            ("SENSOR_TYPE_LINEAR_ACCELERATION" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1830 1861])
+            ("SENSOR_TYPE_GRAVITY" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1788 1807])
+            ("SENSOR_TYPE_PROXIMITY" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1746 1767])
+            ("SENSOR_TYPE_TEMPERATURE" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1688 1711])
+            ("SENSOR_TYPE_PRESSURE" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1646 1666])
+            ("SENSOR_TYPE_LIGHT" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1604 1621])
+            ("SENSOR_TYPE_GYROSCOPE" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1562 1583])
+            ("SENSOR_TYPE_ORIENTATION" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1520 1543])
+            ("SENSOR_TYPE_MAGNETIC_FIELD" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1478 1504])
+            ("SENSOR_TYPE_ACCELEROMETER" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1436 1461])
+            ("SENSORS_HANDLE_COUNT" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1345 1365])
+            ("SENSORS_HANDLE_BITS" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1303 1322])
+            ("SENSORS_HANDLE_BASE" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1261 1280])
+            ("SENSORS_HARDWARE_POLL" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [976 997])
+            ("SENSORS_HARDWARE_MODULE_ID" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [884 910])
+            ("sensors_close" function
+               (:type "int"
+                :arguments 
+                  ( ("device" variable
+                       (:pointer 1
+                        :type ("sensors_poll_device_t" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [15312 15349]))                  
+                :typemodifiers ("extern" "\"C\"" "static" "inline"))
+                (reparse-symbol extern-c-contents) [15280 15403])
+            ("sensors_open" function
+               (:type "int"
+                :arguments 
+                  ( ("module" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("hw_module_t" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [15087 15120])
+                    ("device" variable
+                       (:pointer 2
+                        :type ("sensors_poll_device_t" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [15129 15167]))                  
+                :typemodifiers ("extern" "\"C\"" "static" "inline"))
+                (reparse-symbol extern-c-contents) [15056 15278])
+            ("sensors_poll_device_t" type
+               (:typemodifiers ("extern" "\"C\"")
+                :type "struct"
+                :members 
+                  ( ("common" variable (:type ("hw_device_t" type
+                         (:prototype t
+                          :type "struct")
+                          nil nil)) (reparse-symbol classsubparts) [13812 13838])
+                    ("activate" function
+                       (:prototype-flag t
+                        :function-pointer t
+                        :arguments 
+                          ( ("dev" variable
+                               (:pointer 1
+                                :type ("sensors_poll_device_t" type
+                                     (:prototype t
+                                      :type "struct")
+                                      nil nil))
+                                (reparse-symbol arg-sub-list) [14111 14145])
+                            ("handle" variable (:type "int") (reparse-symbol arg-sub-list) [14158 14169])
+                            ("enabled" variable (:type "int") (reparse-symbol arg-sub-list) [14170 14182]))                          
+                        :type "int")
+                        (reparse-symbol classsubparts) [14095 14183])
+                    ("setDelay" function
+                       (:prototype-flag t
+                        :function-pointer t
+                        :arguments 
+                          ( ("dev" variable
+                               (:pointer 1
+                                :type ("sensors_poll_device_t" type
+                                     (:prototype t
+                                      :type "struct")
+                                      nil nil))
+                                (reparse-symbol arg-sub-list) [14555 14589])
+                            ("handle" variable (:type "int") (reparse-symbol arg-sub-list) [14602 14613])
+                            ("ns" variable (:type ("int64_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [14614 14625]))                          
+                        :type "int")
+                        (reparse-symbol classsubparts) [14539 14626])
+                    ("poll" function
+                       (:prototype-flag t
+                        :function-pointer t
+                        :arguments 
+                          ( ("dev" variable
+                               (:pointer 1
+                                :type ("sensors_poll_device_t" type
+                                     (:prototype t
+                                      :type "struct")
+                                      nil nil))
+                                (reparse-symbol arg-sub-list) [14913 14947])
+                            ("data" variable
+                               (:pointer 1
+                                :type ("sensors_event_t" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [14960 14982])
+                            ("count" variable (:type "int") (reparse-symbol arg-sub-list) [14983 14993]))                          
+                        :type "int")
+                        (reparse-symbol classsubparts) [14901 14994]))                  )
+                (reparse-symbol extern-c-contents) [13777 14997])
+            ("sensor_t" type
+               (:typemodifiers ("extern" "\"C\"")
+                :type "struct"
+                :members 
+                  ( ("name" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol classsubparts) [12386 12407])
+                    ("vendor" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol classsubparts) [12450 12473])
+                    ("version" variable (:type "int") (reparse-symbol classsubparts) [12745 12769])
+                    ("handle" variable (:type "int") (reparse-symbol classsubparts) [12968 12991])
+                    ("type" variable (:type "int") (reparse-symbol classsubparts) [13026 13047])
+                    ("maxRange" variable (:type "float") (reparse-symbol classsubparts) [13112 13137])
+                    ("resolution" variable (:type "float") (reparse-symbol classsubparts) [13215 13242])
+                    ("power" variable (:type "float") (reparse-symbol classsubparts) [13313 13335])
+                    ("minDelay" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [13544 13569])
+                    ("reserved" variable
+                       (:pointer 1
+                        :dereference 1
+                        :type "void")
+                        (reparse-symbol classsubparts) [13614 13642]))                  )
+                (reparse-symbol extern-c-contents) [12333 13645])
+            ("sensors_module_t" type
+               (:typemodifiers ("extern" "\"C\"")
+                :type "struct"
+                :members 
+                  ( ("common" variable (:type ("hw_module_t" type
+                         (:prototype t
+                          :type "struct")
+                          nil nil)) (reparse-symbol classsubparts) [12064 12090])
+                    ("get_sensors_list" function
+                       (:prototype-flag t
+                        :function-pointer t
+                        :arguments 
+                          ( ("module" variable
+                               (:pointer 1
+                                :type ("sensors_module_t" type
+                                     (:prototype t
+                                      :type "struct")
+                                      nil nil))
+                                (reparse-symbol arg-sub-list) [12253 12285])
+                            ("list" variable
+                               (:pointer 2
+                                :constant-flag t
+                                :type ("sensor_t" type
+                                     (:prototype t
+                                      :type "struct")
+                                      nil nil))
+                                (reparse-symbol arg-sub-list) [12298 12327]))                          
+                        :type "int")
+                        (reparse-symbol classsubparts) [12229 12328]))                  )
+                (reparse-symbol extern-c-contents) [12034 12331])
+            ("sensor_t" type
+               (:typemodifiers ("extern" "\"C\"")
+                :type "struct"
+                :prototype t)
+                (reparse-symbol extern-c-contents) [11817 11833])
+            ("sensors_event_t" type
+               (:typemodifiers ("extern" "\"C\"")
+                :type "struct"
+                :members 
+                  ( ("version" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [10722 10738])
+                    ("sensor" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [10772 10787])
+                    ("type" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [10815 10828])
+                    ("reserved0" variable (:type ("int32_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [10853 10871])
+                    ("timestamp" variable (:type ("int64_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [10909 10927])
+                    ("" type
+                       (:members 
+                          ( ("data" variable
+                               (:dereference 1
+                                :type "float")
+                                (reparse-symbol classsubparts) [10949 10974])
+                            ("acceleration" variable (:type ("sensors_vec_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [11061 11090])
+                            ("magnetic" variable (:type ("sensors_vec_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [11161 11186])
+                            ("orientation" variable (:type ("sensors_vec_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [11244 11272])
+                            ("gyro" variable (:type ("sensors_vec_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [11326 11347])
+                            ("temperature" variable (:type "float") (reparse-symbol classsubparts) [11418 11446])
+                            ("distance" variable (:type "float") (reparse-symbol classsubparts) [11494 11519])
+                            ("light" variable (:type "float") (reparse-symbol classsubparts) [11565 11587])
+                            ("pressure" variable (:type "float") (reparse-symbol classsubparts) [11641 11666])
+                            ("relative_humidity" variable (:type "float") (reparse-symbol classsubparts) [11719 11753]))                          
+                        :type "union")
+                        (reparse-symbol classsubparts) [10933 11760])
+                    ("reserved1" variable
+                       (:dereference 1
+                        :type ("uint32_t" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [11765 11794]))                  )
+                (reparse-symbol extern-c-contents) [10644 11813])
+            ("sensors_event_t" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :type ("sensors_event_t" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                (reparse-symbol extern-c-contents) [10644 11813])
+            ("sensors_vec_t" type
+               (:typemodifiers ("extern" "\"C\"")
+                :type "typedef"
+                :typedef ("" type
+                     (:members 
+                        ( ("" type
+                             (:members 
+                                ( ("v" variable
+                                     (:dereference 1
+                                      :type "float")
+                                      (reparse-symbol classsubparts) [10282 10293])
+                                  ("" type
+                                     (:members 
+                                        ( ("x" variable (:type "float") (reparse-symbol classsubparts) [10323 10331])
+                                          ("y" variable (:type "float") (reparse-symbol classsubparts) [10344 10352])
+                                          ("z" variable (:type "float") (reparse-symbol classsubparts) [10365 10373]))                                        
+                                      :type "struct")
+                                      (reparse-symbol classsubparts) [10302 10384])
+                                  ("" type
+                                     (:members 
+                                        ( ("azimuth" variable (:type "float") (reparse-symbol classsubparts) [10414 10428])
+                                          ("pitch" variable (:type "float") (reparse-symbol classsubparts) [10441 10453])
+                                          ("roll" variable (:type "float") (reparse-symbol classsubparts) [10466 10477]))                                        
+                                      :type "struct")
+                                      (reparse-symbol classsubparts) [10393 10488]))                                
+                              :type "union")
+                              (reparse-symbol classsubparts) [10266 10495])
+                          ("status" variable (:type ("int8_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [10500 10514])
+                          ("reserved" variable
+                             (:dereference 1
+                              :type ("uint8_t" type (:type "class") nil nil))
+                              (reparse-symbol classsubparts) [10519 10539]))                        
+                      :type "struct")
+                      nil nil))
+                (reparse-symbol extern-c-contents) [10245 10556])
+            ("SENSOR_STATUS_ACCURACY_HIGH" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [2562 2589])
+            ("SENSOR_STATUS_ACCURACY_MEDIUM" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [2520 2549])
+            ("SENSOR_STATUS_ACCURACY_LOW" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [2478 2504])
+            ("SENSOR_STATUS_UNRELIABLE" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [2436 2460])
+            ("MAGNETIC_FIELD_EARTH_MIN" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [2356 2380])
+            ("MAGNETIC_FIELD_EARTH_MAX" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [2262 2286])
+            ("GRAVITY_EARTH" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [2169 2182])
+            ("GRAVITY_SUN" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [2128 2139])
+            ("SENSOR_TYPE_AMBIENT_TEMPERATURE" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1959 1990])
+            ("SENSOR_TYPE_RELATIVE_HUMIDITY" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1916 1945])
+            ("SENSOR_TYPE_ROTATION_VECTOR" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1873 1900])
+            ("SENSOR_TYPE_LINEAR_ACCELERATION" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1830 1861])
+            ("SENSOR_TYPE_GRAVITY" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1788 1807])
+            ("SENSOR_TYPE_PROXIMITY" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1746 1767])
+            ("SENSOR_TYPE_TEMPERATURE" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1688 1711])
+            ("SENSOR_TYPE_PRESSURE" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1646 1666])
+            ("SENSOR_TYPE_LIGHT" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1604 1621])
+            ("SENSOR_TYPE_GYROSCOPE" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1562 1583])
+            ("SENSOR_TYPE_ORIENTATION" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1520 1543])
+            ("SENSOR_TYPE_MAGNETIC_FIELD" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1478 1504])
+            ("SENSOR_TYPE_ACCELEROMETER" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1436 1461])
+            ("SENSORS_HANDLE_COUNT" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1345 1365])
+            ("SENSORS_HANDLE_BITS" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1303 1322])
+            ("SENSORS_HANDLE_BASE" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [1261 1280])
+            ("SENSORS_HARDWARE_POLL" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [976 997])
+            ("SENSORS_HARDWARE_MODULE_ID" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [884 910]))          
+      :file "sensors.h"
+      :pointmax 15457
+      :fsize 15456
+      :lastmodtime '(21552 28547)
+      :unmatched-syntax '((thing 10636 . 10643) (thing 10636 . 10643))
+      :lexical-table 
+        '(("SENSORS_HANDLE_BITS" . ((number "8" 1335 . 1336)))
+          ("SENSOR_TYPE_LIGHT" . ((number "5" 1636 . 1637)))
+          ("GRAVITY_EARTH" . ((semantic-list "(9.80665f)" 2193 . 2203)))
+          ("SENSOR_STATUS_ACCURACY_MEDIUM" . ((number "2" 2552 . 2553)))
+          ("SENSOR_TYPE_GRAVITY" . ((number "9" 1820 . 1821)))
+          ("SENSORS_HANDLE_BASE" . ((number "0" 1293 . 1294)))
+          ("SENSOR_TYPE_MAGNETIC_FIELD" . ((number "2" 1510 . 1511)))
+          ("GRAVITY_SUN" . ((semantic-list "(275.0f)" 2152 . 2160)))
+          ("MAGNETIC_FIELD_EARTH_MAX" . ((semantic-list "(60.0f)" 2290 . 2297)))
+          ("SENSOR_TYPE_GYROSCOPE" . ((number "4" 1594 . 1595)))
+          ("SENSOR_TYPE_PRESSURE" . ((number "6" 1678 . 1679)))
+          ("MAGNETIC_FIELD_EARTH_MIN" . ((semantic-list "(30.0f)" 2384 . 2391)))
+          ("SENSOR_TYPE_TEMPERATURE" . ((number "7" 1720 . 1721)))
+          ("SENSOR_TYPE_ROTATION_VECTOR" . ((number "11" 1905 . 1907)))
+          ("SENSOR_STATUS_ACCURACY_HIGH" . ((number "3" 2594 . 2595)))
+          ("ANDROID_SENSORS_INTERFACE_H")
+          ("SENSORS_HANDLE_COUNT" . ((semantic-list "(1<<SENSORS_HANDLE_BITS)" 1377 . 1401)))
+          ("SENSOR_STATUS_ACCURACY_LOW" . ((number "1" 2510 . 2511)))
+          ("SENSOR_STATUS_UNRELIABLE" . ((number "0" 2468 . 2469)))
+          ("SENSOR_TYPE_ACCELEROMETER" . ((number "1" 1468 . 1469)))
+          ("SENSOR_TYPE_LINEAR_ACCELERATION" . ((number "10" 1862 . 1864)))
+          ("SENSOR_TYPE_ORIENTATION" . ((number "3" 1552 . 1553)))
+          ("SENSOR_TYPE_PROXIMITY" . ((number "8" 1778 . 1779)))
+          ("SENSORS_HARDWARE_POLL" . ((string "\"poll\"" 1004 . 1010)))
+          ("SENSOR_TYPE_AMBIENT_TEMPERATURE" . ((number "13" 1991 . 1993)))
+          ("SENSOR_TYPE_RELATIVE_HUMIDITY" . ((number "12" 1948 . 1950)))
+          ("SENSORS_HARDWARE_MODULE_ID" . ((string "\"sensors\"" 911 . 920)))
+          )
+))
+  :file "!ssh:w4118@172.16.236.130:!home!w4118!hmwk3-prog!acceleration_d!inc!hardware!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

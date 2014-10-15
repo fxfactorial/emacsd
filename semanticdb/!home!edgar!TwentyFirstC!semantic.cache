@@ -1,0 +1,36 @@
+;; Object TwentyFirstC/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "TwentyFirstC/"
+  :tables
+  (list
+    (semanticdb-table "chap6.c"
+      :major-mode 'c-mode
+      :tags 
+        '( ("stdio.h" include (:system-flag t) nil [1 19])
+            ("stdlib.h" include (:system-flag t) nil [20 39])
+            ("string.h" include (:system-flag t) nil [40 59])
+            ("ctype.h" include (:system-flag t) nil [60 78])
+            ("demo_s" type
+               (:typedef ("" type
+                     (:members 
+                        ( ("a" variable (:type "int") (reparse-symbol classsubparts) [106 115])
+                          ("b" variable (:type "int") (reparse-symbol classsubparts) [106 115])
+                          ("c" variable (:type "double") (reparse-symbol classsubparts) [124 136])
+                          ("d" variable (:type "double") (reparse-symbol classsubparts) [124 136])
+                          ("efg" variable
+                             (:pointer 1
+                              :type "int")
+                              (reparse-symbol classsubparts) [145 154]))                        
+                      :type "struct")
+                      nil nil)
+                :type "typedef")
+                nil [82 163])
+            ("main" function (:type "int") nil [165 344]))          
+      :file "chap6.c"
+      :pointmax 368
+      :fsize 367
+      :lastmodtime '(21523 29080 844984 206000)
+      :unmatched-syntax nil))
+  :file "!home!edgar!TwentyFirstC!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

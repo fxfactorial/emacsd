@@ -1,0 +1,369 @@
+;; Object preview/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "preview/"
+  :tables
+  (list
+    (semanticdb-table "preview.el"
+      :major-mode 'emacs-lisp-mode
+      :tags 
+        '( ("tex-site" include nil nil [1453 1472])
+            ("tex" include nil nil [1473 1487])
+            ("tex-buf" include nil nil [1488 1506])
+            ("latex" include nil nil [1507 1523])
+            ("error" variable nil nil [1925 1939])
+            ("info" include nil nil [1907 1922])
+            ("condition-case" code nil nil [1704 1904])
+            ("condition-case" code nil nil [1546 1701])
+            ("if" code nil nil [2033 2093])
+            ("preview" customgroup (:user-visible-flag t) nil [2247 2528])
+            ("preview-gs" customgroup (:user-visible-flag t) nil [2530 2628])
+            ("preview-appearance" customgroup (:user-visible-flag t) nil [2630 2730])
+            ("preview-specs-type" variable
+               (:constant-flag t
+                :default-value (quote (repeat (list :tag "Image spec" (const :format "" :value :type) (choice :tag "Image type" (const xpm) (const xbm) (symbol :tag "Other")) (set :inline t :tag "Minimum font size" (list :inline t :tag "" (const :format "" :value :min) (integer :tag "pixels"))) (const :format "" :value :file) (string :tag "Filename") (set :inline t :tag "Ascent ratio" (list :inline t :tag "" (const :format "" :value :ascent) (integer :tag "percent of image" :value 50)))))))
+                nil [2732 3464])
+            ("preview-specs-setter" function (:arguments ("symbol" "value")) nil [3466 3713])
+            ("preview-nonready-icon-specs" variable (:default-value (quote ((:type xpm :min 26 :file "prvwrk24.xpm" :ascent 90) (:type xpm :min 22 :file "prvwrk20.xpm" :ascent 90) (:type xpm :min 17 :file "prvwrk16.xpm" :ascent 90) (:type xpm :min 15 :file "prvwrk14.xpm" :ascent 90) (:type xpm :file "prvwrk12.xpm" :ascent 90) (:type xbm :file "prvwrk24.xbm" :ascent 90)))) nil [3715 4580])
+            ("preview-nonready-icon" variable nil nil [4582 4612])
+            ("preview-error-icon-specs" variable (:default-value (quote ((:type xpm :min 22 :file "prverr24.xpm" :ascent 90) (:type xpm :min 18 :file "prverr20.xpm" :ascent 90) (:type xpm :file "prverr16.xpm" :ascent 90) (:type xbm :file "prverr24.xbm" :ascent 90)))) nil [4614 5358])
+            ("preview-error-icon" variable nil nil [5360 5387])
+            ("preview-icon-specs" variable (:default-value (quote ((:type xpm :min 24 :file "prvtex24.xpm" :ascent 75) (:type xpm :min 20 :file "prvtex20.xpm" :ascent 75) (:type xpm :min 16 :file "prvtex16.xpm" :ascent 75) (:type xpm :file "prvtex12.xpm" :ascent 75) (:type xbm :min 24 :file "prvtex24.xbm" :ascent 75) (:type xbm :min 16 :file "prvtex16.xbm" :ascent 75) (:type xbm :file "prvtex12.xbm" :ascent 75)))) nil [5389 6292])
+            ("preview-icon" variable nil nil [6294 6315])
+            ("preview-latex" customgroup (:user-visible-flag t) nil [6317 6413])
+            ("preview-image-creators" variable (:default-value (quote ((dvipng (open preview-gs-open preview-dvipng-process-setup) (place preview-gs-place) (close preview-dvipng-close)) (png (open preview-gs-open) (place preview-gs-place) (close preview-gs-close)) (jpeg (open preview-gs-open) (place preview-gs-place) (close preview-gs-close)) (pnm (open preview-gs-open) (place preview-gs-place) (close preview-gs-close)) (tiff (open preview-gs-open) (place preview-gs-place) (close preview-gs-close))))) nil [6415 7970])
+            ("preview-gs-image-type-alist" variable
+               (:user-visible-flag t
+                :default-value (quote ((png png "-sDEVICE=png16m") (dvipng png "-sDEVICE=png16m") (jpeg jpeg "-sDEVICE=jpeg") (pnm pbm "-sDEVICE=pnmraw") (tiff tiff "-sDEVICE=tiff12nc"))))
+                nil [7972 8604])
+            ("preview-image-type" variable
+               (:user-visible-flag t
+                :default-value (quote png))
+                nil [8606 8836])
+            ("preview-call-hook" function (:arguments ("symbol" "rest")) nil [8838 9352])
+            ("TeX-active-tempdir" variable nil nil [9361 9460])
+            ("make-variable-buffer-local" code nil nil [9461 9509])
+            ("preview-bb-filesize" variable (:default-value 1024) nil [9511 9643])
+            ("preview-preserve-indentation" variable
+               (:user-visible-flag t
+                :default-value t)
+                nil [9645 9797])
+            ("preview-extract-bb" function (:arguments ("filename")) nil [9799 10444])
+            ("preview-prefer-TeX-bb" variable (:user-visible-flag t) nil [10446 10692])
+            ("preview-TeX-bb-border" variable
+               (:user-visible-flag t
+                :default-value 0.5)
+                nil [10694 10826])
+            ("preview-coding-system" variable nil nil [10828 10904])
+            ("make-variable-buffer-local" code nil nil [10905 10956])
+            ("preview-parsed-font-size" variable nil nil [10957 11045])
+            ("make-variable-buffer-local" code nil nil [11046 11100])
+            ("preview-parsed-magnification" variable nil nil [11101 11197])
+            ("make-variable-buffer-local" code nil nil [11198 11256])
+            ("preview-parsed-pdfoutput" variable nil nil [11257 11345])
+            ("make-variable-buffer-local" code nil nil [11346 11400])
+            ("preview-parsed-counters" variable nil nil [11401 11487])
+            ("make-variable-buffer-local" code nil nil [11488 11541])
+            ("preview-parsed-tightpage" variable nil nil [11542 11630])
+            ("make-variable-buffer-local" code nil nil [11631 11685])
+            ("preview-get-magnification" function nil nil [11687 11868])
+            ("preview-TeX-bb" function (:arguments ("list")) nil [11870 12654])
+            ("preview-gs-command" variable
+               (:user-visible-flag t
+                :default-value (or (executable-find "rungs") (let ((gs (executable-find "mgs"))) (when (and gs (= 0 (shell-command (concat gs " -q -dNODISPLAY -c quit")))) gs)) (executable-find "GSWIN32C.EXE") (executable-find "gs")))
+                nil [12656 13309])
+            ("preview-gs-options" variable
+               (:user-visible-flag t
+                :default-value (quote ("-q" "-dDELAYSAFER" "-dNOPAUSE" "-DNOPLATFONTS" "-dPrinted" "-dTextAlphaBits=4" "-dGraphicsAlphaBits=4")))
+                nil [13311 13597])
+            ("preview-gs-queue" variable nil nil [13599 13722])
+            ("make-variable-buffer-local" code nil nil [13723 13769])
+            ("preview-gs-outstanding" variable nil nil [13771 13840])
+            ("make-variable-buffer-local" code nil nil [13841 13893])
+            ("preview-gs-outstanding-limit" variable
+               (:user-visible-flag t
+                :default-value 2)
+                nil [13895 14483])
+            ("preview-gs-answer" variable nil nil [14485 14562])
+            ("make-variable-buffer-local" code nil nil [14563 14610])
+            ("preview-gs-image-type" variable nil nil [14612 14685])
+            ("make-variable-buffer-local" code nil nil [14686 14737])
+            ("preview-gs-sequence" variable nil nil [14739 14824])
+            ("make-variable-buffer-local" code nil nil [14825 14874])
+            ("preview-scale" variable nil nil [14876 15036])
+            ("make-variable-buffer-local" code nil nil [15037 15080])
+            ("preview-colors" variable nil nil [15082 15339])
+            ("make-variable-buffer-local" code nil nil [15340 15384])
+            ("preview-gs-init-string" variable nil nil [15386 15451])
+            ("make-variable-buffer-local" code nil nil [15452 15504])
+            ("preview-ps-file" variable nil nil [15506 15580])
+            ("make-variable-buffer-local" code nil nil [15581 15626])
+            ("preview-gs-dsc" variable nil nil [15628 15683])
+            ("make-variable-buffer-local" code nil nil [15684 15728])
+            ("preview-resolution" variable nil nil [15730 15900])
+            ("make-variable-buffer-local" code nil nil [15901 15949])
+            ("preview-gs-resolution" function (:arguments ("scale" "xres" "yres")) nil [15951 16248])
+            ("preview-gs-behead-outstanding" function (:arguments ("err")) nil [16250 16579])
+            ("preview-gs-command-line" variable nil nil [16585 16621])
+            ("make-variable-buffer-local" code nil nil [16622 16675])
+            ("preview-gs-file" variable nil nil [16676 16704])
+            ("make-variable-buffer-local" code nil nil [16705 16750])
+            ("preview-fast-conversion" variable
+               (:user-visible-flag t
+                :default-value t)
+                nil [16752 16958])
+            ("preview-string-expand" function (:arguments ("arg" "separator")) nil [16960 18158])
+            ("preview-expandable-string" variable
+               (:constant-flag t
+                :default-value ((lambda (f) (funcall f (funcall f (quote sexp)))) (lambda (x) (\` (choice string (repeat :tag "Concatenate" (choice string (cons :tag "Separated list" (choice (string :tag "Separator") (symbol :tag "Indirect separator or flag")) (\, x)) (symbol :tag "Indirect variable (no separator)"))) (symbol :tag "Indirect variable (with separator)"))))))
+                nil [18160 18996])
+            ("preview-dvipng-command" variable
+               (:user-visible-flag t
+                :default-value "dvipng -picky -noghostscript %d -o \"%m/prev%%03d.png\"")
+                nil [18998 19312])
+            ("preview-dvipng-image-type" variable
+               (:user-visible-flag t
+                :default-value (quote png))
+                nil [19314 19577])
+            ("preview-dvips-command" variable
+               (:user-visible-flag t
+                :default-value "dvips -Pwww -i -E %d -o %m/preview.000")
+                nil [19579 19752])
+            ("preview-fast-dvips-command" variable
+               (:user-visible-flag t
+                :default-value "dvips -Pwww %d -o %m/preview.ps")
+                nil [19754 19922])
+            ("preview-pdf2dsc-command" variable
+               (:user-visible-flag t
+                :default-value "pdf2dsc %s.pdf %m/preview.dsc")
+                nil [19924 20087])
+            ("preview-gs-queue-empty" function nil nil [20089 20382])
+            ("preview-error-condition" variable nil nil [20384 20462])
+            ("preview-log-error" function (:arguments ("err" "context" "process")) nil [20464 21197])
+            ("preview-reraise-error" function (:arguments ("process")) nil [21199 21604])
+            ("preview-gs-sentinel" function (:arguments ("process" "string")) nil [21606 23659])
+            ("preview-gs-filter" function (:arguments ("process" "string")) nil [23661 24325])
+            ("preview-gs-restart" function nil nil [24327 25705])
+            ("preview-gs-open" function (:arguments ("setup")) nil [25707 26698])
+            ("preview-gs-color-value" function (:arguments ("value")) nil [26700 26919])
+            ("preview-pdf-color-string" function (:arguments ("colors")) nil [26921 27468])
+            ("preview-gs-color-string" function (:arguments ("colors")) nil [27470 28394])
+            ("preview-dvipng-color-string" function (:arguments ("colors" "res")) nil [28396 29108])
+            ("preview-gs-dvips-process-setup" function nil nil [29110 29870])
+            ("preview-dvipng-process-setup" function nil nil [29872 30765])
+            ("preview-pdf2dsc-process-setup" function nil nil [30768 31008])
+            ("preview-dvips-abort" function nil nil [31010 31416])
+            ("defalias" code nil nil [31418 31471])
+            ("preview-gs-dvips-sentinel" function (:arguments ("process" "command" "gsstart")) nil [31499 32543])
+            ("preview-pdf2dsc-sentinel" function (:arguments ("process" "command" "gsstart")) nil [32545 33507])
+            ("preview-gs-close" function (:arguments ("process" "closedata")) nil [33509 34527])
+            ("preview-dvipng-sentinel" function (:arguments ("process" "command" "placeall")) nil [34529 35190])
+            ("preview-dvipng-close" function (:arguments ("process" "closedata")) nil [35192 36082])
+            ("preview-dsc-parse" function (:arguments ("file")) nil [36084 37491])
+            ("preview-gs-dsc-cvx" function (:arguments ("page" "dsc")) nil [37493 37886])
+            ("preview-ps-quote-filename" function (:arguments ("str" "nonrel")) nil [37890 38291])
+            ("preview-prepare-fast-conversion" function nil nil [38293 39127])
+            ("preview-gs-urgentize" function (:arguments ("ov" "buff")) nil [39129 40056])
+            ("preview-gs-place" function (:arguments ("ov" "snippet" "box" "run-buffer" "tempdir" "ps-file" "imagetype")) nil [40059 41081])
+            ("preview-mouse-open-error" function (:arguments ("string")) nil [41083 41520])
+            ("preview-mouse-open-eps" function (:arguments ("file" "position")) nil [41522 42357])
+            ("preview-gs-flag-error" function (:arguments ("ov" "err")) nil [42359 43567])
+            ("preview-gs-transact" function (:arguments ("process" "answer")) nil [43569 46543])
+            ("preview-hook-enquiry" function (:arguments ("hook")) nil [46545 47073])
+            ("preview-scale-function" variable
+               (:user-visible-flag t
+                :default-value (function preview-scale-from-face))
+                nil [47080 47424])
+            ("preview-default-document-pt" variable
+               (:user-visible-flag t
+                :default-value 10)
+                nil [47426 47921])
+            ("preview-document-pt-list" variable
+               (:user-visible-flag t
+                :default-value (quote (preview-parsed-font-size preview-auctex-font-size preview-default-document-pt)))
+                nil [47923 48415])
+            ("preview-auctex-font-size" function nil nil [48417 48856])
+            ("preview-document-pt" function nil nil [48858 48990])
+            ("preview-scale-from-face" function nil nil [48992 49411])
+            ("preview-min-spec" variable nil nil [49413 49438])
+            ("preview-make-image" function (:arguments ("symbol")) nil [49440 49947])
+            ("preview-filter-specs" function (:arguments ("spec-list")) nil [49949 50247])
+            ("preview-filter-specs-1" function (:arguments ("specs")) nil [50249 50494])
+            ("put" code nil nil [50496 50679])
+            ("preview-datadir" variable (:default-value (file-name-directory load-file-name)) nil [50681 50896])
+            ("put" code nil nil [50898 51101])
+            ("preview-lispdir" variable (:default-value TeX-lisp-directory) nil [51103 51206])
+            ("preview-ascent-from-bb" function (:arguments ("bb")) nil [51208 51898])
+            ("preview-face" variable
+               (:default-value (quote ((((background dark)) (:background "dark slate gray")) (t (:background "beige"))))
+                :type "face")
+                nil [51900 52085])
+            ("preview-reference-face" variable
+               (:default-value (quote ((t nil)))
+                :type "face")
+                nil [52087 52266])
+            ("preview-auto-reveal" variable
+               (:user-visible-flag t
+                :default-value (quote (eval (preview-arrived-via (key-binding [left]) (key-binding [right]) (quote backward-char) (quote forward-char)))))
+                nil [52268 53401])
+            ("preview-auto-reveal-p" function (:arguments ("mode" "distance")) nil [53405 53982])
+            ("preview-arrived-via" function (:arguments ("list")) nil [53984 54136])
+            ("preview-equality-transforms" variable (:default-value (quote (identity preview-canonical-spaces))) nil [54138 54538])
+            ("preview-relaxed-string=" function (:arguments ("args")) nil [54540 54927])
+            ("preview-canonical-spaces" function (:arguments ("arg")) nil [54929 55584])
+            ("preview-regenerate" function (:arguments ("ovr")) nil [55586 55845])
+            ("preview-inner-environments" variable (:default-value (quote ("Bmatrix" "Vmatrix" "aligned" "array" "bmatrix" "cases" "gathered" "matrix" "pmatrix" "smallmatrix" "split" "subarray" "vmatrix"))) nil [55847 56137])
+            ("preview-next-border" function (:arguments ("backwards")) nil [56140 56914])
+            ("preview-at-point" function (:user-visible-flag t) nil [56922 57885])
+            ("preview-disabled-string" function (:arguments ("ov")) nil [57887 58397])
+            ("preview-disable" function (:arguments ("ovr")) nil [58399 58931])
+            ("preview-delete" function (:arguments ("ovr" "ignored")) nil [58933 59350])
+            ("preview-clearout" function
+               (:user-visible-flag t
+                :arguments ("start" "end" "timestamp"))
+                nil [59352 59959])
+            ("preview-clearout-buffer" function
+               (:user-visible-flag t
+                :arguments ("buffer"))
+                nil [59961 60176])
+            ("preview-clearout-section" function (:user-visible-flag t) nil [60178 60370])
+            ("preview-clearout-at-point" function (:user-visible-flag t) nil [60372 60548])
+            ("preview-walk-document" function (:arguments ("func")) nil [60550 61247])
+            ("preview-clearout-document" function (:user-visible-flag t) nil [61249 61544])
+            ("preview-kill-buffer-cleanup" function (:arguments ("buf")) nil [61546 61962])
+            ("add-hook" code nil nil [61964 62022])
+            ("add-hook" code nil nil [62023 62083])
+            ("preview-last-counter" variable nil nil [62085 62114])
+            ("preview-extract-counters" function (:arguments ("ctr")) nil [62116 62308])
+            ("desktop-buffer-preview-misc-data" function (:arguments ("ignored")) nil [62310 63011])
+            ("eval-after-load" code nil nil [63013 63128])
+            ("preview-temp-dirs" variable nil nil [63130 63299])
+            ("preview-dissect" function (:arguments ("ov" "timestamp")) nil [63301 63771])
+            ("preview-buffer-restore-internal" function (:arguments ("buffer-misc")) nil [63773 64592])
+            ("preview-buffer-restore" function (:arguments ("buffer-misc")) nil [64595 65006])
+            ("desktop-buffer-preview" function (:arguments ("desktop-buffer-file-name" "desktop-buffer-name" "desktop-buffer-misc")) nil [65010 65491])
+            ("eval-after-load" code nil nil [65493 65842])
+            ("preview-auto-cache-preamble" variable
+               (:user-visible-flag t
+                :default-value (quote ask))
+                nil [65844 66116])
+            ("preview-dumped-alist" variable nil nil [66118 66687])
+            ("preview-cleanout-tempfiles" function nil nil [66689 66942])
+            ("preview-inactive-string" function (:arguments ("ov")) nil [66944 67562])
+            ("preview-dvipng-place-all" function nil nil [67564 69301])
+            ("preview-active-string" function (:arguments ("ov")) nil [69306 69532])
+            ("preview-make-filename" function (:arguments ("file" "tempdir")) nil [69534 70228])
+            ("preview-attach-filename" function (:arguments ("attached" "file")) nil [70230 70471])
+            ("preview-delete-file" function (:arguments ("file")) nil [70473 71155])
+            ("preview-buffer-has-counters" variable nil nil [71157 71197])
+            ("make-variable-buffer-local" code nil nil [71198 71255])
+            ("preview-place-preview" function (:arguments ("snippet" "start" "end" "box" "counters" "tempdir" "place-opts")) nil [71257 72689])
+            ("preview-counter-find" function (:arguments ("begin")) nil [72842 73587])
+            ("TeX-region-create" function (:arguments ("around" "preview-counters")) nil [73589 73936])
+            ("preview-reinstate-preview" function (:arguments ("tempdirlist" "timestamp" "start" "end" "image" "filename" "counters")) nil [73938 76414])
+            ("preview-back-command" function (:arguments ("nocomplex")) nil [76416 77082])
+            ("preview-required-option-list" variable (:default-value (quote ("active" "tightpage" "auctex" (preview-preserve-counters "counters")))) nil [77084 77429])
+            ("preview-preserve-counters" variable nil nil [77431 77566])
+            ("preview-default-option-list" variable
+               (:user-visible-flag t
+                :default-value (quote ("displaymath" "floats" "graphics" "textmath" "sections" "footnotes")))
+                nil [77568 78915])
+            ("preview-default-preamble" variable
+               (:user-visible-flag t
+                :default-value (quote ("\\RequirePackage[" ("," . preview-default-option-list) "]{preview}[2004/11/05]")))
+                nil [78917 79373])
+            ("preview-LaTeX-command" variable
+               (:user-visible-flag t
+                :default-value (quote ("%`%l \"\\nonstopmode\\nofiles\\PassOptionsToPackage{" ("," . preview-required-option-list) "}{preview}\\AtBeginDocument{\\ifx\\ifPreview\\undefined" preview-default-preamble "\\fi}\"%' %t")))
+                nil [79375 79756])
+            ("preview-goto-info-page" function (:user-visible-flag t) nil [79758 79895])
+            ("eval-after-load" code nil nil [79897 80001])
+            ("preview-map" variable (:default-value (let ((map (make-sparse-keymap))) (define-key map "" (function preview-at-point)) (define-key map "" (function preview-region)) (define-key map "" (function preview-buffer)) (define-key map "" (function preview-document)) (define-key map "" (function preview-cache-preamble)) (define-key map "" (function preview-cache-preamble-off)) (define-key map "	" (function preview-goto-info-page)) (define-key map "" (function preview-environment)) (define-key map "" (function preview-section)) (define-key map "" (function preview-copy-region-as-mml)) (define-key map "" (function preview-clearout-at-point)) (define-key map "" (function preview-clearout)) (define-key map "" (function preview-clearout-section)) (define-key map "" (function preview-clearout-buffer)) (define-key map "" (function preview-clearout-document)) map)) nil [80003 80912])
+            ("preview-copy-text" function (:arguments ("ov")) nil [80914 81108])
+            ("preview-copy-mml" function (:arguments ("ov")) nil [81110 81565])
+            ("preview-copy-region-as-mml" function (:arguments ("start" "end")) nil [81567 82368])
+            ("mailcap-extension-to-mime" function (:prototype-flag t) nil [82370 82417])
+            ("preview-format-mml" function (:arguments ("ov" "dont-ask")) nil [82419 83864])
+            ("preview-active-contents" function (:arguments ("ov")) nil [83866 84030])
+            ("preview-context-menu" function (:arguments ("ov" "ev")) nil [84032 84435])
+            ("preview-TeX-style-dir" variable nil nil [84437 84467])
+            ("preview-TeX-style-cooked" function nil nil [84469 85155])
+            ("preview-set-texinputs" function
+               (:user-visible-flag t
+                :arguments ("remove"))
+                nil [85157 86184])
+            ("preview-TeX-style-dir" variable nil nil [86186 87393])
+            ("preview-install-styles" function
+               (:user-visible-flag t
+                :arguments ("dir" "force-overwrite" "force-save"))
+                nil [87410 88828])
+            ("LaTeX-preview-setup" function nil nil [88845 90433])
+            ("preview-clean-subdir" function (:arguments ("dir")) nil [90435 90739])
+            ("preview-clean-topdir" function (:arguments ("topdir")) nil [90741 91064])
+            ("preview-create-subdirectory" function nil nil [91066 92349])
+            ("if" code nil nil [92424 92524])
+            ("preview-parse-counters" function (:arguments ("string")) nil [92592 92987])
+            ("preview-parse-tightpage" function (:arguments ("string")) nil [92989 93102])
+            ("preview-parse-variables" variable (:default-value (quote (("Fontsize" preview-parsed-font-size "\\` *\\([0-9.]+\\)pt\\'" 1 string-to-number) ("Magnification" preview-parsed-magnification "\\` *\\([0-9]+\\)\\'" 1 string-to-number) ("PDFoutput" preview-parsed-pdfoutput "" 0 stringp) ("Counters" preview-parsed-counters ".*" 0 preview-parse-counters) ("Tightpage" preview-parsed-tightpage "\\` *\\(-?[0-9]+ *\\)\\{4\\}\\'" 0 preview-parse-tightpage)))) nil [93104 93572])
+            ("preview-error-quote" function (:arguments ("string" "run-coding-system")) nil [93574 94852])
+            ("preview-parse-messages" function (:arguments ("open-closure")) nil [94854 106244])
+            ("preview-get-geometry" function nil nil [106246 107192])
+            ("preview-set-geometry" function (:arguments ("geometry")) nil [107194 107476])
+            ("preview-start-dvipng" function nil nil [107478 109022])
+            ("preview-start-dvips" function (:arguments ("fast")) nil [109024 110554])
+            ("preview-start-pdf2dsc" function nil nil [110556 112080])
+            ("preview-TeX-inline-sentinel" function (:arguments ("process" "name")) nil [112082 112838])
+            ("preview-format-extensions" variable (:default-value (quote (".fmt" ".efmt"))) nil [112840 113021])
+            ("preview-format-kill" function (:arguments ("format-cons")) nil [113023 113363])
+            ("preview-dump-file-name" function (:arguments ("file")) nil [113365 113685])
+            ("preview-do-replacements" function (:arguments ("string" "replacements")) nil [113687 114432])
+            ("preview-LaTeX-disable-pdfoutput" variable
+               (:constant-flag t
+                :default-value (quote (("\\`\\(pdf[^ ]*\\)\\(\\( [-&]\\([^ \"]\\|\"[^\"]*\"\\)*\\| \"[-&][^\"]*\"\\)*\\)\\(.*\\)\\'" "\\1\\2 \"\\\\pdfoutput=0 \" \\5"))))
+                nil [114434 114724])
+            ("preview-LaTeX-command-replacements" variable nil nil [114726 115213])
+            ("preview-format-name" variable nil nil [115215 115243])
+            ("preview-dump-replacements" variable (:default-value (quote (preview-LaTeX-command-replacements ("\\`\\([^ ]+\\)\\(\\( +-\\([^ \\\\\"]\\|\\\\\\.\\|\"[^\"]*\"\\)*\\)*\\)\\(.*\\)\\'" "\\1 -ini -interaction=nonstopmode \"&\\1\" " preview-format-name ".ini \\5")))) nil [115245 115698])
+            ("preview-undump-replacements" variable (:default-value (quote (("\\`\\([^ ]+\\) .*? \"\\\\input\" \\(.*\\)\\'" "\\1 -interaction=nonstopmode \"&" preview-format-name "\" \\2")))) nil [115700 116052])
+            ("preview-cache-preamble" function
+               (:user-visible-flag t
+                :arguments ("format-cons"))
+                nil [116055 118305])
+            ("preview-cache-preamble-off" function
+               (:user-visible-flag t
+                :arguments ("old-format"))
+                nil [118307 118859])
+            ("preview-region" function
+               (:user-visible-flag t
+                :arguments ("begin" "end"))
+                nil [118861 119642])
+            ("preview-buffer" function (:user-visible-flag t) nil [119644 119763])
+            ("TeX-region-create" function (:arguments ("before" "preview-preamble" "preactivate" "activate")) nil [120331 120790])
+            ("preview-document" function (:user-visible-flag t) nil [120792 121137])
+            ("preview-environment" function
+               (:user-visible-flag t
+                :arguments ("count"))
+                nil [121148 122037])
+            ("preview-section" function (:user-visible-flag t) nil [122039 122210])
+            ("preview-generate-preview" function (:arguments ("region-p" "file" "command")) nil [122213 123627])
+            ("TeX-inline-preview-internal" function (:arguments ("command" "file" "pr-file" "commandbuff" "dumped-cons" "master" "geometry" "str")) nil [123629 125512])
+            ("preview-version" variable
+               (:constant-flag t
+                :default-value (eval-when-compile (let ((name "$Name:  $") (rev "$Revision: 1.287 $")) (or (when (string-match "\\`[$]Name: *release_\\([^ ]+\\) *[$]\\'" name) (setq name (match-string 1 name)) (while (string-match "_" name) (setq name (replace-match "." t t name))) name) (if (string-match "\\`[$]Revision: *\\([^ ]+\\) *[$]\\'" rev) (format "CVS-%s" (match-string 1 rev))) "unknown"))))
+                nil [125514 126018])
+            ("preview-release-date" variable
+               (:constant-flag t
+                :default-value (eval-when-compile (let ((date "$Date: 2012-12-04 08:01:34 $")) (string-match "\\`[$]Date: *\\([0-9]+\\)/\\([0-9]+\\)/\\([0-9]+\\)" date) (format "%s.%s%s" (match-string 1 date) (match-string 2 date) (match-string 3 date)))))
+                nil [126020 126366])
+            ("preview-dump-state" function (:arguments ("buffer")) nil [126368 126939])
+            ("preview-report-bug" function (:user-visible-flag t) nil [126956 128449])
+            ("when" code nil nil [128472 128637])
+            ("makunbound" code nil nil [128640 128682])
+            ("preview" package nil nil [128684 128702]))          
+      :file "preview.el"
+      :pointmax 128728
+      :fsize 128727
+      :lastmodtime '(21520 19527 613667 253000)
+      :unmatched-syntax '((close-paren 128637 . 128638) (symbol 128452 . 128469) (open-paren 128451 . 128452) (semantic-list 2183 . 2245) (close-paren 2093 . 2094) (symbol 2013 . 2030) (open-paren 2012 . 2013) (close-paren 1939 . 1940) (symbol 1526 . 1543) (open-paren 1525 . 1526))))
+  :file "!home!edgar!.emacs.d!el-get!auctex!preview!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

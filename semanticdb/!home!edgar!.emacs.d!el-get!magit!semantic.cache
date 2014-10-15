@@ -1,0 +1,1250 @@
+;; Object magit/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "magit/"
+  :tables
+  (list
+    (semanticdb-table "magit-svn.el"
+      :major-mode 'emacs-lisp-mode
+      :tags 
+        '( ("magit" include nil nil [1157 1173])
+            ("find-lisp" include nil nil [1216 1236])
+            ("cl-lib" include nil nil [1196 1213])
+            ("declare-function" code nil nil [1239 1298])
+            ("magit-svn" customgroup (:user-visible-flag t) nil [1313 1395])
+            ("magit-svn-externals-dir" variable (:default-value ".git_externals") nil [1397 1554])
+            ("magit-svn-find-rev" function
+               (:user-visible-flag t
+                :arguments ("rev" "branch"))
+                nil [1585 2126])
+            ("magit-svn-create-branch" function
+               (:user-visible-flag t
+                :arguments ("name"))
+                nil [2143 2301])
+            ("magit-svn-create-tag" function
+               (:user-visible-flag t
+                :arguments ("name"))
+                nil [2318 2464])
+            ("magit-svn-rebase" function (:user-visible-flag t) nil [2481 2608])
+            ("magit-svn-dcommit" function (:user-visible-flag t) nil [2625 2755])
+            ("magit-svn-remote-update" function (:user-visible-flag t) nil [2772 2914])
+            ("magit-svn-enabled" function nil nil [2931 3001])
+            ("magit-svn-expand-braces-in-branches" function (:arguments ("branch")) nil [3003 3415])
+            ("magit-svn-get-local-ref" function (:arguments ("url")) nil [3417 4651])
+            ("magit-svn-get-ref-info-cache" variable nil nil [4653 4868])
+            ("magit-svn-get-ref-info" function (:arguments ("use-cache")) nil [4870 6630])
+            ("magit-svn-get-ref" function (:arguments ("use-cache")) nil [6632 6890])
+            ("magit-insert-svn-unpulled" function nil nil [6892 7163])
+            ("magit-insert-svn-unpushed" function nil nil [7165 7436])
+            ("magit-define-section-jumper" code nil nil [7438 7506])
+            ("magit-insert-svn-remote-line" function nil nil [7508 7781])
+            ("magit-svn-fetch-externals" function (:user-visible-flag t) nil [7798 8352])
+            ("magit-svn-external-directories" function nil nil [8354 8749])
+            ("easy-menu-define" code nil nil [8764 9112])
+            ("easy-menu-add-item" code nil nil [9114 9232])
+            ("progn" code nil nil [9264 10014])
+            ("magit-svn-mode-map" variable (:default-value (let ((map (make-sparse-keymap))) (define-key map (kbd "N") (quote magit-key-mode-popup-svn)) map)) nil [10016 10145])
+            ("define-minor-mode" code nil nil [10172 11251])
+            ("turn-on-magit-svn" function nil nil [11268 11363])
+            ("custom-add-option" code nil nil [11380 11433])
+            ("magit-svn" package nil nil [11435 11455]))          
+      :file "magit-svn.el"
+      :pointmax 11536
+      :fsize 11535
+      :lastmodtime '(21519 22510 400666 150000)
+      :unmatched-syntax '((close-paren 1236 . 1237) (symbol 1176 . 1193) (open-paren 1175 . 1176)))
+    (semanticdb-table "magit.el"
+      :major-mode 'emacs-lisp-mode
+      :tags 
+        '( ("magit-version" variable (:default-value (quote undefined)) nil [2206 2343])
+            ("when" code nil nil [2476 2565])
+            ("unless" code nil nil [2771 2842])
+            ("git-rebase-mode" include nil nil [2844 2870])
+            ("ansi-color" include nil nil [2872 2893])
+            ("autorevert" include nil nil [2894 2915])
+            ("cl-lib" include nil nil [2916 2933])
+            ("diff-mode" include nil nil [2934 2954])
+            ("easymenu" include nil nil [2955 2974])
+            ("epa" include nil nil [2975 2989])
+            ("format-spec" include nil nil [2990 3012])
+            ("grep" include nil nil [3013 3028])
+            ("help-mode" include nil nil [3029 3049])
+            ("ring" include nil nil [3050 3065])
+            ("server" include nil nil [3066 3083])
+            ("tramp" include nil nil [3084 3100])
+            ("view" include nil nil [3101 3116])
+            ("view" include nil nil [3284 3299])
+            ("package" include nil nil [3257 3281])
+            ("iswitchb" include nil nil [3235 3254])
+            ("ido" include nil nil [3218 3232])
+            ("eshell" include nil nil [3198 3215])
+            ("ediff" include nil nil [3179 3195])
+            ("dired-x" include nil nil [3158 3176])
+            ("dired" include nil nil [3139 3155])
+            ("if" code nil nil [3321 3416])
+            ("declare-function" code nil nil [3418 3456])
+            ("declare-function" code nil nil [3457 3496])
+            ("declare-function" code nil nil [3497 3541])
+            ("declare-function" code nil nil [3542 3591])
+            ("declare-function" code nil nil [3592 3635])
+            ("declare-function" code nil nil [3636 3685])
+            ("declare-function" code nil nil [3686 3731])
+            ("declare-function" code nil nil [3732 3780])
+            ("declare-function" code nil nil [3781 3829])
+            ("declare-function" code nil nil [3830 3864])
+            ("git-commit-previous-winconf" variable nil nil [3866 3902])
+            ("magit-commit-buffer-name" variable nil nil [3903 3936])
+            ("magit-custom-options" variable nil nil [3937 3966])
+            ("magit-log-buffer-name" variable nil nil [3967 3997])
+            ("magit-marked-commit" variable nil nil [3998 4026])
+            ("magit-process-buffer-name" variable nil nil [4027 4061])
+            ("magit-reflog-buffer-name" variable nil nil [4062 4095])
+            ("magit-refresh-args" variable nil nil [4096 4123])
+            ("magit-stash-buffer-name" variable nil nil [4124 4156])
+            ("magit-status-buffer-name" variable nil nil [4157 4190])
+            ("magit-this-process" variable nil nil [4191 4218])
+            ("package-alist" variable nil nil [4219 4241])
+            ("unless" code nil nil [5133 6194])
+            ("unless" code nil nil [4674 5104])
+            ("unless" code nil nil [4428 4619])
+            ("unless" code nil nil [4309 4373])
+            ("magit" customgroup (:user-visible-flag t) nil [6235 6303])
+            ("magit-process" customgroup (:user-visible-flag t) nil [6305 6401])
+            ("magit-modes" customgroup (:user-visible-flag t) nil [6403 6474])
+            ("magit-status" customgroup (:user-visible-flag t) nil [6476 6570])
+            ("magit-diff" customgroup (:user-visible-flag t) nil [6572 6657])
+            ("magit-commit" customgroup (:user-visible-flag t) nil [6659 6748])
+            ("magit-log" customgroup (:user-visible-flag t) nil [6750 6836])
+            ("magit-extensions" customgroup (:user-visible-flag t) nil [6838 6910])
+            ("magit-faces" customgroup (:user-visible-flag t) nil [6912 6995])
+            ("when" code nil nil [6997 7105])
+            ("when" code nil nil [7107 7279])
+            ("when" code nil nil [7281 7453])
+            ("custom-add-to-group" code nil nil [7455 7520])
+            ("magit-git-executable" variable (:default-value (or (and (eq system-type (quote windows-nt)) (let ((exe (executable-find "git.exe"))) (when exe (let ((alt (directory-file-name (file-name-directory exe)))) (if (and (equal (file-name-nondirectory alt) "cmd") (setq alt (expand-file-name (convert-standard-filename "bin/git.exe") (file-name-directory alt))) (file-executable-p alt)) alt exe))))) "git")) nil [7559 8842])
+            ("magit-git-standard-options" variable (:default-value (quote ("--no-pager" "-c" "core.preloadindex=true"))) nil [8844 9131])
+            ("magit-gitk-executable" variable (:default-value (or (and (eq system-type (quote windows-nt)) (let ((exe (expand-file-name "gitk" (file-name-nondirectory magit-git-executable)))) (and (file-executable-p exe) exe))) (executable-find "gitk") "gitk")) nil [9133 9515])
+            ("magit-locate-emacsclient" function nil nil [9517 11007])
+            ("magit-take" function (:arguments ("n" "l")) nil [11009 11139])
+            ("magit-locate-emacsclient-1" function (:arguments ("path" "depth")) nil [11141 11963])
+            ("magit-emacsclient-version" function (:arguments ("exec")) nil [11965 12068])
+            ("magit-emacsclient-executable" variable (:default-value (magit-locate-emacsclient)) nil [12070 12461])
+            ("magit-process-connection-type" variable (:default-value (not (eq system-type (quote cygwin)))) nil [12463 12832])
+            ("magit-process-popup-time" variable (:default-value -1) nil [12834 13122])
+            ("magit-process-log-max" variable (:default-value 32) nil [13124 13490])
+            ("magit-process-quote-curly-braces" variable (:default-value (and (eq system-type (quote windows-nt)) (let ((case-fold-search t)) (string-match-p "cygwin" magit-git-executable)) t)) nil [13492 14226])
+            ("magit-process-yes-or-no-prompt-regexp" variable (:default-value " [[(]\\([Yy]\\(?:es\\)?\\)[/|]\\([Nn]o?\\)[])] ?[?:] ?$") nil [14228 14485])
+            ("magit-process-password-prompt-regexps" variable (:default-value (quote ("^\\(Enter \\)?[Pp]assphrase\\( for \\(RSA \\)?key '.*'\\)?: ?$" "^\\(Enter \\)?[Pp]assword\\( for '.*'\\)?: ?$" "^.*'s password: ?$" "^Yubikey for .*: ?$"))) nil [14487 14873])
+            ("magit-process-username-prompt-regexps" variable (:default-value (quote ("^Username for '.*': ?$"))) nil [14875 15118])
+            ("magit-server-window-type" variable
+               (:constant-flag t
+                :default-value (quote (choice (const :tag "Use selected window" :match (lambda (widget value) (not (functionp value))) nil) (function-item :tag "Display in new frame" switch-to-buffer-other-frame) (function-item :tag "Use pop-to-buffer" pop-to-buffer) (function :tag "Other function"))))
+                nil [15120 15480])
+            ("magit-server-window-for-commit" variable (:default-value (quote pop-to-buffer)) nil [15482 15874])
+            ("magit-server-window-for-rebase" variable (:default-value server-window) nil [15876 16301])
+            ("magit-stage-all-confirm" variable (:default-value t) nil [16318 16709])
+            ("magit-unstage-all-confirm" variable (:default-value t) nil [16711 17107])
+            ("magit-revert-item-confirm" variable (:default-value t) nil [17109 17311])
+            ("magit-revert-backup" variable nil nil [17313 17796])
+            ("magit-save-some-buffers" variable (:default-value t) nil [17798 18173])
+            ("magit-save-some-buffers-predicate" variable (:default-value (quote magit-save-buffers-predicate-tree-only)) nil [18175 18607])
+            ("magit-rewrite-inclusive" variable (:default-value t) nil [18609 19312])
+            ("magit-set-variable-and-refresh" function (:arguments ("symbol" "value")) nil [19334 19756])
+            ("magit-highlight-whitespace" variable (:default-value t) nil [19758 20216])
+            ("magit-highlight-trailing-whitespace" variable (:default-value t) nil [20218 20462])
+            ("magit-highlight-indentation" variable nil nil [20464 21383])
+            ("magit-item-highlight-face" variable (:default-value (quote magit-item-highlight)) nil [21393 22682])
+            ("magit-use-overlays" variable (:default-value (not (eq magit-item-highlight-face (quote bold)))) nil [22684 23517])
+            ("define-obsolete-variable-alias" code nil nil [23519 23606])
+            ("magit-completing-read-function" variable (:default-value (quote magit-builtin-completing-read)) nil [23626 24002])
+            ("magit-remote-ref-format" variable (:default-value (quote remote-slash-branch)) nil [24004 24570])
+            ("magit-repo-dirs" variable nil nil [24572 24795])
+            ("magit-repo-dirs-depth" variable (:default-value 3) nil [24797 25035])
+            ("magit-mode-hook" variable nil nil [25064 25228])
+            ("magit-show-xref-buttons" variable (:default-value (quote (magit-diff-mode magit-commit-mode))) nil [25230 25600])
+            ("magit-show-child-count" variable nil nil [25602 25782])
+            ("magit-status-line-align-to" variable (:default-value 9) nil [25784 25821])
+            ("magit-restore-window-configuration" variable nil nil [25823 26738])
+            ("magit-refs-namespaces" variable (:default-value (quote (("^\\(HEAD\\)$" magit-log-head-label-head nil) ("^refs/tags/\\(.+\\)" magit-log-head-label-tags nil) ("^refs/heads/\\(.+\\)" magit-log-head-label-local nil) ("^refs/remotes/\\(.+\\)" magit-log-head-label-remote nil) ("^refs/bisect/\\(bad\\)" magit-log-head-label-bisect-bad nil) ("^refs/bisect/\\(skip.*\\)" magit-log-head-label-bisect-skip nil) ("^refs/bisect/\\(good.*\\)" magit-log-head-label-bisect-good nil) ("^refs/wip/\\(.+\\)" magit-log-head-label-wip nil) ("^refs/patches/\\(.+\\)" magit-log-head-label-patches nil) ("^\\(bad\\):" magit-log-head-label-bisect-bad nil) ("^\\(skip\\):" magit-log-head-label-bisect-skip nil) ("^\\(good\\):" magit-log-head-label-bisect-good nil) ("\\(.+\\)" magit-log-head-label-default nil)))) nil [26740 28586])
+            ("magit-status-mode-hook" variable nil nil [28603 28734])
+            ("magit-status-sections-hook" variable (:default-value (quote (magit-insert-status-local-line magit-insert-status-remote-line magit-insert-status-head-line magit-insert-status-tags-line magit-insert-status-merge-line magit-insert-status-rebase-lines magit-insert-empty-line magit-insert-rebase-sequence magit-insert-bisect-output magit-insert-bisect-rest magit-insert-bisect-log magit-insert-stashes magit-insert-untracked-files magit-insert-pending-commits magit-insert-unstaged-changes magit-insert-staged-changes magit-insert-unpulled-commits magit-insert-unpushed-commits))) nil [28736 29972])
+            ("magit-status-buffer-switch-function" variable (:default-value (quote pop-to-buffer)) nil [29974 30326])
+            ("magit-status-show-sequence-help" variable (:default-value t) nil [30328 30639])
+            ("magit-status-tags-line-subject" variable (:default-value (quote head)) nil [30641 31617])
+            ("magit-set-default-diff-options" function
+               (:user-visible-flag t
+                :arguments ("symbol" "value"))
+                nil [31632 32259])
+            ("magit-diff-options" variable nil nil [32261 33888])
+            ("put" code nil nil [33890 33934])
+            ("magit-show-diffstat" variable (:default-value t) nil [33936 34125])
+            ("magit-diff-refine-hunk" variable nil nil [34127 34611])
+            ("magit-commit-ask-to-stage" variable (:default-value t) nil [34628 34823])
+            ("magit-commit-extend-override-date" variable nil nil [34825 35020])
+            ("magit-commit-reword-override-date" variable nil nil [35022 35217])
+            ("magit-commit-squash-commit" variable nil nil [35219 36096])
+            ("magit-expand-staged-on-commit" variable nil nil [36098 36911])
+            ("magit-log-auto-more" variable nil nil [36925 37159])
+            ("magit-log-cutoff-length" variable (:default-value 100) nil [37161 37311])
+            ("magit-log-infinite-length" variable (:default-value 99999) nil [37313 37466])
+            ("magit-log-format-graph-function" variable nil nil [37468 37974])
+            ("magit-log-format-unicode-graph-alist" variable (:default-value (quote ((47 . 9585) (124 . 9474) (92 . 9586) (42 . 9670) (111 . 9671)))) nil [37976 38359])
+            ("magit-log-show-gpg-status" variable nil nil [38361 38544])
+            ("magit-log-show-margin" variable (:default-value t) nil [38546 38909])
+            ("put" code nil nil [38911 38958])
+            ("magit-log-margin-spec" variable (:default-value (quote (25 nil magit-duration-spec))) nil [38960 40379])
+            ("magit-duration-spec" variable (:default-value (\` ((89 "year" "years" (\, (round (* 60 60 24 365.2425)))) (77 "month" "months" (\, (round (* 60 60 24 30.436875)))) (119 "week" "weeks" (\, (* 60 60 24 7))) (100 "day" "days" (\, (* 60 60 24))) (104 "hour" "hours" (\, (* 60 60))) (109 "minute" "minutes" 60) (115 "second" "seconds" 1)))) nil [40381 41433])
+            ("magit-ellipsis" variable (:default-value 8230) nil [41435 41754])
+            ("magit-auto-revert-mode-lighter" variable (:default-value " MRev") nil [41771 41904])
+            ("define-minor-mode" code nil nil [41906 42435])
+            ("magit-merge-warn-dirty-worktree" variable (:default-value t) nil [42437 42644])
+            ("magit-push-hook" variable (:default-value (quote (magit-push-dwim))) nil [42646 42881])
+            ("magit-set-upstream-on-push" variable nil nil [42883 43508])
+            ("magit-wazzup-sections-hook" variable (:default-value (quote (magit-insert-wazzup-head-line magit-insert-empty-line magit-insert-wazzup-branches))) nil [43510 43774])
+            ("magit-cherry-sections-hook" variable (:default-value (quote (magit-insert-cherry-head-line magit-insert-cherry-upstream-line magit-insert-cherry-help-lines magit-insert-empty-line magit-insert-cherry-commits))) nil [43776 44112])
+            ("magit-section-title" variable
+               (:default-value (quote ((t :inherit header-line)))
+                :type "face")
+                nil [44133 44243])
+            ("magit-branch" variable
+               (:default-value (quote ((((class color) (background light)) :background "Grey85" :foreground "LightSkyBlue4") (((class color) (background dark)) :background "Grey13" :foreground "LightSkyBlue1")))
+                :type "face")
+                nil [44245 44512])
+            ("magit-tag" variable
+               (:default-value (quote ((((class color) (background light)) :background "LemonChiffon1" :foreground "goldenrod4") (((class color) (background dark)) :background "LemonChiffon1" :foreground "goldenrod4")))
+                :type "face")
+                nil [44514 44782])
+            ("magit-diff-file-header" variable
+               (:default-value (quote ((t :inherit diff-file-header)))
+                :type "face")
+                nil [44784 44910])
+            ("magit-diff-hunk-header" variable
+               (:default-value (quote ((t :inherit diff-hunk-header)))
+                :type "face")
+                nil [44912 45038])
+            ("magit-diff-add" variable
+               (:default-value (quote ((t :inherit diff-added)))
+                :type "face")
+                nil [45040 45166])
+            ("magit-diff-del" variable
+               (:default-value (quote ((t :inherit diff-removed)))
+                :type "face")
+                nil [45168 45298])
+            ("magit-diff-none" variable
+               (:default-value (quote ((t :inherit diff-context)))
+                :type "face")
+                nil [45300 45427])
+            ("magit-diff-merge-current" variable
+               (:default-value (quote ((t :inherit font-lock-preprocessor-face)))
+                :type "face")
+                nil [45429 45582])
+            ("magit-diff-merge-separator" variable
+               (:default-value (quote ((t :inherit font-lock-preprocessor-face)))
+                :type "face")
+                nil [45584 45734])
+            ("magit-diff-merge-diff3-separator" variable
+               (:default-value (quote ((t :inherit font-lock-preprocessor-face)))
+                :type "face")
+                nil [45736 45892])
+            ("magit-diff-merge-proposed" variable
+               (:default-value (quote ((t :inherit font-lock-preprocessor-face)))
+                :type "face")
+                nil [45894 46049])
+            ("magit-log-graph" variable
+               (:default-value (quote ((((class color) (background light)) :foreground "grey11") (((class color) (background dark)) :foreground "grey80")))
+                :type "face")
+                nil [46051 46282])
+            ("magit-log-sha1" variable
+               (:default-value (quote ((((class color) (background light)) :foreground "firebrick") (((class color) (background dark)) :foreground "tomato")))
+                :type "face")
+                nil [46284 46516])
+            ("magit-log-author" variable
+               (:default-value (quote ((((class color) (background light)) :foreground "firebrick") (((class color) (background dark)) :foreground "tomato")))
+                :type "face")
+                nil [46518 46754])
+            ("magit-log-date" variable
+               (:default-value (quote ((t)))
+                :type "face")
+                nil [46756 46860])
+            ("magit-log-message" variable
+               (:default-value (quote ((t)))
+                :type "face")
+                nil [46862 46972])
+            ("magit-cherry-unmatched" variable
+               (:default-value (quote ((t :foreground "cyan")))
+                :type "face")
+                nil [46974 47073])
+            ("magit-cherry-equivalent" variable
+               (:default-value (quote ((t :foreground "magenta")))
+                :type "face")
+                nil [47075 47179])
+            ("magit-item-highlight" variable
+               (:default-value (quote ((t :inherit secondary-selection)))
+                :type "face")
+                nil [47181 47315])
+            ("magit-item-mark" variable
+               (:default-value (quote ((t :inherit highlight)))
+                :type "face")
+                nil [47317 47431])
+            ("magit-log-head-label-bisect-good" variable
+               (:default-value (quote ((((class color) (background light)) :box t :background "light green" :foreground "dark olive green") (((class color) (background dark)) :box t :background "light green" :foreground "dark olive green")))
+                :type "face")
+                nil [47433 47768])
+            ("magit-log-head-label-bisect-skip" variable
+               (:default-value (quote ((((class color) (background light)) :box t :background "light goldenrod" :foreground "dark goldenrod") (((class color) (background dark)) :box t :background "light goldenrod" :foreground "dark goldenrod")))
+                :type "face")
+                nil [47770 48112])
+            ("magit-log-head-label-bisect-bad" variable
+               (:default-value (quote ((((class color) (background light)) :box t :background "IndianRed1" :foreground "IndianRed4") (((class color) (background dark)) :box t :background "IndianRed1" :foreground "IndianRed4")))
+                :type "face")
+                nil [48114 48433])
+            ("magit-log-head-label-remote" variable
+               (:default-value (quote ((((class color) (background light)) :box t :background "Grey85" :foreground "OliveDrab4") (((class color) (background dark)) :box t :background "Grey11" :foreground "DarkSeaGreen2")))
+                :type "face")
+                nil [48435 48775])
+            ("magit-log-head-label-tags" variable
+               (:default-value (quote ((((class color) (background light)) :box t :background "LemonChiffon1" :foreground "goldenrod4") (((class color) (background dark)) :box t :background "LemonChiffon1" :foreground "goldenrod4")))
+                :type "face")
+                nil [48777 49111])
+            ("magit-log-head-label-patches" variable
+               (:default-value (quote ((((class color) (background light)) :box t :background "IndianRed1" :foreground "IndianRed4") (((class color) (background dark)) :box t :background "IndianRed1" :foreground "IndianRed4")))
+                :type "face")
+                nil [49113 49433])
+            ("magit-whitespace-warning-face" variable
+               (:default-value (quote ((t :inherit trailing-whitespace)))
+                :type "face")
+                nil [49435 49594])
+            ("magit-log-head-label-local" variable
+               (:default-value (quote ((((class color) (background light)) :box t :background "Grey85" :foreground "LightSkyBlue4") (((class color) (background dark)) :box t :background "Grey13" :foreground "LightSkyBlue1")))
+                :type "face")
+                nil [49596 49937])
+            ("magit-log-head-label-head" variable
+               (:default-value (quote ((((class color) (background light)) :box t :background "Grey70" :foreground "Black") (((class color) (background dark)) :box t :background "Grey20" :foreground "White")))
+                :type "face")
+                nil [49939 50265])
+            ("magit-log-head-label-default" variable
+               (:default-value (quote ((((class color) (background light)) :box t :background "Grey50") (((class color) (background dark)) :box t :background "Grey50")))
+                :type "face")
+                nil [50267 50538])
+            ("magit-log-head-label-wip" variable
+               (:default-value (quote ((((class color) (background light)) :box t :background "Grey95" :foreground "LightSkyBlue3") (((class color) (background dark)) :box t :background "Grey07" :foreground "LightSkyBlue4")))
+                :type "face")
+                nil [50540 50869])
+            ("magit-signature-good" variable
+               (:default-value (quote ((t :foreground "green")))
+                :type "face")
+                nil [50871 50982])
+            ("magit-signature-bad" variable
+               (:default-value (quote ((t :foreground "red")))
+                :type "face")
+                nil [50984 51091])
+            ("magit-signature-untrusted" variable
+               (:default-value (quote ((t :foreground "cyan")))
+                :type "face")
+                nil [51093 51218])
+            ("magit-signature-none" variable
+               (:default-value (quote ((t :inherit magit-log-message)))
+                :type "face")
+                nil [51220 51339])
+            ("magit-log-reflog-label-commit" variable
+               (:default-value (quote ((((class color) (background light)) :box t :background "LemonChiffon1" :foreground "goldenrod4") (((class color) (background dark)) :box t :background "LemonChiffon1" :foreground "goldenrod4")))
+                :type "face")
+                nil [51342 51694])
+            ("magit-log-reflog-label-amend" variable
+               (:default-value (quote ((t :inherit magit-log-reflog-label-commit)))
+                :type "face")
+                nil [51696 51863])
+            ("magit-log-reflog-label-merge" variable
+               (:default-value (quote ((t :inherit magit-log-reflog-label-commit)))
+                :type "face")
+                nil [51865 52032])
+            ("magit-log-reflog-label-checkout" variable
+               (:default-value (quote ((((class color) (background light)) :box t :background "Grey85" :foreground "LightSkyBlue4") (((class color) (background dark)) :box t :background "Grey13" :foreground "LightSkyBlue1")))
+                :type "face")
+                nil [52034 52380])
+            ("magit-log-reflog-label-reset" variable
+               (:default-value (quote ((((class color) (background light)) :box t :background "IndianRed1" :foreground "IndianRed4") (((class color) (background dark)) :box t :background "IndianRed1" :foreground "IndianRed4")))
+                :type "face")
+                nil [52382 52727])
+            ("magit-log-reflog-label-rebase" variable
+               (:default-value (quote ((((class color) (background light)) :box t :background "Grey85" :foreground "OliveDrab4") (((class color) (background dark)) :box t :background "Grey11" :foreground "DarkSeaGreen2")))
+                :type "face")
+                nil [52729 53070])
+            ("magit-log-reflog-label-cherry-pick" variable
+               (:default-value (quote ((((class color) (background light)) :box t :background "light green" :foreground "dark olive green") (((class color) (background dark)) :box t :background "light green" :foreground "dark olive green")))
+                :type "face")
+                nil [53072 53435])
+            ("magit-log-reflog-label-remote" variable
+               (:default-value (quote ((((class color) (background light)) :box t :background "Grey50") (((class color) (background dark)) :box t :background "Grey50")))
+                :type "face")
+                nil [53437 53715])
+            ("magit-log-reflog-label-other" variable
+               (:default-value (quote ((((class color) (background light)) :box t :background "Grey50") (((class color) (background dark)) :box t :background "Grey50")))
+                :type "face")
+                nil [53717 53994])
+            ("magit-process-ok" variable
+               (:default-value (quote ((t :inherit magit-section-title :foreground "green")))
+                :type "face")
+                nil [53996 54140])
+            ("magit-process-ng" variable
+               (:default-value (quote ((t :inherit magit-section-title :foreground "red")))
+                :type "face")
+                nil [54142 54288])
+            ("magit-rigid-key-bindings" variable nil nil [54346 54599])
+            ("when" code nil nil [54601 54707])
+            ("magit-mode-map" variable (:default-value (let ((map (make-keymap))) (suppress-keymap map t) (define-key map (kbd "n") (quote magit-goto-next-section)) (define-key map (kbd "p") (quote magit-goto-previous-section)) (define-key map (kbd "^") (quote magit-goto-parent-section)) (define-key map (kbd "M-n") (quote magit-goto-next-sibling-section)) (define-key map (kbd "M-p") (quote magit-goto-previous-sibling-section)) (define-key map (kbd "TAB") (quote magit-toggle-section)) (define-key map (kbd "<backtab>") (quote magit-expand-collapse-section)) (define-key map (kbd "1") (quote magit-show-level-1)) (define-key map (kbd "2") (quote magit-show-level-2)) (define-key map (kbd "3") (quote magit-show-level-3)) (define-key map (kbd "4") (quote magit-show-level-4)) (define-key map (kbd "M-1") (quote magit-show-level-1-all)) (define-key map (kbd "M-2") (quote magit-show-level-2-all)) (define-key map (kbd "M-3") (quote magit-show-level-3-all)) (define-key map (kbd "M-4") (quote magit-show-level-4-all)) (define-key map (kbd "M-h") (quote magit-show-only-files)) (define-key map (kbd "M-H") (quote magit-show-only-files-all)) (define-key map (kbd "M-s") (quote magit-show-level-4)) (define-key map (kbd "M-S") (quote magit-show-level-4-all)) (define-key map (kbd "g") (quote magit-refresh)) (define-key map (kbd "G") (quote magit-refresh-all)) (define-key map (kbd "?") (quote magit-key-mode-popup-dispatch)) (define-key map (kbd ":") (quote magit-git-command)) (define-key map (kbd "C-x 4 a") (quote magit-add-change-log-entry-other-window)) (define-key map (kbd "L") (quote magit-add-change-log-entry)) (define-key map (kbd "RET") (quote magit-visit-item)) (define-key map (kbd "C-<return>") (quote magit-dired-jump)) (define-key map (kbd "SPC") (quote magit-show-item-or-scroll-up)) (define-key map (kbd "DEL") (quote magit-show-item-or-scroll-down)) (define-key map (kbd "C-w") (quote magit-copy-item-as-kill)) (cond (magit-rigid-key-bindings (define-key map (kbd "c") (quote magit-commit)) (define-key map (kbd "m") (quote magit-merge)) (define-key map (kbd "b") (quote magit-checkout)) (define-key map (kbd "M") (quote magit-branch-manager)) (define-key map (kbd "r") (quote undefined)) (define-key map (kbd "f") (quote magit-fetch-current)) (define-key map (kbd "F") (quote magit-pull)) (define-key map (kbd "J") (quote magit-apply-mailbox)) (define-key map (kbd "!") (quote magit-git-command-topdir)) (define-key map (kbd "P") (quote magit-push)) (define-key map (kbd "t") (quote magit-tag)) (define-key map (kbd "l") (quote magit-log)) (define-key map (kbd "o") (quote magit-submodule-update)) (define-key map (kbd "B") (quote undefined)) (define-key map (kbd "z") (quote magit-stash))) (t (define-key map (kbd "c") (quote magit-key-mode-popup-committing)) (define-key map (kbd "m") (quote magit-key-mode-popup-merging)) (define-key map (kbd "b") (quote magit-key-mode-popup-branching)) (define-key map (kbd "M") (quote magit-key-mode-popup-remoting)) (define-key map (kbd "r") (quote magit-key-mode-popup-rewriting)) (define-key map (kbd "f") (quote magit-key-mode-popup-fetching)) (define-key map (kbd "F") (quote magit-key-mode-popup-pulling)) (define-key map (kbd "J") (quote magit-key-mode-popup-apply-mailbox)) (define-key map (kbd "!") (quote magit-key-mode-popup-running)) (define-key map (kbd "P") (quote magit-key-mode-popup-pushing)) (define-key map (kbd "t") (quote magit-key-mode-popup-tagging)) (define-key map (kbd "l") (quote magit-key-mode-popup-logging)) (define-key map (kbd "o") (quote magit-key-mode-popup-submodule)) (define-key map (kbd "B") (quote magit-key-mode-popup-bisecting)) (define-key map (kbd "z") (quote magit-key-mode-popup-stashing)))) (define-key map (kbd "$") (quote magit-process)) (define-key map (kbd "E") (quote magit-interactive-rebase)) (define-key map (kbd "R") (quote magit-rebase-step)) (define-key map (kbd "e") (quote magit-ediff)) (define-key map (kbd "w") (quote magit-wazzup)) (define-key map (kbd "y") (quote magit-cherry)) (define-key map (kbd "q") (quote magit-mode-quit-window)) (define-key map (kbd "x") (quote magit-reset-head)) (define-key map (kbd "v") (quote magit-revert-item)) (define-key map (kbd "a") (quote magit-apply-item)) (define-key map (kbd "A") (quote magit-cherry-pick-item)) (define-key map (kbd "d") (quote magit-diff-working-tree)) (define-key map (kbd "D") (quote magit-diff)) (define-key map (kbd "-") (quote magit-diff-smaller-hunks)) (define-key map (kbd "+") (quote magit-diff-larger-hunks)) (define-key map (kbd "0") (quote magit-diff-default-hunks)) (define-key map (kbd "h") (quote magit-key-mode-popup-diff-options)) (define-key map (kbd "H") (quote magit-diff-toggle-refine-hunk)) (define-key map (kbd "S") (quote magit-stage-all)) (define-key map (kbd "U") (quote magit-unstage-all)) (define-key map (kbd "X") (quote magit-reset-working-tree)) (define-key map (kbd "C-c C-c") (quote magit-key-mode-popup-dispatch)) (define-key map (kbd "C-c C-e") (quote magit-key-mode-popup-dispatch)) map)) nil [54709 59734])
+            ("magit-commit-mode-map" variable (:default-value (let ((map (make-sparse-keymap))) (set-keymap-parent map magit-mode-map) (define-key map (kbd "C-c C-b") (quote magit-go-backward)) (define-key map (kbd "C-c C-f") (quote magit-go-forward)) (define-key map (kbd "SPC") (quote scroll-up)) (define-key map (kbd "DEL") (quote scroll-down)) (define-key map (kbd "j") (quote magit-jump-to-diffstats)) map)) nil [59736 60147])
+            ("magit-status-mode-map" variable (:default-value (let ((map (make-sparse-keymap))) (set-keymap-parent map magit-mode-map) (define-key map (kbd "s") (quote magit-stage-item)) (define-key map (kbd "u") (quote magit-unstage-item)) (define-key map (kbd "i") (quote magit-ignore-item)) (define-key map (kbd "I") (quote magit-ignore-item-locally)) (define-key map (kbd "j") (quote magit-section-jump-map)) (define-key map (kbd ".") (quote magit-mark-item)) (define-key map (kbd "=") (quote magit-diff-with-mark)) (define-key map (kbd "k") (quote magit-discard-item)) (define-key map (kbd "C") (quote magit-commit-add-log)) map)) nil [60149 60771])
+            ("eval-after-load" code nil nil [60773 60874])
+            ("magit-log-mode-map" variable (:default-value (let ((map (make-sparse-keymap))) (set-keymap-parent map magit-mode-map) (define-key map (kbd ".") (quote magit-mark-item)) (define-key map (kbd "=") (quote magit-diff-with-mark)) (define-key map (kbd "e") (quote magit-log-show-more-entries)) (define-key map (kbd "h") (quote magit-log-toggle-margin)) map)) nil [60876 61241])
+            ("magit-cherry-mode-map" variable (:default-value (let ((map (make-sparse-keymap))) (set-keymap-parent map magit-mode-map) map)) nil [61243 61397])
+            ("magit-reflog-mode-map" variable (:default-value (let ((map (make-sparse-keymap))) (set-keymap-parent map magit-log-mode-map) map)) nil [61399 61557])
+            ("magit-diff-mode-map" variable (:default-value (let ((map (make-sparse-keymap))) (set-keymap-parent map magit-mode-map) (define-key map (kbd "C-c C-b") (quote magit-go-backward)) (define-key map (kbd "C-c C-f") (quote magit-go-forward)) (define-key map (kbd "SPC") (quote scroll-up)) (define-key map (kbd "DEL") (quote scroll-down)) (define-key map (kbd "j") (quote magit-jump-to-diffstats)) map)) nil [61559 61966])
+            ("magit-wazzup-mode-map" variable (:default-value (let ((map (make-sparse-keymap))) (set-keymap-parent map magit-mode-map) (define-key map (kbd ".") (quote magit-mark-item)) (define-key map (kbd "=") (quote magit-diff-with-mark)) (define-key map (kbd "i") (quote magit-ignore-item)) map)) nil [61968 62273])
+            ("magit-branch-manager-mode-map" variable (:default-value (let ((map (make-sparse-keymap))) (set-keymap-parent map magit-mode-map) (define-key map (kbd "c") (quote magit-create-branch)) (define-key map (kbd "a") (quote magit-add-remote)) (define-key map (kbd "r") (quote magit-rename-item)) (define-key map (kbd "k") (quote magit-discard-item)) (define-key map (kbd "T") (quote magit-change-what-branch-tracks)) map)) nil [62275 62711])
+            ("magit-process-mode-map" variable (:default-value (let ((map (make-sparse-keymap))) (set-keymap-parent map magit-mode-map) map)) nil [62713 62869])
+            ("magit-section-jump-map" variable (:default-value (let ((map (make-sparse-keymap))) (define-key map (kbd "z") (quote magit-jump-to-stashes)) (define-key map (kbd "n") (quote magit-jump-to-untracked)) (define-key map (kbd "u") (quote magit-jump-to-unstaged)) (define-key map (kbd "s") (quote magit-jump-to-staged)) (define-key map (kbd "f") (quote magit-jump-to-unpulled)) (define-key map (kbd "p") (quote magit-jump-to-unpushed)) (define-key map (kbd "r") (quote magit-jump-to-pending)) map)) nil [62871 63388])
+            ("fset" code nil nil [63389 63442])
+            ("easy-menu-define" code nil nil [63444 65410])
+            ("magit-iswitchb-completing-read" function (:arguments ("prompt" "choices" "predicate" "require-match" "initial-input" "hist" "def")) nil [65455 65959])
+            ("magit-ido-completing-read" function (:arguments ("prompt" "choices" "predicate" "require-match" "initial-input" "hist" "def")) nil [65961 66467])
+            ("magit-builtin-completing-read" function (:arguments ("prompt" "choices" "predicate" "require-match" "initial-input" "hist" "def")) nil [66469 67095])
+            ("magit-completing-read" function (:arguments ("prompt" "collection" "predicate" "require-match" "initial-input" "hist" "def")) nil [67097 67494])
+            ("magit-gpg-secret-key-hist" variable nil nil [67496 67534])
+            ("magit-read-gpg-secret-key" function (:arguments ("prompt")) nil [67536 68287])
+            ("magit-bind-match-strings" function (:arguments ("varlist" "body")) nil [68313 68550])
+            ("magit-file-line" function (:arguments ("file")) nil [68552 68826])
+            ("magit-file-lines" function (:arguments ("file" "keep-empty-lines")) nil [68828 69179])
+            ("defvar-local" code nil nil [69181 69272])
+            ("magit-buffer-file-name" function (:arguments ("relative")) nil [69274 69834])
+            ("magit-format-duration" function (:arguments ("duration" "spec" "width")) nil [69836 70304])
+            ("magit-flatten-onelevel" function (:arguments ("list")) nil [70306 70484])
+            ("magit-insert" function (:arguments ("string" "face" "args")) nil [70486 70856])
+            ("magit-put-face-property" function (:arguments ("start" "end" "face")) nil [70858 71142])
+            ("magit-set-buffer-margin" function (:arguments ("width" "enable")) nil [71165 71914])
+            ("magit-make-margin-overlay" function (:arguments ("strings")) nil [71916 72258])
+            ("defvar-local" code nil nil [72260 72310])
+            ("magit-log-margin-set-timeunit-width" function nil nil [72312 72755])
+            ("magit-with-emacsclient" function (:arguments ("server-window" "body")) nil [72783 75182])
+            ("magit-use-emacsclient-p" function nil nil [75184 75307])
+            ("magit-assert-emacsclient" function (:arguments ("action")) nil [75309 75591])
+            ("magit-get" function (:arguments ("keys")) nil [75610 75761])
+            ("magit-get-all" function (:arguments ("keys")) nil [75763 75934])
+            ("magit-get-boolean" function (:arguments ("keys")) nil [75936 76110])
+            ("magit-set" function (:arguments ("val" "keys")) nil [76112 76353])
+            ("magit-git-repo-p" function (:arguments ("dir")) nil [76375 76453])
+            ("magit-git-dir" function (:arguments ("path")) nil [76455 76948])
+            ("magit-no-commit-p" function nil nil [76950 77100])
+            ("magit-get-top-dir" function (:arguments ("directory")) nil [77102 78231])
+            ("magit-expand-git-file-name" function (:arguments ("filename")) nil [78233 78591])
+            ("magit-file-relative-name" function (:arguments ("file")) nil [78593 78899])
+            ("magit-bare-repo-p" function nil nil [78901 79031])
+            ("magit-get-ref" function (:arguments ("ref")) nil [79033 79105])
+            ("magit-get-current-branch" function nil nil [79107 79265])
+            ("magit-get-remote/branch" function (:arguments ("branch" "verify")) nil [79267 80158])
+            ("magit-get-tracked-branch" function (:arguments ("branch" "qualified" "pretty")) nil [80160 82494])
+            ("magit-get-previous-branch" function nil nil [82496 82728])
+            ("magit-get-current-tag" function (:arguments ("with-distance-p")) nil [82730 83569])
+            ("magit-get-next-tag" function (:arguments ("with-distance-p")) nil [83571 84300])
+            ("magit-get-remote" function (:arguments ("branch")) nil [84302 84685])
+            ("magit-get-current-remote" function nil nil [84687 84970])
+            ("magit-ref-exists-p" function (:arguments ("ref")) nil [84972 85052])
+            ("magit-rev-parse" function (:arguments ("args")) nil [85054 85236])
+            ("magit-ref-ambiguous-p" function (:arguments ("ref")) nil [85238 85530])
+            ("magit-rev-diff-count" function (:arguments ("a" "b")) nil [85532 85903])
+            ("magit-name-rev" function (:arguments ("rev" "no-trim")) nil [85905 87368])
+            ("magit-file-uptodate-p" function (:arguments ("file")) nil [87370 87455])
+            ("magit-anything-staged-p" function nil nil [87457 87541])
+            ("magit-anything-unstaged-p" function nil nil [87543 87618])
+            ("magit-anything-modified-p" function nil nil [87620 87723])
+            ("magit-commit-parents" function (:arguments ("commit")) nil [87725 87839])
+            ("magit-assert-one-parent" function (:arguments ("commit" "command")) nil [87841 87995])
+            ("magit-decode-git-path" function (:arguments ("path")) nil [87997 88112])
+            ("magit-abbrev-length" function nil nil [88114 88200])
+            ("magit-abbrev-arg" function nil nil [88202 88276])
+            ("magit-uninteresting-refs" variable (:default-value (quote ("^refs/stash$" "^refs/remotes/[^/]+/HEAD$" "^refs/remotes/[^/]+/top-bases$" "^refs/top-bases$"))) nil [88298 88443])
+            ("cl-defun" code nil nil [88445 89428])
+            ("magit-format-ref" function (:arguments ("ref")) nil [89430 90048])
+            ("magit-read-file-hist" variable nil nil [90050 90083])
+            ("magit-read-file-from-rev" function (:arguments ("revision" "default")) nil [90085 90484])
+            ("magit-read-file-trace" function (:arguments ("ignored")) nil [90486 90824])
+            ("magit-read-rev-history" variable nil nil [90826 90929])
+            ("magit-read-tag" function (:arguments ("prompt" "require-match")) nil [90931 91114])
+            ("magit-read-rev" function (:arguments ("prompt" "default" "uninteresting" "noselection")) nil [91116 91816])
+            ("magit-read-rev-with-default" function (:arguments ("prompt")) nil [91818 92137])
+            ("magit-read-rev-range" function (:arguments ("op" "def-beg" "def-end")) nil [92139 92521])
+            ("magit-read-stash" function (:arguments ("prompt")) nil [92523 92755])
+            ("magit-read-remote" function (:arguments ("prompt" "default" "require-match")) nil [92757 92993])
+            ("magit-read-remote-branch" function (:arguments ("prompt" "remote" "default")) nil [92995 93570])
+            ("magit-format-ref-label" function (:arguments ("ref")) nil [93572 93870])
+            ("magit-format-ref-labels" function (:arguments ("string")) nil [93872 94148])
+            ("magit-insert-ref-labels" function (:arguments ("string")) nil [94150 94632])
+            ("magit-format-rev-summary" function (:arguments ("rev")) nil [94634 94902])
+            ("cl-defstruct" code nil nil [94955 95134])
+            ("defvar-local" code nil nil [95136 95360])
+            ("put" code nil nil [95361 95405])
+            ("magit-with-section--parent" variable nil nil [95431 95512])
+            ("magit-with-section--oldroot" variable nil nil [95514 95596])
+            ("magit-with-section" function (:arguments ("arglist" "body")) nil [95598 98533])
+            ("magit-cmd-insert-section" function (:arguments ("arglist" "washer" "program" "args")) nil [98535 99569])
+            ("magit-git-insert-section" function (:arguments ("arglist" "washer" "args")) nil [99571 99832])
+            ("magit-insert-line-section" function (:arguments ("arglist" "line")) nil [99834 100451])
+            ("magit-find-section" function (:arguments ("path" "top")) nil [100478 100883])
+            ("magit-section-path" function (:arguments ("section")) nil [100885 101114])
+            ("magit-find-section-after" function (:arguments ("pos")) nil [101116 101264])
+            ("magit-find-section-after*" function (:arguments ("pos" "secs")) nil [101266 101696])
+            ("magit-find-section-before" function (:arguments ("pos")) nil [101698 102326])
+            ("magit-find-section-before*" function (:arguments ("pos" "secs")) nil [102328 102612])
+            ("magit-current-section" function nil nil [102614 102719])
+            ("magit-find-section-at" function (:arguments ("pos")) nil [102721 102864])
+            ("magit-goto-next-section" function (:user-visible-flag t) nil [102889 103101])
+            ("magit-goto-previous-section" function (:user-visible-flag t) nil [103103 103310])
+            ("magit-goto-parent-section" function (:user-visible-flag t) nil [103312 103529])
+            ("magit-goto-next-sibling-section" function (:user-visible-flag t) nil [103531 103987])
+            ("magit-goto-previous-sibling-section" function (:user-visible-flag t) nil [103989 104459])
+            ("magit-goto-section" function (:arguments ("section")) nil [104461 104983])
+            ("magit-goto-section-at-path" function (:arguments ("path")) nil [104985 105225])
+            ("magit-define-section-jumper" function (:arguments ("sym" "title")) nil [105227 105993])
+            ("magit-define-section-jumper" code nil nil [105995 106044])
+            ("magit-define-section-jumper" code nil nil [106045 106102])
+            ("magit-define-section-jumper" code nil nil [106103 106161])
+            ("magit-define-section-jumper" code nil nil [106162 106218])
+            ("magit-define-section-jumper" code nil nil [106219 106277])
+            ("magit-define-section-jumper" code nil nil [106278 106336])
+            ("magit-define-section-jumper" code nil nil [106337 106388])
+            ("magit-add-section-hook" function (:arguments ("hook" "function" "at" "append" "local")) nil [106411 108499])
+            ("magit-map-sections" function (:arguments ("function" "section")) nil [108526 108760])
+            ("magit-wash-sequence" function (:arguments ("function")) nil [108762 108967])
+            ("magit-section-parent-info" function (:arguments ("section")) nil [108969 109108])
+            ("magit-section-siblings" function (:arguments ("section" "direction")) nil [109110 109446])
+            ("magit-section-region-siblings" function (:arguments ("key")) nil [109448 110465])
+            ("magit-diff-section-for-diffstat" function (:arguments ("section")) nil [110467 110776])
+            ("magit-section-set-hidden" function (:arguments ("section" "hidden")) nil [110804 111507])
+            ("magit-section-any-hidden" function (:arguments ("section")) nil [111509 111821])
+            ("magit-section-collapse" function (:arguments ("section")) nil [111823 112034])
+            ("magit-section-expand" function (:arguments ("section")) nil [112036 112242])
+            ("magit-section-expand-all-aux" function (:arguments ("section")) nil [112244 112460])
+            ("magit-section-expand-all" function (:arguments ("section")) nil [112462 112625])
+            ("magit-section-hideshow" function (:arguments ("flag-or-func")) nil [112627 113159])
+            ("magit-show-section" function (:user-visible-flag t) nil [113161 113263])
+            ("magit-hide-section" function (:user-visible-flag t) nil [113265 113365])
+            ("magit-collapse-section" function (:user-visible-flag t) nil [113367 113512])
+            ("magit-expand-section" function (:user-visible-flag t) nil [113514 113655])
+            ("magit-toggle-file-section" function (:user-visible-flag t) nil [113657 113895])
+            ("magit-toggle-section" function (:user-visible-flag t) nil [113897 114097])
+            ("magit-expand-collapse-section" function (:user-visible-flag t) nil [114099 114396])
+            ("magit-cycle-section" function (:user-visible-flag t) nil [114398 114986])
+            ("magit-section-lineage" function (:arguments ("section")) nil [114988 115175])
+            ("magit-section-show-level" function (:arguments ("section" "level" "threshold" "path")) nil [115177 115578])
+            ("magit-show-level" function (:arguments ("level" "all")) nil [115580 116011])
+            ("magit-show-only-files" function (:user-visible-flag t) nil [116013 116316])
+            ("magit-show-only-files-all" function (:user-visible-flag t) nil [116318 116597])
+            ("magit-define-level-shower-1" function (:arguments ("level" "all")) nil [116599 117114])
+            ("magit-define-level-shower" function (:arguments ("level")) nil [117116 117368])
+            ("magit-define-level-shower" code nil nil [117370 117399])
+            ("magit-define-level-shower" code nil nil [117400 117429])
+            ("magit-define-level-shower" code nil nil [117430 117459])
+            ("magit-define-level-shower" code nil nil [117460 117489])
+            ("defvar-local" code nil nil [117519 117563])
+            ("defvar-local" code nil nil [117564 117606])
+            ("magit-highlight-section" function nil nil [117608 118803])
+            ("magit-section-context-type" function (:arguments ("section")) nil [118828 119038])
+            ("magit-section-match-1" function (:arguments ("l1" "l2")) nil [119040 119362])
+            ("magit-section-match" function (:arguments ("condition" "section")) nil [119364 119957])
+            ("magit-section-case" function (:arguments ("slots" "clauses")) nil [119959 120417])
+            ("magit-section-action-success" variable
+               (:constant-flag t
+                :default-value (make-symbol "magit-section-action-success"))
+                nil [120419 120505])
+            ("magit-section-action" function (:arguments ("opname" "slots" "clauses")) nil [120507 121565])
+            ("magit-process" function (:user-visible-flag t) nil [121608 121828])
+            ("magit-process-kill" function (:user-visible-flag t) nil [121830 122138])
+            ("magit-git-command-history" variable nil nil [122140 122178])
+            ("magit-git-command" function
+               (:user-visible-flag t
+                :arguments ("args" "directory"))
+                nil [122195 122868])
+            ("magit-git-command-topdir" function
+               (:user-visible-flag t
+                :arguments ("args" "directory"))
+                nil [122870 123159])
+            ("magit-git-command-read-args" function (:arguments ("root")) nil [123161 123589])
+            ("define-derived-mode" code nil nil [123611 123722])
+            ("magit-process-buffer-name" variable (:default-value "*magit-process*") nil [123724 123829])
+            ("magit-process-buffer" function (:arguments ("topdir" "create")) nil [123831 124514])
+            ("magit-git-exit-code" function (:arguments ("args")) nil [124545 124787])
+            ("magit-git-success" function (:arguments ("args")) nil [124789 124932])
+            ("magit-git-failure" function (:arguments ("args")) nil [124934 125077])
+            ("magit-git-string" function (:arguments ("args")) nil [125079 125634])
+            ("magit-git-true" function (:arguments ("args")) nil [125636 125881])
+            ("magit-git-false" function (:arguments ("args")) nil [125883 126132])
+            ("magit-git-insert" function (:arguments ("args")) nil [126134 126388])
+            ("magit-git-lines" function (:arguments ("args")) nil [126390 126780])
+            ("magit-run-git" function (:arguments ("args")) nil [126782 127626])
+            ("magit-call-git" function (:arguments ("args")) nil [127628 128221])
+            ("magit-call-process" function (:arguments ("program" "args")) nil [128223 128902])
+            ("magit-run-git-with-input" function (:arguments ("input" "args")) nil [128904 129895])
+            ("magit-run-git-with-logfile" function (:arguments ("file" "args")) nil [129897 130318])
+            ("magit-this-process" variable nil nil [130350 130381])
+            ("magit-run-git-async" function (:arguments ("args")) nil [130383 131410])
+            ("magit-start-git" function (:arguments ("input" "args")) nil [131412 132392])
+            ("magit-start-process" function (:arguments ("program" "input" "args")) nil [132394 134842])
+            ("magit-process-setup" function (:arguments ("program" "args")) nil [134869 135654])
+            ("magit-process-truncate-log" function (:arguments ("buffer")) nil [135656 136584])
+            ("magit-process-sentinel" function (:arguments ("process" "event")) nil [136586 137183])
+            ("magit-process-filter" function (:arguments ("proc" "string")) nil [137185 138300])
+            ("magit-process-logfile-filter" function (:arguments ("process" "string")) nil [138302 138700])
+            ("magit-process-yes-or-no-prompt" function (:arguments ("proc" "string")) nil [138702 139120])
+            ("magit-process-password-prompt" function (:arguments ("proc" "string")) nil [139122 139411])
+            ("magit-process-username-prompt" function (:arguments ("proc" "string")) nil [139413 139838])
+            ("magit-process-match-prompt" function (:arguments ("prompts" "string")) nil [139840 140228])
+            ("magit-process-wait" function nil nil [140230 140374])
+            ("magit-process-set-mode-line" function (:arguments ("program" "args")) nil [140376 140758])
+            ("magit-process-unset-mode-line" function nil nil [140760 140869])
+            ("magit-process-error-message-re" variable (:default-value (concat "^\\(?:error\\|fatal\\|git\\): \\(.*\\)" paragraph-separate)) nil [140871 140981])
+            ("magit-process-finish" function (:arguments ("arg" "process-buf" "command-buf" "default-dir" "section")) nil [140983 142798])
+            ("magit-process-display-buffer" function (:arguments ("process")) nil [142800 143477])
+            ("magit-process-quote-arguments" function (:arguments ("args")) nil [143479 143962])
+            ("define-derived-mode" code nil nil [144001 144735])
+            ("defvar-local" code nil nil [144737 144778])
+            ("put" code nil nil [144779 144827])
+            ("defvar-local" code nil nil [144829 144866])
+            ("put" code nil nil [144867 144911])
+            ("magit-mode-setup" function (:arguments ("buffer" "switch-func" "mode" "refresh-func" "refresh-args")) nil [144913 145971])
+            ("magit-mode-init" function (:arguments ("dir" "mode" "refresh-func" "refresh-args")) nil [145973 146717])
+            ("defvar-local" code nil nil [146719 146773])
+            ("put" code nil nil [146774 146835])
+            ("magit-mode-display-buffer" function (:arguments ("buffer" "mode" "switch-function")) nil [146837 148053])
+            ("magit-mode-get-buffer" function (:arguments ("format" "mode" "topdir" "create")) nil [148055 148970])
+            ("magit-mode-get-buffer-create" function (:arguments ("format" "mode" "topdir")) nil [148972 149086])
+            ("cl-defun" code nil nil [149088 150423])
+            ("magit-mode-quit-window" function
+               (:user-visible-flag t
+                :arguments ("kill-buffer"))
+                nil [150425 151402])
+            ("magit-map-magit-buffers" function (:arguments ("func" "dir")) nil [151426 151694])
+            ("defvar-local" code nil nil [151721 151756])
+            ("put" code nil nil [151757 151799])
+            ("magit-remember-point" function nil nil [151801 151866])
+            ("magit-invisible-region-end" function (:arguments ("pos")) nil [151868 152021])
+            ("magit-invisible-region-start" function (:arguments ("pos")) nil [152023 152187])
+            ("magit-correct-point-after-command" function nil nil [152189 152884])
+            ("magit-go-backward" function (:user-visible-flag t) nil [152908 153122])
+            ("magit-go-forward" function (:user-visible-flag t) nil [153124 153343])
+            ("magit-xref-insert-buttons" function nil nil [153345 153877])
+            ("magit-xref-insert-button" function (:arguments ("label" "type")) nil [153879 154071])
+            ("define-button-type" code nil nil [154073 154252])
+            ("define-button-type" code nil nil [154254 154431])
+            ("magit-setup-xref" function (:arguments ("item")) nil [154433 154759])
+            ("magit-refresh" function
+               (:user-visible-flag t
+                :arguments ("buffer"))
+                nil [154786 155704])
+            ("magit-refresh-all" function (:user-visible-flag t) nil [155706 156125])
+            ("magit-revert-buffers" function nil nil [156127 156779])
+            ("magit-diff-context-lines" variable (:default-value 3) nil [156816 156851])
+            ("magit-diff-U-arg" function nil nil [156853 156923])
+            ("magit-diff-smaller-hunks" function
+               (:user-visible-flag t
+                :arguments ("count"))
+                nil [156925 157140])
+            ("magit-diff-larger-hunks" function
+               (:user-visible-flag t
+                :arguments ("count"))
+                nil [157142 157348])
+            ("magit-diff-default-hunks" function (:user-visible-flag t) nil [157350 157509])
+            ("magit-set-diff-options" function (:user-visible-flag t) nil [157511 157728])
+            ("magit-save-default-diff-options" function (:user-visible-flag t) nil [157802 158069])
+            ("magit-reset-diff-options" function (:user-visible-flag t) nil [158071 158303])
+            ("magit-insert-diff" function (:arguments ("section" "file" "status")) nil [158328 158738])
+            ("magit-wash-raw-diffs" function (:arguments ("staged")) nil [158740 158910])
+            ("magit-wash-raw-diff" function (:arguments ("previous" "staged")) nil [158912 160272])
+            ("define-derived-mode" code nil nil [160324 160927])
+            ("magit-commit-buffer-name" variable (:default-value "*magit-commit*") nil [160929 161024])
+            ("magit-show-commit" function
+               (:user-visible-flag t
+                :arguments ("commit" "noselect"))
+                nil [161041 161561])
+            ("magit-show-item-or-scroll-up" function (:user-visible-flag t) nil [161563 161990])
+            ("magit-show-item-or-scroll-down" function (:user-visible-flag t) nil [161992 162425])
+            ("magit-show-item-or-scroll" function (:arguments ("fn")) nil [162427 163337])
+            ("magit-refresh-commit-buffer" function (:arguments ("commit")) nil [163339 163609])
+            ("magit-wash-commit" function nil nil [163633 165178])
+            ("magit-insert-commit-button" function (:arguments ("hash")) nil [165180 165704])
+            ("define-derived-mode" code nil nil [165724 166310])
+            ("magit-status-buffer-name" variable (:default-value "*magit: %t*") nil [166312 166417])
+            ("magit-status" function
+               (:user-visible-flag t
+                :arguments ("dir" "switch-function"))
+                nil [166434 167998])
+            ("magit-refresh-status" function nil nil [168000 168221])
+            ("magit-insert-stashes" function nil nil [168256 168893])
+            ("magit-insert-untracked-files" function nil nil [168895 169461])
+            ("magit-insert-pending-commits" function nil nil [169463 170188])
+            ("magit-insert-unstaged-changes" function nil nil [170190 170466])
+            ("magit-insert-staged-changes" function nil nil [170468 171028])
+            ("magit-insert-unpulled-or-recent-commits" function nil nil [171030 171485])
+            ("magit-insert-unpulled-commits" function nil nil [171487 171779])
+            ("magit-insert-unpushed-commits" function nil nil [171781 172073])
+            ("magit-insert-unpulled-cherries" function nil nil [172075 172380])
+            ("magit-insert-unpushed-cherries" function nil nil [172382 172660])
+            ("magit-insert-empty-line" function nil nil [172682 172732])
+            ("magit-insert-status-local-line" function nil nil [172734 173025])
+            ("magit-insert-status-remote-line" function nil nil [173027 173402])
+            ("magit-format-tracked-line" function (:arguments ("tracked" "branch")) nil [173404 173928])
+            ("magit-insert-status-head-line" function nil nil [173930 174246])
+            ("magit-insert-status-tags-line" function nil nil [174248 174911])
+            ("magit-format-status-tag-sentence" function (:arguments ("behindp" "tag" "cnt" "ignored")) nil [174913 175376])
+            ("magit-insert-status-merge-line" function nil nil [175402 175782])
+            ("magit-insert-status-rebase-lines" function nil nil [175784 176352])
+            ("magit-insert-rebase-sequence" function nil nil [176354 177201])
+            ("magit-insert-bisect-output" function nil nil [177203 178211])
+            ("magit-insert-bisect-rest" function nil nil [178213 178480])
+            ("magit-insert-bisect-log" function nil nil [178482 178656])
+            ("magit-wash-bisect-log" function nil nil [178658 179623])
+            ("magit-bisecting-p" function nil nil [179625 179700])
+            ("magit-default-directory" variable nil nil [179739 179775])
+            ("magit-save-some-buffers" function
+               (:user-visible-flag t
+                :arguments ("msg" "pred" "topdir"))
+                nil [179777 180809])
+            ("magit-save-buffers-predicate-all" function nil nil [180811 180911])
+            ("magit-save-buffers-predicate-tree-only" function nil nil [180913 181460])
+            ("magit-apply-item" function (:user-visible-flag t) nil [181522 181908])
+            ("magit-stage-item" function
+               (:user-visible-flag t
+                :arguments ("file"))
+                nil [181924 183781])
+            ("magit-stage-all" function
+               (:user-visible-flag t
+                :arguments ("including-untracked"))
+                nil [183798 184257])
+            ("magit-unstage-item" function (:user-visible-flag t) nil [184275 185100])
+            ("magit-unstage-all" function (:user-visible-flag t) nil [185117 185548])
+            ("magit-discard-item" function (:user-visible-flag t) nil [185566 187496])
+            ("magit-revert-item" function (:user-visible-flag t) nil [187513 188232])
+            ("magit-revert-commit" function (:arguments ("commit")) nil [188234 188362])
+            ("magit-revert-backup-file" variable
+               (:constant-flag t
+                :default-value "magit/reverted.diff")
+                nil [188364 188421])
+            ("magit-revert-undo" function (:user-visible-flag t) nil [188423 188734])
+            ("magit-discard-diff" function (:arguments ("diff" "stagedp")) nil [188754 189398])
+            ("magit-apply-commit" function (:arguments ("commit")) nil [189400 189537])
+            ("magit-apply-diff-item" function (:arguments ("diff" "args")) nil [189539 189932])
+            ("magit-apply-hunk-item" function (:arguments ("hunk" "args")) nil [189934 191310])
+            ("magit-insert-diff-item-patch" function (:arguments ("diff" "buf")) nil [191312 191497])
+            ("magit-insert-hunk-item-patch" function (:arguments ("hunk" "buf")) nil [191499 191742])
+            ("magit-insert-hunk-item-region-patch" function (:arguments ("hunk" "reverse" "beg" "end" "buf")) nil [191744 192627])
+            ("magit-diff-item-insert-header" function (:arguments ("diff" "buf")) nil [192629 192992])
+            ("magit-insert-region" function (:arguments ("beg" "end" "buf")) nil [192994 193143])
+            ("magit-insert-current-line" function (:arguments ("buf")) nil [193145 193353])
+            ("magit-revert-backup" function (:arguments ("buffer" "args")) nil [193355 193831])
+            ("magit-visit-item" function
+               (:user-visible-flag t
+                :arguments ("other-window"))
+                nil [193845 194413])
+            ("magit-visit-file-item" function (:arguments ("file" "other-window" "line" "column")) nil [194415 195272])
+            ("magit-hunk-item-target-line" function (:arguments ("hunk")) nil [195274 195851])
+            ("magit-dired-jump" function
+               (:user-visible-flag t
+                :arguments ("other-window"))
+                nil [195868 196320])
+            ("defvar-local" code nil nil [196322 196360])
+            ("defvar-local" code nil nil [196361 196406])
+            ("magit-show" function
+               (:user-visible-flag t
+                :arguments ("rev" "file" "switch-function"))
+                nil [196423 199391])
+            ("magit-merge" function
+               (:user-visible-flag t
+                :arguments ("revision" "do-commit"))
+                nil [199432 200304])
+            ("magit-merge-abort" function (:user-visible-flag t) nil [200321 200587])
+            ("magit-checkout" function
+               (:user-visible-flag t
+                :arguments ("revision"))
+                nil [200621 202022])
+            ("magit-create-branch" function
+               (:user-visible-flag t
+                :arguments ("branch" "parent"))
+                nil [202039 202727])
+            ("magit-delete-branch" function
+               (:user-visible-flag t
+                :arguments ("branch" "force"))
+                nil [202744 204270])
+            ("magit-rename-branch" function
+               (:user-visible-flag t
+                :arguments ("old" "new" "force"))
+                nil [204287 204814])
+            ("magit-guess-branch" function nil nil [204816 205130])
+            ("magit-add-remote" function
+               (:user-visible-flag t
+                :arguments ("remote" "url"))
+                nil [205163 205423])
+            ("magit-remove-remote" function
+               (:user-visible-flag t
+                :arguments ("remote"))
+                nil [205440 205624])
+            ("magit-rename-remote" function
+               (:user-visible-flag t
+                :arguments ("old" "new"))
+                nil [205641 206089])
+            ("magit-guess-remote" function nil nil [206091 206274])
+            ("magit-rebase-info" function nil nil [206290 208316])
+            ("magit-rebase-step" function (:user-visible-flag t) nil [208318 209261])
+            ("magit-interactive-rebase" function
+               (:user-visible-flag t
+                :arguments ("commit"))
+                nil [209278 209817])
+            ("magit-apply-mailbox" function
+               (:user-visible-flag t
+                :arguments ("file-or-dir"))
+                nil [209829 210082])
+            ("magit-reset-head" function
+               (:user-visible-flag t
+                :arguments ("revision" "hard"))
+                nil [210112 210860])
+            ("magit-reset-head-hard" function
+               (:user-visible-flag t
+                :arguments ("revision"))
+                nil [210877 211239])
+            ("magit-reset-working-tree" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [211256 212088])
+            ("magit-read-rewrite-info" function nil nil [212107 212352])
+            ("magit-write-rewrite-info" function (:arguments ("info")) nil [212354 212517])
+            ("magit-rewrite-set-commit-property" function (:arguments ("commit" "prop" "value")) nil [212519 212837])
+            ("add-hook" code nil nil [212839 212888])
+            ("put" code nil nil [212889 212963])
+            ("magit-rewrite-apply" function (:arguments ("commit")) nil [212964 213083])
+            ("add-hook" code nil nil [213085 213139])
+            ("put" code nil nil [213140 213213])
+            ("magit-rewrite-pick" function (:arguments ("commit")) nil [213214 213338])
+            ("add-hook" code nil nil [213340 213391])
+            ("put" code nil nil [213392 213467])
+            ("magit-rewrite-revert" function (:arguments ("commit")) nil [213468 213690])
+            ("magit-rewrite-set-used" function nil nil [213692 213869])
+            ("magit-rewrite-set-unused" function nil nil [213871 214052])
+            ("magit-rewrite-start" function (:arguments ("from" "onto")) nil [214054 214960])
+            ("magit-rewrite-stop" function (:arguments ("noconfirm")) nil [214962 215260])
+            ("magit-rewrite-abort" function nil nil [215262 215671])
+            ("magit-rewrite-finish" function nil nil [215673 215768])
+            ("magit-rewrite-finish-step" function nil nil [215770 216531])
+            ("magit-rewrite-diff-pending" function nil nil [216533 216764])
+            ("magit-rewrite-diff-pending-transition" function nil nil [216766 216963])
+            ("define-obsolete-function-alias" code nil nil [216965 217166])
+            ("magit-fetch" function
+               (:user-visible-flag t
+                :arguments ("remote"))
+                nil [217199 217368])
+            ("magit-fetch-current" function (:user-visible-flag t) nil [217385 217612])
+            ("magit-remote-update" function (:user-visible-flag t) nil [217629 217834])
+            ("magit-pull" function (:user-visible-flag t) nil [217866 220500])
+            ("magit-push-tags" function (:user-visible-flag t) nil [220532 221319])
+            ("magit-push" function (:user-visible-flag t) nil [221336 222108])
+            ("magit-push-dwim" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [222110 224585])
+            ("magit-commit" function
+               (:user-visible-flag t
+                :arguments ("amendp"))
+                nil [224620 225023])
+            ("magit-commit-amend" function (:user-visible-flag t) nil [225040 225240])
+            ("magit-commit-extend" function
+               (:user-visible-flag t
+                :arguments ("override-date"))
+                nil [225257 226110])
+            ("magit-commit-reword" function
+               (:user-visible-flag t
+                :arguments ("override-date"))
+                nil [226127 227016])
+            ("defvar-local" code nil nil [227018 227062])
+            ("defvar-local" code nil nil [227063 227107])
+            ("magit-commit-unmark-after-squash" variable (:default-value t) nil [227109 227152])
+            ("magit-commit-fixup" function
+               (:user-visible-flag t
+                :arguments ("commit"))
+                nil [227169 227563])
+            ("magit-commit-squash" function
+               (:user-visible-flag t
+                :arguments ("commit" "fixup"))
+                nil [227580 228629])
+            ("magit-commit-squash-commit" function nil nil [228631 229046])
+            ("magit-commit-squash-marked" function nil nil [229048 229485])
+            ("magit-commit-squash-abort" function (:arguments ("buffer")) nil [229487 229746])
+            ("magit-commit-assert" function (:arguments ("args")) nil [229748 230399])
+            ("magit-commit-maybe-expand" function (:arguments ("unstaged")) nil [230401 230633])
+            ("magit-commit-internal" function (:arguments ("subcmd" "args")) nil [230635 232095])
+            ("magit-commit-add-log" function (:user-visible-flag t) nil [232097 234996])
+            ("magit-tag" function
+               (:user-visible-flag t
+                :arguments ("name" "rev" "annotate"))
+                nil [235028 235694])
+            ("magit-delete-tag" function
+               (:user-visible-flag t
+                :arguments ("name"))
+                nil [235711 235914])
+            ("magit-read-stash-history" variable nil nil [235932 236013])
+            ("magit-stash" function
+               (:user-visible-flag t
+                :arguments ("description"))
+                nil [236030 236493])
+            ("magit-stash-snapshot" function (:user-visible-flag t) nil [236510 236929])
+            ("magit-stash-apply" function
+               (:user-visible-flag t
+                :arguments ("stash"))
+                nil [236931 237162])
+            ("magit-stash-pop" function
+               (:user-visible-flag t
+                :arguments ("stash"))
+                nil [237164 237402])
+            ("magit-stash-drop" function
+               (:user-visible-flag t
+                :arguments ("stash"))
+                nil [237404 237611])
+            ("magit-cherry-pick-item" function (:user-visible-flag t) nil [237632 237842])
+            ("magit-cherry-pick-commit" function (:arguments ("commit")) nil [237844 237973])
+            ("magit-submodule-update" function
+               (:user-visible-flag t
+                :arguments ("init"))
+                nil [238009 238298])
+            ("magit-submodule-update-init" function (:user-visible-flag t) nil [238315 238463])
+            ("magit-submodule-init" function (:user-visible-flag t) nil [238480 238653])
+            ("magit-submodule-sync" function (:user-visible-flag t) nil [238670 238867])
+            ("magit-bisect-start" function
+               (:user-visible-flag t
+                :arguments ("bad" "good"))
+                nil [238901 239527])
+            ("magit-bisect-reset" function (:user-visible-flag t) nil [239544 239808])
+            ("magit-bisect-good" function (:user-visible-flag t) nil [239825 240042])
+            ("magit-bisect-bad" function (:user-visible-flag t) nil [240059 240269])
+            ("magit-bisect-skip" function (:user-visible-flag t) nil [240286 240529])
+            ("magit-bisect-run" function
+               (:user-visible-flag t
+                :arguments ("cmdline"))
+                nil [240546 240757])
+            ("magit-run-git-bisect" function (:arguments ("subcommand" "args" "no-assert")) nil [240759 241152])
+            ("magit-log" function (:arguments ("range")) nil [241184 241459])
+            ("magit-log-ranged" function (:arguments ("range")) nil [241476 241587])
+            ("magit-log-long" function (:arguments ("range")) nil [241604 241881])
+            ("magit-log-long-ranged" function (:arguments ("range")) nil [241898 242024])
+            ("magit-file-log" function
+               (:user-visible-flag t
+                :arguments ("file" "use-graph"))
+                nil [242041 242698])
+            ("magit-reflog" function
+               (:user-visible-flag t
+                :arguments ("ref"))
+                nil [242715 243201])
+            ("magit-reflog-head" function (:user-visible-flag t) nil [243218 243315])
+            ("define-derived-mode" code nil nil [243361 244228])
+            ("magit-log-buffer-name" variable (:default-value "*magit-log*") nil [244230 244322])
+            ("magit-refresh-log-buffer" function (:arguments ("style" "range" "args" "file")) nil [244324 245452])
+            ("magit-log-oneline-re" variable
+               (:constant-flag t
+                :default-value (concat "^" "\\(?4:\\(?:[-_/|\\*o.] *\\)+ *\\)?" "\\(?:" "\\(?1:[0-9a-fA-F]+\\) " "\\(?:\\(?3:([^()]+)\\) \\)?" "\\(?7:[BGUN]\\)?" "\\[\\(?5:[^]]*\\)\\]" "\\[\\(?6:[^]]*\\)\\]" "\\(?2:.*\\)" "\\)?$"))
+                nil [245473 245962])
+            ("magit-log-long-re" variable
+               (:constant-flag t
+                :default-value (concat "^" "\\(?4:\\(?:[-_/|\\*o.] *\\)+ *\\)?" "\\(?:" "\\(?:commit \\(?1:[0-9a-fA-F]+\\)" "\\(?: \\(?3:([^()]+)\\)\\)?\\)" "\\|" "\\(?2:.+\\)\\)$"))
+                nil [245964 246244])
+            ("magit-log-unique-re" variable
+               (:constant-flag t
+                :default-value (concat "^" "\\(?1:[0-9a-fA-F]+\\) " "\\(?2:.*\\)$"))
+                nil [246275 246403])
+            ("magit-log-cherry-re" variable
+               (:constant-flag t
+                :default-value (concat "^" "\\(?8:[-+]\\) " "\\(?1:[0-9a-fA-F]+\\) " "\\(?2:.*\\)$"))
+                nil [246435 246623])
+            ("magit-log-bisect-vis-re" variable
+               (:constant-flag t
+                :default-value (concat "^" "\\(?1:[0-9a-fA-F]+\\) " "\\(?:\\(?3:([^()]+)\\) \\)?" "\\(?2:.+\\)$"))
+                nil [246655 246845])
+            ("magit-log-bisect-log-re" variable
+               (:constant-flag t
+                :default-value (concat "^# " "\\(?3:bad:\\|skip:\\|good:\\) " "\\[\\(?1:[^]]+\\)\\] " "\\(?2:.+\\)$"))
+                nil [246877 247050])
+            ("magit-log-reflog-re" variable
+               (:constant-flag t
+                :default-value (concat "^" "\\(?1:[^ ]+\\) " "\\[\\(?5:[^]]*\\)\\] " "\\(?6:[^ ]*\\) " "[^@]+@{\\(?9:[^}]+\\)} " "\\(?10:merge\\|[^:]+\\)?:? ?" "\\(?2:.+\\)?$"))
+                nil [247082 247449])
+            ("magit-reflog-subject-re" variable
+               (:constant-flag t
+                :default-value (concat "\\([^ ]+\\) ?" "\\(\\(?: ?-[^ ]+\\)+\\)?" "\\(?: ?(\\([^)]+\\))\\)?"))
+                nil [247480 247682])
+            ("magit-log-count" variable nil nil [247710 247738])
+            ("magit-wash-log" function (:arguments ("style" "color" "longer")) nil [247740 248703])
+            ("magit-wash-log-line" function (:arguments ("style" "abbrev")) nil [248705 250968])
+            ("magit-log-format-unicode-graph" function (:arguments ("string")) nil [250970 251522])
+            ("magit-format-log-margin" function (:arguments ("author" "date")) nil [251524 252576])
+            ("magit-log-toggle-margin" function (:user-visible-flag t) nil [252598 253274])
+            ("magit-log-show-more-entries" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [253276 253870])
+            ("define-derived-mode" code nil nil [253890 254626])
+            ("magit-cherry-buffer-name" variable (:default-value "*magit-cherry*") nil [254628 254742])
+            ("magit-cherry" function
+               (:user-visible-flag t
+                :arguments ("head" "upstream"))
+                nil [254759 255237])
+            ("magit-refresh-cherry-buffer" function (:arguments ("upstream" "head")) nil [255239 255388])
+            ("magit-insert-cherry-head-line" function nil nil [255390 255617])
+            ("magit-insert-cherry-upstream-line" function nil nil [255619 255796])
+            ("magit-insert-cherry-help-lines" function nil nil [255798 256192])
+            ("magit-insert-cherry-commits" function nil nil [256194 256394])
+            ("magit-reflog-buffer-name" variable (:default-value "*magit-reflog*") nil [256414 256515])
+            ("define-derived-mode" code nil nil [256517 257225])
+            ("magit-refresh-reflog-buffer" function (:arguments ("ref")) nil [257227 257564])
+            ("magit-reflog-labels" variable (:default-value (quote (("commit" . magit-log-reflog-label-commit) ("amend" . magit-log-reflog-label-amend) ("merge" . magit-log-reflog-label-merge) ("checkout" . magit-log-reflog-label-checkout) ("branch" . magit-log-reflog-label-checkout) ("reset" . magit-log-reflog-label-reset) ("rebase" . magit-log-reflog-label-rebase) ("cherry-pick" . magit-log-reflog-label-cherry-pick) ("initial" . magit-log-reflog-label-commit) ("pull" . magit-log-reflog-label-remote) ("clone" . magit-log-reflog-label-remote)))) nil [257566 258173])
+            ("magit-log-format-reflog" function (:arguments ("subject")) nil [258175 258959])
+            ("magit-ediff-buffers" variable nil nil [258981 259078])
+            ("magit-ediff-windows" variable nil nil [259080 259187])
+            ("magit-ediff" function (:user-visible-flag t) nil [259189 260700])
+            ("magit-ediff-buffers" function (:arguments ("a" "b")) nil [260702 260884])
+            ("magit-ediff-buffers3" function (:arguments ("a" "b" "c")) nil [260886 261076])
+            ("magit-diff-range" function (:arguments ("diff")) nil [261078 261433])
+            ("magit-ediff-add-cleanup" function nil nil [261435 261710])
+            ("magit-ediff-restore" function nil nil [261712 262308])
+            ("magit-save-index" function (:user-visible-flag t) nil [262325 263235])
+            ("magit-interactive-resolve" function
+               (:user-visible-flag t
+                :arguments ("file"))
+                nil [263252 265771])
+            ("define-derived-mode" code nil nil [265805 266417])
+            ("magit-diff-buffer-name" variable (:default-value "*magit-diff*") nil [266419 266508])
+            ("magit-stash-buffer-name" variable (:default-value "*magit-stash*") nil [266510 266602])
+            ("magit-diff" function
+               (:user-visible-flag t
+                :arguments ("range" "working" "args"))
+                nil [266646 267208])
+            ("magit-diff-working-tree" function
+               (:user-visible-flag t
+                :arguments ("rev"))
+                nil [267225 267441])
+            ("magit-diff-staged" function (:user-visible-flag t) nil [267458 267603])
+            ("magit-diff-unstaged" function (:user-visible-flag t) nil [267620 267750])
+            ("magit-diff-stash" function
+               (:user-visible-flag t
+                :arguments ("stash" "noselect"))
+                nil [267767 268304])
+            ("magit-diff-with-mark" function
+               (:user-visible-flag t
+                :arguments ("range"))
+                nil [268306 268964])
+            ("magit-refresh-diff-buffer" function (:arguments ("range" "working" "args")) nil [268966 269975])
+            ("magit-diff-statline-re" variable
+               (:constant-flag t
+                :default-value (concat "^ ?" "\\(.*\\)" "\\( +| +\\)" "\\([0-9]+\\|Bin\\(?: +[0-9]+ -> [0-9]+ bytes\\)?$\\) ?" "\\(\\+*\\)" "\\(-*\\)$"))
+                nil [269997 270236])
+            ("magit-current-diff-range" variable nil nil [270245 270339])
+            ("defvar-local" code nil nil [270341 270390])
+            ("put" code nil nil [270391 270447])
+            ("magit-wash-diffs" function nil nil [270449 270686])
+            ("magit-wash-diffstats" function nil nil [270688 271178])
+            ("magit-wash-diffstat" function nil nil [271180 271668])
+            ("magit-wash-diff" function nil nil [271670 271940])
+            ("magit-wash-diff-section" function (:arguments ("section")) nil [271942 275337])
+            ("magit-insert-diff-title" function (:arguments ("status" "file" "file2")) nil [275339 275554])
+            ("magit-wash-hunk" function nil nil [275556 276778])
+            ("magit-diff-highlight-whitespace" function (:arguments ("merging")) nil [276780 278158])
+            ("magit-diff-toggle-refine-hunk" function
+               (:user-visible-flag t
+                :arguments ("other"))
+                nil [278186 279517])
+            ("magit-diff-refine-hunk" function (:arguments ("hunk")) nil [279519 279737])
+            ("magit-diff-unrefine-hunk" function (:arguments ("hunk")) nil [279739 279909])
+            ("define-derived-mode" code nil nil [279929 280745])
+            ("magit-wazzup-buffer-name" variable (:default-value "*magit-wazzup*") nil [280747 280870])
+            ("magit-wazzup" function
+               (:user-visible-flag t
+                :arguments ("branch"))
+                nil [280887 281434])
+            ("magit-refresh-wazzup-buffer" function (:arguments ("head")) nil [281436 281582])
+            ("magit-insert-wazzup-head-line" function nil nil [281584 281810])
+            ("magit-insert-wazzup-branches" function nil nil [281812 282157])
+            ("magit-insert-wazzup-commits" function (:arguments ("upstream" "head")) nil [282159 283011])
+            ("define-derived-mode" code nil nil [283052 283765])
+            ("magit-branches-buffer-name" variable (:default-value "*magit-branches*") nil [283767 283877])
+            ("magit-branch-manager" function (:user-visible-flag t) nil [283894 284252])
+            ("magit-refresh-branch-manager" function nil nil [284254 284407])
+            ("magit-wash-branch-line-re" variable
+               (:constant-flag t
+                :default-value (concat "^\\([ *] \\)" "\\(.+?\\) +" "\\(?:" "\\([0-9a-fA-F]+\\)" " " "\\(?:\\[" "\\([^:
+]+?\\)" "\\(?:: \\)?" "\\(?:ahead \\([0-9]+\\)\\)?" "\\(?:, \\)?" "\\(?:behind \\([0-9]+\\)\\)?" "\\] \\)?" "\\(?:.*\\)" "\\|" "-> " "\\(.+\\)" "\\)
+"))
+                nil [284436 285157])
+            ("magit-wash-branch-line" function (:arguments ("remote-name")) nil [285159 287234])
+            ("magit-wash-remote-branches-group" function (:arguments ("group")) nil [287236 287699])
+            ("magit-wash-branches-between-point-and-marker" function (:arguments ("marker" "remote-name")) nil [287701 287928])
+            ("magit-wash-branches" function nil nil [287930 289364])
+            ("magit-rename-item" function (:user-visible-flag t) nil [289384 289603])
+            ("magit-change-what-branch-tracks" function (:user-visible-flag t) nil [289605 290464])
+            ("magit-init" function
+               (:user-visible-flag t
+                :arguments ("directory"))
+                nil [290528 291534])
+            ("magit-copy-item-as-kill" function (:user-visible-flag t) nil [291536 291750])
+            ("magit-ignore-item" function
+               (:user-visible-flag t
+                :arguments ("edit" "local"))
+                nil [291752 292224])
+            ("magit-ignore-item-locally" function
+               (:user-visible-flag t
+                :arguments ("edit"))
+                nil [292226 292405])
+            ("magit-ignore-file" function (:arguments ("file" "edit" "local")) nil [292407 293316])
+            ("magit-ignore-edit-string" function (:arguments ("file")) nil [293318 293857])
+            ("magit-marked-commit" variable nil nil [293877 293909])
+            ("defvar-local" code nil nil [293911 293948])
+            ("put" code nil nil [293949 293993])
+            ("magit-mark-item" function
+               (:user-visible-flag t
+                :arguments ("unmark"))
+                nil [293995 294457])
+            ("magit-refresh-marked-commits" function nil nil [294459 294567])
+            ("magit-refresh-marked-commits-in-buffer" function nil nil [294569 295201])
+            ("magit-add-change-log-entry" function
+               (:user-visible-flag t
+                :arguments ("whoami" "file-name" "other-window"))
+                nil [295234 295887])
+            ("magit-add-change-log-entry-other-window" function
+               (:user-visible-flag t
+                :arguments ("whoami" "file-name"))
+                nil [295904 296409])
+            ("magit-read-top-dir" function (:arguments ("dir")) nil [296433 297228])
+            ("magit-list-repos" function (:arguments ("dirs")) nil [297230 297513])
+            ("magit-list-repos*" function (:arguments ("dir" "depth")) nil [297515 297995])
+            ("magit-list-repos-remove-conflicts" function (:arguments ("alist")) nil [297997 298849])
+            ("magit-run-git-gui" function (:user-visible-flag t) nil [298887 299088])
+            ("magit-run-git-gui-blame" function
+               (:user-visible-flag t
+                :arguments ("commit" "filename" "linenum"))
+                nil [299105 300275])
+            ("magit-run-gitk" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [300292 300578])
+            ("magit-describe-item" function (:user-visible-flag t) nil [300604 301410])
+            ("magit-load-config-extensions" function nil nil [301435 301813])
+            ("magit-font-lock-keywords" variable
+               (:constant-flag t
+                :default-value (eval-when-compile (\` (((\, (concat "(\\(" (regexp-opt (quote ("magit-define-level-shower" "magit-define-section-jumper"))) "\\)\\>[ 	'(]*\\(\\sw+\\)?")) (1 font-lock-keyword-face) (2 font-lock-function-name-face nil t)) ((\, (concat "(" (regexp-opt (quote ("magit-with-section" "magit-cmd-insert-section" "magit-git-insert-section" "magit-insert-line-section" "magit-section-action" "magit-section-case" "magit-add-action-clauses" "magit-bind-match-strings" "magit-visiting-file-item" "magit-tests--with-temp-dir" "magit-tests--with-temp-repo" "magit-tests--with-temp-clone")) t) "\\>")) . 1)))))
+                nil [301839 303081])
+            ("magit-version" function
+               (:user-visible-flag t
+                :arguments ("noerror"))
+                nil [303083 304731])
+            ("cl-eval-when" code nil nil [304733 304777])
+            ("define-obsolete-variable-alias" code nil nil [304779 304884])
+            ("define-obsolete-variable-alias" code nil nil [304885 304990])
+            ("define-obsolete-variable-alias" code nil nil [304991 305096])
+            ("define-obsolete-variable-alias" code nil nil [305098 305200])
+            ("magit" package nil nil [305202 305218])
+            ("magit-key-mode" include nil nil [305242 305267])
+            ("unless" code nil nil [305428 305498]))          
+      :file "magit.el"
+      :pointmax 305593
+      :fsize 305603
+      :lastmodtime '(21519 22510 404666 150000)
+      :unmatched-syntax '((close-paren 6197 . 6198) (symbol 4264 . 4280) (open-paren 4263 . 4264) (close-paren 3299 . 3300) (symbol 3119 . 3136) (open-paren 3118 . 3119)))
+    (semanticdb-table "magit-stgit.el"
+      :major-mode 'emacs-lisp-mode
+      :tags 
+        '( ("magit" include nil nil [1506 1522])
+            ("magit-stgit" customgroup (:user-visible-flag t) nil [1552 1634])
+            ("magit-stgit-executable" variable (:default-value "stg") nil [1636 1752])
+            ("magit-stgit-show-patch-name" variable (:default-value t) nil [1754 1909])
+            ("magit-stgit-faces" customgroup (:user-visible-flag t) nil [1923 2030])
+            ("magit-stgit-patch" variable
+               (:default-value (quote ((t :inherit magit-log-sha1)))
+                :type "face")
+                nil [2032 2156])
+            ("magit-stgit-current" variable
+               (:default-value (quote ((t :inherit magit-log-sha1)))
+                :type "face")
+                nil [2158 2286])
+            ("magit-stgit-applied" variable
+               (:default-value (quote ((t :inherit magit-cherry-equivalent)))
+                :type "face")
+                nil [2288 2424])
+            ("magit-stgit-unapplied" variable
+               (:default-value (quote ((t :inherit magit-cherry-unmatched)))
+                :type "face")
+                nil [2426 2565])
+            ("magit-stgit-empty" variable
+               (:default-value (quote ((t :inherit magit-diff-del)))
+                :type "face")
+                nil [2567 2690])
+            ("magit-stgit-hidden" variable
+               (:default-value (quote ((t :inherit magit-diff-empty)))
+                :type "face")
+                nil [2692 2819])
+            ("magit-stgit-patch-buffer-name" variable (:default-value "*magit-stgit-patch*") nil [2836 2946])
+            ("magit-stgit-patch-history" variable nil nil [2948 3034])
+            ("magit-run-stgit" function (:arguments ("args")) nil [3051 3164])
+            ("magit-stgit-lines" function (:arguments ("args")) nil [3166 3352])
+            ("magit-stgit-read-patch" function (:arguments ("prompt" "require-match")) nil [3354 3588])
+            ("magit-stgit-refresh" function
+               (:user-visible-flag t
+                :arguments ("patch"))
+                nil [3619 3862])
+            ("magit-stgit-repair" function (:user-visible-flag t) nil [3879 4175])
+            ("magit-stgit-rebase" function (:user-visible-flag t) nil [4192 4698])
+            ("magit-stgit-discard" function
+               (:user-visible-flag t
+                :arguments ("patch"))
+                nil [4715 4941])
+            ("magit-stgit-goto" function (:arguments ("patch")) nil [4958 5081])
+            ("magit-stgit-show" function
+               (:user-visible-flag t
+                :arguments ("patch"))
+                nil [5098 5433])
+            ("magit-stgit-refresh-patch-buffer" function (:arguments ("patch")) nil [5435 5692])
+            ("magit-stgit-mode-lighter" variable (:default-value " Stg") nil [5704 5744])
+            ("define-minor-mode" code nil nil [5761 6633])
+            ("put" code nil nil [6635 6704])
+            ("put" code nil nil [6705 6774])
+            ("put" code nil nil [6775 6844])
+            ("turn-on-magit-stgit" function nil nil [6861 6962])
+            ("custom-add-option" code nil nil [6979 7034])
+            ("easy-menu-define" code nil nil [7036 7448])
+            ("easy-menu-add-item" code nil nil [7450 7550])
+            ("magit-stgit-patch-re" variable
+               (:constant-flag t
+                :default-value "^\\(.\\)\\([-+>!]\\) \\([^ ]+\\) +# \\(.*\\)$")
+                nil [7572 7653])
+            ("magit-insert-stgit-series" function nil nil [7655 7916])
+            ("magit-stgit-wash-patch" function nil nil [7918 8860])
+            ("magit-stgit" package nil nil [8862 8884]))          
+      :file "magit-stgit.el"
+      :pointmax 8967
+      :fsize 8967
+      :lastmodtime '(21519 22510 400666 150000)
+      :unmatched-syntax nil)
+    (semanticdb-table "magit-wip.el"
+      :major-mode 'emacs-lisp-mode
+      :tags 
+        '( ("magit" include nil nil [1761 1777])
+            ("format-spec" include nil nil [1778 1800])
+            ("magit-wip-mode" function (:arguments ("ignore")) nil [1802 1904])
+            ("make-obsolete" code nil nil [1905 1970])
+            ("magit-wip" customgroup (:user-visible-flag t) nil [1985 2067])
+            ("magit-wip-commit-message" variable (:default-value "WIP %r") nil [2069 2388])
+            ("magit-wip-echo-area-message" variable (:default-value "Wrote %f (wip)") nil [2390 2787])
+            ("magit-wip-save-mode-lighter" variable (:default-value " Wip") nil [2789 2832])
+            ("define-minor-mode" code nil nil [2859 3281])
+            ("define-globalized-minor-mode" code nil nil [3298 3420])
+            ("turn-on-magit-wip-save" function nil nil [3422 3941])
+            ("magit-wip-save" function nil nil [3943 4892])
+            ("magit-wip" package nil nil [4894 4914]))          
+      :file "magit-wip.el"
+      :pointmax 4995
+      :fsize 4994
+      :lastmodtime '(21519 22510 400666 150000)
+      :unmatched-syntax nil))
+  :file "!home!edgar!.emacs.d!el-get!magit!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

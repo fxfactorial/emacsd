@@ -1,0 +1,119 @@
+;; Object KR/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "KR/"
+  :tables
+  (list
+    (semanticdb-table "chap5.c"
+      :major-mode 'c-mode
+      :tags 
+        '( ("stdio.h" include (:system-flag t) nil [1 19])
+            ("stdlib.h" include (:system-flag t) nil [20 39])
+            ("string.h" include (:system-flag t) nil [40 59])
+            ("unistd.h" include (:system-flag t) nil [60 79])
+            ("ctype.h" include (:system-flag t) nil [80 98])
+            ("MAXLINES" variable (:constant-flag t) nil [108 116])
+            ("main" function (:type "int") nil [140 222]))          
+      :file "chap5.c"
+      :pointmax 226
+      :fsize 225
+      :lastmodtime '(21516 64731 229046 491000)
+      :unmatched-syntax '((thing 129 . 136) (thing 129 . 136) (thing 128 . 129) (thing 128 . 129) (thing 123 . 127) (thing 123 . 127) (thing 117 . 121) (thing 108 . 116))
+      :lexical-table 
+        '(("MAXLINES" . ((number "5000" 117 . 121)))
+          )
+)
+    (semanticdb-table "fork.c"
+      :major-mode 'c-mode
+      :tags 
+        '( ("sys/types.h" include (:system-flag t) nil [1 23])
+            ("sys/wait.h" include (:system-flag t) nil [36 57])
+            ("stdio.h" include (:system-flag t) nil [73 91])
+            ("stdlib.h" include (:system-flag t) nil [117 136])
+            ("unistd.h" include (:system-flag t) nil [151 170])
+            ("cmdloop" function
+               (:arguments 
+                  ( ("command" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [209 223]))                  
+                :type "void")
+                nil [196 909])
+            ("main" function
+               (:arguments 
+                  ( ("argc" variable (:type "int") (reparse-symbol arg-sub-list) [921 930])
+                    ("argv" variable
+                       (:pointer 2
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [931 943]))                  
+                :type "int")
+                nil [912 1244]))          
+      :file "fork.c"
+      :pointmax 1245
+      :fsize 1244
+      :lastmodtime '(21517 612 213030 565000)
+      :unmatched-syntax nil)
+    (semanticdb-table "shell.c"
+      :major-mode 'c-mode
+      :tags 
+        '( ("sys/types.h" include (:system-flag t) nil [1 23])
+            ("sys/wait.h" include (:system-flag t) nil [36 57])
+            ("string.h" include (:system-flag t) nil [73 92])
+            ("stdio.h" include (:system-flag t) nil [123 141])
+            ("stdlib.h" include (:system-flag t) nil [167 186])
+            ("unistd.h" include (:system-flag t) nil [201 220])
+            ("builtins" variable
+               (:pointer 1
+                :dereference 1
+                :typemodifiers ("static")
+                :default-value "{\"cd\", \"pwd\"}"
+                :type "char")
+                nil [243 283])
+            ("command_args" variable
+               (:default-value "0"
+                :type "int")
+                nil [285 306])
+            ("r_trim" function
+               (:pointer 1
+                :typemodifiers ("static" "inline")
+                :arguments 
+                  ( ("str" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [336 346]))                  
+                :type "char")
+                nil [309 497])
+            ("parse" function
+               (:pointer 2
+                :typemodifiers ("static" "inline")
+                :arguments 
+                  ( ("s" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [596 604]))                  
+                :type "char")
+                nil [569 1739])
+            ("cmd" function
+               (:arguments 
+                  ( ("input" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [1752 1764]))                  
+                :type "void")
+                nil [1743 2584])
+            ("main" function
+               (:arguments 
+                  ( ("argc" variable (:type "int") (reparse-symbol arg-sub-list) [2596 2605])
+                    ("argv" variable
+                       (:pointer 2
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [2606 2618]))                  
+                :type "int")
+                nil [2587 2941]))          
+      :file "shell.c"
+      :pointmax 2942
+      :fsize 2941
+      :lastmodtime '(21518 24405 763095 104000)
+      :unmatched-syntax nil))
+  :file "!home!edgar!KR!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

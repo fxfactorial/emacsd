@@ -1,0 +1,128 @@
+gcc chap2.c -o TEST
+./TEST
+gcc chap2.c -o TEST
+./TEST
+gcc chap2.c -o TEST
+./TEST
+gcc chap2.c -o TEST
+./TEST
+gcc chap2.c -o TEST
+./TEST
+gcc chap2.c -o TEST
+./TEST
+gcc chap2.c -o TEST
+./TEST
+gcc chap2.c -o TEST
+./TEST
+gcc chap2.c -o TEST
+./TEST
+gcc chap2.c -o TEST
+./TEST
+gcc chap2.c -o TEST
+./TEST
+gcc chap2.c -o TEST
+./TEST
+./TEST
+./TEST
+./TEST
+./TEST
+gcc chap2.c -o TEST
+./TEST
+gcc chap2.c -o TEST
+gcc chap2.c -o TEST
+gcc chap2.c -o TEST
+./TEST
+gcc chap2.c -o TEST
+gcc chap2.c -o TEST
+gcc chap2.c -o TEST
+gcc chap2.c -o TEST
+./TEST
+gcc chap2.c -o TEST
+./TEST
+gcc chap2.c -o TEST
+./TEST
+gcc chap2.c -o TEST
+./TEST
+gcc chap2.c -o TEST
+./TEST
+gtags
+cd ..
+ls
+mkdir CFund
+cd CFund/
+ls
+pwd
+gcc chap1.c -o TEST
+gcc chap1.c -o TEST
+gcc chap1.c -o TEST
+gcc chap1.c -o TEST
+./TEST 
+gcc chap1.c -o TEST
+./TEST 
+gcc chap1.c -o TEST
+gcc chap1.c -o TEST
+./TEST 
+gcc chap1.c -o TEST
+./TEST 
+gcc chap1.c -o TEST
+./TEST 
+gcc chap1.c -o TEST
+./TEST 
+gcc chap1.c -o TEST
+./TEST 
+gcc chap1.c -o TEST
+./TEST 
+gcc chap1.c -o TEST
+gcc -std=c99 chap1.c -o TEST
+gcc -std=c99 chap1.c -o TEST
+gcc -std=c99 chap1.c -o TEST
+gcc -std=c99 chap1.c -o TEST
+gcc -std=c99 chap1.c -o TEST
+gcc -std=c99 chap1.c -o TEST
+./TEST 
+gcc -std=c99 chap1.c -o TEST
+./TEST 
+gtags
+gtags
+gcc -std=c99 chap1.c -o TEST
+./TEST 
+gcc -std=c99 chap1.c -o TEST
+./TEST 
+gcc -std=c99 chap1.c -o TEST
+./TEST 
+gcc -std=c99 chap1.c -o TEST
+gcc -std=c99 chap1.c -o TEST
+./TEST 
+gcc -std=c99 chap1.c -o TEST
+./TEST 
+gcc chap1.c -o TESt
+gcc chap1.c -o TESt
+gcc chap1.c -o TESt
+gcc -std=c99 chap1.c -o TESt
+gcc -std=c99 chap1.c -o TESt
+gcc -std=c99 chap1.c -o TESt
+gcc -std=c99 chap1.c -o TESt
+gcc -std=c99 chap1.c -o TESt
+gcc -std=c99 chap1.c -o TESt
+./TEST 
+./TEST
+gcc -std=c99 chap1.c -o TEST
+./TEST 
+./TEST 
+gcc chap1.c -o TEST
+gcc -std=c99 chap1.c -o TEST
+./TEST 
+
+./TEST 
+./TEST 
+./TEST 
+./TEST 
+./TEST 
+./TEST 
+./TEST 
+./TEST 
+./TEST 
+./TEST 
+./TEST 
+gcc -std=c99 chap1.c -o TEST
+./TEST 

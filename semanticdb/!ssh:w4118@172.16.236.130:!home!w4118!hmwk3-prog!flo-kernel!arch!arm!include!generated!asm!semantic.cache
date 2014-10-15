@@ -1,0 +1,98 @@
+;; Object asm/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "asm/"
+  :tables
+  (list
+    (semanticdb-table "cputime.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("asm-generic/cputime.h" include (:system-flag t) nil [1 33]))          
+      :file "cputime.h"
+      :pointmax 34
+      :fsize 33
+      :lastmodtime '(21552 1226)
+      :unmatched-syntax nil)
+    (semanticdb-table "siginfo.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("asm-generic/siginfo.h" include (:system-flag t) nil [1 33]))          
+      :file "siginfo.h"
+      :pointmax 34
+      :fsize 33
+      :lastmodtime '(21552 1226)
+      :unmatched-syntax nil)
+    (semanticdb-table "errno.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("asm-generic/errno.h" include (:system-flag t) nil [1 31]))          
+      :file "errno.h"
+      :pointmax 32
+      :fsize 31
+      :lastmodtime '(21552 1226)
+      :unmatched-syntax nil)
+    (semanticdb-table "percpu.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("asm-generic/percpu.h" include (:system-flag t) nil [1 32]))          
+      :file "percpu.h"
+      :pointmax 33
+      :fsize 32
+      :lastmodtime '(21552 1226)
+      :unmatched-syntax nil)
+    (semanticdb-table "resource.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("asm-generic/resource.h" include (:system-flag t) nil [1 34]))          
+      :file "resource.h"
+      :pointmax 35
+      :fsize 34
+      :lastmodtime '(21552 1226)
+      :unmatched-syntax nil)
+    (semanticdb-table "auxvec.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("asm-generic/auxvec.h" include (:system-flag t) nil [1 32]))          
+      :file "auxvec.h"
+      :pointmax 33
+      :fsize 32
+      :lastmodtime '(21552 1226)
+      :unmatched-syntax nil)
+    (semanticdb-table "sizes.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("asm-generic/sizes.h" include (:system-flag t) nil [1 31]))          
+      :file "sizes.h"
+      :pointmax 32
+      :fsize 31
+      :lastmodtime '(21552 1226)
+      :unmatched-syntax nil)
+    (semanticdb-table "bitsperlong.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("asm-generic/bitsperlong.h" include (:system-flag t) nil [1 37]))          
+      :file "bitsperlong.h"
+      :pointmax 38
+      :fsize 37
+      :lastmodtime '(21552 1226)
+      :unmatched-syntax nil)
+    (semanticdb-table "local.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("asm-generic/local.h" include (:system-flag t) nil [1 31]))          
+      :file "local.h"
+      :pointmax 32
+      :fsize 31
+      :lastmodtime '(21552 1226)
+      :unmatched-syntax nil)
+    (semanticdb-table "ioctl.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("asm-generic/ioctl.h" include (:system-flag t) nil [1 31]))          
+      :file "ioctl.h"
+      :pointmax 32
+      :fsize 31
+      :lastmodtime '(21552 1226)
+      :unmatched-syntax nil))
+  :file "!ssh:w4118@172.16.236.130:!home!w4118!hmwk3-prog!flo-kernel!arch!arm!include!generated!asm!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

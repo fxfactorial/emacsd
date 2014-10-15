@@ -1,0 +1,100 @@
+((("lambda" .
+   [1 0 0 0 0 0])
+  ("helm-mode" .
+   [2 0 0 0 0 0 0 0 0])
+  ("c-basic-offset" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 1])
+  ("c-default-style" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 1])
+  ("flymake-mode" .
+   [1 0 0 0 0 0 0 0 0 0 0 0])
+  ("auto-complete-mode" .
+   [2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("string-equal" .
+   [1 0 0 0 0 0 0 0 0 0 0 0])
+  ("substring" .
+   [1 0 0 0 0 0 0 0 0])
+  ("buffer-file-name" .
+   [1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0])
+  ("when" .
+   [1 0 0 0])
+  ("company-semantic" .
+   [0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0])
+  ("company-mode-map" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("open-file" .
+   [1 0 0 0 0 0 0 0 0])
+  ("semantic-reset" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("semantic-mode" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("load-file" .
+   [1 0 0 0 0 0 0 0 0])
+  ("load-path" .
+   [3 0 0 0 0 0 0 0 0])
+  ("add-to-list" .
+   [3 0 0 0 0 0 0 0 0 0 0])
+  ("message" .
+   [2 0 0 0 0 0 0])
+  ("progn" .
+   [1 0 0 0 0])
+  ("eval-after-load" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("defun" .
+   [2 0 0 0 0])
+  ("semanticdb-enable-gnu-global-databases" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("semanticdb" .
+   [0 0 0 0 0 0 0 0 0 1])
+  ("require" .
+   [1 0 0 0 0 0 0])
+  ("bovinate" .
+   [1 0 0 0 0 0 0 0])
+  ("interactive" .
+   [3 0 0 0 0 0 0 0 0 0 1])
+  ("helm-gtags-pop-stack" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0])
+  ("helm-gtags-dwim" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("kbd" .
+   [3 0 0])
+  ("helm-gtags-mode-map" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("define-key" .
+   [3 0 0 0 0 0 0 0 0 0])
+  ("setq" .
+   [9 0 0 0])
+  ("semantic-dependency-system-include-path" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 1 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("nil" .
+   [2 0 0])
+  ("defvar-mode-local" .
+   [1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0])
+  ("c-mode" .
+   [9 0 0 0 0 0])
+  ("defvar" .
+   [2 0 0 0 0 0])
+  ("semanticdb-project-roots" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0])
+  ("semantic-add-system-include" .
+   [3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 0 0 0 0 0 0 0 0])
+  ("find-file" .
+   [1 0 0 0 0 0 0 0 0])
+  ("global-semantic-idle-completions-mode" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("global-cedet-m3-minor-mode" .
+   [0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("semantic-mode-map" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("semantic-decoration-include-visit" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0])
+  ("add-hook" .
+   [0 0 0 1 0 0 0 0])
+  ("before-save-hook" .
+   [0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0])
+  ("delete-trailing-whitespace" .
+   [0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("ac-auto-show-menu" .
+   [0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0])
+  ("os-class-semantic" .
+   [0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0])))

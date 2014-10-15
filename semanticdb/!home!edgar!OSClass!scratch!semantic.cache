@@ -1,0 +1,20 @@
+;; Object scratch/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "scratch/"
+  :tables
+  (list
+    (semanticdb-table "lec2.c"
+      :major-mode 'c-mode
+      :tags 
+        '( ("stdio.h" include (:system-flag t) nil [1 19])
+            ("stdlib.h" include (:system-flag t) nil [20 39])
+            ("unistd.h" include (:system-flag t) nil [40 59])
+            ("main" function (:type "int") nil [214 334]))          
+      :file "lec2.c"
+      :pointmax 335
+      :fsize 334
+      :lastmodtime '(21519 4732 114329 917000)
+      :unmatched-syntax nil))
+  :file "!home!edgar!OSClass!scratch!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

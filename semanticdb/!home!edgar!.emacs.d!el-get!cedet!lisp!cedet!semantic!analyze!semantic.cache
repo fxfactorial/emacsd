@@ -1,0 +1,31 @@
+;; Object analyze/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "analyze/"
+  :tables
+  (list
+    (semanticdb-table "complete.el"
+      :major-mode 'emacs-lisp-mode
+      :tags 
+        '( ("semantic/analyze" include nil nil [1043 1070])
+            ("semantic/find" include nil nil [1122 1146])
+            ("semantic-analyze-type-constants" function
+               (:overloadable t
+                :arguments ("type"))
+                nil [1197 1358])
+            ("semantic-analyze-type-constants-default" function (:arguments ("type")) nil [1360 1446])
+            ("semantic-analyze-tags-of-class-list" function (:arguments ("tags" "classlist")) nil [1448 1857])
+            ("semantic-analyze-possible-completions" function
+               (:overloadable t
+                :user-visible-flag t
+                :arguments ("context" "flags"))
+                nil [1908 3818])
+            ("semantic-analyze-possible-completions-default" function (:arguments ("context" "flags")) nil [3820 9420])
+            ("semantic/analyze/complete" package nil nil [9422 9458]))          
+      :file "complete.el"
+      :pointmax 9638
+      :fsize 9637
+      :lastmodtime '(21509 59354 890312 0)
+      :unmatched-syntax nil))
+  :file "!home!edgar!.emacs.d!el-get!cedet!lisp!cedet!semantic!analyze!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

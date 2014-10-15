@@ -1,0 +1,456 @@
+;; Object kernel/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "kernel/"
+  :tables (list 
+   (semanticdb-table "acceleration.c"
+    :major-mode 'c-mode
+    :tags 
+        '( ("linux/syscalls.h" include (:system-flag t) nil [1 28])
+            ("linux/sched.h" include (:system-flag t) nil [29 53])
+            ("linux/slab.h" include (:system-flag t) nil [54 77])
+            ("linux/acceleration.h" include (:system-flag t) nil [78 109])
+            ("asm/uaccess.h" include (:system-flag t) nil [110 134])
+            ("MAX" variable (:constant-flag t) nil [144 147])
+            ("raw_acc_static" variable
+               (:pointer 1
+                :typemodifiers ("static")
+                :type ("dev_acceleration" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [152 199])
+            ("this_event_id" variable
+               (:typemodifiers ("static")
+                :type "int")
+                nil [201 226])
+            ("baseline_events" variable
+               (:pointer 1
+                :dereference 1
+                :typemodifiers ("static")
+                :type ("event_t" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [227 271])
+            ("events_top" variable
+               (:typemodifiers ("static")
+                :type "int")
+                nil [272 294])
+            ("SYSCALL_DEFINE1" function
+               (:arguments 
+                  ( ("" variable (:type ("set_acceleration" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [312 329])
+                    ("__user" variable (:type ("dev_acceleration" type
+                         (:prototype t
+                          :type "struct")
+                          nil nil)) (reparse-symbol arg-sub-list) [330 362])
+                    ("" variable (:type ("acc" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [364 368]))                  
+                :type "int")
+                nil [296 670])
+            ("push_event" function
+               (:arguments 
+                  ( ("events" variable
+                       (:pointer 2
+                        :type ("event_t" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [688 712])
+                    ("event" variable
+                       (:pointer 1
+                        :type ("event_t" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [713 735]))                  
+                :type "void")
+                nil [672 770])
+            ("pop_event" function
+               (:arguments 
+                  ( ("events" variable
+                       (:pointer 2
+                        :type ("event_t" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [787 811]))                  
+                :type "void")
+                nil [772 830])
+            ("SYSCALL_DEFINE1" function
+               (:arguments 
+                  ( ("" variable (:type ("accevt_create" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [848 862])
+                    ("__user" variable (:type ("acc_motion" type
+                         (:prototype t
+                          :type "struct")
+                          nil nil)) (reparse-symbol arg-sub-list) [863 889])
+                    ("" variable (:type ("acc" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [891 895]))                  
+                :type "int")
+                nil [832 1216])
+            ("SYSCALL_DEFINE1" function
+               (:arguments 
+                  ( ("" variable (:type ("accevt_wait" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [1234 1246])
+                    ("" variable (:type "int") (reparse-symbol arg-sub-list) [1247 1251])
+                    ("" variable (:type ("event_id" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [1252 1261]))                  
+                :type "int")
+                nil [1218 1315])
+            ("baseline_trigger" function
+               (:arguments 
+                  ( ("trigger" variable
+                       (:pointer 1
+                        :type ("acc_motion" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [1339 1366]))                  
+                :type "void")
+                nil [1317 1434])
+            ("SYSCALL_DEFINE1" function
+               (:arguments 
+                  ( ("" variable (:type ("accevt_signal" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [1452 1466])
+                    ("__user" variable (:type ("dev_acceleration" type
+                         (:prototype t
+                          :type "struct")
+                          nil nil)) (reparse-symbol arg-sub-list) [1467 1499])
+                    ("" variable (:type ("acc" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [1501 1505]))                  
+                :type "int")
+                nil [1436 2130])
+            ("SYSCALL_DEFINE1" function
+               (:arguments 
+                  ( ("" variable (:type ("accevt_destroy" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [2148 2163])
+                    ("" variable (:type "int") (reparse-symbol arg-sub-list) [2164 2168])
+                    ("" variable (:type ("event_id" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [2169 2178]))                  
+                :type "int")
+                nil [2132 2194]))          
+    :file "acceleration.c"
+    :pointmax 2195
+    :fsize 2194
+    :lastmodtime '(21559 10211)
+    :unmatched-syntax '((punctuation 1498 . 1499) (punctuation 888 . 889) (punctuation 361 . 362))
+    :lexical-table 
+        '(("MAX" . ((number "30" 148 . 150)))
+          )
+
+    )
+   (semanticdb-table "cgroup_freezer.c"
+    :major-mode 'c-mode
+    :tags 
+        '( ("linux/export.h" include (:system-flag t) nil [546 571])
+            ("linux/slab.h" include (:system-flag t) nil [572 595])
+            ("linux/cgroup.h" include (:system-flag t) nil [596 621])
+            ("linux/fs.h" include (:system-flag t) nil [622 643])
+            ("linux/uaccess.h" include (:system-flag t) nil [644 670])
+            ("linux/freezer.h" include (:system-flag t) nil [671 697])
+            ("linux/seq_file.h" include (:system-flag t) nil [698 725])
+            ("freezer_state" type
+               (:members 
+                  ( ("CGROUP_THAWED" variable
+                       (:constant-flag t
+                        :default-value (765 766)
+                        :type "int")
+                        (reparse-symbol enumsubparts) [749 766])
+                    ("CGROUP_FREEZING" variable
+                       (:constant-flag t
+                        :type "int")
+                        (reparse-symbol enumsubparts) [769 785])
+                    ("CGROUP_FROZEN" variable
+                       (:constant-flag t
+                        :type "int")
+                        (reparse-symbol enumsubparts) [787 801]))                  
+                :type "enum")
+                nil [727 804])
+            ("freezer" type
+               (:members 
+                  ( ("css" variable (:type ("cgroup_subsys_state" type
+                         (:prototype t
+                          :type "struct")
+                          nil nil)) (reparse-symbol classsubparts) [824 855])
+                    ("state" variable (:type ("freezer_state" type (:type "enum") nil nil)) (reparse-symbol classsubparts) [857 882])
+                    ("lock" variable (:type ("spinlock_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [884 900]))                  
+                :type "struct")
+                nil [806 936])
+            ("cgroup_freezer" function
+               (:pointer 1
+                :typemodifiers ("static" "inline")
+                :arguments 
+                  ( ("cgroup" variable
+                       (:pointer 1
+                        :type ("cgroup" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [986 1008]))                  
+                :type ("freezer" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [938 1108])
+            ("task_freezer" function
+               (:pointer 1
+                :typemodifiers ("static" "inline")
+                :arguments 
+                  ( ("task" variable
+                       (:pointer 1
+                        :type ("task_struct" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [1153 1178]))                  
+                :type ("freezer" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [1110 1276])
+            ("cgroup_freezing" function
+               (:arguments 
+                  ( ("task" variable
+                       (:pointer 1
+                        :type ("task_struct" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [1299 1324]))                  
+                :type "bool")
+                nil [1278 1514])
+            ("freezer_state_strs" variable
+               (:pointer 1
+                :dereference 1
+                :typemodifiers ("static")
+                :constant-flag t
+                :type "char")
+                nil [1621 1702])
+            ("freezer_subsys" variable (:type ("cgroup_subsys" type
+                 (:prototype t
+                  :type "struct")
+                  nil nil)) nil [2093 2129])
+            ("freezer_create" function
+               (:pointer 1
+                :typemodifiers ("static")
+                :arguments 
+                  ( ("cgroup" variable
+                       (:pointer 1
+                        :type ("cgroup" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [3505 3527]))                  
+                :type ("cgroup_subsys_state" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [3455 3746])
+            ("freezer_destroy" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("cgroup" variable
+                       (:pointer 1
+                        :type ("cgroup" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [3776 3798]))                  
+                :type "void")
+                nil [3748 3945])
+            ("is_task_frozen_enough" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("task" variable
+                       (:pointer 1
+                        :type ("task_struct" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [4053 4078]))                  
+                :type "bool")
+                nil [4019 4161])
+            ("freezer_can_attach" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("new_cgroup" variable
+                       (:pointer 1
+                        :type ("cgroup" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [4405 4431])
+                    ("tset" variable
+                       (:pointer 1
+                        :type ("cgroup_taskset" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [4441 4469]))                  
+                :type "int")
+                nil [4375 4791])
+            ("freezer_fork" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("task" variable
+                       (:pointer 1
+                        :type ("task_struct" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [4818 4843]))                  
+                :type "void")
+                nil [4793 5616])
+            ("update_if_frozen" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("cgroup" variable
+                       (:pointer 1
+                        :type ("cgroup" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [5688 5710])
+                    ("freezer" variable
+                       (:pointer 1
+                        :type ("freezer" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [5716 5740]))                  
+                :type "void")
+                nil [5659 6318])
+            ("freezer_read" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("cgroup" variable
+                       (:pointer 1
+                        :type ("cgroup" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [6344 6366])
+                    ("cft" variable
+                       (:pointer 1
+                        :type ("cftype" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [6367 6386])
+                    ("m" variable
+                       (:pointer 1
+                        :type ("seq_file" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [6390 6409]))                  
+                :type "int")
+                nil [6320 6957])
+            ("try_to_freeze_cgroup" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("cgroup" variable
+                       (:pointer 1
+                        :type ("cgroup" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [6991 7013])
+                    ("freezer" variable
+                       (:pointer 1
+                        :type ("freezer" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [7014 7038]))                  
+                :type "int")
+                nil [6959 7459])
+            ("unfreeze_cgroup" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("cgroup" variable
+                       (:pointer 1
+                        :type ("cgroup" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [7489 7511])
+                    ("freezer" variable
+                       (:pointer 1
+                        :type ("freezer" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [7512 7536]))                  
+                :type "void")
+                nil [7461 7725])
+            ("freezer_change_state" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("cgroup" variable
+                       (:pointer 1
+                        :type ("cgroup" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [7759 7781])
+                    ("goal_state" variable (:type ("freezer_state" type (:type "enum") nil nil)) (reparse-symbol arg-sub-list) [7786 7816]))                  
+                :type "int")
+                nil [7727 8435])
+            ("freezer_write" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("cgroup" variable
+                       (:pointer 1
+                        :type ("cgroup" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [8462 8484])
+                    ("cft" variable
+                       (:pointer 1
+                        :type ("cftype" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [8489 8508])
+                    ("buffer" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [8513 8532]))                  
+                :type "int")
+                nil [8437 8936])
+            ("files" variable
+               (:dereference 1
+                :typemodifiers ("static")
+                :type ("cftype" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [8938 9067])
+            ("freezer_populate" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("ss" variable
+                       (:pointer 1
+                        :type ("cgroup_subsys" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [9097 9122])
+                    ("cgroup" variable
+                       (:pointer 1
+                        :type ("cgroup" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [9123 9145]))                  
+                :type "int")
+                nil [9069 9247])
+            ("freezer_subsys" variable (:type ("cgroup_subsys" type
+                 (:prototype t
+                  :type "struct")
+                  nil nil)) nil [9249 9492]))          
+    :file "cgroup_freezer.c"
+    :pointmax 9493
+    :fsize 9492
+    :lastmodtime '(21551 64835)
+    :unmatched-syntax 'nil
+    )
+   )
+  :file "!ssh:w4118@172.16.236.130:!home!w4118!hmwk3-prog!flo-kernel!kernel!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2"
+  )
