@@ -27,7 +27,13 @@
 (add-to-list 'load-path "~/.emacs.d/elpa/company-c-headers-20140930.1102")
 (add-to-list 'load-path "~/.emacs.d/cedet/lisp/cedet")
 
+;;Cute Matrix Style Zone-Mode
+(add-to-list 'load-path "~/.emacs.d/elpa/zone-matrix-0.0.1")
+
 ;; All requires done early
+(require 'zone-matrix)
+(require 'zone-matrix-settings)
+(require 'zone-settings)
 (require 'password-cache)
 (require 'semantic/senator)
 (require 'semantic/ia)
@@ -48,6 +54,8 @@
 ;;community extension with stuff on github and melpa itself.
 (add-to-list 'package-archives 
 	     '("melpa" . "http://melpa.milkbox.net/packages/"))
+(add-to-list 'package-archives 
+	     '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 ;;Getting custom in before we set the tron theme
 (custom-set-variables
@@ -67,7 +75,6 @@
  '(tool-bar-mode nil))
 
 ;;Custom Functions
-
 (defun os-class-semantic ()
   "Only way to get semantic to play nicely with desired files,
    very strange, *remember* to add the trailing slash for directories."
@@ -79,7 +86,6 @@
   (setq semantic-dependency-include-path '("/ssh:w4118@172.16.236.130:/home/w4118/hmwk3-prog/flo-kernel/kernel/"))
   (semantic-add-system-include "/ssh:w4118@172.16.236.130:/home/w4118/hmwk3-prog/flo-kernel/arch/arm/include/")
   (semantic-add-system-include "/ssh:w4118@172.16.236.130:/home/w4118/hmwk3-prog/flo-kernel/include/" 'c-mode))
-
 
 (defun linux-c-mode ()
   "C mode with adjusted defaults for use with the linux kernel."
@@ -155,7 +161,10 @@
 ;;Annoying issue with TRAMP constantly asking for password
 (setq password-cache-expiry nil)
 
-;;Visuals, but note that some visuals also set in custom, ie stuff related to solarized. 
+;;Visuals, but note that some visuals also set in custom, ie stuff
+;;related to solarized. Zone-matrix has dependency on tabbar
+(setq zone-programs [zone-matrix])
+(zone-when-idle 60)
 (global-linum-mode t)
 (setq inhibit-startup-message t)
 (window-number-mode)
@@ -196,7 +205,17 @@
 (global-cedet-m3-minor-mode 1)
 (semanticdb-enable-gnu-global-databases 'c-mode t)
 (global-semantic-show-unmatched-syntax-mode t)
-					;(add-hook 'semantic-init-hooks '<Your function>)
+;;Amazing, this works out of the box for Emacs and Linux source Code!
+;;For custom stuff, be see this example
+ ;; (ede-cpp-root-project "NAME" :file "FILENAME"
+ ;;     :include-path '( "/include" "../include" "/c/include" )
+ ;;     :system-include-path '( "/usr/include/c++/3.2.2/" )
+ ;;     :spp-table '( ("MOOSE" . "")
+ ;;                   ("CONST" . "const") )
+ ;;     :spp-files '( "include/config.h" )
+ ;;     ) 
+(global-ede-mode 1)
+;(add-hook 'semantic-init-hooks '<Your function>)
 (setq company-backends '(company-semantic
 			 company-c-headers))
 
