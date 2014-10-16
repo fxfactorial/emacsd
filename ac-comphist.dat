@@ -1,100 +1,218 @@
-((("os-class-semantic" .
-   [0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0])
-  ("ac-auto-show-menu" .
-   [0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0])
-  ("delete-trailing-whitespace" .
-   [0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("before-save-hook" .
-   [0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0])
-  ("add-hook" .
-   [0 0 0 1 0 0 0 0])
-  ("semantic-decoration-include-visit" .
-   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0])
-  ("semantic-mode-map" .
-   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("global-cedet-m3-minor-mode" .
-   [0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("global-semantic-idle-completions-mode" .
-   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("find-file" .
-   [1 0 0 0 0 0 0 0 0])
-  ("semantic-add-system-include" .
-   [3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 0 0 0 0 0 0 0 0])
-  ("semanticdb-project-roots" .
-   [1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0])
-  ("defvar" .
-   [2 0 0 0 0 0])
-  ("c-mode" .
-   [9 0 0 0 0 0])
-  ("defvar-mode-local" .
-   [1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0])
-  ("nil" .
-   [2 0 0])
-  ("semantic-dependency-system-include-path" .
-   [0 0 0 0 0 0 0 0 0 0 0 0 1 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("setq" .
-   [9 0 0 0])
-  ("define-key" .
-   [3 0 0 0 0 0 0 0 0 0])
-  ("helm-gtags-mode-map" .
-   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("kbd" .
-   [3 0 0])
-  ("helm-gtags-dwim" .
-   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("helm-gtags-pop-stack" .
-   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0])
-  ("interactive" .
-   [3 0 0 0 0 0 0 0 0 0 1])
-  ("bovinate" .
-   [1 0 0 0 0 0 0 0])
-  ("require" .
-   [1 0 0 0 0 0 0])
-  ("semanticdb" .
-   [0 0 0 0 0 0 0 0 0 1])
-  ("semanticdb-enable-gnu-global-databases" .
-   [0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("defun" .
-   [2 0 0 0 0])
-  ("eval-after-load" .
-   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("progn" .
-   [1 0 0 0 0])
-  ("message" .
-   [2 0 0 0 0 0 0])
-  ("add-to-list" .
-   [3 0 0 0 0 0 0 0 0 0 0])
-  ("load-path" .
-   [3 0 0 0 0 0 0 0 0])
-  ("load-file" .
-   [1 0 0 0 0 0 0 0 0])
-  ("semantic-mode" .
-   [1 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("semantic-reset" .
-   [1 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("open-file" .
-   [1 0 0 0 0 0 0 0 0])
-  ("company-mode-map" .
-   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("company-semantic" .
-   [0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0])
-  ("when" .
+((("ring" .
    [1 0 0 0])
-  ("buffer-file-name" .
-   [1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0])
-  ("substring" .
-   [1 0 0 0 0 0 0 0 0])
-  ("string-equal" .
+  ("global-semantic-idle-local-symbol-highlight-mode" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("semantic/mru-bookmark" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0])
+  ("semantic-mrub-push" .
+   [2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("mark" .
+   [3 0 0 0])
+  ("point" .
+   [3 0 0 0 0])
+  ("semantic-mru-bookmark-ring" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 2 0 0 1 2 0 0 0 0 0 0 0 0])
+  ("push-mark" .
+   [1 0 0 0 0 0 0 0 2])
+  ("defadvice" .
+   [3 0 0 0 0 0 0 0 0])
+  ("global-semantic-mru-bookmark-mode" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("compile" .
+   [0 0 0 0 0 1 0])
+  ("c-mode-map" .
+   [0 0 0 0 0 0 0 0 0 1])
+  ("column-number-mode" .
+   [0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0])
+  ("uniquify" .
+   [0 0 0 2 0 0 0 0])
+  ("uniquify-buffer-file-name" .
+   [0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("uniquify-buffer-base-name" .
+   [0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("lambda" .
+   [2 0 0 0 0 0])
+  ("helm-mode" .
+   [2 0 0 0 0 0 0 0 0])
+  ("c-basic-offset" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 1])
+  ("c-default-style" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 1])
+  ("flymake-mode" .
    [1 0 0 0 0 0 0 0 0 0 0 0])
   ("auto-complete-mode" .
    [2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
-  ("flymake-mode" .
+  ("string-equal" .
    [1 0 0 0 0 0 0 0 0 0 0 0])
-  ("c-default-style" .
-   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 1])
-  ("c-basic-offset" .
+  ("substring" .
+   [1 0 0 0 0 0 0 0 0])
+  ("buffer-file-name" .
+   [4 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0])
+  ("when" .
+   [1 0 0 0])
+  ("company-semantic" .
+   [0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0])
+  ("company-mode-map" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("open-file" .
+   [1 0 0 0 0 0 0 0 0])
+  ("semantic-reset" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("semantic-mode" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("load-file" .
+   [1 0 0 0 0 0 0 0 0])
+  ("load-path" .
+   [3 0 0 0 0 0 0 0 0])
+  ("add-to-list" .
+   [3 0 0 0 0 0 0 0 0 0 0])
+  ("message" .
+   [3 0 0 0 0 0 0])
+  ("progn" .
+   [1 0 0 0 0])
+  ("eval-after-load" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("defun" .
+   [4 0 0 0 0])
+  ("semanticdb-enable-gnu-global-databases" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("semanticdb" .
+   [0 0 0 0 0 0 0 0 0 1])
+  ("require" .
+   [7 0 0 0 0 0 0])
+  ("bovinate" .
+   [1 0 0 0 0 0 0 0])
+  ("interactive" .
+   [6 0 0 0 0 0 0 0 0 0 1])
+  ("helm-gtags-pop-stack" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0])
+  ("helm-gtags-dwim" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("kbd" .
+   [5 0 0])
+  ("helm-gtags-mode-map" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("define-key" .
+   [4 0 0 0 0 0 0 0 0 0])
+  ("setq" .
+   [15 0 0 0])
+  ("semantic-dependency-system-include-path" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 1 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("nil" .
+   [3 0 0])
+  ("defvar-mode-local" .
+   [1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0])
+  ("c-mode" .
+   [9 0 0 0 0 0])
+  ("defvar" .
+   [2 0 0 0 0 0])
+  ("semanticdb-project-roots" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0])
+  ("semantic-add-system-include" .
+   [3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 0 0 0 0 0 0 0 0])
+  ("find-file" .
+   [1 0 0 0 0 0 0 0 1])
+  ("global-semantic-idle-completions-mode" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("global-cedet-m3-minor-mode" .
+   [0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("semantic-mode-map" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("semantic-decoration-include-visit" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0])
+  ("add-hook" .
+   [0 0 0 1 0 0 0 1])
+  ("before-save-hook" .
+   [0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0])
+  ("delete-trailing-whitespace" .
+   [0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("ac-auto-show-menu" .
+   [0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0])
+  ("os-class-semantic" .
+   [0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0])
+  ("uniquify-buffer-name-style" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0])
+  ("frame-title-format" .
+   [1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0])
+  ("list" .
+   [1 0 0 0])
+  ("format" .
+   [1 0 0 0 0 0])
+  ("system-name" .
+   [0 0 0 0 0 0 0 0 0 0 1])
+  ("dired-directory-changed-p" .
+   [0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("dired-rmail" .
+   [0 0 0 0 0 0 0 1 0 0 0])
+  ("dired-directory" .
+   [0 0 0 0 0 0 0 0 0 0 1 0 0 0 0])
+  (":eval" .
+   [1 0 0 0 0])
+  ("abbreviate-file-name" .
+   [0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0])
+  ("load-theme" .
+   [1 0 0 0 0 0 0 0 0 0])
+  ("find-file-hook" .
    [0 0 0 0 0 0 0 0 0 0 0 0 0 1])
-  ("helm-mode" .
-   [2 0 0 0 0 0 0 0 0])
-  ("lambda" .
-   [1 0 0 0 0 0])))
+  ("mode-line-buffer-identification" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("buffer-file-truename" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0])
+  ("scroll-step" .
+   [0 0 0 0 0 0 0 0 1 0 0])
+  ("semantic" .
+   [3 0 0 0 0 0 0 0])
+  ("semantic-mru-bookmark-mode" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1])
+  ("semantic/analyze/refs" .
+   [0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0])
+  ("Aroutiounian" .
+   [0 0 0 0 1 0 0 0 0 0 0 0])
+  ("and" .
+   [1 0 0])
+  ("TEST" .
+   [3 0 0 0])
+  ("ring-empty-p" .
+   [0 0 0 0 0 0 0 0 0 0 2 0])
+  ("oref" .
+   [3 0 0 1])
+  ("if" .
+   [3 0])
+  ("error" .
+   [1 0 0 0 0])
+  ("let" .
+   [1 0 1])
+  ("let*" .
+   [1 0 0 0])
+  ("alist" .
+   [3 0 0 0 0])
+  ("semantic-mrub-ring-to-assoc-list" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("first" .
+   [4 0 0 0 0])
+  ("cdr" .
+   [3 0 0])
+  ("car" .
+   [1 0 0])
+  ("semantic-equivalent-tag-p" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("tag" .
+   [1 0 0])
+  ("semantic-current-tag" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1])
+  ("semantic-mrub-switch-tags" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0])
+  ("senator" .
+   [0 0 0 0 1 0 0])
+  ("/" .
+   [1])
+  ("semantic/senator" .
+   [0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0])
+  ("make-backup-files" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1])
+  ("global-set-key" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("toggle-window-split" .
+   [2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("foo" .
+   [1 0 0])))
