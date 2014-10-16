@@ -1,40 +1,39 @@
-Semantic Tips: 1) When you're in in a foreign land, say linux kernel,
-& Company         be sure to update the system headers include path,
-                  see the example on os-class-semantic.  
-	       2) Semantic's jump functionality is awesome, but does 
-	          require the extra two definitions in this init.el. 
-		  Semantic alone can jump to definitions, do M-] to 
-		  jump to a definition of a tag and M-[ to come 
-		  back to where you were, this include #includes.
-               3) Semantic is hooked up with company-mode as it's
-                  backend, so you can do M-Tab and get
-                  auto-completion of functions! During the
-                  auto-complete, do C-w to get a new temp buffer with
-                  the definition, F1 for more documenation if any
-                  exists, and C-s to close that temp buffer. 
-               4) Company with semantic backing it can also do
-	          headers, use M-h in an #include <..>.
+Semantic, Company Tips:
+1) When you're in in a foreign land, say linux kernel, be sure to 
+update the system headers include path, see the example on 
+os-class-semantic.  
+2) Semantic's jump functionality is awesome, but does require the 
+extra two definitions in this init.el. Semantic alone can jump 
+to definitions, do M-] to jump to a definition of a tag and M-[ 
+to come back to where you were, this include #includes.  
+3) Semantic is hooked up with company-mode as it's backend, so you 
+can do M-Tab and get auto-completion of functions! During the 
+auto-complete, do C-w to get a new temp buffer with the definition, 
+F1 for more documenation if any exists, and C-s to close that temp 
+buffer.  
+4) Company with semantic backing it can also do headers, use M-h 
+in an #include <..>.
 
-Org-Mode Tips: 1) C-o will insert your common defaults, its bound to a 
-                  custom function. 
-               2) C-e is basically the start of all export abilities. 
+Org-Mode Tips: 
+1) C-o will insert your common defaults, its bound to a custom
+function.  
+2) C-e is basically the start of all export abilities.
 
-Misc Tips:     1) C-; is always available and will swap two buffers. 
-               2) You can fold code with C-c C-t, this is just in C
-                  code at the moment. 
-               3) C-c C-c will call compile, this is also just in C
-                  code at the moment. 
+Misc Tips: 
+1) C-; is always available and will swap two buffers.  
+2) You can fold code with C-c C-t, this is just in C code at the moment.
+3) C-c C-c will call compile, this is also just in C code at the moment.
 
-LaTeX Tips:    1) LaTeX is set up with math mode already on, so doing 
-                  `-<something> gives you math macros, to get them
-                  enclosed in $$, do C-u `-<something>
-	       2) C-c compiles, and hitting C-c again will open the
-                  PDF in evince. 
-               3) C-e gives you an easy way to make environments, its
-                  also smart that it remembers the last environment
-                  you made. 
+LaTeX Tips: 
+1) LaTeX is set up with math mode already on, so doing `-<something>
+gives you math macros, to get them enclosed in $$, do C-u
+`-<something> 
+2) C-c compiles, and hitting C-c again will open the PDF in evince.  
+3) C-e gives you an easy way to make environments, its also smart 
+that it remembers the last environment you made.
 
-Helm Tips:     1) Helm beginning KBD is C-c C-f, key one is C-c C-f i,
-     	       	  that opens up Semantic Tags for that file.
-	       2) M-s opens up all the available gtags, nice thing is
-     	       	  it will make gtags if you don't have them already. 
+Helm Tips: 
+1) Helm beginning KBD is C-c C-f, key one is C-c C-f i, that opens up 
+Semantic Tags for that file.  
+2) M-s opens up all the available gtags, nice thing is it will make 
+gtags if you don't have them already.
