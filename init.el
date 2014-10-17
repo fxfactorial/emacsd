@@ -27,13 +27,8 @@
 (add-to-list 'load-path "~/.emacs.d/elpa/company-c-headers-20140930.1102")
 (add-to-list 'load-path "~/.emacs.d/cedet/lisp/cedet")
 
-;;Cute Matrix Style Zone-Mode
-(add-to-list 'load-path "~/.emacs.d/elpa/zone-matrix-0.0.1")
 
 ;; All requires done early
-(require 'zone-matrix)
-(require 'zone-matrix-settings)
-(require 'zone-settings)
 (require 'password-cache)
 (require 'semantic/senator)
 (require 'semantic/ia)
@@ -162,9 +157,6 @@
 (setq password-cache-expiry nil)
 
 ;;Visuals, but note that some visuals also set in custom, ie stuff
-;;related to solarized. Zone-matrix has dependency on tabbar
-(setq zone-programs [zone-matrix])
-(zone-when-idle 60)
 (global-linum-mode t)
 (setq inhibit-startup-message t)
 (window-number-mode)
