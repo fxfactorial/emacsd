@@ -1,4 +1,4 @@
-#!/home/edgar/.emacs.d/.python-environments/jedi/bin/python3
+#!/Users/Edgar/.emacs.d/.python-environments/jedi/bin/python3.4
 
 # -*- coding: utf-8 -*-
 import re

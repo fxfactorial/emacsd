@@ -39,7 +39,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/edgar/.emacs.d/.python-environments/jedi"
+VIRTUAL_ENV="/Users/Edgar/.emacs.d/.python-environments/jedi"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

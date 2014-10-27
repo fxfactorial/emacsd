@@ -1,4 +1,4 @@
-#!/home/edgar/.emacs.d/.python-environments/jedi/bin/python3
+#!/Users/Edgar/.emacs.d/.python-environments/jedi/bin/python3.4
 # EASY-INSTALL-ENTRY-SCRIPT: 'jediepcserver==0.0.0','console_scripts','jediepcserver'
 __requires__ = 'jediepcserver==0.0.0'
 import sys

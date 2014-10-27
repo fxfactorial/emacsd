@@ -1,4 +1,4 @@
-;; -*- emacs-lisp -*- <14/10/15 12:11:53 /home/edgar/.emacs.d/tramp>
+;; -*- emacs-lisp -*- <14/10/27 01:06:32 /Users/Edgar/.emacs.d/tramp>
 ;; Tramp connection history.  Don't change this file.
 ;; You can delete it, forcing Tramp to reapply the checks.
 
@@ -30,13 +30,31 @@
   ("gid-integer" 1001)
   ("gid-string" "edgar")
   ("readlink" "\\readlink"))
- (["ssh" "w4118" "172.16.236.130" nil nil]
+ (["sudo" "root" "Edgars-MacBook-Pro.local" nil nil]
+  ("uname" "Darwin 14.0.0")
+  ("test" "test")
+  ("remote-path"
+   ("/usr/bin" "/bin" "/usr/sbin" "/sbin" "/usr/local/bin"))
+  ("remote-shell" "/bin/sh")
+  ("busybox" nil)
+  ("perl-file-spec" t)
+  ("perl-cwd-realpath" t)
+  ("perl" "\\perl")
+  ("file-exists" "test -e")
+  ("readlink" nil)
+  ("stat" nil)
+  ("ls" "/bin/ls")
+  ("id" "/usr/bin/id")
+  ("gid-integer" 0)
+  ("~root" "/var/root")
+  ("uid-integer" 0))
+ (["ssh" "w4118" "192.168.180.128" nil nil]
+  ("locale" "LC_ALL=en_US.utf8")
   ("uname" "Linux 3.2.0-4-amd64")
   ("test" "test")
   ("remote-path"
    ("/bin" "/usr/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin"))
   ("remote-shell" "/bin/sh")
-  ("busybox" nil)
   ("~" "/home/w4118")
   ("file-exists" "test -e")
   ("ls" "/bin/ls --color=never")
@@ -48,4 +66,28 @@
   ("perl-cwd-realpath" t)
   ("perl" "\\perl")
   ("readlink" "\\readlink")
-  ("uid-integer" 1000)))
+  ("gid-string" "w4118")
+  ("tmpdir" "/ssh:w4118@192.168.180.128:/tmp")
+  ("touch-t" t)
+  ("touch" "\\touch")
+  ("git" "\\git")
+  ("uid-integer" 1000))
+ (["ssh" "user" "167.88.44.5" nil nil]
+  ("locale" "LC_ALL=en_US.utf8")
+  ("uname" "Linux 3.13.0-32-generic")
+  ("test" "test")
+  ("remote-path"
+   ("/bin" "/usr/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin"))
+  ("remote-shell" "/bin/sh")
+  ("~" "/home/user")
+  ("file-exists" "test -e")
+  ("perl-file-spec" t)
+  ("perl-cwd-realpath" t)
+  ("perl" "\\perl")
+  ("ls" "/bin/ls --color=never")
+  ("ls-dired" t)
+  ("stat" "\\stat")
+  ("id" "/usr/bin/id")
+  ("gid-integer" 1000)
+  ("gid-string" "user")
+  ("readlink" "\\readlink")))
