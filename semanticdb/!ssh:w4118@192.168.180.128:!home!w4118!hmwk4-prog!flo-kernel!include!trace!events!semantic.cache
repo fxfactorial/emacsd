@@ -1,0 +1,36 @@
+;; Object events/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "events/"
+  :tables
+  (list
+    (semanticdb-table "sched.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("TRACE_SYSTEM" variable (:constant-flag t) nil [29 41])
+            ("trace/define_trace.h" include (:system-flag t) nil [9901 9932]))          
+      :file "sched.h"
+      :pointmax 9933
+      :fsize 9932
+      :lastmodtime '(21577 34058)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("TRACE_SYSTEM" . ((symbol "sched" 42 . 47)))
+          )
+)
+    (semanticdb-table "timer.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("TRACE_SYSTEM" variable (:constant-flag t) nil [29 41])
+            ("trace/define_trace.h" include (:system-flag t) nil [7722 7753]))          
+      :file "timer.h"
+      :pointmax 7754
+      :fsize 7753
+      :lastmodtime '(21577 34058)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("TRACE_SYSTEM" . ((symbol "timer" 42 . 47)))
+          )
+))
+  :file "!ssh:w4118@192.168.180.128:!home!w4118!hmwk4-prog!flo-kernel!include!trace!events!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

@@ -1,0 +1,429 @@
+;; Object cedet/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "cedet/"
+  :tables
+  (list
+    (semanticdb-table "ede.el"
+      :major-mode 'emacs-lisp-mode
+      :tags 
+        '( ("cedet" include nil nil [1479 1495])
+            ("eieio" include nil nil [1496 1512])
+            ("eieio-speedbar" include nil nil [1513 1538])
+            ("ede/source" include nil nil [1539 1560])
+            ("ede/base" include nil nil [1561 1580])
+            ("ede/auto" include nil nil [1581 1600])
+            ("ede/detect" include nil nil [1601 1622])
+            ("load" code nil nil [1624 1660])
+            ("declare-function" code nil nil [1662 1712])
+            ("declare-function" code nil nil [1713 1760])
+            ("declare-function" code nil nil [1761 1822])
+            ("declare-function" code nil nil [1823 1893])
+            ("declare-function" code nil nil [1894 1948])
+            ("declare-function" code nil nil [1949 2013])
+            ("declare-function" code nil nil [2014 2078])
+            ("declare-function" code nil nil [2079 2121])
+            ("declare-function" code nil nil [2122 2173])
+            ("declare-function" code nil nil [2174 2221])
+            ("declare-function" code nil nil [2222 2287])
+            ("ede-version" variable
+               (:constant-flag t
+                :default-value "2.0")
+                nil [2289 2355])
+            ("ede-version" function (:user-visible-flag t) nil [2367 2484])
+            ("ede" customgroup (:user-visible-flag t) nil [2486 2576])
+            ("ede-auto-add-method" variable (:default-value (quote ask)) nil [2578 3327])
+            ("ede-debug-program-function" variable (:default-value (quote gdb)) nil [3329 3450])
+            ("ede-project-directories" variable nil nil [3494 4316])
+            ("ede-directory-safe-p" function (:arguments ("dir")) nil [4318 4982])
+            ("ede-projects" variable nil nil [5012 5098])
+            ("ede-object-root-project" variable nil nil [5100 5279])
+            ("make-variable-buffer-local" code nil nil [5280 5333])
+            ("ede-object-project" variable nil nil [5335 5513])
+            ("make-variable-buffer-local" code nil nil [5514 5562])
+            ("ede-object" variable nil nil [5564 5698])
+            ("make-variable-buffer-local" code nil nil [5699 5739])
+            ("ede-selected-object" variable nil nil [5741 5891])
+            ("ede-constructing" variable nil nil [5893 6077])
+            ("ede-deep-rescan" variable nil nil [6079 6242])
+            ("ede-singular-object" function (:arguments ("prompt")) nil [6263 6450])
+            ("ede-choose-object" function (:arguments ("prompt" "list-o-o")) nil [6452 6765])
+            ("ede-minor-mode-map" variable (:default-value (let ((map (make-sparse-keymap)) (pmap (make-sparse-keymap))) (define-key pmap "e" (quote ede-edit-file-target)) (define-key pmap "a" (quote ede-add-file)) (define-key pmap "d" (quote ede-remove-file)) (define-key pmap "t" (quote ede-new-target)) (define-key pmap "g" (quote ede-rescan-toplevel)) (define-key pmap "s" (quote ede-speedbar)) (define-key pmap "f" (quote ede-find-file)) (define-key pmap "C" (quote ede-compile-project)) (define-key pmap "c" (quote ede-compile-target)) (define-key pmap "" (quote ede-compile-selected)) (define-key pmap "D" (quote ede-debug-target)) (define-key pmap "R" (quote ede-run-target)) (define-key map "." pmap) map)) nil [6789 7526])
+            ("global-ede-mode-map" variable (:default-value (let ((map (make-sparse-keymap))) (define-key map [menu-bar cedet-menu] (cons "Development" cedet-menu-map)) map)) nil [7528 7724])
+            ("define-key" code nil nil [7771 7920])
+            ("define-key" code nil nil [7921 8062])
+            ("define-key" code nil nil [8063 8162])
+            ("define-key" code nil nil [8163 8304])
+            ("define-key" code nil nil [8305 8473])
+            ("define-key" code nil nil [8474 8646])
+            ("define-key" code nil nil [8647 8843])
+            ("ede-buffer-belongs-to-target-p" function nil nil [8845 9068])
+            ("ede-buffer-belongs-to-project-p" function nil nil [9070 9284])
+            ("ede-menu-obj-of-class-p" function (:arguments ("class")) nil [9286 9542])
+            ("ede-build-forms-menu" function (:arguments ("menu-def")) nil [9544 10990])
+            ("ede-target-forms-menu" function (:arguments ("menu-def")) nil [10992 11645])
+            ("ede-project-forms-menu" function (:arguments ("menu-def")) nil [11647 12493])
+            ("ede-configuration-forms-menu" function (:arguments ("menu-def")) nil [12495 13215])
+            ("ede-project-configurations-set" function
+               (:user-visible-flag t
+                :arguments ("newconfig"))
+                nil [13217 13816])
+            ("ede-customize-forms-menu" function (:arguments ("menu-def")) nil [13818 14535])
+            ("ede-apply-object-keymap" function (:arguments ("default")) nil [14538 15234])
+            ("ede-menu-items-build" function
+               (:parent "ede-project"
+                :arguments ("obj" "current"))
+                nil [15278 15661])
+            ("ede-menu-items-build" function
+               (:parent "ede-target"
+                :arguments ("obj" "current"))
+                nil [15663 16033])
+            ("ede-dired-minor-mode" function
+               (:prototype-flag t
+                :user-visible-flag t)
+                nil [16081 16152])
+            ("ede-apply-target-options" function nil nil [16155 16406])
+            ("ede-turn-on-hook" function nil nil [16408 16798])
+            ("define-minor-mode" code nil nil [16800 17541])
+            ("ede-initialize-state-current-buffer" function nil nil [17543 19657])
+            ("ede-reset-all-buffers" function (:user-visible-flag t) nil [19659 20087])
+            ("define-minor-mode" code nil nil [20104 21686])
+            ("ede-ignored-file-alist" variable (:default-value (quote ("\\.cvsignore$" "\\.#" "~$"))) nil [21688 21830])
+            ("ede-ignore-file" function (:arguments ("filename")) nil [21832 22065])
+            ("ede-auto-add-to-target" function nil nil [22067 23688])
+            ("ede" function
+               (:user-visible-flag t
+                :arguments ("dir"))
+                nil [23730 25546])
+            ("ede-check-project-directory" function (:arguments ("dir")) nil [25548 26619])
+            ("ede-new" function
+               (:user-visible-flag t
+                :arguments ("type" "name"))
+                nil [26621 29517])
+            ("ede-add-subproject" function
+               (:parent "ede-project"
+                :arguments ("proj-a" "proj-b"))
+                nil [29519 29683])
+            ("ede-invoke-method" function (:arguments ("sym" "args")) nil [29685 30090])
+            ("ede-rescan-toplevel" function (:user-visible-flag t) nil [30092 30433])
+            ("ede-new-target" function
+               (:user-visible-flag t
+                :arguments ("args"))
+                nil [30435 31005])
+            ("ede-new-target-custom" function (:user-visible-flag t) nil [31007 31170])
+            ("ede-delete-target" function
+               (:user-visible-flag t
+                :arguments ("target"))
+                nil [31172 31820])
+            ("ede-add-file" function
+               (:user-visible-flag t
+                :arguments ("target"))
+                nil [31822 32647])
+            ("ede-remove-file" function
+               (:user-visible-flag t
+                :arguments ("force"))
+                nil [32649 33311])
+            ("ede-edit-file-target" function (:user-visible-flag t) nil [33313 33477])
+            ("ede-compile-project" function (:user-visible-flag t) nil [33512 33853])
+            ("ede-compile-selected" function
+               (:user-visible-flag t
+                :arguments ("target"))
+                nil [33855 34084])
+            ("ede-compile-target" function (:user-visible-flag t) nil [34086 34229])
+            ("ede-debug-target" function (:user-visible-flag t) nil [34231 34368])
+            ("ede-run-target" function (:user-visible-flag t) nil [34370 34501])
+            ("ede-make-dist" function (:user-visible-flag t) nil [34503 34676])
+            ("project-interactive-select-target" function
+               (:parent "ede-project-placeholder"
+                :arguments ("this" "prompt"))
+                nil [35068 35318])
+            ("project-interactive-select-target" function
+               (:parent "ede-project"
+                :arguments ("this" "prompt"))
+                nil [35320 35649])
+            ("project-add-file" function
+               (:parent "ede-project-placeholder"
+                :arguments ("this" "file"))
+                nil [35651 35861])
+            ("project-add-file" function
+               (:parent "ede-target"
+                :arguments ("ot" "file"))
+                nil [35863 36071])
+            ("project-remove-file" function
+               (:parent "ede-target"
+                :arguments ("ot" "fnnd"))
+                nil [36073 36278])
+            ("project-edit-file-target" function
+               (:parent "ede-target"
+                :arguments ("ot"))
+                nil [36280 36432])
+            ("project-new-target" function
+               (:parent "ede-project"
+                :arguments ("proj" "args"))
+                nil [36434 36636])
+            ("project-new-target-custom" function
+               (:parent "ede-project"
+                :arguments ("proj"))
+                nil [36638 36843])
+            ("project-delete-target" function
+               (:parent "ede-target"
+                :arguments ("ot"))
+                nil [36845 37018])
+            ("project-compile-project" function
+               (:parent "ede-project"
+                :arguments ("obj" "command"))
+                nil [37020 37264])
+            ("project-compile-target" function
+               (:parent "ede-target"
+                :arguments ("obj" "command"))
+                nil [37266 37509])
+            ("project-debug-target" function
+               (:parent "ede-target"
+                :arguments ("obj"))
+                nil [37511 37685])
+            ("project-run-target" function
+               (:parent "ede-target"
+                :arguments ("obj"))
+                nil [37687 37843])
+            ("project-make-dist" function
+               (:parent "ede-project"
+                :arguments ("this"))
+                nil [37845 38026])
+            ("project-dist-files" function
+               (:parent "ede-project"
+                :arguments ("this"))
+                nil [38028 38225])
+            ("project-rescan" function
+               (:parent "ede-project"
+                :arguments ("this"))
+                nil [38227 38388])
+            ("ede-ecb-project-paths" function nil nil [38390 38667])
+            ("ede-add-project-to-global-list" function (:arguments ("proj")) nil [38701 39187])
+            ("ede-delete-project-from-global-list" function (:arguments ("proj")) nil [39189 39346])
+            ("ede-flush-deleted-projects" function (:user-visible-flag t) nil [39348 39709])
+            ("ede-global-list-sanity-check" function (:user-visible-flag t) nil [39711 40392])
+            ("ede-load-project-file" function (:arguments ("dir" "detectin" "rootreturn")) nil [40394 42230])
+            ("ede-parent-project" function (:arguments ("obj")) nil [42343 43422])
+            ("ede-current-project" function (:arguments ("dir")) nil [43424 43905])
+            ("ede-buffer-object" function (:arguments ("buffer" "projsym")) nil [43907 45168])
+            ("ede-target-in-project-p" function
+               (:parent "ede-project"
+                :arguments ("proj" "target"))
+                nil [45170 45580])
+            ("ede-target-parent" function (:arguments ("target")) nil [45582 46032])
+            ("ede-find-target" function
+               (:parent "ede-project"
+                :arguments ("proj" "buffer"))
+                nil [46034 46834])
+            ("ede-target-buffer-in-sourcelist" function
+               (:parent "ede-target"
+                :arguments ("this" "buffer" "source"))
+                nil [46836 47075])
+            ("ede-buffer-mine" function
+               (:parent "ede-project"
+                :arguments ("this" "buffer"))
+                nil [47077 47206])
+            ("ede-buffer-mine" function
+               (:parent "ede-target"
+                :arguments ("this" "buffer"))
+                nil [47208 47477])
+            ("ede-project-buffers" function (:arguments ("project")) nil [47504 47885])
+            ("ede-target-buffers" function (:arguments ("target")) nil [47887 48226])
+            ("ede-buffers" function nil nil [48228 48486])
+            ("ede-map-buffers" function (:arguments ("proc")) nil [48488 48599])
+            ("ede-map-project-buffers" function
+               (:parent "ede-project"
+                :arguments ("this" "proc"))
+                nil [48601 48766])
+            ("ede-map-target-buffers" function
+               (:parent "ede-target"
+                :arguments ("this" "proc"))
+                nil [48768 48930])
+            ("ede-map-subprojects" function
+               (:parent "ede-project"
+                :arguments ("this" "proc"))
+                nil [48958 49203])
+            ("ede-map-all-subprojects" function
+               (:parent "ede-project"
+                :arguments ("this" "allproc"))
+                nil [49205 49562])
+            ("ede-map-targets" function
+               (:parent "ede-project"
+                :arguments ("this" "proc"))
+                nil [49662 49801])
+            ("ede-map-any-target-p" function
+               (:parent "ede-project"
+                :arguments ("this" "proc"))
+                nil [49803 50031])
+            ("ede-system-include-path" function
+               (:parent "ede-project"
+                :arguments ("this"))
+                nil [50195 50311])
+            ("ede-system-include-path" function
+               (:parent "ede-target"
+                :arguments ("this"))
+                nil [50313 50428])
+            ("ede-source-paths" function
+               (:parent "ede-project"
+                :arguments ("this" "mode"))
+                nil [50430 50649])
+            ("ede-apply-preprocessor-map" function nil nil [50660 51484])
+            ("ede-system-include-path" function
+               (:parent "ede-project"
+                :arguments ("this"))
+                nil [51486 51602])
+            ("ede-preprocessor-map" function
+               (:parent "ede-project"
+                :arguments ("this"))
+                nil [51604 51711])
+            ("ede-preprocessor-map" function
+               (:parent "ede-target"
+                :arguments ("this"))
+                nil [51713 51819])
+            ("ede-java-classpath" function
+               (:parent "ede-project"
+                :arguments ("this"))
+                nil [51829 51971])
+            ("ede-set" function
+               (:user-visible-flag t
+                :arguments ("variable" "value" "proj"))
+                nil [52004 52673])
+            ("ede-apply-project-local-variables" function (:arguments ("buffer")) nil [52675 53123])
+            ("ede-make-project-local-variable" function (:arguments ("variable" "project")) nil [53125 53447])
+            ("ede-set-project-local-variable" function (:arguments ("variable" "value" "project")) nil [53449 53971])
+            ("ede-set-project-variables" function
+               (:parent "ede-project"
+                :arguments ("project" "buffer"))
+                nil [53973 54291])
+            ("ede-commit-local-variables" function
+               (:parent "ede-project"
+                :arguments ("proj"))
+                nil [54293 54404])
+            ("ede" package nil nil [54406 54420])
+            ("ede/files" include nil nil [54470 54490])
+            ("if" code nil nil [54576 54689]))          
+      :file "ede.el"
+      :pointmax 54712
+      :fsize 54711
+      :lastmodtime '(21566 62338 0 0)
+      :unmatched-syntax '((close-paren 16152 . 16153) (symbol 16062 . 16078) (open-paren 16061 . 16062)))
+    (semanticdb-table "cedet.el"
+      :file "cedet.el"
+      :fsize 5049
+      :lastmodtime '(21566 62338 0 0))
+    (semanticdb-table "loaddefs.el"
+      :major-mode 'emacs-lisp-mode
+      :tags 
+        '( ("cedet-android-create-project" function
+               (:prototype-flag t
+                :user-visible-flag t)
+                nil [473 910])
+            ("cedet-android-target-list" function
+               (:prototype-flag t
+                :user-visible-flag t)
+                nil [912 1044])
+            ("cedet-android-layoutopt" function
+               (:prototype-flag t
+                :user-visible-flag t)
+                nil [1046 1264])
+            ("cedet-android-start-ddms" function
+               (:prototype-flag t
+                :user-visible-flag t)
+                nil [1266 1373])
+            ("cedet-android-adb-help" function
+               (:prototype-flag t
+                :user-visible-flag t)
+                nil [1375 1477])
+            ("cedet-android-adb-devices" function
+               (:prototype-flag t
+                :user-visible-flag t)
+                nil [1479 1609])
+            ("cedet-android-adb-version-check" function
+               (:prototype-flag t
+                :user-visible-flag t)
+                nil [1611 1892])
+            ("cedet-android-adb-shell" function
+               (:prototype-flag t
+                :user-visible-flag t)
+                nil [1894 2013])
+            ("cedet-android-sdk-update-classpath" function
+               (:prototype-flag t
+                :user-visible-flag t)
+                nil [2015 2179])
+            ("add-hook" code nil nil [2323 2511])
+            ("add-hook" code nil nil [2513 2639])
+            ("cedet-gnu-global-version-check" function
+               (:prototype-flag t
+                :user-visible-flag t)
+                nil [2812 3086])
+            ("cedet-graphviz-dot-command" variable (:default-value "dot") nil [3331 3422])
+            ("custom-autoload" code nil nil [3424 3488])
+            ("cedet-graphviz-neato-command" variable (:default-value "neato") nil [3490 3587])
+            ("custom-autoload" code nil nil [3589 3655])
+            ("cedet-graphviz-dot-version-check" function
+               (:prototype-flag t
+                :user-visible-flag t)
+                nil [3657 3941])
+            ("cedet-java-version-check" function
+               (:prototype-flag t
+                :user-visible-flag t)
+                nil [4125 4389])
+            ("cedet-javap-dump-class" function
+               (:prototype-flag t
+                :user-visible-flag t)
+                nil [4391 4533])
+            ("cedet-m3-minor-mode" function
+               (:prototype-flag t
+                :user-visible-flag t)
+                nil [4710 4965])
+            ("global-cedet-m3-minor-mode" variable nil nil [4967 5308])
+            ("custom-autoload" code nil nil [5310 5370])
+            ("global-cedet-m3-minor-mode" function
+               (:prototype-flag t
+                :user-visible-flag t)
+                nil [5372 5578])
+            ("eieio-defclass-autoload" code nil nil [5784 6002])
+            ("eieio-defclass-autoload" code nil nil [6004 6208])
+            ("eieio-defclass-autoload" code nil nil [6210 6399])
+            ("eieio-defclass-autoload" code nil nil [6401 6723])
+            ("eieio-defclass-autoload" code nil nil [6725 6824])
+            ("cogre" function
+               (:prototype-flag t
+                :user-visible-flag t)
+                nil [6826 7078])
+            ("data-debug-new-buffer" function (:prototype-flag t) nil [7236 7348])
+            ("global-ede-mode" variable nil nil [7479 7776])
+            ("custom-autoload" code nil nil [7778 7822])
+            ("global-ede-mode" function
+               (:prototype-flag t
+                :user-visible-flag t)
+                nil [7824 8199])
+            ("define-fame-channel" function (:prototype-flag t) nil [8337 8998])
+            ("inversion-require-emacs" function (:prototype-flag t) nil [9155 9380])
+            ("put" code nil nil [9518 9571])
+            ("pprint-to-string" function (:prototype-flag t) nil [9735 10151])
+            ("pprint" function (:prototype-flag t) nil [10153 10603])
+            ("pprint-function" function
+               (:prototype-flag t
+                :user-visible-flag t)
+                nil [10605 10726])
+            ("semantic-default-submodes" variable (:default-value (quote (global-semantic-idle-scheduler-mode global-semanticdb-minor-mode))) nil [10896 12445])
+            ("custom-autoload" code nil nil [12447 12504])
+            ("semantic-mode" variable nil nil [12506 12795])
+            ("custom-autoload" code nil nil [12797 12844])
+            ("semantic-mode" function
+               (:prototype-flag t
+                :user-visible-flag t)
+                nil [12846 13407])
+            ("loaddefs" package nil nil [13620 13639]))          
+      :file "loaddefs.el"
+      :pointmax 13785
+      :fsize 13784
+      :lastmodtime '(21566 62338 0 0)
+      :unmatched-syntax nil)
+    (semanticdb-table "semantic.el"
+      :file "semantic.el"
+      :fsize 52846
+      :lastmodtime '(21566 62338 0 0)))
+  :file "!Users!Edgar!.emacs.d!cedet!lisp!cedet!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

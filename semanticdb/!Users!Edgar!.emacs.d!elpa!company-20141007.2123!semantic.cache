@@ -1,0 +1,112 @@
+;; Object company-20141007.2123/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "company-20141007.2123/"
+  :tables
+  (list
+    (semanticdb-table "company-semantic.el"
+      :major-mode 'emacs-lisp-mode
+      :tags 
+        '( ("company" include nil nil [877 895])
+            ("cl-lib" include nil nil [896 913])
+            ("semantic-idle-summary-function" variable nil nil [915 954])
+            ("declare-function" code nil nil [955 1020])
+            ("declare-function" code nil nil [1021 1091])
+            ("declare-function" code nil nil [1092 1168])
+            ("declare-function" code nil nil [1169 1247])
+            ("declare-function" code nil nil [1248 1300])
+            ("declare-function" code nil nil [1301 1352])
+            ("declare-function" code nil nil [1353 1405])
+            ("declare-function" code nil nil [1406 1459])
+            ("declare-function" code nil nil [1460 1507])
+            ("company-semantic" customgroup (:user-visible-flag t) nil [1509 1598])
+            ("company-semantic-metadata-function" variable (:default-value (quote company-semantic-summary-and-doc)) nil [1600 1760])
+            ("company-semantic-modes" variable (:default-value (quote (c-mode c++-mode jde-mode java-mode))) nil [1762 1831])
+            ("defvar-local" code nil nil [1833 1916])
+            ("company-semantic-documentation-for-tag" function (:arguments ("tag")) nil [1918 2119])
+            ("company-semantic-doc-or-summary" function (:arguments ("tag")) nil [2121 2365])
+            ("company-semantic-summary-and-doc" function (:arguments ("tag")) nil [2367 2843])
+            ("company-semantic-doc-buffer" function (:arguments ("tag")) nil [2845 3095])
+            ("company-semantic-completions" function (:arguments ("prefix")) nil [3097 3425])
+            ("company-semantic-completions-raw" function (:arguments ("prefix")) nil [3427 3756])
+            ("company-semantic--pre-prefix-length" function (:arguments ("prefix-length")) nil [3758 4141])
+            ("company-semantic--grab" function nil nil [4143 4387])
+            ("company-semantic" function
+               (:user-visible-flag t
+                :arguments ("command" "arg" "ignored"))
+                nil [4404 5663])
+            ("company-semantic" package nil nil [5665 5692]))          
+      :file "company-semantic.el"
+      :pointmax 5727
+      :fsize 5726
+      :lastmodtime '(21566 62339 0 0)
+      :unmatched-syntax nil)
+    (semanticdb-table "company.el"
+      :file "company.el"
+      :fsize 105316
+      :lastmodtime '(21566 62339 0 0))
+    (semanticdb-table "company-clang.el"
+      :major-mode 'emacs-lisp-mode
+      :tags 
+        '( ("company" include nil nil [903 921])
+            ("company-template" include nil nil [922 949])
+            ("cl-lib" include nil nil [950 967])
+            ("company-clang" customgroup (:user-visible-flag t) nil [969 1050])
+            ("company-clang-executable" variable (:default-value (executable-find "clang")) nil [1052 1164])
+            ("company-clang-begin-after-member-access" variable (:default-value t) nil [1166 1534])
+            ("company-clang-arguments" variable nil nil [1536 1819])
+            ("company-clang-prefix-guesser" variable (:default-value (quote company-clang-guess-prefix)) nil [1821 2005])
+            ("company-clang-modes" variable (:default-value (quote (c-mode c++-mode objc-mode))) nil [2007 2106])
+            ("company-clang-insert-arguments" variable (:default-value t) nil [2108 2285])
+            ("company-clang--prefix" variable nil nil [2369 2403])
+            ("company-clang--guess-pch-file" function (:arguments ("file")) nil [2405 2682])
+            ("company-clang--file-substring" function (:arguments ("file" "beg" "end")) nil [2684 2834])
+            ("company-clang-guess-prefix" function nil nil [2836 3259])
+            ("company-clang-set-prefix" function
+               (:user-visible-flag t
+                :arguments ("prefix"))
+                nil [3261 3875])
+            ("add-hook" code nil nil [3898 3951])
+            ("company-clang--completion-pattern" variable
+               (:constant-flag t
+                :default-value "^COMPLETION: \\_<\\(%s[a-zA-Z0-9_:]*\\)\\(?: : \\(.*\\)$\\)?$")
+                nil [4134 4244])
+            ("company-clang--error-buffer-name" variable
+               (:constant-flag t
+                :default-value "*clang-error*")
+                nil [4246 4305])
+            ("company-clang--lang-option" function nil nil [4307 4540])
+            ("company-clang--parse-output" function (:arguments ("prefix" "_objc")) nil [4542 5342])
+            ("company-clang--meta" function (:arguments ("candidate")) nil [5344 5423])
+            ("company-clang--annotation" function (:arguments ("candidate")) nil [5425 5718])
+            ("company-clang--strip-formatting" function (:arguments ("text")) nil [5720 5869])
+            ("company-clang--handle-error" function (:arguments ("res" "args")) nil [5871 6834])
+            ("company-clang--start-process" function (:arguments ("prefix" "callback" "args")) nil [6836 7898])
+            ("company-clang--build-location" function (:arguments ("pos")) nil [7900 8290])
+            ("company-clang--build-complete-args" function (:arguments ("pos")) nil [8292 8867])
+            ("company-clang--candidates" function (:arguments ("prefix" "callback")) nil [8869 9312])
+            ("company-clang--prefix" function nil nil [9314 9470])
+            ("company-clang-required-version" variable
+               (:constant-flag t
+                :default-value 1.1)
+                nil [9554 9599])
+            ("company-clang--version" variable nil nil [9601 9636])
+            ("company-clang--auto-save-p" function nil nil [9638 9708])
+            ("company-clang-version" function nil nil [9710 10140])
+            ("company-clang-objc-templatify" function (:arguments ("selector")) nil [10142 10784])
+            ("company-clang" function
+               (:user-visible-flag t
+                :arguments ("command" "arg" "ignored"))
+                nil [10786 12643])
+            ("company-clang" package nil nil [12645 12669]))          
+      :file "company-clang.el"
+      :pointmax 12701
+      :fsize 12700
+      :lastmodtime '(21566 62339 0 0)
+      :unmatched-syntax nil)
+    (semanticdb-table "company-template.el"
+      :file "company-template.el"
+      :fsize 6464
+      :lastmodtime '(21566 62339 0 0)))
+  :file "!Users!Edgar!.emacs.d!elpa!company-20141007.2123!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

@@ -77,6 +77,9 @@
     ("442c946bc5c40902e11b0a56bd12edc4d00d7e1c982233545979968e02deb2bc" "e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "ee6081af57dd389d9c94be45d49cf75d7d737c4a78970325165c7d8cb6eb9e34" default)))
  '(display-time-default-load-average nil)
  '(display-time-mode t)
+ '(ede-project-directories
+   (quote
+    ("/ssh:w4118@192.168.180.128:/home/w4118/hmwk4-prog/flo-kernel")))
  '(flycheck-c/c++-gcc-executable "/usr/local/bin/gcc-4.9")
  '(flycheck-make-executable "/usr/bin/make")
  '(mail-user-agent (quote gnus-user-agent))
@@ -97,6 +100,7 @@
   (setq semantic-dependency-include-path '("/ssh:w4118@192.168.180.128:/home/w4118/hmwk4-prog/flo-kernel/kernel/"))
   (semantic-add-system-include "/ssh:w4118@192.168.180.128:/home/w4118/hmwk4-prog/flo-kernel/arch/arm/include/")
   (semantic-add-system-include "/ssh:w4118@192.168.180.128:/home/w4118/hmwk4-prog/flo-kernel/include/" 'c-mode))
+;;  (setq-default semantic-symref-tool 'global))
 
 (define-global-minor-mode this-linum-mode linum-mode
   (lambda ()
@@ -222,7 +226,7 @@
 (add-hook 'find-file-hooks
 	  '(lambda ()
 	     (setq mode-line-buffer-identification 'buffer-file-truename)))
-(global-set-key (kbd "C-;") 'toggle-window-split)
+(global-set-key (kbd "C-'") 'toggle-window-split)
 (when window-system
 ;;  (load-theme 'solarized-dark))
 ;;My other favorite theme. 
@@ -294,7 +298,9 @@
 
 ;;Doc-view mode, think viewing pdfs in emacs
 (add-hook 'doc-view-mode-hook (lambda ()
+				;;Improves resolution at cost of computation
 				(setq doc-view-resolution 300)
+				;; Basically poll the file for changes. 
 				(auto-revert-mode)))
 
 ;;Python Stuff
@@ -338,19 +344,20 @@
 			       (company-mode 1)))
 
 ;;OCaml Stuff
-(add-hook 'tuareg-mode-hook (lambda ()
-			      (dolist (var
-				       (car (read-from-string
-					     (shell-command-to-string "opam config env --sexp"))))
-				(setenv (car var) (cadr var)))
-			      (push (concat (getenv "OCAML_TOPLEVEL_PATH") "/../../share/emacs/site-lisp") load-path)
-			      (autoload 'utop "utop" "Toplevel for OCaml" t)
-			      (autoload 'utop-setup-ocaml-buffer "utop" "Toplevel for OCaml" t)
-			      (utop-setup-ocaml-buffer)
-			      (push "/Users/Edgar/.opam/system/share/emacs/site-lisp" load-path)
-			      (setq merlin-command "/Users/Edgar/.opam/system/bin/ocamlmerlin")
-			      (autoload 'merlin-mode "merlin" "Merlin mode" t)
-			      (merlin-mode)))
+;;Uninstalled all ocaml stuff so this is not needed right now. 
+;; (add-hook 'tuareg-mode-hook (lambda ()
+;; 			      (dolist (var
+;; 				       (car (read-from-string
+;; 					     (shell-command-to-string "opam config env --sexp"))))
+;; 				(setenv (car var) (cadr var)))
+;; 			      (push (concat (getenv "OCAML_TOPLEVEL_PATH") "/../../share/emacs/site-lisp") load-path)
+;; 			      (autoload 'utop "utop" "Toplevel for OCaml" t)
+;; 			      (autoload 'utop-setup-ocaml-buffer "utop" "Toplevel for OCaml" t)
+;; 			      (utop-setup-ocaml-buffer)
+;; 			      (push "/Users/Edgar/.opam/system/share/emacs/site-lisp" load-path)
+;; 			      (setq merlin-command "/Users/Edgar/.opam/system/bin/ocamlmerlin")
+;; 			      (autoload 'merlin-mode "merlin" "Merlin mode" t)
+;; 			      (merlin-mode)))
 
 ;;Orgmode Stuff
 (add-hook 'org-mode-hook (lambda ()

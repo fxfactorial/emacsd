@@ -1,0 +1,16 @@
+;; Object tronesque-theme-20140922.256/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "tronesque-theme-20140922.256/"
+  :tables
+  (list
+    (semanticdb-table "tronesque-theme-autoloads.el"
+      :major-mode 'emacs-lisp-mode
+      :tags nil
+      :file "tronesque-theme-autoloads.el"
+      :pointmax 303
+      :fsize 571
+      :lastmodtime '(21573 43504 0 0)
+      :unmatched-syntax nil))
+  :file "!Users!Edgar!.emacs.d!elpa!tronesque-theme-20140922.256!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

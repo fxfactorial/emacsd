@@ -1,0 +1,1552 @@
+;; Object gfs2/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "gfs2/"
+  :tables
+  (list
+    (semanticdb-table "glock.c"
+      :major-mode 'c-mode
+      :tags 
+        '( ("linux/sched.h" include (:system-flag t) nil [340 364])
+            ("linux/slab.h" include (:system-flag t) nil [365 388])
+            ("linux/spinlock.h" include (:system-flag t) nil [389 416])
+            ("linux/buffer_head.h" include (:system-flag t) nil [417 447])
+            ("linux/delay.h" include (:system-flag t) nil [448 472])
+            ("linux/sort.h" include (:system-flag t) nil [473 496])
+            ("linux/jhash.h" include (:system-flag t) nil [497 521])
+            ("linux/kallsyms.h" include (:system-flag t) nil [522 549])
+            ("linux/gfs2_ondisk.h" include (:system-flag t) nil [550 580])
+            ("linux/list.h" include (:system-flag t) nil [581 604])
+            ("linux/wait.h" include (:system-flag t) nil [605 628])
+            ("linux/module.h" include (:system-flag t) nil [629 654])
+            ("asm/uaccess.h" include (:system-flag t) nil [655 679])
+            ("linux/seq_file.h" include (:system-flag t) nil [680 707])
+            ("linux/debugfs.h" include (:system-flag t) nil [708 734])
+            ("linux/kthread.h" include (:system-flag t) nil [735 761])
+            ("linux/freezer.h" include (:system-flag t) nil [762 788])
+            ("linux/workqueue.h" include (:system-flag t) nil [789 817])
+            ("linux/jiffies.h" include (:system-flag t) nil [818 844])
+            ("linux/rcupdate.h" include (:system-flag t) nil [845 872])
+            ("linux/rculist_bl.h" include (:system-flag t) nil [873 902])
+            ("linux/bit_spinlock.h" include (:system-flag t) nil [903 934])
+            ("linux/percpu.h" include (:system-flag t) nil [935 960])
+            ("gfs2.h" include nil nil [962 979])
+            ("incore.h" include nil nil [980 999])
+            ("glock.h" include nil nil [1000 1018])
+            ("glops.h" include nil nil [1019 1037])
+            ("inode.h" include nil nil [1038 1056])
+            ("lops.h" include nil nil [1057 1074])
+            ("meta_io.h" include nil nil [1075 1095])
+            ("quota.h" include nil nil [1096 1114])
+            ("super.h" include nil nil [1115 1133])
+            ("util.h" include nil nil [1134 1151])
+            ("bmap.h" include nil nil [1152 1169])
+            ("CREATE_TRACE_POINTS" variable (:constant-flag t) nil [1178 1197])
+            ("trace_gfs2.h" include nil nil [1198 1221])
+            ("gfs2_glock_iter" type
+               (:members 
+                  ( ("hash" variable (:type "int") (reparse-symbol classsubparts) [1249 1258])
+                    ("sdp" variable
+                       (:pointer 1
+                        :type ("gfs2_sbd" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol classsubparts) [1294 1315])
+                    ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol classsubparts) [1350 1372])
+                    ("string" variable
+                       (:dereference 1
+                        :type "char")
+                        (reparse-symbol classsubparts) [1407 1424]))                  
+                :type "struct")
+                nil [1223 1460])
+            ("glock_examiner" function
+               (:prototype-flag t
+                :function-pointer t
+                :arguments 
+                  ( ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [1494 1517]))                  
+                :type "void")
+                nil [1470 1518])
+            ("__dump_glock" function
+               (:prototype-flag t
+                :typemodifiers ("static")
+                :arguments 
+                  ( ("seq" variable
+                       (:pointer 1
+                        :type ("seq_file" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [1544 1565])
+                    ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [1572 1594]))                  
+                :type "int")
+                nil [1520 1595])
+            ("GLOCK_BUG_ON" variable (:constant-flag t) nil [1604 1616])
+            ("do_xmote" function
+               (:prototype-flag t
+                :typemodifiers ("static")
+                :arguments 
+                  ( ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [1712 1734])
+                    ("gh" variable
+                       (:pointer 1
+                        :type ("gfs2_holder" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [1735 1758])
+                    ("target" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [1759 1779]))                  
+                :type "void")
+                nil [1691 1780])
+            ("gfs2_root" variable
+               (:pointer 1
+                :typemodifiers ("static")
+                :type ("dentry" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [1782 1814])
+            ("glock_workqueue" variable
+               (:pointer 1
+                :typemodifiers ("static")
+                :type ("workqueue_struct" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [1815 1863])
+            ("gfs2_delete_workqueue" variable
+               (:pointer 1
+                :type ("workqueue_struct" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [1864 1911])
+            ("LIST_HEAD" function
+               (:prototype-flag t
+                :typemodifiers ("static")
+                :arguments 
+                  ( ("" variable (:type ("lru_list" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [1929 1938]))                  
+                :type "int")
+                nil [1912 1939])
+            ("lru_count" variable
+               (:typemodifiers ("static")
+                :default-value "ATOMIC_INIT(0)"
+                :type ("atomic_t" type (:type "class") nil nil))
+                nil [1940 1983])
+            ("DEFINE_SPINLOCK" function
+               (:prototype-flag t
+                :typemodifiers ("static")
+                :arguments 
+                  ( ("" variable (:type ("lru_lock" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [2007 2016]))                  
+                :type "int")
+                nil [1984 2017])
+            ("GFS2_GL_HASH_SHIFT" variable (:constant-flag t) nil [2027 2045])
+            ("GFS2_GL_HASH_SIZE" variable (:constant-flag t) nil [2062 2079])
+            ("GFS2_GL_HASH_MASK" variable (:constant-flag t) nil [2120 2137])
+            ("gl_hash_table" variable
+               (:dereference 1
+                :typemodifiers ("static")
+                :type ("hlist_bl_head" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [2169 2230])
+            ("gfs2_root" variable
+               (:pointer 1
+                :typemodifiers ("static")
+                :type ("dentry" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [2231 2263])
+            ("gl_hash" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("sdp" variable
+                       (:pointer 1
+                        :type ("gfs2_sbd" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [2451 2472])
+                    ("name" variable
+                       (:pointer 1
+                        :type ("lm_lockname" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [2486 2511]))                  
+                :type "unsigned int")
+                nil [2417 2717])
+            ("spin_lock_bucket" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("hash" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [2755 2773]))                  
+                :type "void")
+                nil [2719 2815])
+            ("spin_unlock_bucket" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("hash" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [2855 2873]))                  
+                :type "void")
+                nil [2817 2917])
+            ("gfs2_glock_dealloc" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("rcu" variable
+                       (:pointer 1
+                        :type ("rcu_head" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [2950 2971]))                  
+                :type "void")
+                nil [2919 3185])
+            ("gfs2_glock_free" function
+               (:arguments 
+                  ( ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [3208 3230]))                  
+                :type "void")
+                nil [3187 3398])
+            ("gfs2_glock_hold" function
+               (:arguments 
+                  ( ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [3517 3539]))                  
+                :type "void")
+                nil [3496 3619])
+            ("demote_ok" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [3760 3782]))                  
+                :type "int")
+                nil [3733 4011])
+            ("gfs2_glock_add_to_lru" function
+               (:arguments 
+                  ( ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [4041 4063]))                  
+                :type "void")
+                nil [4014 4284])
+            ("__gfs2_glock_remove_from_lru" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [4327 4349]))                  
+                :type "void")
+                nil [4286 4482])
+            ("gfs2_glock_remove_from_lru" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [4523 4545]))                  
+                :type "void")
+                nil [4484 4632])
+            ("__gfs2_glock_schedule_for_reclaim" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [4876 4898]))                  
+                :type "void")
+                nil [4830 4951])
+            ("gfs2_glock_put_nolock" function
+               (:arguments 
+                  ( ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [5210 5232]))                  
+                :type "void")
+                nil [5183 5298])
+            ("gfs2_glock_put" function
+               (:arguments 
+                  ( ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [5414 5436]))                  
+                :type "void")
+                nil [5394 5925])
+            ("search_bucket" function
+               (:pointer 1
+                :typemodifiers ("static")
+                :arguments 
+                  ( ("hash" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [6164 6182])
+                    ("sdp" variable
+                       (:pointer 1
+                        :type ("gfs2_sbd" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [6194 6215])
+                    ("name" variable
+                       (:pointer 1
+                        :type ("lm_lockname" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [6227 6252]))                  
+                :type ("gfs2_glock" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [6124 6541])
+            ("may_grant" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [6751 6773])
+                    ("gh" variable
+                       (:pointer 1
+                        :type ("gfs2_holder" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [6780 6803]))                  
+                :type "int")
+                nil [6717 7427])
+            ("gfs2_holder_wake" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("gh" variable
+                       (:pointer 1
+                        :type ("gfs2_holder" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [7458 7481]))                  
+                :type "void")
+                nil [7429 7591])
+            ("do_error" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [7703 7725])
+                    ("ret" variable (:type "int") (reparse-symbol arg-sub-list) [7732 7740]))                  
+                :type "void")
+                nil [7675 8149])
+            ("__acquires" function
+               (:arguments 
+                  ( ("" variable (:type ("gl" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [8465 8468])
+                    ("" variable (:type ("gl_spin" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [8469 8477]))                  
+                :type "int")
+                nil [8453 9468])
+            ("find_first_waiter" function
+               (:pointer 1
+                :typemodifiers ("static")
+                :arguments 
+                  ( ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [9625 9647]))                  
+                :type ("gfs2_holder" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [9567 9806])
+            ("state_change" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [9959 9981])
+                    ("new_state" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [9982 10005]))                  
+                :type "void")
+                nil [9934 10526])
+            ("gfs2_demote_wake" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [10557 10579]))                  
+                :type "void")
+                nil [10528 10731])
+            ("finish_xmote" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [10887 10909])
+                    ("ret" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [10910 10927]))                  
+                :type "void")
+                nil [10862 12998])
+            ("__acquires" function
+               (:arguments 
+                  ( ("" variable (:type ("gl" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [13292 13295])
+                    ("" variable (:type ("gl_spin" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [13296 13304]))                  
+                :type "int")
+                nil [13280 14678])
+            ("find_first_holder" function
+               (:pointer 1
+                :typemodifiers ("static")
+                :arguments 
+                  ( ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [14815 14837]))                  
+                :type ("gfs2_holder" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [14757 15048])
+            ("__acquires" function
+               (:arguments 
+                  ( ("" variable (:type ("gl" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [15306 15309])
+                    ("" variable (:type ("gl_spin" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [15310 15318]))                  
+                :type "int")
+                nil [15294 16487])
+            ("delete_work_func" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("work" variable
+                       (:pointer 1
+                        :type ("work_struct" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [16518 16543]))                  
+                :type "void")
+                nil [16489 17070])
+            ("glock_work_func" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("work" variable
+                       (:pointer 1
+                        :type ("work_struct" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [17100 17125]))                  
+                :type "void")
+                nil [17072 18074])
+            ("gfs2_glock_get" function
+               (:arguments 
+                  ( ("sdp" variable
+                       (:pointer 1
+                        :type ("gfs2_sbd" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [18461 18482])
+                    ("number" variable (:type ("u64" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [18483 18494])
+                    ("glops" variable
+                       (:pointer 1
+                        :type ("gfs2_glock_operations" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [18506 18542])
+                    ("create" variable (:type "int") (reparse-symbol arg-sub-list) [18543 18554])
+                    ("glp" variable
+                       (:pointer 2
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [18560 18584]))                  
+                :type "int")
+                nil [18442 20639])
+            ("gfs2_holder_init" function
+               (:arguments 
+                  ( ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [20863 20885])
+                    ("state" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [20886 20905])
+                    ("flags" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [20906 20921])
+                    ("gh" variable
+                       (:pointer 1
+                        :type ("gfs2_holder" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [20930 20953]))                  
+                :type "void")
+                nil [20841 21217])
+            ("gfs2_holder_reinit" function
+               (:arguments 
+                  ( ("state" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [21464 21483])
+                    ("flags" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [21484 21499])
+                    ("gh" variable
+                       (:pointer 1
+                        :type ("gfs2_holder" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [21500 21523]))                  
+                :type "void")
+                nil [21440 21750])
+            ("gfs2_holder_uninit" function
+               (:arguments 
+                  ( ("gh" variable
+                       (:pointer 1
+                        :type ("gfs2_holder" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [21896 21919]))                  
+                :type "void")
+                nil [21872 22014])
+            ("gfs2_glock_holder_wait" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("word" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [22289 22300]))                  
+                :type "int")
+                nil [22255 22342])
+            ("gfs2_glock_demote_wait" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("word" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [22378 22389]))                  
+                :type "int")
+                nil [22344 22417])
+            ("wait_on_holder" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("gh" variable
+                       (:pointer 1
+                        :type ("gfs2_holder" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [22446 22469]))                  
+                :type "void")
+                nil [22419 22839])
+            ("wait_on_demote" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [22868 22890]))                  
+                :type "void")
+                nil [22841 22997])
+            ("handle_callback" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [23268 23290])
+                    ("state" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [23291 23310])
+                    ("delay" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [23318 23338]))                  
+                :type "void")
+                nil [23240 23754])
+            ("gfs2_glock_wait" function
+               (:arguments 
+                  ( ("gh" variable
+                       (:pointer 1
+                        :type ("gfs2_holder" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [23887 23910]))                  
+                :type "int")
+                nil [23867 23957])
+            ("gfs2_print_dbg" function
+               (:arguments 
+                  ( ("seq" variable
+                       (:pointer 1
+                        :type ("seq_file" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [23979 24000])
+                    ("fmt" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [24007 24017])
+                    ("..." variable (:type "vararg") (reparse-symbol arg-sub-list) [24018 24022]))                  
+                :type "void")
+                nil [23959 24309])
+            ("__acquires" function
+               (:arguments 
+                  ( ("" variable (:type ("gl" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [24714 24717])
+                    ("" variable (:type ("gl_spin" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [24718 24726]))                  
+                :type "int")
+                nil [24702 26813])
+            ("gfs2_glock_nq" function
+               (:arguments 
+                  ( ("gh" variable
+                       (:pointer 1
+                        :type ("gfs2_holder" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [27067 27090]))                  
+                :type "int")
+                nil [27049 27637])
+            ("gfs2_glock_poll" function
+               (:arguments 
+                  ( ("gh" variable
+                       (:pointer 1
+                        :type ("gfs2_holder" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [27829 27852]))                  
+                :type "int")
+                nil [27809 27908])
+            ("gfs2_glock_dq" function
+               (:arguments 
+                  ( ("gh" variable
+                       (:pointer 1
+                        :type ("gfs2_holder" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [28045 28068]))                  
+                :type "void")
+                nil [28026 29207])
+            ("gfs2_glock_dq_wait" function
+               (:arguments 
+                  ( ("gh" variable
+                       (:pointer 1
+                        :type ("gfs2_holder" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [29233 29256]))                  
+                :type "void")
+                nil [29209 29337])
+            ("gfs2_glock_dq_uninit" function
+               (:arguments 
+                  ( ("gh" variable
+                       (:pointer 1
+                        :type ("gfs2_holder" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [29480 29503]))                  
+                :type "void")
+                nil [29454 29552])
+            ("gfs2_glock_nq_num" function
+               (:arguments 
+                  ( ("sdp" variable
+                       (:pointer 1
+                        :type ("gfs2_sbd" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [29894 29915])
+                    ("number" variable (:type ("u64" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [29916 29927])
+                    ("glops" variable
+                       (:pointer 1
+                        :type ("gfs2_glock_operations" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [29942 29978])
+                    ("state" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [29987 30006])
+                    ("flags" variable (:type "int") (reparse-symbol arg-sub-list) [30007 30017])
+                    ("gh" variable
+                       (:pointer 1
+                        :type ("gfs2_holder" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [30018 30041]))                  
+                :type "int")
+                nil [29872 30248])
+            ("glock_compare" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("arg_a" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [30428 30440])
+                    ("arg_b" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [30447 30459]))                  
+                :type "int")
+                nil [30397 30889])
+            ("nq_m_sync" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("num_gh" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [31189 31209])
+                    ("ghs" variable
+                       (:pointer 1
+                        :type ("gfs2_holder" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [31210 31234])
+                    ("p" variable
+                       (:pointer 2
+                        :type ("gfs2_holder" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [31242 31265]))                  
+                :type "int")
+                nil [31168 31621])
+            ("gfs2_glock_nq_m" function
+               (:arguments 
+                  ( ("num_gh" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [31889 31909])
+                    ("ghs" variable
+                       (:pointer 1
+                        :type ("gfs2_holder" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [31910 31934]))                  
+                :type "int")
+                nil [31869 32366])
+            ("gfs2_glock_dq_m" function
+               (:arguments 
+                  ( ("num_gh" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [32534 32554])
+                    ("ghs" variable
+                       (:pointer 1
+                        :type ("gfs2_holder" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [32555 32579]))                  
+                :type "void")
+                nil [32513 32632])
+            ("gfs2_glock_dq_uninit_m" function
+               (:arguments 
+                  ( ("num_gh" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [32814 32834])
+                    ("ghs" variable
+                       (:pointer 1
+                        :type ("gfs2_holder" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [32835 32859]))                  
+                :type "void")
+                nil [32786 32919])
+            ("gfs2_glock_cb" function
+               (:arguments 
+                  ( ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [32940 32962])
+                    ("state" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [32963 32982]))                  
+                :type "void")
+                nil [32921 33550])
+            ("gfs2_should_freeze" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [33946 33968]))                  
+                :type "int")
+                nil [33910 34278])
+            ("gfs2_glock_complete" function
+               (:arguments 
+                  ( ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [34559 34581])
+                    ("ret" variable (:type "int") (reparse-symbol arg-sub-list) [34582 34590]))                  
+                :type "void")
+                nil [34534 35078])
+            ("gfs2_shrink_glock_memory" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("shrink" variable
+                       (:pointer 1
+                        :type ("shrinker" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [35117 35141])
+                    ("sc" variable
+                       (:pointer 1
+                        :type ("shrink_control" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [35150 35176]))                  
+                :type "int")
+                nil [35081 36382])
+            ("glock_shrinker" variable
+               (:typemodifiers ("static")
+                :default-value "{
+	.shrink = gfs2_shrink_glock_memory,
+	.seeks = DEFAULT_SEEKS,
+}"
+                :type ("shrinker" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [36384 36490])
+            ("examine_bucket" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("examiner" variable (:type ("glock_examiner" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [36668 36692])
+                    ("sdp" variable
+                       (:pointer 1
+                        :type ("gfs2_sbd" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [36699 36720])
+                    ("hash" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [36726 36744]))                  
+                :type "void")
+                nil [36641 37038])
+            ("glock_hash_walk" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("examiner" variable (:type ("glock_examiner" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [37068 37092])
+                    ("sdp" variable
+                       (:pointer 1
+                        :type ("gfs2_sbd" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [37099 37120]))                  
+                :type "void")
+                nil [37040 37215])
+            ("thaw_glock" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [37488 37510]))                  
+                :type "void")
+                nil [37465 37729])
+            ("clear_glock" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [37872 37894]))                  
+                :type "void")
+                nil [37848 38173])
+            ("gfs2_glock_thaw" function
+               (:arguments 
+                  ( ("sdp" variable
+                       (:pointer 1
+                        :type ("gfs2_sbd" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [38277 38298]))                  
+                :type "void")
+                nil [38256 38337])
+            ("dump_glock" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("seq" variable
+                       (:pointer 1
+                        :type ("seq_file" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [38361 38382])
+                    ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [38383 38405]))                  
+                :type "int")
+                nil [38339 38516])
+            ("dump_glock_func" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [38546 38568]))                  
+                :type "void")
+                nil [38518 38595])
+            ("gfs2_gl_hash_clear" function
+               (:arguments 
+                  ( ("sdp" variable
+                       (:pointer 1
+                        :type ("gfs2_sbd" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [38789 38810]))                  
+                :type "void")
+                nil [38765 39001])
+            ("gfs2_glock_finish_truncate" function
+               (:arguments 
+                  ( ("ip" variable
+                       (:pointer 1
+                        :type ("gfs2_inode" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [39035 39057]))                  
+                :type "void")
+                nil [39003 39297])
+            ("state2str" function
+               (:pointer 1
+                :typemodifiers ("static")
+                :arguments 
+                  ( ("state" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [39328 39343]))                  
+                :type "char")
+                nil [39299 39528])
+            ("hflags2str" function
+               (:pointer 1
+                :typemodifiers ("static")
+                :arguments 
+                  ( ("buf" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [39560 39570])
+                    ("flags" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [39571 39586])
+                    ("iflags" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [39587 39608]))                  
+                :type "char")
+                nil [39530 40121])
+            ("dump_holder" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("seq" variable
+                       (:pointer 1
+                        :type ("seq_file" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [40328 40349])
+                    ("gh" variable
+                       (:pointer 1
+                        :type ("gfs2_holder" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [40356 40379]))                  
+                :type "int")
+                nil [40305 40851])
+            ("gflags2str" function
+               (:pointer 1
+                :typemodifiers ("static")
+                :arguments 
+                  ( ("buf" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [40883 40893])
+                    ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [40900 40922]))                  
+                :type "char")
+                nil [40853 41722])
+            ("__dump_glock" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("seq" variable
+                       (:pointer 1
+                        :type ("seq_file" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [42510 42531])
+                    ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [42538 42560]))                  
+                :type "int")
+                nil [42486 43497])
+            ("gfs2_glstats_seq_show" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("seq" variable
+                       (:pointer 1
+                        :type ("seq_file" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [43532 43553])
+                    ("iter_ptr" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [43554 43569]))                  
+                :type "int")
+                nil [43499 44218])
+            ("gfs2_gltype" variable
+               (:pointer 1
+                :dereference 1
+                :typemodifiers ("static")
+                :default-value "{
+	\"type\",
+	\"reserved\",
+	\"nondisk\",
+	\"inode\",
+	\"rgrp\",
+	\"meta\",
+	\"iopen\",
+	\"flock\",
+	\"plock\",
+	\"quota\",
+	\"journal\",
+}"
+                :type "char")
+                nil [44220 44373])
+            ("gfs2_stype" variable
+               (:pointer 1
+                :dereference 1
+                :typemodifiers ("static")
+                :default-value "{
+	[GFS2_LKS_SRTT]		= \"srtt\",
+	[GFS2_LKS_SRTTVAR]	= \"srttvar\",
+	[GFS2_LKS_SRTTB]	= \"srttb\",
+	[GFS2_LKS_SRTTVARB]	= \"srttvarb\",
+	[GFS2_LKS_SIRT]		= \"sirt\",
+	[GFS2_LKS_SIRTVAR]	= \"sirtvar\",
+	[GFS2_LKS_DCOUNT]	= \"dlm\",
+	[GFS2_LKS_QCOUNT]	= \"queue\",
+}"
+                :type "char")
+                nil [44375 44657])
+            ("GFS2_NR_SBSTATS" variable (:constant-flag t) nil [44667 44682])
+            ("gfs2_sbstats_seq_show" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("seq" variable
+                       (:pointer 1
+                        :type ("seq_file" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [44768 44789])
+                    ("iter_ptr" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [44790 44805]))                  
+                :type "int")
+                nil [44735 45435])
+            ("gfs2_glock_init" function
+               (:arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [45464 45469]))                  
+                :type ("__init" type (:type "class") nil nil))
+                nil [45441 46025])
+            ("gfs2_glock_exit" function
+               (:arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [46048 46053]))                  
+                :type "void")
+                nil [46027 46176])
+            ("glock_hash_chain" function
+               (:pointer 1
+                :typemodifiers ("static")
+                :arguments 
+                  ( ("hash" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [46228 46242]))                  
+                :type ("gfs2_glock" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [46178 46349])
+            ("glock_hash_next" function
+               (:pointer 1
+                :typemodifiers ("static")
+                :arguments 
+                  ( ("gl" variable
+                       (:pointer 1
+                        :type ("gfs2_glock" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [46400 46422]))                  
+                :type ("gfs2_glock" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [46351 46522])
+            ("gfs2_glock_iter_next" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("gi" variable
+                       (:pointer 1
+                        :type ("gfs2_glock_iter" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [46556 46583]))                  
+                :type "int")
+                nil [46524 47038])
+            ("gfs2_glock_seq_start" function
+               (:pointer 1
+                :typemodifiers ("static")
+                :arguments 
+                  ( ("seq" variable
+                       (:pointer 1
+                        :type ("seq_file" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [47074 47095])
+                    ("pos" variable
+                       (:pointer 1
+                        :type ("loff_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [47096 47108]))                  
+                :type "void")
+                nil [47040 47296])
+            ("gfs2_glock_seq_next" function
+               (:pointer 1
+                :typemodifiers ("static")
+                :arguments 
+                  ( ("seq" variable
+                       (:pointer 1
+                        :type ("seq_file" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [47331 47352])
+                    ("iter_ptr" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [47353 47368])
+                    ("pos" variable
+                       (:pointer 1
+                        :type ("loff_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [47374 47386]))                  
+                :type "void")
+                nil [47298 47510])
+            ("gfs2_glock_seq_stop" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("seq" variable
+                       (:pointer 1
+                        :type ("seq_file" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [47544 47565])
+                    ("iter_ptr" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [47566 47581]))                  
+                :type "void")
+                nil [47512 47680])
+            ("gfs2_glock_seq_show" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("seq" variable
+                       (:pointer 1
+                        :type ("seq_file" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [47713 47734])
+                    ("iter_ptr" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [47735 47750]))                  
+                :type "int")
+                nil [47682 47789])
+            ("gfs2_sbstats_seq_start" function
+               (:pointer 1
+                :typemodifiers ("static")
+                :arguments 
+                  ( ("seq" variable
+                       (:pointer 1
+                        :type ("seq_file" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [47827 47848])
+                    ("pos" variable
+                       (:pointer 1
+                        :type ("loff_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [47849 47861]))                  
+                :type "void")
+                nil [47791 48018])
+            ("gfs2_sbstats_seq_next" function
+               (:pointer 1
+                :typemodifiers ("static")
+                :arguments 
+                  ( ("seq" variable
+                       (:pointer 1
+                        :type ("seq_file" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [48055 48076])
+                    ("iter_ptr" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [48077 48092])
+                    ("pos" variable
+                       (:pointer 1
+                        :type ("loff_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [48100 48112]))                  
+                :type "void")
+                nil [48020 48283])
+            ("gfs2_sbstats_seq_stop" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("seq" variable
+                       (:pointer 1
+                        :type ("seq_file" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [48319 48340])
+                    ("iter_ptr" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [48341 48356]))                  
+                :type "void")
+                nil [48285 48379])
+            ("gfs2_glock_seq_ops" variable
+               (:typemodifiers ("static")
+                :default-value "{
+	.start = gfs2_glock_seq_start,
+	.next  = gfs2_glock_seq_next,
+	.stop  = gfs2_glock_seq_stop,
+	.show  = gfs2_glock_seq_show,
+}"
+                :type ("seq_operations" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [48381 48566])
+            ("gfs2_glstats_seq_ops" variable
+               (:typemodifiers ("static")
+                :default-value "{
+	.start = gfs2_glock_seq_start,
+	.next  = gfs2_glock_seq_next,
+	.stop  = gfs2_glock_seq_stop,
+	.show  = gfs2_glstats_seq_show,
+}"
+                :type ("seq_operations" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [48568 48757])
+            ("gfs2_sbstats_seq_ops" variable
+               (:typemodifiers ("static")
+                :default-value "{
+	.start = gfs2_sbstats_seq_start,
+	.next  = gfs2_sbstats_seq_next,
+	.stop  = gfs2_sbstats_seq_stop,
+	.show  = gfs2_sbstats_seq_show,
+}"
+                :type ("seq_operations" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [48759 48954])
+            ("gfs2_glocks_open" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("inode" variable
+                       (:pointer 1
+                        :type ("inode" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [48984 49004])
+                    ("file" variable
+                       (:pointer 1
+                        :type ("file" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [49005 49023]))                  
+                :type "int")
+                nil [48956 49275])
+            ("gfs2_glstats_open" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("inode" variable
+                       (:pointer 1
+                        :type ("inode" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [49306 49326])
+                    ("file" variable
+                       (:pointer 1
+                        :type ("file" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [49327 49345]))                  
+                :type "int")
+                nil [49277 49599])
+            ("gfs2_sbstats_open" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("inode" variable
+                       (:pointer 1
+                        :type ("inode" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [49630 49650])
+                    ("file" variable
+                       (:pointer 1
+                        :type ("file" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [49651 49669]))                  
+                :type "int")
+                nil [49601 49923])
+            ("gfs2_glocks_fops" variable
+               (:typemodifiers ("static")
+                :default-value "{
+	.owner   = THIS_MODULE,
+	.open    = gfs2_glocks_open,
+	.read    = seq_read,
+	.llseek  = seq_lseek,
+	.release = seq_release_private,
+}"
+                :type ("file_operations" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [49925 50117])
+            ("gfs2_glstats_fops" variable
+               (:typemodifiers ("static")
+                :default-value "{
+	.owner   = THIS_MODULE,
+	.open    = gfs2_glstats_open,
+	.read    = seq_read,
+	.llseek  = seq_lseek,
+	.release = seq_release_private,
+}"
+                :type ("file_operations" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [50119 50313])
+            ("gfs2_sbstats_fops" variable
+               (:typemodifiers ("static")
+                :default-value "{
+	.owner   = THIS_MODULE,
+	.open	 = gfs2_sbstats_open,
+	.read    = seq_read,
+	.llseek  = seq_lseek,
+	.release = seq_release_private,
+}"
+                :type ("file_operations" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [50315 50507])
+            ("gfs2_create_debugfs_file" function
+               (:arguments 
+                  ( ("sdp" variable
+                       (:pointer 1
+                        :type ("gfs2_sbd" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [50538 50559]))                  
+                :type "int")
+                nil [50509 51326])
+            ("gfs2_delete_debugfs_file" function
+               (:arguments 
+                  ( ("sdp" variable
+                       (:pointer 1
+                        :type ("gfs2_sbd" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [51358 51379]))                  
+                :type "void")
+                nil [51328 51855])
+            ("gfs2_register_debugfs" function
+               (:arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [51883 51888]))                  
+                :type "int")
+                nil [51857 51972])
+            ("gfs2_unregister_debugfs" function
+               (:arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [52003 52008]))                  
+                :type "void")
+                nil [51974 52059]))          
+      :file "glock.c"
+      :pointmax 52060
+      :fsize 52059
+      :lastmodtime '(21577 34057)
+      :unmatched-syntax '((thing 13295 . 13296) (thing 13294 . 13295) (thing 13291 . 13292) (thing 13265 . 13279) (thing 13270 . 13271) (thing 13269 . 13270) (thing 13266 . 13267) (thing 13255 . 13265) (thing 13186 . 13254) (thing 13178 . 13186) (thing 13173 . 13177) (thing 13166 . 13172) (thing 8468 . 8469) (thing 8467 . 8468) (thing 8464 . 8465) (thing 8438 . 8452) (thing 8443 . 8444) (thing 8442 . 8443) (thing 8439 . 8440) (thing 8428 . 8438) (thing 8404 . 8427) (thing 8394 . 8404) (thing 8390 . 8393) (thing 8383 . 8389) (thing 1462 . 1469) (thing 15204 . 15210) (thing 15211 . 15215) (thing 15216 . 15225) (thing 15225 . 15268) (thing 15269 . 15279) (thing 15279 . 15293) (thing 15280 . 15281) (thing 15283 . 15284) (thing 15284 . 15285) (thing 15305 . 15306) (thing 15308 . 15309) (thing 15309 . 15310) (thing 24621 . 24627) (thing 24635 . 24639) (thing 24640 . 24652) (thing 24652 . 24676) (thing 24677 . 24687) (thing 24687 . 24701) (thing 24688 . 24689) (thing 24691 . 24692) (thing 24692 . 24693) (thing 24713 . 24714) (thing 24716 . 24717) (thing 24717 . 24718) (thing 45437 . 45440))
+      :lexical-table 
+        '(("CREATE_TRACE_POINTS")
+          ("GFS2_GL_HASH_MASK" . ((semantic-list "(GFS2_GL_HASH_SIZE - 1)" 2144 . 2167)))
+          ("GFS2_NR_SBSTATS" . ((semantic-list "(ARRAY_SIZE(gfs2_gltype) * ARRAY_SIZE(gfs2_stype))" 44683 . 44733)))
+          ("GLOCK_BUG_ON" (spp-arg-list ("gl" "x") 1616 . 1622) . 
+              ((DO "do" 1623 . 1625) (semantic-list "{ if (unlikely(x)) { __dump_glock(NULL, gl); BUG(); } }" 1626 . 1681) (WHILE "while" 1682 . 1687) (semantic-list "(0)" 1687 . 1690)))
+          ("GFS2_GL_HASH_SIZE" . ((semantic-list "(1 << GFS2_GL_HASH_SHIFT)" 2086 . 2111)))
+          ("GFS2_GL_HASH_SHIFT" . ((number "15" 2051 . 2053)))
+          )
+)
+    (semanticdb-table "gfs2.h"
+      :file "gfs2.h"
+      :fsize 524
+      :lastmodtime '(21577 34057))
+    (semanticdb-table "incore.h"
+      :file "incore.h"
+      :fsize 20316
+      :lastmodtime '(21577 34057))
+    (semanticdb-table "glock.h"
+      :file "glock.h"
+      :fsize 7319
+      :lastmodtime '(21577 34057))
+    (semanticdb-table "glops.h"
+      :file "glops.h"
+      :fsize 1107
+      :lastmodtime '(21577 34057))
+    (semanticdb-table "inode.h"
+      :file "inode.h"
+      :fsize 4490
+      :lastmodtime '(21577 34057))
+    (semanticdb-table "lops.h"
+      :file "lops.h"
+      :fsize 2985
+      :lastmodtime '(21577 34057))
+    (semanticdb-table "meta_io.h"
+      :file "meta_io.h"
+      :fsize 2523
+      :lastmodtime '(21577 34057))
+    (semanticdb-table "quota.h"
+      :file "quota.h"
+      :fsize 1850
+      :lastmodtime '(21577 34057))
+    (semanticdb-table "super.h"
+      :file "super.h"
+      :fsize 2025
+      :lastmodtime '(21577 34057))
+    (semanticdb-table "util.h"
+      :file "util.h"
+      :fsize 5134
+      :lastmodtime '(21577 34057))
+    (semanticdb-table "bmap.h"
+      :file "bmap.h"
+      :fsize 1869
+      :lastmodtime '(21577 34057))
+    (semanticdb-table "trace_gfs2.h"
+      :file "trace_gfs2.h"
+      :fsize 13737
+      :lastmodtime '(21577 34057)))
+  :file "!ssh:w4118@192.168.180.128:!home!w4118!hmwk4-prog!flo-kernel!fs!gfs2!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

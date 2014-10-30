@@ -1,4 +1,6 @@
-((("ns-use-srgb-colorspace" .
+((("setq-default" .
+   [1 0 0 0 0 0 0 0 0 0 0 0])
+  ("ns-use-srgb-colorspace" .
    [0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
   ("savehist-mode" .
    [0 0 0 0 0 1 0 0 0 0 0 0 0])

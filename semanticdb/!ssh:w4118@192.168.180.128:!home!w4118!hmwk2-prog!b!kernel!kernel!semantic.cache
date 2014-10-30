@@ -1,0 +1,159 @@
+;; Object kernel/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "kernel/"
+  :tables
+  (list
+    (semanticdb-table "tree.c"
+      :major-mode 'c-mode
+      :tags 
+        '( ("linux/kernel.h" include (:system-flag t) nil [92 117])
+            ("linux/prinfo.h" include (:system-flag t) nil [118 143])
+            ("linux/sched.h" include (:system-flag t) nil [144 168])
+            ("linux/syscalls.h" include (:system-flag t) nil [169 196])
+            ("linux/uaccess.h" include (:system-flag t) nil [197 223])
+            ("linux/slab.h" include (:system-flag t) nil [224 247])
+            ("prbuf" type
+               (:members 
+                  ( ("buf" variable
+                       (:pointer 1
+                        :type ("prinfo" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol classsubparts) [327 346])
+                    ("pos" variable (:type "int") (reparse-symbol classsubparts) [367 375])
+                    ("bufsz" variable (:type "int") (reparse-symbol classsubparts) [424 434]))                  
+                :type "struct")
+                nil [311 479])
+            ("prbuf_init" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("buf" variable
+                       (:pointer 1
+                        :type ("prbuf" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [528 546])
+                    ("sz" variable (:type "int") (reparse-symbol arg-sub-list) [547 554]))                  
+                :type "int")
+                nil [506 738])
+            ("prbuf_free_buf" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("buf" variable
+                       (:pointer 1
+                        :type ("prbuf" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [798 816]))                  
+                :type "void")
+                nil [771 838])
+            ("get_parent_pid" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("p" variable
+                       (:pointer 1
+                        :type ("task_struct" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [928 950]))                  
+                :type ("pid_t" type (:type "class") nil nil))
+                nil [893 991])
+            ("first_child_pid" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("p" variable
+                       (:pointer 1
+                        :type ("task_struct" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [1085 1107]))                  
+                :type ("pid_t" type (:type "class") nil nil))
+                nil [1049 1246])
+            ("next_sibling_pid" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("p" variable
+                       (:pointer 1
+                        :type ("task_struct" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [1340 1362]))                  
+                :type ("pid_t" type (:type "class") nil nil))
+                nil [1303 1520])
+            ("prbuf_maybe_push" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("buf" variable
+                       (:pointer 1
+                        :type ("prbuf" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [1833 1851])
+                    ("p" variable
+                       (:pointer 1
+                        :type ("task_struct" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [1852 1874]))                  
+                :type "void")
+                nil [1797 2236])
+            ("ptree_add_task" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("kbuf" variable
+                       (:pointer 1
+                        :type ("prbuf" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [2654 2673])
+                    ("root" variable
+                       (:pointer 1
+                        :type ("task_struct" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [2674 2699]))                  
+                :type "int")
+                nil [2628 3610])
+            ("ptree_add_tasks" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("kbuf" variable
+                       (:pointer 1
+                        :type ("prbuf" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [3813 3832])
+                    ("req_nr" variable (:type "int") (reparse-symbol arg-sub-list) [3833 3844]))                  
+                :type "int")
+                nil [3786 4898])
+            ("SYSCALL_DEFINE2" function
+               (:arguments 
+                  ( ("" variable (:type ("ptree" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [4986 4992])
+                    ("__user" variable (:type ("prinfo" type
+                         (:prototype t
+                          :type "struct")
+                          nil nil)) (reparse-symbol arg-sub-list) [4993 5015])
+                    ("" variable (:type ("buf" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5017 5021])
+                    ("__user" variable (:type "int") (reparse-symbol arg-sub-list) [5022 5034])
+                    ("" variable (:type ("nr" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5036 5039]))                  
+                :type "int")
+                nil [4970 5697]))          
+      :file "tree.c"
+      :pointmax 5698
+      :fsize 5696
+      :lastmodtime '(21571 14254)
+      :unmatched-syntax '((thing 5033 . 5034) (thing 5014 . 5015))))
+  :file "!ssh:w4118@192.168.180.128:!home!w4118!hmwk2-prog!b!kernel!kernel!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

@@ -1,0 +1,448 @@
+;; Object bitops/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "bitops/"
+  :tables
+  (list
+    (semanticdb-table "non-atomic.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_ASM_GENERIC_BITOPS_NON_ATOMIC_H_" variable (:constant-flag t) nil [51 84])
+            ("asm/types.h" include (:system-flag t) nil [86 108])
+            ("__set_bit" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("nr" variable (:type "int") (reparse-symbol arg-sub-list) [442 449])
+                    ("addr" variable
+                       (:pointer 1
+                        :type "unsigned long")
+                        (reparse-symbol arg-sub-list) [459 479]))                  
+                :type "void")
+                nil [413 594])
+            ("__clear_bit" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("nr" variable (:type "int") (reparse-symbol arg-sub-list) [627 634])
+                    ("addr" variable
+                       (:pointer 1
+                        :type "unsigned long")
+                        (reparse-symbol arg-sub-list) [644 664]))                  
+                :type "void")
+                nil [596 779])
+            ("__change_bit" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("nr" variable (:type "int") (reparse-symbol arg-sub-list) [1128 1135])
+                    ("addr" variable
+                       (:pointer 1
+                        :type "unsigned long")
+                        (reparse-symbol arg-sub-list) [1145 1165]))                  
+                :type "void")
+                nil [1096 1279])
+            ("__test_and_set_bit" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("nr" variable (:type "int") (reparse-symbol arg-sub-list) [1633 1640])
+                    ("addr" variable
+                       (:pointer 1
+                        :type "unsigned long")
+                        (reparse-symbol arg-sub-list) [1650 1670]))                  
+                :type "int")
+                nil [1596 1841])
+            ("__test_and_clear_bit" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("nr" variable (:type "int") (reparse-symbol arg-sub-list) [2203 2210])
+                    ("addr" variable
+                       (:pointer 1
+                        :type "unsigned long")
+                        (reparse-symbol arg-sub-list) [2220 2240]))                  
+                :type "int")
+                nil [2164 2412])
+            ("__test_and_change_bit" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("nr" variable (:type "int") (reparse-symbol arg-sub-list) [2505 2512])
+                    ("addr" variable
+                       (:pointer 1
+                        :type "unsigned long")
+                        (reparse-symbol arg-sub-list) [2531 2551]))                  
+                :type "int")
+                nil [2465 2722])
+            ("test_bit" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("nr" variable (:type "int") (reparse-symbol arg-sub-list) [2872 2879])
+                    ("addr" variable
+                       (:pointer 1
+                        :type "unsigned long")
+                        (reparse-symbol arg-sub-list) [2895 2915]))                  
+                :type "int")
+                nil [2845 2983]))          
+      :file "non-atomic.h"
+      :pointmax 3032
+      :fsize 3031
+      :lastmodtime '(21569 50788)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("_ASM_GENERIC_BITOPS_NON_ATOMIC_H_")
+          )
+)
+    (semanticdb-table "ffz.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_ASM_GENERIC_BITOPS_FFZ_H_" variable (:constant-flag t) nil [44 70])
+            ("ffz" variable (:constant-flag t) nil [226 229]))          
+      :file "ffz.h"
+      :pointmax 287
+      :fsize 286
+      :lastmodtime '(21569 50788)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("_ASM_GENERIC_BITOPS_FFZ_H_")
+          ("ffz" (spp-arg-list ("x") 229 . 232) . ((symbol "__ffs" 234 . 239) (semantic-list "(~(x))" 239 . 245)))
+          )
+)
+    (semanticdb-table "__fls.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_ASM_GENERIC_BITOPS___FLS_H_" variable (:constant-flag t) nil [46 74])
+            ("asm/types.h" include (:system-flag t) nil [76 98])
+            ("__fls" function
+               (:arguments 
+                  ( ("word" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [319 338]))                  
+                :type "unsigned long")
+                nil [299 838]))          
+      :file "__fls.h"
+      :pointmax 882
+      :fsize 881
+      :lastmodtime '(21569 50788)
+      :unmatched-syntax '((symbol 283 . 298) (STATIC 276 . 282))
+      :lexical-table 
+        '(("_ASM_GENERIC_BITOPS___FLS_H_")
+          )
+)
+    (semanticdb-table "__ffs.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_ASM_GENERIC_BITOPS___FFS_H_" variable (:constant-flag t) nil [46 74])
+            ("asm/types.h" include (:system-flag t) nil [76 98])
+            ("__ffs" function
+               (:arguments 
+                  ( ("word" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [287 306]))                  
+                :type "unsigned long")
+                nil [267 695]))          
+      :file "__ffs.h"
+      :pointmax 739
+      :fsize 738
+      :lastmodtime '(21569 50788)
+      :unmatched-syntax '((symbol 251 . 266) (STATIC 244 . 250))
+      :lexical-table 
+        '(("_ASM_GENERIC_BITOPS___FFS_H_")
+          )
+)
+    (semanticdb-table "fls.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_ASM_GENERIC_BITOPS_FLS_H_" variable (:constant-flag t) nil [44 70])
+            ("fls" function
+               (:arguments 
+                  ( ("x" variable (:type "int") (reparse-symbol arg-sub-list) [281 287]))                  
+                :type "int")
+                nil [273 594]))          
+      :file "fls.h"
+      :pointmax 636
+      :fsize 635
+      :lastmodtime '(21569 50788)
+      :unmatched-syntax '((symbol 257 . 272) (STATIC 250 . 256))
+      :lexical-table 
+        '(("_ASM_GENERIC_BITOPS_FLS_H_")
+          )
+)
+    (semanticdb-table "ffs.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_ASM_GENERIC_BITOPS_FFS_H_" variable (:constant-flag t) nil [44 70])
+            ("ffs" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("x" variable (:type "int") (reparse-symbol arg-sub-list) [302 308]))                  
+                :type "int")
+                nil [280 574]))          
+      :file "ffs.h"
+      :pointmax 616
+      :fsize 615
+      :lastmodtime '(21569 50788)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("_ASM_GENERIC_BITOPS_FFS_H_")
+          )
+)
+    (semanticdb-table "fls64.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_ASM_GENERIC_BITOPS_FLS64_H_" variable (:constant-flag t) nil [46 74])
+            ("asm/types.h" include (:system-flag t) nil [76 98]))          
+      :file "fls64.h"
+      :pointmax 822
+      :fsize 821
+      :lastmodtime '(21569 50788)
+      :unmatched-syntax '((number 769 . 771) (symbol 766 . 768) (number 763 . 765) (symbol 759 . 762) (symbol 745 . 758) (symbol 739 . 744) (punctuation 738 . 739))
+      :lexical-table 
+        '(("_ASM_GENERIC_BITOPS_FLS64_H_")
+          )
+)
+    (semanticdb-table "sched.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_ASM_GENERIC_BITOPS_SCHED_H_" variable (:constant-flag t) nil [46 74])
+            ("linux/compiler.h" include (:system-flag t) nil [76 103])
+            ("asm/types.h" include (:system-flag t) nil [121 143])
+            ("sched_find_first_bit" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("b" variable
+                       (:pointer 1
+                        :type "unsigned long")
+                        (reparse-symbol arg-sub-list) [367 384]))                  
+                :type "int")
+                nil [322 678]))          
+      :file "sched.h"
+      :pointmax 722
+      :fsize 721
+      :lastmodtime '(21569 50788)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("_ASM_GENERIC_BITOPS_SCHED_H_")
+          )
+)
+    (semanticdb-table "hweight.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_ASM_GENERIC_BITOPS_HWEIGHT_H_" variable (:constant-flag t) nil [48 78])
+            ("asm-generic/bitops/arch_hweight.h" include (:system-flag t) nil [80 124])
+            ("asm-generic/bitops/const_hweight.h" include (:system-flag t) nil [125 170]))          
+      :file "hweight.h"
+      :pointmax 216
+      :fsize 215
+      :lastmodtime '(21569 50788)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("_ASM_GENERIC_BITOPS_HWEIGHT_H_")
+          )
+)
+    (semanticdb-table "lock.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_ASM_GENERIC_BITOPS_LOCK_H_" variable (:constant-flag t) nil [45 72])
+            ("test_and_set_bit_lock" variable (:constant-flag t) nil [326 347])
+            ("clear_bit_unlock" variable (:constant-flag t) nil [597 613])
+            ("__clear_bit_unlock" variable (:constant-flag t) nil [1212 1230]))          
+      :file "lock.h"
+      :pointmax 1351
+      :fsize 1350
+      :lastmodtime '(21569 50788)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("clear_bit_unlock" (spp-arg-list ("nr" "addr") 613 . 623) . 
+              ((DO "do" 626 . 628) (semantic-list "{					\\
+	smp_mb__before_clear_bit();	\\
+	clear_bit(nr, addr);		\\
+}" 629 . 694) (WHILE "while" 695 . 700) (semantic-list "(0)" 701 . 704)))
+          ("test_and_set_bit_lock" (spp-arg-list ("nr" "addr") 347 . 357) . ((symbol "test_and_set_bit" 358 . 374) (semantic-list "(nr, addr)" 374 . 384)))
+          ("__clear_bit_unlock" (spp-arg-list ("nr" "addr") 1230 . 1240) . 
+              ((DO "do" 1243 . 1245) (semantic-list "{					\\
+	smp_mb();			\\
+	__clear_bit(nr, addr);		\\
+}" 1246 . 1297) (WHILE "while" 1298 . 1303) (semantic-list "(0)" 1304 . 1307)))
+          ("_ASM_GENERIC_BITOPS_LOCK_H_")
+          )
+)
+    (semanticdb-table "le.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_ASM_GENERIC_BITOPS_LE_H_" variable (:constant-flag t) nil [43 68])
+            ("asm/types.h" include (:system-flag t) nil [70 92])
+            ("asm/byteorder.h" include (:system-flag t) nil [93 119])
+            ("test_bit_le" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("nr" variable (:type "int") (reparse-symbol arg-sub-list) [1204 1211])
+                    ("addr" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [1218 1229]))                  
+                :type "int")
+                nil [1174 1280])
+            ("__set_bit_le" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("nr" variable (:type "int") (reparse-symbol arg-sub-list) [1314 1321])
+                    ("addr" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [1322 1333]))                  
+                :type "void")
+                nil [1282 1378])
+            ("__clear_bit_le" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("nr" variable (:type "int") (reparse-symbol arg-sub-list) [1414 1421])
+                    ("addr" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [1422 1433]))                  
+                :type "void")
+                nil [1380 1480])
+            ("test_and_set_bit_le" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("nr" variable (:type "int") (reparse-symbol arg-sub-list) [1520 1527])
+                    ("addr" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [1528 1539]))                  
+                :type "int")
+                nil [1482 1598])
+            ("test_and_clear_bit_le" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("nr" variable (:type "int") (reparse-symbol arg-sub-list) [1640 1647])
+                    ("addr" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [1648 1659]))                  
+                :type "int")
+                nil [1600 1720])
+            ("__test_and_set_bit_le" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("nr" variable (:type "int") (reparse-symbol arg-sub-list) [1762 1769])
+                    ("addr" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [1770 1781]))                  
+                :type "int")
+                nil [1722 1842])
+            ("__test_and_clear_bit_le" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("nr" variable (:type "int") (reparse-symbol arg-sub-list) [1886 1893])
+                    ("addr" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [1894 1905]))                  
+                :type "int")
+                nil [1844 1968]))          
+      :file "le.h"
+      :pointmax 2009
+      :fsize 2008
+      :lastmodtime '(21569 50788)
+      :unmatched-syntax '((string 1135 . 1165) (symbol 1129 . 1134) (punctuation 1128 . 1129))
+      :lexical-table 
+        '(("_ASM_GENERIC_BITOPS_LE_H_")
+          )
+)
+    (semanticdb-table "ext2-atomic-setbit.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_ASM_GENERIC_BITOPS_EXT2_ATOMIC_SETBIT_H_" variable (:constant-flag t) nil [59 100])
+            ("ext2_set_bit_atomic" variable (:constant-flag t) nil [171 190])
+            ("ext2_clear_bit_atomic" variable (:constant-flag t) nil [242 263]))          
+      :file "ext2-atomic-setbit.h"
+      :pointmax 365
+      :fsize 364
+      :lastmodtime '(21569 50788)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("_ASM_GENERIC_BITOPS_EXT2_ATOMIC_SETBIT_H_")
+          ("ext2_set_bit_atomic" (spp-arg-list ("l" "nr" "addr") 190 . 203) . ((symbol "test_and_set_bit_le" 204 . 223) (semantic-list "(nr, addr)" 223 . 233)))
+          ("ext2_clear_bit_atomic" (spp-arg-list ("l" "nr" "addr") 263 . 276) . ((symbol "test_and_clear_bit_le" 277 . 298) (semantic-list "(nr, addr)" 298 . 308)))
+          )
+)
+    (semanticdb-table "arch_hweight.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_ASM_GENERIC_BITOPS_ARCH_HWEIGHT_H_" variable (:constant-flag t) nil [53 88])
+            ("asm/types.h" include (:system-flag t) nil [90 112])
+            ("__arch_hweight32" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("w" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [158 173]))                  
+                :type "unsigned int")
+                nil [114 204])
+            ("__arch_hweight16" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("w" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [250 265]))                  
+                :type "unsigned int")
+                nil [206 296])
+            ("__arch_hweight8" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("w" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [341 356]))                  
+                :type "unsigned int")
+                nil [298 386])
+            ("__arch_hweight64" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("w" variable (:type ("__u64" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [433 441]))                  
+                :type "unsigned long")
+                nil [388 472]))          
+      :file "arch_hweight.h"
+      :pointmax 517
+      :fsize 516
+      :lastmodtime '(21569 50788)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("_ASM_GENERIC_BITOPS_ARCH_HWEIGHT_H_")
+          )
+)
+    (semanticdb-table "const_hweight.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_ASM_GENERIC_BITOPS_CONST_HWEIGHT_H_" variable (:constant-flag t) nil [54 90])
+            ("__const_hweight8" variable (:constant-flag t) nil [153 169])
+            ("__const_hweight16" variable (:constant-flag t) nil [422 439])
+            ("__const_hweight32" variable (:constant-flag t) nil [505 522])
+            ("__const_hweight64" variable (:constant-flag t) nil [588 605])
+            ("hweight8" variable (:constant-flag t) nil [701 709])
+            ("hweight16" variable (:constant-flag t) nil [792 801])
+            ("hweight32" variable (:constant-flag t) nil [884 893])
+            ("hweight64" variable (:constant-flag t) nil [976 985])
+            ("HWEIGHT8" variable (:constant-flag t) nil [1118 1126])
+            ("HWEIGHT16" variable (:constant-flag t) nil [1207 1216])
+            ("HWEIGHT32" variable (:constant-flag t) nil [1297 1306])
+            ("HWEIGHT64" variable (:constant-flag t) nil [1387 1396])
+            ("HWEIGHT" variable (:constant-flag t) nil [1561 1568]))          
+      :file "const_hweight.h"
+      :pointmax 1643
+      :fsize 1642
+      :lastmodtime '(21569 50788)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("__const_hweight8" (spp-arg-list ("w") 169 . 172) . ((semantic-list "(	(!!((w) & (1ULL << 0))) +	\\
+	(!!((w) & (1ULL << 1))) +	\\
+	(!!((w) & (1ULL << 2))) +	\\
+	(!!((w) & (1ULL << 3))) +	\\
+	(!!((w) & (1ULL << 4))) +	\\
+	(!!((w) & (1ULL << 5))) +	\\
+	(!!((w) & (1ULL << 6))) +	\\
+	(!!((w) & (1ULL << 7)))	)" 182 . 412)))
+          ("_ASM_GENERIC_BITOPS_CONST_HWEIGHT_H_")
+          ("hweight8" (spp-arg-list ("w") 709 . 712) . ((semantic-list "(__builtin_constant_p(w) ? __const_hweight8(w)  : __arch_hweight8(w))" 714 . 783)))
+          ("HWEIGHT16" (spp-arg-list ("w") 1216 . 1219) . ((semantic-list "(BUILD_BUG_ON_ZERO(!__builtin_constant_p(w)) + __const_hweight16(w))" 1220 . 1288)))
+          ("HWEIGHT64" (spp-arg-list ("w") 1396 . 1399) . ((semantic-list "(BUILD_BUG_ON_ZERO(!__builtin_constant_p(w)) + __const_hweight64(w))" 1400 . 1468)))
+          ("__const_hweight16" (spp-arg-list ("w") 439 . 442) . ((semantic-list "(__const_hweight8(w)  + __const_hweight8((w)  >> 8 ))" 443 . 496)))
+          ("__const_hweight64" (spp-arg-list ("w") 605 . 608) . ((semantic-list "(__const_hweight32(w) + __const_hweight32((w) >> 32))" 609 . 662)))
+          ("hweight16" (spp-arg-list ("w") 801 . 804) . ((semantic-list "(__builtin_constant_p(w) ? __const_hweight16(w) : __arch_hweight16(w))" 805 . 875)))
+          ("hweight64" (spp-arg-list ("w") 985 . 988) . ((semantic-list "(__builtin_constant_p(w) ? __const_hweight64(w) : __arch_hweight64(w))" 989 . 1059)))
+          ("HWEIGHT32" (spp-arg-list ("w") 1306 . 1309) . ((semantic-list "(BUILD_BUG_ON_ZERO(!__builtin_constant_p(w)) + __const_hweight32(w))" 1310 . 1378)))
+          ("HWEIGHT" (spp-arg-list ("w") 1568 . 1571) . ((symbol "HWEIGHT64" 1574 . 1583) (semantic-list "((u64)w)" 1583 . 1591)))
+          ("__const_hweight32" (spp-arg-list ("w") 522 . 525) . ((semantic-list "(__const_hweight16(w) + __const_hweight16((w) >> 16))" 526 . 579)))
+          ("hweight32" (spp-arg-list ("w") 893 . 896) . ((semantic-list "(__builtin_constant_p(w) ? __const_hweight32(w) : __arch_hweight32(w))" 897 . 967)))
+          ("HWEIGHT8" (spp-arg-list ("w") 1126 . 1129) . ((semantic-list "(BUILD_BUG_ON_ZERO(!__builtin_constant_p(w)) + __const_hweight8(w))" 1131 . 1198)))
+          )
+))
+  :file "!ssh:w4118@192.168.180.128:!home!w4118!hmwk2-prog!kernel!include!asm-generic!bitops!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

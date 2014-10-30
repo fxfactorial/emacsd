@@ -1,0 +1,470 @@
+;; Object semantic/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "semantic/"
+  :tables
+  (list
+    (semanticdb-table "util-modes.el"
+      :major-mode 'emacs-lisp-mode
+      :tags 
+        '( ("semantic" include nil nil [1155 1174])
+            ("semantic-modes" customgroup (:user-visible-flag t) nil [1219 1326])
+            ("semantic-update-mode-line" variable (:default-value t) nil [1370 1806])
+            ("semantic-mode-line-prefix" variable (:default-value (propertize "S" (quote face) (quote bold))) nil [1808 2044])
+            ("semantic-minor-modes-format" variable nil nil [2046 2197])
+            ("put" code nil nil [2198 2256])
+            ("semantic-minor-mode-alist" variable nil nil [2258 2398])
+            ("semantic-mode-line-update" function nil nil [2400 4476])
+            ("semantic-desktop-ignore-this-minor-mode" function (:arguments ("buffer")) nil [4478 4665])
+            ("semantic-add-minor-mode" function (:arguments ("toggle" "name")) nil [4667 5733])
+            ("semantic-toggle-minor-mode-globally" function (:arguments ("mode" "arg")) nil [5735 6883])
+            ("define-minor-mode" code nil nil [6966 7326])
+            ("semantic-highlight-edits-mode-hook" variable nil nil [7328 7480])
+            ("semantic-highlight-edits-face" variable
+               (:default-value (quote ((((class color) (background dark)) (:background "gray20")) (((class color) (background light)) (:background "gray90"))))
+                :type "face")
+                nil [7482 7813])
+            ("semantic-highlight-edits-new-change-hook-fcn" function (:arguments ("overlay")) nil [7815 8121])
+            ("semantic-highlight-edits-mode-map" variable (:default-value (let ((km (make-sparse-keymap))) km)) nil [8123 8251])
+            ("define-minor-mode" code nil nil [8268 9437])
+            ("semantic-add-minor-mode" code nil nil [9439 9524])
+            ("define-minor-mode" code nil nil [9603 10071])
+            ("semantic-show-unmatched-syntax-mode-hook" variable nil nil [10073 10237])
+            ("semantic-unmatched-syntax-face" variable
+               (:default-value (quote ((((class color) (background dark)) (:underline "red")) (((class color) (background light)) (:underline "red"))))
+                :type "face")
+                nil [10239 10536])
+            ("semantic-unmatched-syntax-overlay-p" function (:arguments ("overlay")) nil [10538 10711])
+            ("semantic-showing-unmatched-syntax-p" function nil nil [10713 11042])
+            ("semantic-show-unmatched-lex-tokens-fetch" function nil nil [11044 11586])
+            ("semantic-clean-unmatched-syntax-in-region" function (:arguments ("beg" "end")) nil [11588 11891])
+            ("semantic-clean-unmatched-syntax-in-buffer" function nil nil [11893 12087])
+            ("semantic-clean-token-of-unmatched-syntax" function (:arguments ("token")) nil [12089 12314])
+            ("semantic-show-unmatched-syntax" function (:arguments ("syntax")) nil [12316 13255])
+            ("semantic-next-unmatched-syntax" function (:arguments ("point" "bound")) nil [13257 13955])
+            ("semantic-show-unmatched-syntax-mode-map" variable (:default-value (let ((km (make-sparse-keymap))) (define-key km ",`" (quote semantic-show-unmatched-syntax-next)) km)) nil [13957 14176])
+            ("define-minor-mode" code nil nil [14193 16051])
+            ("semantic-add-minor-mode" code nil nil [16053 16144])
+            ("semantic-show-unmatched-syntax-next" function (:user-visible-flag t) nil [16146 16375])
+            ("define-minor-mode" code nil nil [16466 16895])
+            ("semantic-show-parser-state-mode-hook" variable nil nil [16897 17053])
+            ("semantic-show-parser-state-mode-map" variable (:default-value (let ((km (make-sparse-keymap))) km)) nil [17055 17187])
+            ("define-minor-mode" code nil nil [17204 20914])
+            ("semantic-add-minor-mode" code nil nil [20916 21002])
+            ("semantic-show-parser-state-string" variable nil nil [21004 21156])
+            ("make-variable-buffer-local" code nil nil [21157 21220])
+            ("semantic-show-parser-state-marker" function (:arguments ("ignore")) nil [21222 22042])
+            ("semantic-show-parser-state-auto-marker" function nil nil [22044 22362])
+            ("define-minor-mode" code nil nil [22439 22860])
+            ("semantic-stickyfunc-mode-hook" variable nil nil [22862 23004])
+            ("semantic-stickyfunc-mode-map" variable (:default-value (let ((km (make-sparse-keymap))) (define-key km [header-line down-mouse-1] (quote semantic-stickyfunc-menu)) km)) nil [23006 23199])
+            ("semantic-stickyfunc-popup-menu" variable nil nil [23201 23321])
+            ("easy-menu-define" code nil nil [23323 24470])
+            ("semantic-stickyfunc-indent-string" variable (:default-value (if (and window-system (not (featurep (quote xemacs)))) (concat (condition-case nil (let ((charwidth (frame-char-width)) (scrollpos (frame-parameter (selected-frame) (quote vertical-scroll-bars)))) (if (or (eq scrollpos (quote left)) (eq scrollpos t)) (let ((w (when (boundp (quote scroll-bar-width)) (symbol-value (quote scroll-bar-width))))) (if (not w) (setq w (frame-parameter (selected-frame) (quote scroll-bar-width)))) (if (not w) (setq w (+ (get (quote scroll-bar-width) (quote x-frame-parameter)) 1))) (if (not w) "  " (setq w (+ 2 w)) (make-string (/ w charwidth) 32))) "")) (error "")) (condition-case nil (let* ((f (window-fringes)) (fw (car f)) (numspace (/ fw (frame-char-width)))) (make-string numspace 32)) (error (condition-case nil (if (get (quote fringe) (quote face)) " " "") (error ""))))) "")) nil [24472 26623])
+            ("semantic-stickyfunc-old-hlf" variable nil nil [26625 26725])
+            ("semantic-stickyfunc-header-line-format" variable
+               (:constant-flag t
+                :default-value (cond ((featurep (quote xemacs)) nil) ((>= emacs-major-version 22) (quote (:eval (list (propertize " " (quote display) (quote ((space :align-to 0)))) (semantic-stickyfunc-fetch-stickyline))))) ((= emacs-major-version 21) (quote (:eval (list semantic-stickyfunc-indent-string (semantic-stickyfunc-fetch-stickyline))))) (t nil)))
+                nil [26727 27187])
+            ("define-minor-mode" code nil nil [27204 29199])
+            ("semantic-stickyfunc-sticky-classes" variable (:default-value (quote (function type))) nil [29201 29337])
+            ("make-variable-buffer-local" code nil nil [29338 29402])
+            ("semantic-stickyfunc-show-only-functions-p" variable nil nil [29404 29682])
+            ("semantic-stickyfunc-tag-to-stick" function nil nil [29684 30051])
+            ("semantic-stickyfunc-fetch-stickyline" function nil nil [30053 31872])
+            ("semantic-stickyfunc-menu" function
+               (:user-visible-flag t
+                :arguments ("event"))
+                nil [31874 32344])
+            ("semantic-add-minor-mode" code nil nil [32347 32426])
+            ("define-minor-mode" code nil nil [32680 33120])
+            ("semantic-highlight-func-mode-hook" variable nil nil [33122 33272])
+            ("semantic-highlight-func-mode-map" variable (:default-value (let ((km (make-sparse-keymap)) (m3 (if (featurep (quote xemacs)) [button3] [mouse-3]))) (define-key km m3 (quote semantic-highlight-func-menu)) km)) nil [33274 33510])
+            ("semantic-highlight-func-popup-menu" variable nil nil [33512 33651])
+            ("easy-menu-define" code nil nil [33653 34708])
+            ("semantic-highlight-func-menu" function
+               (:user-visible-flag t
+                :arguments ("event"))
+                nil [34710 35226])
+            ("semantic-highlight-func-ct-overlay" variable nil nil [35228 35331])
+            ("make-variable-buffer-local" code nil nil [35332 35396])
+            ("semantic-highlight-func-current-tag-face" variable
+               (:default-value (quote ((((class color) (background dark)) (:background "gray20")) (((class color) (background light)) (:background "gray90"))))
+                :type "face")
+                nil [35398 35720])
+            ("define-minor-mode" code nil nil [35737 37090])
+            ("semantic-highlight-func-highlight-current-tag" function (:arguments ("disable")) nil [37092 38757])
+            ("semantic-add-minor-mode" code nil nil [38759 38842])
+            ("semantic/util-modes" package nil nil [38889 38919]))          
+      :file "util-modes.el"
+      :pointmax 39084
+      :fsize 39083
+      :lastmodtime '(21573 25737 0 0)
+      :unmatched-syntax nil)
+    (semanticdb-table "dep.el"
+      :major-mode 'emacs-lisp-mode
+      :tags 
+        '( ("semantic/tag" include nil nil [1440 1463])
+            ("semantic-dependency-include-path" variable nil nil [1476 2144])
+            ("make-variable-buffer-local" code nil nil [2145 2207])
+            ("semantic-dependency-system-include-path" variable nil nil [2209 2774])
+            ("make-variable-buffer-local" code nil nil [2775 2844])
+            ("defcustom-mode-local-semantic-dependency-system-include-path" function (:arguments ("mode" "name" "value" "docstring")) nil [2846 4342])
+            ("semantic-add-system-include" function
+               (:user-visible-flag t
+                :arguments ("dir" "mode"))
+                nil [4428 4996])
+            ("semantic-remove-system-include" function
+               (:user-visible-flag t
+                :arguments ("dir" "mode"))
+                nil [5013 5678])
+            ("semantic-reset-system-include" function
+               (:user-visible-flag t
+                :arguments ("mode"))
+                nil [5695 6021])
+            ("semantic-customize-system-include-path" function
+               (:user-visible-flag t
+                :arguments ("mode"))
+                nil [6038 6583])
+            ("semantic--dependency-find-file-on-path" function (:arguments ("file" "path")) nil [6653 6980])
+            ("ede-minor-mode" variable nil nil [6982 7005])
+            ("ede-object" variable nil nil [7006 7025])
+            ("declare-function" code nil nil [7026 7074])
+            ("semantic-dependency-find-file-on-path" function (:arguments ("file" "systemp" "mode")) nil [7076 8163])
+            ("semantic/dep" package nil nil [8166 8189]))          
+      :file "dep.el"
+      :pointmax 8340
+      :fsize 8339
+      :lastmodtime '(21573 25737 0 0)
+      :unmatched-syntax nil)
+    (semanticdb-table "tag.el"
+      :major-mode 'emacs-lisp-mode
+      :tags 
+        '( ("semantic/fw" include nil nil [1789 1811])
+            ("semantic/lex" include nil nil [1812 1835])
+            ("declare-function" code nil nil [1837 1906])
+            ("declare-function" code nil nil [1907 1956])
+            ("declare-function" code nil nil [1957 2016])
+            ("declare-function" code nil nil [2017 2076])
+            ("semantic-tag-version" variable
+               (:constant-flag t
+                :default-value "2.0")
+                nil [2078 2172])
+            ("semantic-tag-incompatible-version" variable
+               (:constant-flag t
+                :default-value "1.0")
+                nil [2174 2418])
+            ("semantic-tag-name" function (:arguments ("tag")) nil [3179 3493])
+            ("semantic-tag-class" function (:arguments ("tag")) nil [3495 4243])
+            ("semantic-tag-attributes" function (:arguments ("tag")) nil [4245 4419])
+            ("semantic-tag-properties" function (:arguments ("tag")) nil [4421 4594])
+            ("semantic-tag-overlay" function (:arguments ("tag")) nil [4596 4873])
+            ("semantic--tag-overlay-cdr" function (:arguments ("tag")) nil [4875 5037])
+            ("semantic--tag-set-overlay" function (:arguments ("tag" "overlay")) nil [5039 5226])
+            ("semantic-tag-start" function (:arguments ("tag")) nil [5228 5426])
+            ("semantic-tag-end" function (:arguments ("tag")) nil [5428 5620])
+            ("semantic-tag-bounds" function (:arguments ("tag")) nil [5622 5782])
+            ("semantic-tag-set-bounds" function (:arguments ("tag" "start" "end")) nil [5784 6070])
+            ("semantic-tag-in-buffer-p" function (:arguments ("tag")) nil [6072 6427])
+            ("semantic--tag-get-property" function (:arguments ("tag" "property")) nil [6429 6699])
+            ("semantic-tag-buffer" function (:arguments ("tag")) nil [6701 7282])
+            ("semantic-tag-mode" function (:arguments ("tag")) nil [7284 8192])
+            ("semantic--tag-attributes-cdr" function (:arguments ("tag")) nil [8194 8362])
+            ("semantic-tag-put-attribute" function (:arguments ("tag" "attribute" "value")) nil [8364 8888])
+            ("semantic-tag-put-attribute-no-side-effect" function (:arguments ("tag" "attribute" "value")) nil [8890 9520])
+            ("semantic-tag-get-attribute" function (:arguments ("tag" "attribute")) nil [9522 9811])
+            ("semantic--tag-properties-cdr" function (:arguments ("tag")) nil [9859 10027])
+            ("semantic--tag-put-property" function (:arguments ("tag" "property" "value")) nil [10029 10503])
+            ("semantic--tag-put-property-no-side-effect" function (:arguments ("tag" "property" "value")) nil [10505 11169])
+            ("semantic-tag-file-name" function (:arguments ("tag")) nil [11171 11603])
+            ("semantic-tag-p" function (:arguments ("tag")) nil [11637 12058])
+            ("semantic-tag-of-class-p" function (:arguments ("tag" "class")) nil [12060 12189])
+            ("semantic-tag-type-members" function (:arguments ("tag")) nil [12191 12379])
+            ("semantic-tag-type" function (:arguments ("tag")) nil [12381 12706])
+            ("semantic-tag-with-position-p" function (:arguments ("tag")) nil [12708 12971])
+            ("semantic-equivalent-tag-p" function (:arguments ("tag1" "tag2")) nil [12973 13656])
+            ("semantic-tag-similar-with-subtags-p" function (:arguments ("tag1" "tag2" "ignorable-attributes")) nil [13659 14056])
+            ("semantic-tag-of-type-p" function (:arguments ("tag" "type")) nil [14058 15385])
+            ("semantic-tag-type-compound-p" function (:arguments ("tag")) nil [15387 15834])
+            ("semantic-tag-faux-p" function (:arguments ("tag")) nil [15836 16201])
+            ("semantic-tag-make-plist" function (:arguments ("args")) nil [16262 16988])
+            ("semantic-tag" function (:arguments ("name" "class" "attributes")) nil [16990 17359])
+            ("semantic-tag-new-variable" function (:arguments ("name" "type" "default-value" "attributes")) nil [17361 17875])
+            ("semantic-tag-new-function" function (:arguments ("name" "type" "arg-list" "attributes")) nil [17877 18374])
+            ("semantic-tag-new-type" function (:arguments ("name" "type" "members" "parents" "attributes")) nil [18376 19446])
+            ("semantic-tag-new-include" function (:arguments ("name" "system-flag" "attributes")) nil [19448 19899])
+            ("semantic-tag-new-package" function (:arguments ("name" "detail" "attributes")) nil [19901 20287])
+            ("semantic-tag-new-code" function (:arguments ("name" "detail" "attributes")) nil [20289 20616])
+            ("semantic-tag-set-faux" function (:arguments ("tag")) nil [20618 20854])
+            ("semantic-tag-set-name" function (:arguments ("tag" "name")) nil [20856 20945])
+            ("semantic-create-tag-proxy" function (:arguments ("function" "data")) nil [21362 21910])
+            ("semantic-tag-set-proxy" function (:arguments ("tag" "proxy" "filename")) nil [21912 22372])
+            ("semantic-tag-resolve-proxy" function (:arguments ("tag")) nil [22374 22772])
+            ("semantic-tag-clone" function (:arguments ("tag" "name")) nil [22807 23223])
+            ("semantic-tag-copy" function (:arguments ("tag" "name" "keep-file")) nil [23225 24728])
+            ("semantic--tag-copy-properties" function (:arguments ("tag1" "tag2")) nil [24986 25313])
+            ("semantic-tag-deep-copy-one-tag" function (:arguments ("tag" "filter")) nil [25334 26254])
+            ("semantic--tag-deep-copy-attributes" function (:arguments ("attrs" "filter")) nil [26256 26852])
+            ("semantic--tag-deep-copy-value" function (:arguments ("value" "filter")) nil [26854 27460])
+            ("semantic--tag-deep-copy-tag-list" function (:arguments ("tags" "filter")) nil [27462 28064])
+            ("semantic-tag-modifiers" function (:arguments ("tag")) nil [28110 28262])
+            ("semantic-tag-docstring" function (:arguments ("tag" "buffer")) nil [28264 29056])
+            ("semantic-tag-named-parent" function (:arguments ("tag")) nil [29107 29408])
+            ("semantic-tag-type-superclasses" function (:arguments ("tag")) nil [29436 30065])
+            ("semantic--tag-find-parent-by-name" function (:arguments ("name" "supers")) nil [30067 30673])
+            ("semantic-tag-type-superclass-protection" function (:arguments ("tag" "parentstring")) nil [30675 31781])
+            ("semantic-tag-type-interfaces" function (:arguments ("tag")) nil [31783 31988])
+            ("semantic-tag-function-arguments" function (:arguments ("tag")) nil [32022 32226])
+            ("semantic-tag-function-throws" function (:arguments ("tag")) nil [32228 32431])
+            ("semantic-tag-function-parent" function (:arguments ("tag")) nil [32433 32735])
+            ("semantic-tag-function-destructor-p" function (:arguments ("tag")) nil [32737 32954])
+            ("semantic-tag-function-constructor-p" function (:arguments ("tag")) nil [32956 33177])
+            ("semantic-tag-variable-default" function (:arguments ("tag")) nil [33211 33425])
+            ("semantic-tag-variable-constant-p" function (:arguments ("tag")) nil [33427 33648])
+            ("semantic-tag-include-system-p" function (:arguments ("tag")) nil [33681 33900])
+            ("semantic-tag-include-filename" function
+               (:overloadable t
+                :arguments ("tag"))
+                nil [33902 34334])
+            ("semantic-tag-include-filename-default" function (:arguments ("tag")) nil [34336 34487])
+            ("semantic-tag-code-detail" function (:arguments ("tag")) nil [34517 34707])
+            ("semantic-tag-new-alias" function (:arguments ("name" "meta-tag-class" "value" "attributes")) nil [34738 35171])
+            ("semantic-tag-alias-class" function (:arguments ("tag")) nil [35173 35306])
+            ("semantic-tag-alias-definition" function
+               (:overloadable t
+                :arguments ("tag"))
+                nil [35308 35726])
+            ("semantic-tag-components" function
+               (:overloadable t
+                :arguments ("tag"))
+                nil [35792 36076])
+            ("semantic-tag-components-default" function (:arguments ("tag")) nil [36078 36394])
+            ("semantic-tag-components-with-overlays" function
+               (:overloadable t
+                :arguments ("tag"))
+                nil [36396 36927])
+            ("semantic-tag-components-with-overlays-default" function (:arguments ("tag")) nil [36929 38125])
+            ("semantic-tag-children-compatibility" function (:arguments ("tag" "positiononly")) nil [38127 38523])
+            ("semantic-narrow-to-tag" function
+               (:user-visible-flag t
+                :arguments ("tag"))
+                nil [38618 38890])
+            ("semantic-with-buffer-narrowed-to-current-tag" function (:arguments ("body")) nil [38892 39109])
+            ("put" code nil nil [39110 39185])
+            ("add-hook" code nil nil [39186 39316])
+            ("semantic-with-buffer-narrowed-to-tag" function (:arguments ("tag" "body")) nil [39318 39488])
+            ("put" code nil nil [39489 39556])
+            ("add-hook" code nil nil [39557 39679])
+            ("semantic--tag-hook-value" variable nil nil [40028 40061])
+            ("semantic-tag-add-hook" function (:arguments ("tag" "hook" "function" "append")) nil [40063 40677])
+            ("semantic-tag-remove-hook" function (:arguments ("tag" "hook" "function")) nil [40679 41252])
+            ("semantic--tag-run-hooks" function (:arguments ("tag" "hook" "args")) nil [41254 41809])
+            ("semantic--tag-unlink-list-from-buffer" function (:arguments ("tags")) nil [41966 42177])
+            ("semantic--tag-unlink-from-buffer" function (:arguments ("tag")) nil [42179 42840])
+            ("semantic--tag-link-list-to-buffer" function (:arguments ("tags")) nil [42842 43043])
+            ("semantic--tag-link-to-buffer" function (:arguments ("tag")) nil [43045 43844])
+            ("semantic--tag-unlink-cache-from-buffer" function nil nil [43846 44124])
+            ("semantic--buffer-cache" variable nil nil [44126 44157])
+            ("semantic--tag-link-cache-to-buffer" function nil nil [44159 44723])
+            ("semantic--tag-expanded-p" function (:arguments ("tag")) nil [44939 45395])
+            ("semantic-tag-expand-function" variable nil nil [45397 45909])
+            ("make-variable-buffer-local" code nil nil [45910 45968])
+            ("semantic--tag-expand" function (:arguments ("tag")) nil [45970 47704])
+            ("semantic-foreign-tag-invalid" function (:arguments ("tag")) nil [47726 47882])
+            ("semantic-foreign-tag-p" function (:arguments ("tag")) nil [47884 48167])
+            ("semantic-foreign-tag-check" function (:arguments ("tag")) nil [48169 48356])
+            ("semantic-foreign-tag" function (:arguments ("tag")) nil [48358 49173])
+            ("semantic-obtain-foreign-tag" function
+               (:overloadable t
+                :arguments ("tag"))
+                nil [49225 49465])
+            ("semantic-insert-foreign-tag-default" function (:arguments ("foreign-tag")) nil [49467 49840])
+            ("semantic-insert-foreign-tag" function
+               (:overloadable t
+                :arguments ("foreign-tag"))
+                nil [49842 50201])
+            ("semantic-insert-foreign-tag" function
+               (:parent "log-edit-mode"
+                :override-function-flag t
+                :arguments ("foreign-tag"))
+                nil [50230 50429])
+            ("semantic-insert-foreign-tag" function
+               (:parent "change-log-mode"
+                :override-function-flag t
+                :arguments ("foreign-tag"))
+                nil [50431 50632])
+            ("semantic-token-version" variable
+               (:constant-flag t
+                :default-value semantic-tag-version)
+                nil [50656 50712])
+            ("semantic-token-incompatible-version" variable
+               (:constant-flag t
+                :default-value semantic-tag-incompatible-version)
+                nil [50713 50795])
+            ("semantic-token-type-parent" function (:arguments ("tag")) nil [50797 51230])
+            ("make-obsolete" code nil nil [51232 51374])
+            ("semantic-alias-obsolete" code nil nil [51376 51488])
+            ("semantic-varalias-obsolete" code nil nil [51490 51612])
+            ("semantic/tag" package nil nil [51614 51637]))          
+      :file "tag.el"
+      :pointmax 51788
+      :fsize 51787
+      :lastmodtime '(21573 25737 0 0)
+      :unmatched-syntax nil)
+    (semanticdb-table "senator.el"
+      :file "senator.el"
+      :fsize 57863
+      :lastmodtime '(21573 25737 0 0))
+    (semanticdb-table "ia.el"
+      :file "ia.el"
+      :fsize 17405
+      :lastmodtime '(21573 25737 0 0))
+    (semanticdb-table "complete.el"
+      :file "complete.el"
+      :fsize 86166
+      :lastmodtime '(21573 25737 0 0))
+    (semanticdb-table "mru-bookmark.el"
+      :file "mru-bookmark.el"
+      :fsize 13954
+      :lastmodtime '(21573 25737 0 0))
+    (semanticdb-table "fw.el"
+      :file "fw.el"
+      :fsize 19692
+      :lastmodtime '(21573 25737 0 0))
+    (semanticdb-table "lex.el"
+      :file "lex.el"
+      :fsize 81694
+      :lastmodtime '(21573 25737 0 0))
+    (semanticdb-table "symref.el"
+      :major-mode 'emacs-lisp-mode
+      :tags 
+        '( ("semantic" include nil nil [2521 2540])
+            ("ede-minor-mode" variable nil nil [2542 2565])
+            ("declare-function" code nil nil [2566 2619])
+            ("declare-function" code nil nil [2620 2687])
+            ("declare-function" code nil nil [2688 2730])
+            ("declare-function" code nil nil [2731 2788])
+            ("declare-function" code nil nil [2789 2836])
+            ("semantic-symref-tool" variable
+               (:user-visible-flag t
+                :default-value (quote detect))
+                nil [2848 3041])
+            ("make-variable-buffer-local" code nil nil [3042 3092])
+            ("semantic-symref-tool-alist" variable (:default-value (quote (((lambda (rootdir) (file-exists-p (expand-file-name "GPATH" rootdir))) . global) ((lambda (rootdir) (file-exists-p (expand-file-name "ID" rootdir))) . idutils) ((lambda (rootdir) (file-exists-p (expand-file-name "cscope.out" rootdir))) . cscope)))) nil [3112 3738])
+            ("semantic-symref-calculate-rootdir" function nil nil [3740 4255])
+            ("semantic-symref-detect-symref-tool" function nil nil [4257 4886])
+            ("semantic-symref-instantiate" function (:arguments ("args")) nil [4888 5345])
+            ("semantic-symref-last-result" variable nil nil [5347 5426])
+            ("semantic-symref-data-debug-last-result" function (:user-visible-flag t) nil [5428 5772])
+            ("semantic-symref-find-references-by-name" function
+               (:user-visible-flag t
+                :arguments ("name" "scope" "tool-return"))
+                nil [5810 6733])
+            ("semantic-symref-find-tags-by-name" function
+               (:user-visible-flag t
+                :arguments ("name" "scope"))
+                nil [6750 7460])
+            ("semantic-symref-find-tags-by-regexp" function
+               (:user-visible-flag t
+                :arguments ("name" "scope"))
+                nil [7477 8197])
+            ("semantic-symref-find-tags-by-completion" function
+               (:user-visible-flag t
+                :arguments ("name" "scope"))
+                nil [8214 8943])
+            ("semantic-symref-find-file-references-by-name" function
+               (:user-visible-flag t
+                :arguments ("name" "scope"))
+                nil [8960 9686])
+            ("semantic-symref-find-text" function
+               (:user-visible-flag t
+                :arguments ("text" "scope"))
+                nil [9703 10472])
+            ("semantic-symref-result" type
+               (:members 
+                  ( ("created-by" variable
+                       (:documentation "Back-pointer to the symref tool creating these results."
+                        :type "semantic-symref-tool-baseclass")
+                        nil nil)
+                    ("hit-files" variable
+                       (:documentation "The list of files hit."
+                        :type "list")
+                        nil nil)
+                    ("hit-text" variable
+                       (:documentation "If the result doesn't provide full lines, then fill in hit-text.
+GNU Global does completion search this way."
+                        :type "list")
+                        nil nil)
+                    ("hit-lines" variable
+                       (:documentation "The list of line hits.
+Each element is a cons cell of the form (LINE . FILENAME)."
+                        :type "list")
+                        nil nil)
+                    ("hit-tags" variable
+                       (:documentation "The list of tags with hits in them.
+Use the  `semantic-symref-hit-tags' method to get this list."
+                        :type "list")
+                        nil nil))                  
+                :type "class")
+                nil [10559 11456])
+            ("semantic-symref-result-get-files" function
+               (:parent "semantic-symref-result"
+                :arguments ("result"))
+                nil [11458 12122])
+            ("semantic-symref-recently-opened-buffers" variable nil nil [12124 12241])
+            ("semantic-symref-cleanup-recent-buffers-fcn" function nil nil [12243 12966])
+            ("semantic-symref-result-get-tags" function
+               (:parent "semantic-symref-result"
+                :arguments ("result" "open-buffers"))
+                nil [12970 14565])
+            ("semantic-symref-hit-to-tag-via-db" function (:arguments ("hit" "searchtxt" "searchtype")) nil [14567 15966])
+            ("semantic-symref-hit-to-tag-via-buffer" function (:arguments ("hit" "searchtxt" "searchtype" "open-buffers")) nil [15968 18460])
+            ("semantic-symref-tool-baseclass" type
+               (:members 
+                  ( ("searchfor" variable
+                       (:documentation "The thing to search for."
+                        :type "string")
+                        nil nil)
+                    ("searchtype" variable
+                       (:documentation "The type of search to do.
+Values could be `symbol, `regexp, 'tagname, or 'completion."
+                        :type "symbol")
+                        nil nil)
+                    ("searchscope" variable
+                       (:documentation "The scope to search for.
+Can be 'project, 'target, or 'file."
+                        :type "symbol")
+                        nil nil)
+                    ("resulttype" variable
+                       (:documentation "The kind of search results desired.
+Can be 'line, 'file, or 'tag.
+The type of result can be converted from 'line to 'file, or 'line to 'tag,
+but not from 'file to 'line or 'tag."
+                        :type "symbol")
+                        nil nil))                  
+                :type "class")
+                nil [18584 19620])
+            ("semantic-symref-get-result" function
+               (:parent "semantic-symref-tool-baseclass"
+                :arguments ("tool"))
+                nil [19622 20146])
+            ("semantic-symref-perform-search" function
+               (:parent "semantic-symref-tool-baseclass"
+                :arguments ("tool"))
+                nil [20148 20366])
+            ("semantic-symref-parse-tool-output" function
+               (:parent "semantic-symref-tool-baseclass"
+                :arguments ("tool" "outputbuffer"))
+                nil [20368 20865])
+            ("semantic-symref-parse-tool-output-one-line" function
+               (:parent "semantic-symref-tool-baseclass"
+                :arguments ("tool"))
+                nil [20867 21101])
+            ("semantic/symref" package nil nil [21103 21129]))          
+      :file "symref.el"
+      :pointmax 21286
+      :fsize 21285
+      :lastmodtime '(21573 25737 0 0)
+      :unmatched-syntax nil))
+  :file "!Users!Edgar!.emacs.d!cedet!lisp!cedet!semantic!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

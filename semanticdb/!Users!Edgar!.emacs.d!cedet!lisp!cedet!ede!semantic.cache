@@ -1,0 +1,248 @@
+;; Object ede/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "ede/"
+  :tables
+  (list
+    (semanticdb-table "linux.el"
+      :major-mode 'emacs-lisp-mode
+      :tags 
+        '( ("cl" include nil nil [1179 1192])
+            ("ede" include nil nil [1195 1209])
+            ("ede/make" include nil nil [1210 1229])
+            ("declare-function" code nil nil [1231 1292])
+            ("declare-function" code nil nil [1293 1352])
+            ("declare-function" code nil nil [1353 1410])
+            ("project-linux" customgroup (:user-visible-flag t) nil [1422 1530])
+            ("project-linux-build-directory-default" variable (:default-value (quote ask)) nil [1532 1745])
+            ("project-linux-architecture-default" variable (:default-value (quote ask)) nil [1747 1982])
+            ("project-linux-compile-target-command" variable
+               (:user-visible-flag t
+                :default-value (concat ede-make-command " -k -C %s SUBDIRS=%s"))
+                nil [1985 2169])
+            ("project-linux-compile-project-command" variable
+               (:user-visible-flag t
+                :default-value (concat ede-make-command " -k -C %s"))
+                nil [2171 2346])
+            ("ede-linux-version" function (:arguments ("dir")) nil [2348 3026])
+            ("ede-linux-project" type
+               (:superclasses "ede-project"
+                :members 
+                  ( ("build-directory" variable
+                       (:documentation "Build directory."
+                        :type "string")
+                        nil nil)
+                    ("architecture" variable
+                       (:documentation "Target architecture."
+                        :type "string")
+                        nil nil)
+                    ("include-path" variable
+                       (:documentation "Include directories.
+Contains both common and target architecture-specific directories."
+                        :type "list")
+                        nil nil))                  
+                :type "class")
+                nil [3028 3606])
+            ("ede-linux--get-build-directory" function (:arguments ("dir")) nil [3609 4070])
+            ("ede-linux--get-archs" function (:arguments ("dir")) nil [4073 4684])
+            ("ede-linux--detect-architecture" function (:arguments ("dir")) nil [4687 5485])
+            ("ede-linux--get-architecture" function (:arguments ("dir" "bdir")) nil [5487 5940])
+            ("ede-linux--include-path" function (:arguments ("dir" "bdir" "arch")) nil [5943 6641])
+            ("ede-linux-load" function (:arguments ("dir" "rootproj")) nil [6658 7382])
+            ("ede-add-project-autoload" code nil nil [7399 7674])
+            ("ede-linux-target-c" type
+               (:superclasses "ede-target"
+                :type "class")
+                nil [7676 7806])
+            ("ede-linux-target-misc" type
+               (:superclasses "ede-target"
+                :type "class")
+                nil [7808 7945])
+            ("initialize-instance" function
+               (:parent "ede-linux-project"
+                :arguments ("this" "fields"))
+                nil [7947 8152])
+            ("ede-project-root-directory" function
+               (:parent "ede-linux-project"
+                :arguments ("this" "file"))
+                nil [8172 8377])
+            ("ede-project-root" function
+               (:parent "ede-linux-project"
+                :arguments ("this"))
+                nil [8379 8461])
+            ("ede-find-subproject-for-directory" function
+               (:parent "ede-linux-project"
+                :arguments ("proj" "dir"))
+                nil [8463 8610])
+            ("ede-linux-find-matching-target" function (:arguments ("class" "dir" "targets")) nil [8637 8926])
+            ("ede-find-target" function
+               (:parent "ede-linux-project"
+                :arguments ("proj" "buffer"))
+                nil [8928 9638])
+            ("ede-preprocessor-map" function
+               (:parent "ede-linux-target-c"
+                :arguments ("this"))
+                nil [9666 10328])
+            ("ede-linux-file-exists-name" function (:arguments ("name" "root" "subdir")) nil [10330 10556])
+            ("ede-expand-filename-impl" function
+               (:parent "ede-linux-project"
+                :arguments ("proj" "name"))
+                nil [10558 11527])
+            ("project-compile-project" function
+               (:parent "ede-linux-project"
+                :arguments ("proj" "command"))
+                nil [11552 12061])
+            ("project-compile-target" function
+               (:parent "ede-linux-target-c"
+                :arguments ("obj" "command"))
+                nil [12063 12664])
+            ("project-rescan" function
+               (:parent "ede-linux-project"
+                :arguments ("this"))
+                nil [12666 13132])
+            ("ede/linux" package nil nil [13134 13154]))          
+      :file "linux.el"
+      :pointmax 13299
+      :fsize 13298
+      :lastmodtime '(21573 25737 0 0)
+      :unmatched-syntax '((thing 1192 . 1193) (thing 1161 . 1178) (thing 1160 . 1161)))
+    (semanticdb-table "make.el"
+      :file "make.el"
+      :fsize 3590
+      :lastmodtime '(21573 25737 0 0))
+    (semanticdb-table "auto.el"
+      :major-mode 'emacs-lisp-mode
+      :tags 
+        '( ("eieio" include nil nil [1090 1106])
+            ("declare-function" code nil nil [1108 1153])
+            ("declare-function" code nil nil [1154 1209])
+            ("ede-project-autoload-dirmatch" type
+               (:members 
+                  ( ("fromconfig" variable
+                       (:documentation "A config file within which the match pattern lives."
+                        :default-value "nil")
+                        nil nil)
+                    ("configregex" variable
+                       (:documentation "A regexp to identify the dirmatch pattern."
+                        :default-value "nil")
+                        nil nil)
+                    ("configregexidx" variable
+                       (:documentation "An index into the match-data of `configregex'."
+                        :default-value "nil")
+                        nil nil)
+                    ("subdir-only" variable
+                       (:documentation "Non-nil means an exact match to the found directory is a non-match.
+This implies projects exist only in subdirectories of the configuration path.
+If `:subdir-only' is nil, then the directory from the configuration file is the project."
+                        :default-value "t")
+                        nil nil)
+                    ("configdatastash" variable (:documentation "Save discovered match string.") nil nil))                  
+                :type "class")
+                nil [1211 2337])
+            ("ede-dirmatch-installed" function
+               (:parent "ede-project-autoload-dirmatch"
+                :arguments ("dirmatch"))
+                nil [2339 2769])
+            ("ede-do-dirmatch" function
+               (:parent "ede-project-autoload-dirmatch"
+                :arguments ("dirmatch" "file"))
+                nil [2772 4790])
+            ("declare-function" code nil nil [4792 4837])
+            ("declare-function" code nil nil [4838 4893])
+            ("ede-project-autoload" type
+               (:members 
+                  ( ("name" variable (:documentation "Name of this project type") nil nil)
+                    ("file" variable (:documentation "The lisp file belonging to this class.") nil nil)
+                    ("proj-file" variable (:documentation "Name of a project file of this type.") nil nil)
+                    ("root-only" variable
+                       (:documentation "Non-nil if project detection only finds proj-file @ project root."
+                        :default-value "t")
+                        nil nil)
+                    ("proj-root-dirmatch" variable
+                       (:documentation "To avoid loading a project, check if the directory matches this.
+Specifying this matcher object will  allow EDE to perform a complex
+check without loading the project.
+
+NOTE: If you use dirmatch, you may need to set :root-only to `nil'.
+While it may be a root based project, all subdirs will happen to return
+true for the dirmatch, so for scanning purposes, set it to `nil'."
+                        :default-value "nil"
+                        :type "(or null string ede-project-autoload-dirmatch)")
+                        nil nil)
+                    ("proj-root" variable
+                       (:documentation "A function symbol to call for the project root.
+This function takes no arguments, and returns the current directories
+root, if available.  Leave blank to use the EDE directory walking
+routine instead."
+                        :type "function")
+                        nil nil)
+                    ("initializers" variable
+                       (:documentation "Initializers passed to the project object.
+These are used so there can be multiple types of projects
+associated with a single object class, based on the initializers used."
+                        :default-value "nil")
+                        nil nil)
+                    ("load-type" variable (:documentation "Fn symbol used to load this project file.") nil nil)
+                    ("class-sym" variable (:documentation "Symbol representing the project class to use.") nil nil)
+                    ("generic-p" variable
+                       (:documentation "Generic projects are added to the project list at the end.
+The add routine will set this to non-nil so that future non-generic placement will
+be successful."
+                        :default-value "nil")
+                        nil nil)
+                    ("new-p" variable
+                       (:documentation "Non-nil if this is an option when a user creates a project."
+                        :default-value "t")
+                        nil nil)
+                    ("safe-p" variable
+                       (:documentation "Non-nil if the project load files are \"safe\".
+An unsafe project is one that loads project variables via Emacs
+Lisp code.  A safe project is one that loads project variables by
+scanning files without loading Lisp code from them."
+                        :default-value "t")
+                        nil nil))                  
+                :type "class")
+                nil [4895 7496])
+            ("ede-project-class-files" variable (:default-value (list (ede-project-autoload "edeproject-makefile" :name "Make" :file (quote ede/proj) :proj-file "Project.ede" :root-only nil :load-type (quote ede-proj-load) :class-sym (quote ede-proj-project) :safe-p nil) (ede-project-autoload "edeproject-automake" :name "Automake" :file (quote ede/proj) :proj-file "Project.ede" :root-only nil :initializers (quote (:makefile-type Makefile\.am)) :load-type (quote ede-proj-load) :class-sym (quote ede-proj-project) :safe-p nil) (ede-project-autoload "automake" :name "automake" :file (quote ede/project-am) :proj-file "Makefile.am" :root-only nil :load-type (quote project-am-load) :class-sym (quote project-am-makefile) :new-p nil :safe-p t))) nil [7498 8311])
+            ("put" code nil nil [8313 8367])
+            ("ede-add-project-autoload" function (:arguments ("projauto" "flag")) nil [8369 10068])
+            ("ede-auto-detect-in-dir" function
+               (:parent "ede-project-autoload"
+                :arguments ("this" "dir"))
+                nil [10133 10772])
+            ("ede-auto-load-project" function
+               (:parent "ede-project-autoload"
+                :arguments ("this" "dir"))
+                nil [10774 11571])
+            ("ede-project-root" function
+               (:parent "ede-project-autoload"
+                :arguments ("this"))
+                nil [11688 11856])
+            ("ede-project-root-directory" function
+               (:parent "ede-project-autoload"
+                :arguments ("this" "file"))
+                nil [11907 11999])
+            ("ede/auto" package nil nil [12001 12020]))          
+      :file "auto.el"
+      :pointmax 12048
+      :fsize 12047
+      :lastmodtime '(21573 25737 0 0)
+      :unmatched-syntax nil)
+    (semanticdb-table "source.el"
+      :file "source.el"
+      :fsize 6042
+      :lastmodtime '(21573 25737 0 0))
+    (semanticdb-table "base.el"
+      :file "base.el"
+      :fsize 22559
+      :lastmodtime '(21573 25737 0 0))
+    (semanticdb-table "detect.el"
+      :file "detect.el"
+      :fsize 7031
+      :lastmodtime '(21573 25737 0 0))
+    (semanticdb-table "files.el"
+      :file "files.el"
+      :fsize 20304
+      :lastmodtime '(21573 25737 0 0)))
+  :file "!Users!Edgar!.emacs.d!cedet!lisp!cedet!ede!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

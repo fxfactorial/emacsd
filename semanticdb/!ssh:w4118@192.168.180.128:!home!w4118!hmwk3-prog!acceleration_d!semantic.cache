@@ -1,0 +1,160 @@
+;; Object acceleration_d/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "acceleration_d/"
+  :tables
+  (list
+    (semanticdb-table "accelerationd.c"
+      :major-mode 'c-mode
+      :tags 
+        '( ("bionic/errno.h" include (:system-flag t) nil [72 97])
+            ("fcntl.h" include (:system-flag t) nil [144 162])
+            ("math.h" include (:system-flag t) nil [163 180])
+            ("stdio.h" include (:system-flag t) nil [181 199])
+            ("stdlib.h" include (:system-flag t) nil [200 219])
+            ("string.h" include (:system-flag t) nil [220 239])
+            ("unistd.h" include (:system-flag t) nil [240 259])
+            ("sys/ioctl.h" include (:system-flag t) nil [260 282])
+            ("hardware/hardware.h" include (:system-flag t) nil [283 313])
+            ("hardware/sensors.h" include (:system-flag t) nil [314 343])
+            ("../flo-kernel/include/linux/akm8975.h" include nil nil [384 432])
+            ("acceleration.h" include nil nil [434 459])
+            ("ID_ACCELERATION" variable (:constant-flag t) nil [490 505])
+            ("ID_MAGNETIC_FIELD" variable (:constant-flag t) nil [520 537])
+            ("ID_ORIENTATION" variable (:constant-flag t) nil [550 564])
+            ("ID_TEMPERATURE" variable (:constant-flag t) nil [579 593])
+            ("SENSORS_ACCELERATION" variable (:constant-flag t) nil [609 629])
+            ("SENSORS_MAGNETIC_FIELD" variable (:constant-flag t) nil [661 683])
+            ("SENSORS_ORIENTATION" variable (:constant-flag t) nil [715 734])
+            ("SENSORS_TEMPERATURE" variable (:constant-flag t) nil [766 785])
+            ("__NR_set_acceleration" variable (:constant-flag t) nil [819 840])
+            ("dbg" variable (:constant-flag t) nil [902 905])
+            ("effective_sensor" variable
+               (:typemodifiers ("static")
+                :type "int")
+                nil [998 1026])
+            ("open_sensors" function
+               (:prototype-flag t
+                :typemodifiers ("static")
+                :arguments 
+                  ( ("hw_module" variable
+                       (:pointer 2
+                        :type ("sensors_module_t" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [1096 1132])
+                    ("poll_device" variable
+                       (:pointer 2
+                        :type ("sensors_poll_device_t" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [1136 1179]))                  
+                :type "int")
+                nil [1072 1180])
+            ("enumerate_sensors" function
+               (:prototype-flag t
+                :typemodifiers ("static")
+                :arguments 
+                  ( ("sensors" variable
+                       (:pointer 1
+                        :type ("sensors_module_t" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [1217 1250]))                  
+                :type "void")
+                nil [1181 1251])
+            ("poll_sensor_data" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("sensors_device" variable
+                       (:pointer 1
+                        :type ("sensors_poll_device_t" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [1281 1326]))                  
+                :type "int")
+                nil [1253 1870])
+            ("main" function
+               (:arguments 
+                  ( ("argc" variable (:type "int") (reparse-symbol arg-sub-list) [1949 1958])
+                    ("argv" variable
+                       (:pointer 2
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [1959 1971]))                  
+                :type "int")
+                nil [1940 2459])
+            ("open_sensors" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("mSensorModule" variable
+                       (:pointer 2
+                        :type ("sensors_module_t" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [2626 2666])
+                    ("mSensorDevice" variable
+                       (:pointer 2
+                        :type ("sensors_poll_device_t" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [2670 2715]))                  
+                :type "int")
+                nil [2602 3490])
+            ("enumerate_sensors" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("sensors" variable
+                       (:pointer 1
+                        :type ("sensors_module_t" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [3528 3561]))                  
+                :type "void")
+                nil [3492 4225]))          
+      :file "accelerationd.c"
+      :pointmax 4226
+      :fsize 4225
+      :lastmodtime '(21571 17959)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("SENSORS_ORIENTATION" . ((semantic-list "(1<<ID_ORIENTATION)" 738 . 757)))
+          ("ID_ORIENTATION" . ((semantic-list "(2)" 567 . 570)))
+          ("SENSORS_MAGNETIC_FIELD" . ((semantic-list "(1<<ID_MAGNETIC_FIELD)" 684 . 706)))
+          ("SENSORS_ACCELERATION" . ((semantic-list "(1<<ID_ACCELERATION)" 632 . 652)))
+          ("ID_MAGNETIC_FIELD" . ((semantic-list "(1)" 538 . 541)))
+          ("__NR_set_acceleration" . ((number "378" 841 . 844)))
+          ("ID_ACCELERATION" . ((semantic-list "(0)" 508 . 511)))
+          ("dbg" (spp-arg-list ("fmt" "...") 905 . 915) . ((symbol "printf" 916 . 922) (semantic-list "(\"Accelerometer: \" fmt, ## __VA_ARGS__)" 922 . 961)))
+          ("SENSORS_TEMPERATURE" . ((semantic-list "(1<<ID_TEMPERATURE)" 789 . 808)))
+          ("ID_TEMPERATURE" . ((semantic-list "(3)" 596 . 599)))
+          )
+)
+    (semanticdb-table "acceleration.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_ACCELERATION_H" variable (:constant-flag t) nil [33 48])
+            ("dev_acceleration" type
+               (:members 
+                  ( ("x" variable (:type "int") (reparse-symbol classsubparts) [76 82])
+                    ("y" variable (:type "int") (reparse-symbol classsubparts) [84 90])
+                    ("z" variable (:type "int") (reparse-symbol classsubparts) [92 98]))                  
+                :type "struct")
+                nil [50 101]))          
+      :file "acceleration.h"
+      :pointmax 110
+      :fsize 109
+      :lastmodtime '(21571 17481)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("_ACCELERATION_H")
+          )
+))
+  :file "!ssh:w4118@192.168.180.128:!home!w4118!hmwk3-prog!acceleration_d!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

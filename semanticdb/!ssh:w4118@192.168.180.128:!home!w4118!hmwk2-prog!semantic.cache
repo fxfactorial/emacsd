@@ -1,0 +1,73 @@
+;; Object hmwk2-prog/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "hmwk2-prog/"
+  :tables
+  (list
+
+
+    (semanticdb-table "Makefile"
+      :major-mode 'makefile-bsdmake-mode
+      :tags 
+        '( ("TARGET" variable (:default-value ("ptree")) nil [40 55])
+            ("SOURCES" variable (:default-value ("ptree.c")) nil [163 181])
+            ("OBJECTS" variable (:default-value ("$(SOURCES:%.c=%.c.o)")) nil [310 341])
+            ("INCLUDE" variable (:default-value ("-I.")) nil [341 355])
+            ("CFLAGS" variable (:default-value ("-g" "-O2" "-Wall" "$(INCLUDE)" "-static")) nil [355 396])
+            ("LDFLAGS" variable (:default-value ("-static")) nil [396 414])
+            ("CC" variable (:default-value ("/home/w4118/utils/arm-2013.11/bin/arm-none-linux-gnueabi-gcc")) nil [414 480])
+            ("LD" variable (:default-value ("/home/w4118/utils/arm-2013.11/bin/arm-none-linux-gnueabi-gcc")) nil [480 546])
+            ("ADB" variable (:default-value ("/home/w4118/utils/android-sdk-linux/platform-tools/adb")) nil [546 607])
+            ("default" function (:arguments ("$(SOURCES)" "$(TARGET)")) nil [608 701])
+            ("$(TARGET)" function (:arguments ("$(OBJECTS)")) nil [702 760])
+            ("%.c.o" function (:arguments ("%.c")) nil [761 824])
+            ("clean" function (:arguments (".PHONY")) nil [825 883]))          
+      :file "Makefile"
+      :pointmax 892
+      :fsize 891
+      :lastmodtime '(21572 9327)
+      :unmatched-syntax '((thing 884 . 884) (thing 884 . 890) (thing 890 . 891)))
+    (semanticdb-table "ptree.c"
+      :major-mode 'c-mode
+      :tags 
+        '( ("stdio.h" include (:system-flag t) nil [1 19])
+            ("stdlib.h" include (:system-flag t) nil [20 39])
+            ("unistd.h" include (:system-flag t) nil [40 59])
+            ("ctype.h" include (:system-flag t) nil [60 78])
+            ("string.h" include (:system-flag t) nil [79 98])
+            ("ptree.h" include nil nil [99 117])
+            ("main" function
+               (:arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [128 133]))                  
+                :type "int")
+                nil [119 270]))          
+      :file "ptree.c"
+      :pointmax 271
+      :fsize 270
+      :lastmodtime '(21572 10933)
+      :unmatched-syntax nil)
+    (semanticdb-table "ptree.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("unistd.h" include (:system-flag t) nil [3 22])
+            ("prinfo" type
+               (:members 
+                  ( ("parent_pid" variable (:type ("pid_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [41 58])
+                    ("pid" variable (:type ("pid_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [88 98])
+                    ("first_child_pid" variable (:type ("pid_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [119 141])
+                    ("next_sibling_pid" variable (:type ("pid_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [173 196])
+                    ("state" variable (:type "long") (reparse-symbol classsubparts) [227 238])
+                    ("uid" variable (:type "long") (reparse-symbol classsubparts) [273 282])
+                    ("comm" variable
+                       (:dereference 1
+                        :type "char")
+                        (reparse-symbol classsubparts) [317 331]))                  
+                :type "struct")
+                nil [24 367]))          
+      :file "ptree.h"
+      :pointmax 368
+      :fsize 367
+      :lastmodtime '(21572 8948)
+      :unmatched-syntax nil))
+  :file "!ssh:w4118@192.168.180.128:!home!w4118!hmwk2-prog!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

@@ -1,0 +1,176 @@
+;; Object kernel/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "kernel/"
+  :tables
+  (list
+    (semanticdb-table "init_task.c"
+      :major-mode 'c-mode
+      :tags 
+        '( ("linux/mm.h" include (:system-flag t) nil [46 67])
+            ("linux/module.h" include (:system-flag t) nil [68 93])
+            ("linux/fs.h" include (:system-flag t) nil [94 115])
+            ("linux/sched.h" include (:system-flag t) nil [116 140])
+            ("linux/init.h" include (:system-flag t) nil [141 164])
+            ("linux/init_task.h" include (:system-flag t) nil [165 193])
+            ("linux/mqueue.h" include (:system-flag t) nil [194 219])
+            ("linux/uaccess.h" include (:system-flag t) nil [220 246])
+            ("asm/pgtable.h" include (:system-flag t) nil [248 272])
+            ("init_signals" variable
+               (:typemodifiers ("static")
+                :default-value "INIT_SIGNALS(init_signals)"
+                :type ("signal_struct" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [274 344])
+            ("init_sighand" variable
+               (:typemodifiers ("static")
+                :default-value "INIT_SIGHAND(init_sighand)"
+                :type ("sighand_struct" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [345 416])
+            ("__init_task_data" variable
+               (:default-value "{ INIT_THREAD_INFO(init_task) }"
+                :type ("init_thread_union" type (:type "class") nil nil))
+                nil [760 830])
+            ("init_task" variable
+               (:default-value "INIT_TASK(init_task)"
+                :type ("task_struct" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [932 984])
+            ("EXPORT_SYMBOL" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("" variable (:type ("init_task" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [1000 1010]))                  
+                :type "int")
+                nil [986 1011]))          
+      :file "init_task.c"
+      :pointmax 1012
+      :fsize 1011
+      :lastmodtime '(21569 50778)
+      :unmatched-syntax '((thing 747 . 759) (thing 741 . 746)))
+    (semanticdb-table "sys_arm.c"
+      :major-mode 'c-mode
+      :tags 
+        '( ("linux/export.h" include (:system-flag t) nil [480 505])
+            ("linux/errno.h" include (:system-flag t) nil [506 530])
+            ("linux/sched.h" include (:system-flag t) nil [531 555])
+            ("linux/mm.h" include (:system-flag t) nil [556 577])
+            ("linux/sem.h" include (:system-flag t) nil [578 600])
+            ("linux/msg.h" include (:system-flag t) nil [601 623])
+            ("linux/shm.h" include (:system-flag t) nil [624 646])
+            ("linux/stat.h" include (:system-flag t) nil [647 670])
+            ("linux/syscalls.h" include (:system-flag t) nil [671 698])
+            ("linux/mman.h" include (:system-flag t) nil [699 722])
+            ("linux/fs.h" include (:system-flag t) nil [723 744])
+            ("linux/file.h" include (:system-flag t) nil [745 768])
+            ("linux/ipc.h" include (:system-flag t) nil [769 791])
+            ("linux/uaccess.h" include (:system-flag t) nil [792 818])
+            ("linux/slab.h" include (:system-flag t) nil [819 842])
+            ("sys_fork" function
+               (:arguments 
+                  ( ("regs" variable
+                       (:pointer 1
+                        :type ("pt_regs" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [977 998]))                  
+                :type "int")
+                nil [964 1149])
+            ("sys_clone" function
+               (:arguments 
+                  ( ("clone_flags" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [1287 1313])
+                    ("newsp" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [1314 1334])
+                    ("__user" variable (:type "int") (reparse-symbol arg-sub-list) [1339 1351])
+                    ("" variable (:type ("parent_tidptr" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [1351 1365])
+                    ("tls_val" variable (:type "int") (reparse-symbol arg-sub-list) [1366 1378])
+                    ("__user" variable (:type "int") (reparse-symbol arg-sub-list) [1383 1395])
+                    ("" variable (:type ("child_tidptr" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [1395 1408])
+                    ("regs" variable
+                       (:pointer 1
+                        :type ("pt_regs" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [1409 1430]))                  
+                :type "int")
+                nil [1273 1547])
+            ("sys_vfork" function
+               (:arguments 
+                  ( ("regs" variable
+                       (:pointer 1
+                        :type ("pt_regs" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [1574 1595]))                  
+                :type "int")
+                nil [1560 1685])
+            ("sys_execve" function
+               (:arguments 
+                  ( ("__user" variable (:type "char") (reparse-symbol arg-sub-list) [1812 1825])
+                    ("" variable (:type ("filenamei" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [1825 1835])
+                    ("__user" variable (:type "char") (reparse-symbol arg-sub-list) [1847 1860])
+                    ("argv" variable
+                       (:pointer 1
+                        :type ("__user" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [1866 1879])
+                    ("__user" variable (:type "char") (reparse-symbol arg-sub-list) [1891 1904])
+                    ("envp" variable
+                       (:pointer 1
+                        :type ("__user" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [1910 1923])
+                    ("regs" variable
+                       (:pointer 1
+                        :type ("pt_regs" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [1924 1945]))                  
+                :type "int")
+                nil [1791 2163])
+            ("kernel_execve" function
+               (:arguments 
+                  ( ("filename" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [2189 2204])
+                    ("argv" variable
+                       (:pointer 1
+                        :dereference 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [2215 2234])
+                    ("envp" variable
+                       (:pointer 1
+                        :dereference 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [2245 2264]))                  
+                :type "int")
+                nil [2165 3183])
+            ("EXPORT_SYMBOL" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("" variable (:type ("kernel_execve" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [3198 3212]))                  
+                :type "int")
+                nil [3184 3213])
+            ("sys_arm_fadvise64_64" function
+               (:arguments 
+                  ( ("fd" variable (:type "int") (reparse-symbol arg-sub-list) [3360 3367])
+                    ("advice" variable (:type "int") (reparse-symbol arg-sub-list) [3368 3379])
+                    ("offset" variable (:type ("loff_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [3389 3403])
+                    ("len" variable (:type ("loff_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [3404 3415]))                  
+                :type "long")
+                nil [3334 3470]))          
+      :file "sys_arm.c"
+      :pointmax 3471
+      :fsize 3470
+      :lastmodtime '(21569 50778)
+      :unmatched-syntax '((thing 1903 . 1904) (thing 1859 . 1860) (thing 1824 . 1825) (thing 1780 . 1790) (thing 1549 . 1559) (thing 1394 . 1395) (thing 1350 . 1351) (thing 1262 . 1272) (thing 953 . 963) (thing 3323 . 3333))))
+  :file "!ssh:w4118@192.168.180.128:!home!w4118!hmwk2-prog!kernel!arch!arm!kernel!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

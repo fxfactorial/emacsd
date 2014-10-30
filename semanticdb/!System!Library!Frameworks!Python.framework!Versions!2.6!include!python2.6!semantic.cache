@@ -1,0 +1,60 @@
+;; Object python2.6/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "python2.6/"
+  :tables
+  (list
+    (semanticdb-table "pystrcmp.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("Py_STRCMP_H" variable (:constant-flag t) nil [29 40])
+            ("PyOS_stricmp" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [373 385])
+            ("PyOS_strnicmp" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [335 348])
+            ("PyOS_mystricmp" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [192 199])
+                    ("" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [206 213]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [171 214])
+            ("PyOS_mystrnicmp" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [120 127])
+                    ("" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [134 141])
+                    ("" variable (:type ("Py_ssize_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [142 153]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [98 154]))          
+      :file "pystrcmp.h"
+      :pointmax 464
+      :fsize 463
+      :lastmodtime '(21095 17720 0 0)
+      :unmatched-syntax '((semantic-list 165 . 170) (symbol 155 . 165) (semantic-list 92 . 97) (symbol 82 . 92))
+      :lexical-table 
+        '(("Py_STRCMP_H")
+          ("PyOS_strnicmp" . ((symbol "PyOS_mystrnicmp" 349 . 364)))
+          ("PyOS_stricmp" . ((symbol "PyOS_mystricmp" 386 . 400)))
+          )
+))
+  :file "!System!Library!Frameworks!Python.framework!Versions!2.6!include!python2.6!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

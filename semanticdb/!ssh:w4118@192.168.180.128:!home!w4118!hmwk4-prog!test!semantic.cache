@@ -1,0 +1,42 @@
+;; Object test/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "test/"
+  :tables
+  (list
+    (semanticdb-table "test.c"
+      :major-mode 'c-mode
+      :tags 
+        '( ("unistd.h" include (:system-flag t) nil [1 20])
+            ("sched.h" include (:system-flag t) nil [21 39])
+            ("sys/types.h" include (:system-flag t) nil [40 62])
+            ("stdio.h" include (:system-flag t) nil [63 81])
+            ("main" function
+               (:arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [92 97]))                  
+                :type "int")
+                nil [83 336]))          
+      :file "test.c"
+      :pointmax 337
+      :fsize 341
+      :lastmodtime '(21577 55300)
+      :unmatched-syntax nil)
+    (semanticdb-table "Makefile"
+      :major-mode 'makefile-bsdmake-mode
+      :tags 
+        '( ("CC" variable (:default-value ("/home/w4118/utils/arm-2013.11/bin/arm-none-linux-gnueabi-gcc")) nil [1 68])
+            ("LD" variable (:default-value ("/home/w4118/utils/arm-2013.11/bin/arm-none-linux-gnueabi-gcc")) nil [68 135])
+            ("CFLAGS" variable (:default-value ("-g" "-Wall" "-Werror" "-static")) nil [135 170])
+            ("LDFLAGS" variable (:default-value ("-static")) nil [170 189])
+            ("ADB" variable (:default-value ("/home/w4118/utils/android-sdk-linux/platform-tools/adb")) nil [189 251])
+            ("OBJECTS" variable (:default-value ("test.o")) nil [252 270])
+            ("all" function (:arguments ("test")) nil [271 342])
+            ("%.o" function (:arguments ("%.c")) nil [402 435])
+            ("clean" function nil nil [436 470]))          
+      :file "Makefile"
+      :pointmax 485
+      :fsize 484
+      :lastmodtime '(21577 54482)
+      :unmatched-syntax '((thing 357 . 400) (thing 356 . 356) (thing 346 . 355) (thing 345 . 346) (thing 343 . 344) (thing 343 . 343) (thing 471 . 471) (thing 471 . 477) (thing 477 . 478) (thing 479 . 484))))
+  :file "!ssh:w4118@192.168.180.128:!home!w4118!hmwk4-prog!test!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

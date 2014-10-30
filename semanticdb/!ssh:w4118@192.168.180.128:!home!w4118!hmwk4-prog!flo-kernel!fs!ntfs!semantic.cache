@@ -1,0 +1,147 @@
+;; Object ntfs/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "ntfs/"
+  :tables
+  (list
+    (semanticdb-table "runlist.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_LINUX_NTFS_RUNLIST_H" variable (:constant-flag t) nil [1067 1088])
+            ("types.h" include nil nil [1090 1108])
+            ("layout.h" include nil nil [1109 1128])
+            ("volume.h" include nil nil [1129 1148])
+            ("runlist_element" type
+               (:typedef ("" type
+                     (:members 
+                        ( ("vcn" variable (:type ("VCN" type (:type "class") nil nil)) (reparse-symbol classsubparts) [1671 1679])
+                          ("lcn" variable (:type ("LCN" type (:type "class") nil nil)) (reparse-symbol classsubparts) [1726 1734])
+                          ("length" variable (:type ("s64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [1781 1792]))                        
+                      :type "struct")
+                      nil nil)
+                :type "typedef")
+                nil [1599 1841])
+            ("runlist" type
+               (:typedef ("" type
+                     (:members 
+                        ( ("rl" variable
+                             (:pointer 1
+                              :type ("runlist_element" type (:type "class") nil nil))
+                              (reparse-symbol classsubparts) [2057 2077])
+                          ("lock" variable (:type ("rw_semaphore" type
+                               (:prototype t
+                                :type "struct")
+                                nil nil)) (reparse-symbol classsubparts) [2079 2104]))                        
+                      :type "struct")
+                      nil nil)
+                :type "typedef")
+                nil [2039 2115])
+            ("ntfs_init_runlist" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("rl" variable
+                       (:pointer 1
+                        :type ("runlist" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2154 2166]))                  
+                :type "void")
+                nil [2117 2210])
+            ("LCN_SPECIAL_VALUES" type
+               (:typedef ("" type
+                     (:members 
+                        ( ("LCN_HOLE" variable
+                             (:constant-flag t
+                              :default-value (2240 2242)
+                              :type "int")
+                              (reparse-symbol enumsubparts) [2228 2242])
+                          ("LCN_RL_NOT_MAPPED" variable
+                             (:constant-flag t
+                              :default-value (2306 2308)
+                              :type "int")
+                              (reparse-symbol enumsubparts) [2286 2308])
+                          ("LCN_ENOENT" variable
+                             (:constant-flag t
+                              :default-value (2325 2327)
+                              :type "int")
+                              (reparse-symbol enumsubparts) [2311 2327])
+                          ("LCN_ENOMEM" variable
+                             (:constant-flag t
+                              :default-value (2344 2346)
+                              :type "int")
+                              (reparse-symbol enumsubparts) [2330 2346])
+                          ("LCN_EIO" variable
+                             (:constant-flag t
+                              :default-value (2361 2363)
+                              :type "int")
+                              (reparse-symbol enumsubparts) [2349 2363]))                        
+                      :type "enum")
+                      nil nil)
+                :type "typedef")
+                nil [2212 2386])
+            ("ntfs_runlists_merge" function
+               (:prototype-flag t
+                :pointer 1
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("drl" variable
+                       (:pointer 1
+                        :type ("runlist_element" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2432 2453])
+                    ("srl" variable
+                       (:pointer 1
+                        :type ("runlist_element" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2456 2477]))                  
+                :type ("runlist_element" type (:type "class") nil nil))
+                nil [2388 2478])
+            ("ntfs_mapping_pairs_decompress" function
+               (:prototype-flag t
+                :pointer 1
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("vol" variable
+                       (:pointer 1
+                        :type ("ntfs_volume" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2540 2557])
+                    ("attr" variable
+                       (:pointer 1
+                        :type ("ATTR_RECORD" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2566 2584])
+                    ("old_rl" variable
+                       (:pointer 1
+                        :type ("runlist_element" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2585 2609]))                  
+                :type ("runlist_element" type (:type "class") nil nil))
+                nil [2480 2610])
+            ("ntfs_rl_vcn_to_lcn" function
+               (:prototype-flag t
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("rl" variable
+                       (:pointer 1
+                        :type ("runlist_element" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2648 2668])
+                    ("vcn" variable (:type ("VCN" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [2675 2683]))                  
+                :type ("LCN" type (:type "class") nil nil))
+                nil [2612 2684]))          
+      :file "runlist.h"
+      :pointmax 3392
+      :fsize 3391
+      :lastmodtime '(21577 34057)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("_LINUX_NTFS_RUNLIST_H")
+          )
+)
+    (semanticdb-table "types.h"
+      :file "types.h"
+      :fsize 2088
+      :lastmodtime '(21577 34057))
+    (semanticdb-table "layout.h"
+      :file "layout.h"
+      :fsize 99278
+      :lastmodtime '(21577 34057))
+    (semanticdb-table "volume.h"
+      :file "volume.h"
+      :fsize 6979
+      :lastmodtime '(21577 34057)))
+  :file "!ssh:w4118@192.168.180.128:!home!w4118!hmwk4-prog!flo-kernel!fs!ntfs!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

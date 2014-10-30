@@ -1,0 +1,36 @@
+;; Object ScratchCode/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "ScratchCode/"
+  :tables
+  (list
+    (semanticdb-table "test.c"
+      :major-mode 'c-mode
+      :tags 
+        '( ("string.h" include (:system-flag t) nil [1 20])
+            ("stdio.h" include (:system-flag t) nil [21 39])
+            ("stdlib.h" include (:system-flag t) nil [40 59])
+            ("unistd.h" include (:system-flag t) nil [60 79])
+            ("ctype.h" include (:system-flag t) nil [80 98])
+            ("a" variable
+               (:default-value "10"
+                :type "int")
+                nil [100 111])
+            ("b" variable (:type "int") nil [113 119])
+            ("foo" type
+               (:members 
+                  ( ("bar" variable (:type "int") (reparse-symbol classsubparts) [135 143]))                  
+                :type "struct")
+                nil [121 146])
+            ("main" function
+               (:arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [158 163]))                  
+                :type "int")
+                nil [149 328]))          
+      :file "test.c"
+      :pointmax 329
+      :fsize 328
+      :lastmodtime '(21572 5746 0 0)
+      :unmatched-syntax nil))
+  :file "!Users!Edgar!ScratchCode!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

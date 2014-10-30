@@ -1,0 +1,1257 @@
+;; Object asm/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "asm/"
+  :tables
+  (list
+    (semanticdb-table "processor.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_ASM_X86_PROCESSOR_H" variable (:constant-flag t) nil [38 58])
+            ("asm/processor-flags.h" include (:system-flag t) nil [60 92])
+            ("task_struct" type
+               (:prototype t
+                :type "struct")
+                nil [139 158])
+            ("mm_struct" type
+               (:prototype t
+                :type "struct")
+                nil [159 176])
+            ("asm/vm86.h" include (:system-flag t) nil [178 199])
+            ("asm/math_emu.h" include (:system-flag t) nil [200 225])
+            ("asm/segment.h" include (:system-flag t) nil [226 250])
+            ("asm/types.h" include (:system-flag t) nil [251 273])
+            ("asm/sigcontext.h" include (:system-flag t) nil [274 301])
+            ("asm/current.h" include (:system-flag t) nil [302 326])
+            ("asm/cpufeature.h" include (:system-flag t) nil [327 354])
+            ("asm/page.h" include (:system-flag t) nil [355 376])
+            ("asm/pgtable_types.h" include (:system-flag t) nil [377 407])
+            ("asm/percpu.h" include (:system-flag t) nil [408 431])
+            ("asm/msr.h" include (:system-flag t) nil [432 452])
+            ("asm/desc_defs.h" include (:system-flag t) nil [453 479])
+            ("asm/nops.h" include (:system-flag t) nil [480 501])
+            ("asm/special_insns.h" include (:system-flag t) nil [502 532])
+            ("linux/personality.h" include (:system-flag t) nil [534 564])
+            ("linux/cpumask.h" include (:system-flag t) nil [565 591])
+            ("linux/cache.h" include (:system-flag t) nil [592 616])
+            ("linux/threads.h" include (:system-flag t) nil [617 643])
+            ("linux/math64.h" include (:system-flag t) nil [644 669])
+            ("linux/init.h" include (:system-flag t) nil [670 693])
+            ("linux/err.h" include (:system-flag t) nil [694 716])
+            ("linux/irqflags.h" include (:system-flag t) nil [717 744])
+            ("NET_IP_ALIGN" variable (:constant-flag t) nil [973 985])
+            ("HBP_NUM" variable (:constant-flag t) nil [997 1004])
+            ("current_text_addr" function
+               (:pointer 1
+                :typemodifiers ("static")
+                :arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [1152 1157]))                  
+                :type "void")
+                nil [1114 1230])
+            ("ARCH_MIN_TASKALIGN" variable (:constant-flag t) nil [1390 1408])
+            ("ARCH_MIN_MMSTRUCT_ALIGN" variable (:constant-flag t) nil [1422 1445])
+            ("cpuinfo_x86" type
+               (:members 
+                  ( ("x86" variable (:type ("__u8" type (:type "class") nil nil)) (reparse-symbol classsubparts) [1655 1666])
+                    ("x86_vendor" variable (:type ("__u8" type (:type "class") nil nil)) (reparse-symbol classsubparts) [1686 1704])
+                    ("x86_model" variable (:type ("__u8" type (:type "class") nil nil)) (reparse-symbol classsubparts) [1723 1740])
+                    ("x86_mask" variable (:type ("__u8" type (:type "class") nil nil)) (reparse-symbol classsubparts) [1742 1758])
+                    ("x86_tlbsize" variable (:type "int") (reparse-symbol classsubparts) [2064 2082])
+                    ("x86_virt_bits" variable (:type ("__u8" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2091 2112])
+                    ("x86_phys_bits" variable (:type ("__u8" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2114 2135])
+                    ("x86_coreid_bits" variable (:type ("__u8" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2173 2196])
+                    ("extended_cpuid_level" variable (:type ("__u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2244 2273])
+                    ("cpuid_level" variable (:type "int") (reparse-symbol classsubparts) [2326 2344])
+                    ("x86_capability" variable
+                       (:dereference 1
+                        :type ("__u32" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2346 2379])
+                    ("x86_vendor_id" variable
+                       (:dereference 1
+                        :type "char")
+                        (reparse-symbol classsubparts) [2381 2406])
+                    ("x86_model_id" variable
+                       (:dereference 1
+                        :type "char")
+                        (reparse-symbol classsubparts) [2408 2432])
+                    ("x86_cache_size" variable (:type "int") (reparse-symbol classsubparts) [2489 2510])
+                    ("x86_cache_alignment" variable (:type "int") (reparse-symbol classsubparts) [2512 2538])
+                    ("x86_power" variable (:type "int") (reparse-symbol classsubparts) [2555 2571])
+                    ("loops_per_jiffy" variable (:type "unsigned long") (reparse-symbol classsubparts) [2573 2604])
+                    ("x86_max_cores" variable (:type ("u16" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2645 2666])
+                    ("apicid" variable (:type ("u16" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2668 2681])
+                    ("initial_apicid" variable (:type ("u16" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2683 2704])
+                    ("x86_clflush_size" variable (:type ("u16" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2706 2729])
+                    ("booted_cores" variable (:type ("u16" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2773 2792])
+                    ("phys_proc_id" variable (:type ("u16" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2824 2843])
+                    ("cpu_core_id" variable (:type ("u16" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2861 2879])
+                    ("compute_unit_id" variable (:type ("u8" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2904 2925])
+                    ("cpu_index" variable (:type ("u16" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2959 2975])
+                    ("microcode" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2977 2993]))                  
+                :type "struct")
+                nil [1633 3042])
+            ("X86_VENDOR_INTEL" variable (:constant-flag t) nil [3052 3068])
+            ("X86_VENDOR_CYRIX" variable (:constant-flag t) nil [3079 3095])
+            ("X86_VENDOR_AMD" variable (:constant-flag t) nil [3106 3120])
+            ("X86_VENDOR_UMC" variable (:constant-flag t) nil [3132 3146])
+            ("X86_VENDOR_CENTAUR" variable (:constant-flag t) nil [3158 3176])
+            ("X86_VENDOR_TRANSMETA" variable (:constant-flag t) nil [3187 3207])
+            ("X86_VENDOR_NSC" variable (:constant-flag t) nil [3218 3232])
+            ("X86_VENDOR_NUM" variable (:constant-flag t) nil [3244 3258])
+            ("X86_VENDOR_UNKNOWN" variable (:constant-flag t) nil [3271 3289])
+            ("boot_cpu_data" variable
+               (:typemodifiers ("extern")
+                :type ("cpuinfo_x86" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [3327 3367])
+            ("new_cpu_data" variable
+               (:typemodifiers ("extern")
+                :type ("cpuinfo_x86" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [3368 3407])
+            ("doublefault_tss" variable
+               (:typemodifiers ("extern")
+                :type ("tss_struct" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [3409 3450])
+            ("cpu_caps_cleared" variable
+               (:dereference 1
+                :typemodifiers ("extern")
+                :type ("__u32" type (:type "class") nil nil))
+                nil [3451 3493])
+            ("cpu_caps_set" variable
+               (:dereference 1
+                :typemodifiers ("extern")
+                :type ("__u32" type (:type "class") nil nil))
+                nil [3494 3532])
+            ("cpu_info" variable (:constant-flag t) nil [3674 3682])
+            ("cpu_data" variable (:constant-flag t) nil [3706 3714])
+            ("cpuinfo_op" variable
+               (:typemodifiers ("extern")
+                :type ("seq_operations" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [3743 3789])
+            ("hlt_works" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("cpu" variable (:type "int") (reparse-symbol arg-sub-list) [3819 3827]))                  
+                :type "int")
+                nil [3791 3912])
+            ("cache_line_size" variable (:constant-flag t) nil [3922 3937])
+            ("cpu_detect" function
+               (:prototype-flag t
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("c" variable
+                       (:pointer 1
+                        :type ("cpuinfo_x86" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [4000 4022]))                  
+                :type "void")
+                nil [3977 4023])
+            ("idle_regs" function
+               (:prototype-flag t
+                :pointer 1
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pt_regs" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [4058 4075]))                  
+                :type ("pt_regs" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [4025 4076])
+            ("early_cpu_init" function
+               (:prototype-flag t
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [4105 4110]))                  
+                :type "void")
+                nil [4078 4111])
+            ("identify_boot_cpu" function
+               (:prototype-flag t
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [4142 4147]))                  
+                :type "void")
+                nil [4112 4148])
+            ("identify_secondary_cpu" function
+               (:prototype-flag t
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("cpuinfo_x86" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [4184 4205]))                  
+                :type "void")
+                nil [4149 4206])
+            ("print_cpu_info" function
+               (:prototype-flag t
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("cpuinfo_x86" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [4234 4255]))                  
+                :type "void")
+                nil [4207 4256])
+            ("print_cpu_msr" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("cpuinfo_x86" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [4276 4297]))                  
+                :type "void")
+                nil [4257 4298])
+            ("init_scattered_cpuid_features" function
+               (:prototype-flag t
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("c" variable
+                       (:pointer 1
+                        :type ("cpuinfo_x86" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [4341 4363]))                  
+                :type "void")
+                nil [4299 4364])
+            ("init_intel_cacheinfo" function
+               (:prototype-flag t
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("c" variable
+                       (:pointer 1
+                        :type ("cpuinfo_x86" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [4406 4428]))                  
+                :type "unsigned int")
+                nil [4365 4429])
+            ("num_cache_leaves" variable
+               (:typemodifiers ("extern")
+                :type "unsigned short")
+                nil [4430 4469])
+            ("detect_extended_topology" function
+               (:prototype-flag t
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("c" variable
+                       (:pointer 1
+                        :type ("cpuinfo_x86" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [4508 4530]))                  
+                :type "void")
+                nil [4471 4531])
+            ("detect_ht" function
+               (:prototype-flag t
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("c" variable
+                       (:pointer 1
+                        :type ("cpuinfo_x86" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [4554 4576]))                  
+                :type "void")
+                nil [4532 4577])
+            ("native_cpuid" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("eax" variable
+                       (:pointer 1
+                        :type "unsigned int")
+                        (reparse-symbol arg-sub-list) [4611 4629])
+                    ("ebx" variable
+                       (:pointer 1
+                        :type "unsigned int")
+                        (reparse-symbol arg-sub-list) [4630 4648])
+                    ("ecx" variable
+                       (:pointer 1
+                        :type "unsigned int")
+                        (reparse-symbol arg-sub-list) [4653 4671])
+                    ("edx" variable
+                       (:pointer 1
+                        :type "unsigned int")
+                        (reparse-symbol arg-sub-list) [4672 4690]))                  
+                :type "void")
+                nil [4579 4894])
+            ("load_cr3" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("pgdir" variable
+                       (:pointer 1
+                        :type ("pgd_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [4924 4937]))                  
+                :type "void")
+                nil [4896 4966])
+            ("____cacheline_aligned" variable (:type ("x86_hw_tss" type
+                 (:prototype t
+                  :type "struct")
+                  nil nil)) nil [5799 6032])
+            ("x86_hw_tss" type
+               (:members 
+                  ( ("reserved1" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [5820 5836])
+                    ("sp0" variable (:type ("u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [5838 5848])
+                    ("sp1" variable (:type ("u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [5850 5860])
+                    ("sp2" variable (:type ("u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [5862 5872])
+                    ("reserved2" variable (:type ("u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [5874 5890])
+                    ("ist" variable
+                       (:dereference 1
+                        :type ("u64" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5892 5905])
+                    ("reserved3" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [5907 5923])
+                    ("reserved4" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [5925 5941])
+                    ("reserved5" variable (:type ("u16" type (:type "class") nil nil)) (reparse-symbol classsubparts) [5943 5959])
+                    ("io_bitmap_base" variable (:type ("u16" type (:type "class") nil nil)) (reparse-symbol classsubparts) [5961 5982]))                  
+                :type "struct")
+                nil [5799 6032])
+            ("IO_BITMAP_BITS" variable (:constant-flag t) nil [6076 6090])
+            ("IO_BITMAP_BYTES" variable (:constant-flag t) nil [6107 6122])
+            ("IO_BITMAP_LONGS" variable (:constant-flag t) nil [6152 6167])
+            ("IO_BITMAP_OFFSET" variable (:constant-flag t) nil [6209 6225])
+            ("INVALID_IO_BITMAP_OFFSET" variable (:constant-flag t) nil [6274 6298])
+            ("____cacheline_aligned" variable (:type ("tss_struct" type
+                 (:prototype t
+                  :type "struct")
+                  nil nil)) nil [6307 6769])
+            ("tss_struct" type
+               (:members 
+                  ( ("x86_tss" variable (:type ("x86_hw_tss" type
+                         (:prototype t
+                          :type "struct")
+                          nil nil)) (reparse-symbol classsubparts) [6361 6387])
+                    ("io_bitmap" variable
+                       (:dereference 1
+                        :type "unsigned long")
+                        (reparse-symbol classsubparts) [6592 6638])
+                    ("stack" variable
+                       (:dereference 1
+                        :type "unsigned long")
+                        (reparse-symbol classsubparts) [6718 6743]))                  
+                :type "struct")
+                nil [6307 6769])
+            ("DECLARE_PER_CPU_SHARED_ALIGNED" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("" variable (:type ("tss_struct" type
+                         (:prototype t
+                          :type "struct")
+                          nil nil)) (reparse-symbol arg-sub-list) [6802 6820])
+                    ("" variable (:type ("init_tss" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [6821 6830]))                  
+                :type "int")
+                nil [6771 6831])
+            ("orig_ist" type
+               (:members 
+                  ( ("ist" variable
+                       (:dereference 1
+                        :type "unsigned long")
+                        (reparse-symbol classsubparts) [6936 6958]))                  
+                :type "struct")
+                nil [6917 6961])
+            ("MXCSR_DEFAULT" variable (:constant-flag t) nil [6971 6984])
+            ("i387_fsave_struct" type
+               (:members 
+                  ( ("cwd" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [7022 7032])
+                    ("swd" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [7058 7068])
+                    ("twd" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [7093 7103])
+                    ("fip" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [7126 7136])
+                    ("fcs" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [7159 7169])
+                    ("foo" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [7194 7204])
+                    ("fos" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [7239 7249])
+                    ("st_space" variable
+                       (:dereference 1
+                        :type ("u32" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [7335 7354])
+                    ("status" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [7418 7431]))                  
+                :type "struct")
+                nil [6994 7434])
+            ("i387_fxsave_struct" type
+               (:members 
+                  ( ("cwd" variable (:type ("u16" type (:type "class") nil nil)) (reparse-symbol classsubparts) [7465 7475])
+                    ("swd" variable (:type ("u16" type (:type "class") nil nil)) (reparse-symbol classsubparts) [7498 7508])
+                    ("twd" variable (:type ("u16" type (:type "class") nil nil)) (reparse-symbol classsubparts) [7530 7540])
+                    ("fop" variable (:type ("u16" type (:type "class") nil nil)) (reparse-symbol classsubparts) [7559 7569])
+                    ("" type
+                       (:members 
+                          ( ("" type
+                               (:members 
+                                  ( ("rip" variable (:type ("u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [7624 7632])
+                                    ("rdp" variable (:type ("u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [7663 7671]))                                  
+                                :type "struct")
+                                (reparse-symbol classsubparts) [7612 7697])
+                            ("" type
+                               (:members 
+                                  ( ("fip" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [7712 7720])
+                                    ("fcs" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [7746 7754])
+                                    ("foo" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [7782 7790])
+                                    ("fos" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [7820 7828]))                                  
+                                :type "struct")
+                                (reparse-symbol classsubparts) [7700 7861]))                          
+                        :type "union")
+                        (reparse-symbol classsubparts) [7602 7865])
+                    ("mxcsr" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [7867 7879])
+                    ("mxcsr_mask" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [7909 7926])
+                    ("st_space" variable
+                       (:dereference 1
+                        :type ("u32" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [7996 8015])
+                    ("xmm_space" variable
+                       (:dereference 1
+                        :type ("u32" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [8069 8089])
+                    ("padding" variable
+                       (:dereference 1
+                        :type ("u32" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [8092 8110])
+                    ("" type
+                       (:members 
+                          ( ("padding1" variable
+                               (:dereference 1
+                                :type ("u32" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [8123 8141])
+                            ("sw_reserved" variable
+                               (:dereference 1
+                                :type ("u32" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [8144 8165]))                          
+                        :type "union")
+                        (reparse-symbol classsubparts) [8113 8169]))                  
+                :type "struct")
+                nil [7436 8202])
+            ("i387_soft_struct" type
+               (:members 
+                  ( ("cwd" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [8231 8241])
+                    ("swd" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [8243 8253])
+                    ("twd" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [8255 8265])
+                    ("fip" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [8267 8277])
+                    ("fcs" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [8279 8289])
+                    ("foo" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [8291 8301])
+                    ("fos" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [8303 8313])
+                    ("st_space" variable
+                       (:dereference 1
+                        :type ("u32" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [8361 8380])
+                    ("ftop" variable (:type ("u8" type (:type "class") nil nil)) (reparse-symbol classsubparts) [8382 8392])
+                    ("changed" variable (:type ("u8" type (:type "class") nil nil)) (reparse-symbol classsubparts) [8394 8407])
+                    ("lookahead" variable (:type ("u8" type (:type "class") nil nil)) (reparse-symbol classsubparts) [8409 8424])
+                    ("no_update" variable (:type ("u8" type (:type "class") nil nil)) (reparse-symbol classsubparts) [8426 8441])
+                    ("rm" variable (:type ("u8" type (:type "class") nil nil)) (reparse-symbol classsubparts) [8443 8451])
+                    ("alimit" variable (:type ("u8" type (:type "class") nil nil)) (reparse-symbol classsubparts) [8453 8465])
+                    ("info" variable
+                       (:pointer 1
+                        :type ("math_emu_info" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol classsubparts) [8467 8494])
+                    ("entry_eip" variable (:type ("u32" type (:type "class") nil nil)) (reparse-symbol classsubparts) [8496 8512]))                  
+                :type "struct")
+                nil [8204 8515])
+            ("ymmh_struct" type
+               (:members 
+                  ( ("ymmh_space" variable
+                       (:dereference 1
+                        :type ("u32" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [8590 8609]))                  
+                :type "struct")
+                nil [8517 8612])
+            ("xsave_hdr_struct" type
+               (:members 
+                  ( ("xstate_bv" variable (:type ("u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [8641 8655])
+                    ("reserved1" variable
+                       (:dereference 1
+                        :type ("u64" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [8657 8674])
+                    ("reserved2" variable
+                       (:dereference 1
+                        :type ("u64" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [8676 8693]))                  
+                :type "struct")
+                nil [8614 8720])
+            ("xsave_struct" type
+               (:members 
+                  ( ("i387" variable (:type ("i387_fxsave_struct" type
+                         (:prototype t
+                          :type "struct")
+                          nil nil)) (reparse-symbol classsubparts) [8745 8776])
+                    ("xsave_hdr" variable (:type ("xsave_hdr_struct" type
+                         (:prototype t
+                          :type "struct")
+                          nil nil)) (reparse-symbol classsubparts) [8778 8812])
+                    ("ymmh" variable (:type ("ymmh_struct" type
+                         (:prototype t
+                          :type "struct")
+                          nil nil)) (reparse-symbol classsubparts) [8814 8838]))                  
+                :type "struct")
+                nil [8722 8931])
+            ("thread_xstate" type
+               (:members 
+                  ( ("fsave" variable (:type ("i387_fsave_struct" type
+                         (:prototype t
+                          :type "struct")
+                          nil nil)) (reparse-symbol classsubparts) [8956 8987])
+                    ("fxsave" variable (:type ("i387_fxsave_struct" type
+                         (:prototype t
+                          :type "struct")
+                          nil nil)) (reparse-symbol classsubparts) [8989 9022])
+                    ("soft" variable (:type ("i387_soft_struct" type
+                         (:prototype t
+                          :type "struct")
+                          nil nil)) (reparse-symbol classsubparts) [9024 9054])
+                    ("xsave" variable (:type ("xsave_struct" type
+                         (:prototype t
+                          :type "struct")
+                          nil nil)) (reparse-symbol classsubparts) [9056 9083]))                  
+                :type "union")
+                nil [8933 9086])
+            ("fpu" type
+               (:members 
+                  ( ("last_cpu" variable (:type "unsigned int") (reparse-symbol classsubparts) [9102 9124])
+                    ("has_fpu" variable (:type "unsigned int") (reparse-symbol classsubparts) [9126 9147])
+                    ("state" variable
+                       (:pointer 1
+                        :type ("thread_xstate" type (:type "union") nil nil))
+                        (reparse-symbol classsubparts) [9149 9176]))                  
+                :type "struct")
+                nil [9088 9179])
+            ("xstate_size" variable
+               (:typemodifiers ("extern")
+                :type "unsigned int")
+                nil [10290 10322])
+            ("free_thread_xstate" function
+               (:prototype-flag t
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("task_struct" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [10354 10375]))                  
+                :type "void")
+                nil [10323 10376])
+            ("task_xstate_cachep" variable
+               (:pointer 1
+                :typemodifiers ("extern")
+                :type ("kmem_cache" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [10377 10422])
+            ("perf_event" type
+               (:prototype t
+                :type "struct")
+                nil [10424 10442])
+            ("thread_struct" type
+               (:members 
+                  ( ("tls_array" variable
+                       (:dereference 1
+                        :type ("desc_struct" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol classsubparts) [10499 10551])
+                    ("sp0" variable (:type "unsigned long") (reparse-symbol classsubparts) [10553 10572])
+                    ("sp" variable (:type "unsigned long") (reparse-symbol classsubparts) [10574 10592])
+                    ("usersp" variable (:type "unsigned long") (reparse-symbol classsubparts) [10650 10672])
+                    ("es" variable (:type "unsigned short") (reparse-symbol classsubparts) [10694 10713])
+                    ("ds" variable (:type "unsigned short") (reparse-symbol classsubparts) [10715 10734])
+                    ("fsindex" variable (:type "unsigned short") (reparse-symbol classsubparts) [10736 10760])
+                    ("gsindex" variable (:type "unsigned short") (reparse-symbol classsubparts) [10762 10786])
+                    ("gs" variable (:type "unsigned long") (reparse-symbol classsubparts) [10891 10909])
+                    ("ptrace_bps" variable
+                       (:pointer 1
+                        :dereference 1
+                        :type ("perf_event" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol classsubparts) [10959 10998])
+                    ("debugreg6" variable (:type "unsigned long") (reparse-symbol classsubparts) [11057 11091])
+                    ("ptrace_dr7" variable (:type "unsigned long") (reparse-symbol classsubparts) [11150 11185])
+                    ("cr2" variable (:type "unsigned long") (reparse-symbol classsubparts) [11206 11225])
+                    ("trap_nr" variable (:type "unsigned long") (reparse-symbol classsubparts) [11227 11250])
+                    ("error_code" variable (:type "unsigned long") (reparse-symbol classsubparts) [11252 11278])
+                    ("fpu" variable (:type ("fpu" type
+                         (:prototype t
+                          :type "struct")
+                          nil nil)) (reparse-symbol classsubparts) [11331 11347])
+                    ("io_bitmap_ptr" variable
+                       (:pointer 1
+                        :type "unsigned long")
+                        (reparse-symbol classsubparts) [11626 11656])
+                    ("iopl" variable (:type "unsigned long") (reparse-symbol classsubparts) [11658 11678])
+                    ("io_bitmap_max" variable (:type "unsigned int") (reparse-symbol classsubparts) [11729 11753]))                  
+                :type "struct")
+                nil [10444 11756])
+            ("native_set_iopl_mask" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("mask" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [11848 11862]))                  
+                :type "void")
+                nil [11808 12108])
+            ("native_load_sp0" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("tss" variable
+                       (:pointer 1
+                        :type ("tss_struct" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [12145 12168])
+                    ("thread" variable
+                       (:pointer 1
+                        :type ("thread_struct" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [12169 12198]))                  
+                :type "void")
+                nil [12110 12492])
+            ("native_swapgs" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [12527 12532]))                  
+                :type "void")
+                nil [12494 12602])
+            ("__cpuid" variable (:constant-flag t) nil [12667 12674])
+            ("paravirt_enabled" variable (:constant-flag t) nil [12698 12714])
+            ("load_sp0" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("tss" variable
+                       (:pointer 1
+                        :type ("tss_struct" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [12748 12771])
+                    ("thread" variable
+                       (:pointer 1
+                        :type ("thread_struct" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [12779 12808]))                  
+                :type "void")
+                nil [12720 12843])
+            ("set_iopl_mask" variable (:constant-flag t) nil [12853 12866])
+            ("mmu_cr4_features" variable
+               (:typemodifiers ("extern")
+                :type "unsigned long")
+                nil [13094 13133])
+            ("set_in_cr4" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("mask" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [13165 13184]))                  
+                :type "void")
+                nil [13135 13286])
+            ("clear_in_cr4" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("mask" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [13320 13339]))                  
+                :type "void")
+                nil [13288 13443])
+            ("mm_segment_t" type
+               (:typedef ("" type
+                     (:members 
+                        ( ("seg" variable (:type "unsigned long") (reparse-symbol classsubparts) [13463 13482]))                        
+                      :type "struct")
+                      nil nil)
+                :type "typedef")
+                nil [13445 13498])
+            ("kernel_thread" function
+               (:prototype-flag t
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("fn" function
+                       (:function-pointer t
+                        :arguments 
+                          ( ("" variable
+                               (:pointer 1
+                                :type "void")
+                                (reparse-symbol arg-sub-list) [13604 13611]))                          
+                        :type "int")
+                        nil nil)
+                    ("arg" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [13613 13623])
+                    ("flags" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [13624 13644]))                  
+                :type "int")
+                nil [13569 13645])
+            ("release_thread" function
+               (:prototype-flag t
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("task_struct" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [13717 13738]))                  
+                :type "void")
+                nil [13690 13739])
+            ("prepare_to_copy" function
+               (:prototype-flag t
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("tsk" variable
+                       (:pointer 1
+                        :type ("task_struct" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [13828 13852]))                  
+                :type "void")
+                nil [13800 13853])
+            ("get_wchan" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("p" variable
+                       (:pointer 1
+                        :type ("task_struct" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [13879 13901]))                  
+                :type "unsigned long")
+                nil [13855 13902])
+            ("cpuid" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("op" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [14085 14101])
+                    ("eax" variable
+                       (:pointer 1
+                        :type "unsigned int")
+                        (reparse-symbol arg-sub-list) [14106 14124])
+                    ("ebx" variable
+                       (:pointer 1
+                        :type "unsigned int")
+                        (reparse-symbol arg-sub-list) [14125 14143])
+                    ("ecx" variable
+                       (:pointer 1
+                        :type "unsigned int")
+                        (reparse-symbol arg-sub-list) [14148 14166])
+                    ("edx" variable
+                       (:pointer 1
+                        :type "unsigned int")
+                        (reparse-symbol arg-sub-list) [14167 14185]))                  
+                :type "void")
+                nil [14060 14242])
+            ("cpuid_count" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("op" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [14331 14347])
+                    ("count" variable (:type "int") (reparse-symbol arg-sub-list) [14348 14358])
+                    ("eax" variable
+                       (:pointer 1
+                        :type "unsigned int")
+                        (reparse-symbol arg-sub-list) [14369 14387])
+                    ("ebx" variable
+                       (:pointer 1
+                        :type "unsigned int")
+                        (reparse-symbol arg-sub-list) [14388 14406])
+                    ("ecx" variable
+                       (:pointer 1
+                        :type "unsigned int")
+                        (reparse-symbol arg-sub-list) [14417 14435])
+                    ("edx" variable
+                       (:pointer 1
+                        :type "unsigned int")
+                        (reparse-symbol arg-sub-list) [14436 14454]))                  
+                :type "void")
+                nil [14300 14515])
+            ("cpuid_eax" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("op" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [14605 14621]))                  
+                :type "unsigned int")
+                nil [14568 14710])
+            ("cpuid_ebx" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("op" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [14749 14765]))                  
+                :type "unsigned int")
+                nil [14712 14854])
+            ("cpuid_ecx" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("op" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [14893 14909]))                  
+                :type "unsigned int")
+                nil [14856 14998])
+            ("cpuid_edx" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("op" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [15037 15053]))                  
+                :type "unsigned int")
+                nil [15000 15142])
+            ("rep_nop" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [15241 15246]))                  
+                :type "void")
+                nil [15214 15290])
+            ("cpu_relax" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [15321 15326]))                  
+                :type "void")
+                nil [15292 15342])
+            ("sync_core" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [15440 15445]))                  
+                :type "void")
+                nil [15411 15896])
+            ("__monitor" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("eax" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [15933 15943])
+                    ("ecx" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [15944 15962])
+                    ("edx" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [15971 15989]))                  
+                :type "void")
+                nil [15898 16111])
+            ("__mwait" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("eax" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [16140 16158])
+                    ("ecx" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [16159 16177]))                  
+                :type "void")
+                nil [16113 16281])
+            ("__sti_mwait" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("eax" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [16314 16332])
+                    ("ecx" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [16333 16351]))                  
+                :type "void")
+                nil [16283 16482])
+            ("select_idle_routine" function
+               (:prototype-flag t
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("c" variable
+                       (:pointer 1
+                        :type ("cpuinfo_x86" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [16522 16544]))                  
+                :type "void")
+                nil [16484 16545])
+            ("init_amd_e400_c1e_mask" function
+               (:prototype-flag t
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [16581 16586]))                  
+                :type "void")
+                nil [16546 16587])
+            ("boot_option_idle_override" variable
+               (:typemodifiers ("extern")
+                :type "unsigned long")
+                nil [16589 16637])
+            ("amd_e400_c1e_detected" variable
+               (:typemodifiers ("extern")
+                :type "bool")
+                nil [16638 16674])
+            ("idle_boot_override" type
+               (:members 
+                  ( ("IDLE_NO_OVERRIDE" variable
+                       (:constant-flag t
+                        :default-value (16718 16719)
+                        :type "int")
+                        (reparse-symbol enumsubparts) [16701 16719])
+                    ("IDLE_HALT" variable
+                       (:constant-flag t
+                        :type "int")
+                        (reparse-symbol enumsubparts) [16721 16731])
+                    ("IDLE_NOMWAIT" variable
+                       (:constant-flag t
+                        :type "int")
+                        (reparse-symbol enumsubparts) [16732 16745])
+                    ("IDLE_POLL" variable
+                       (:constant-flag t
+                        :type "int")
+                        (reparse-symbol enumsubparts) [16750 16760])
+                    ("IDLE_FORCE_MWAIT" variable
+                       (:constant-flag t
+                        :type "int")
+                        (reparse-symbol enumsubparts) [16761 16778]))                  
+                :type "enum")
+                nil [16676 16779])
+            ("enable_sep_cpu" function
+               (:prototype-flag t
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [16808 16813]))                  
+                :type "void")
+                nil [16781 16814])
+            ("sysenter_setup" function
+               (:prototype-flag t
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [16841 16846]))                  
+                :type "int")
+                nil [16815 16847])
+            ("early_trap_init" function
+               (:prototype-flag t
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [16877 16882]))                  
+                :type "void")
+                nil [16849 16883])
+            ("early_gdt_descr" variable
+               (:typemodifiers ("extern")
+                :type ("desc_ptr" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [16909 16949])
+            ("cpu_set_gdt" function
+               (:prototype-flag t
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("" variable (:type "int") (reparse-symbol arg-sub-list) [16975 16979]))                  
+                :type "void")
+                nil [16951 16980])
+            ("switch_to_new_gdt" function
+               (:prototype-flag t
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("" variable (:type "int") (reparse-symbol arg-sub-list) [17011 17015]))                  
+                :type "void")
+                nil [16981 17016])
+            ("load_percpu_segment" function
+               (:prototype-flag t
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("" variable (:type "int") (reparse-symbol arg-sub-list) [17049 17053]))                  
+                :type "void")
+                nil [17017 17054])
+            ("cpu_init" function
+               (:prototype-flag t
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [17076 17081]))                  
+                :type "void")
+                nil [17055 17082])
+            ("get_debugctlmsr" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [17128 17133]))                  
+                :type "unsigned long")
+                nil [17084 17314])
+            ("update_debugctlmsr" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("debugctlmsr" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [17354 17380]))                  
+                :type "void")
+                nil [17316 17504])
+            ("machine_id" variable
+               (:typemodifiers ("extern")
+                :type "unsigned int")
+                nil [17609 17641])
+            ("machine_submodel_id" variable
+               (:typemodifiers ("extern")
+                :type "unsigned int")
+                nil [17642 17683])
+            ("BIOS_revision" variable
+               (:typemodifiers ("extern")
+                :type "unsigned int")
+                nil [17684 17719])
+            ("bootloader_type" variable
+               (:typemodifiers ("extern")
+                :type "int")
+                nil [17767 17796])
+            ("bootloader_version" variable
+               (:typemodifiers ("extern")
+                :type "int")
+                nil [17797 17829])
+            ("ignore_fpu_irq" variable
+               (:typemodifiers ("extern")
+                :type "char")
+                nil [17831 17860])
+            ("HAVE_ARCH_PICK_MMAP_LAYOUT" variable (:constant-flag t) nil [17870 17896])
+            ("ARCH_HAS_PREFETCHW" variable (:constant-flag t) nil [17907 17925])
+            ("ARCH_HAS_SPINLOCK_PREFETCH" variable (:constant-flag t) nil [17934 17960])
+            ("BASE_PREFETCH" variable (:constant-flag t) nil [18058 18071])
+            ("prefetch" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("x" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [18319 18327]))                  
+                :type "void")
+                nil [18285 18427])
+            ("prefetchw" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("x" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [18611 18619]))                  
+                :type "void")
+                nil [18576 18719])
+            ("spin_lock_prefetch" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("x" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [18765 18773]))                  
+                :type "void")
+                nil [18721 18792])
+            ("TASK_SIZE_MAX" variable (:constant-flag t) nil [21082 21095])
+            ("IA32_PAGE_OFFSET" variable (:constant-flag t) nil [21227 21243])
+            ("TASK_SIZE" variable (:constant-flag t) nil [21328 21337])
+            ("TASK_SIZE_OF" variable (:constant-flag t) nil [21420 21432])
+            ("STACK_TOP" variable (:constant-flag t) nil [21535 21544])
+            ("STACK_TOP_MAX" variable (:constant-flag t) nil [21564 21577])
+            ("INIT_THREAD" variable (:constant-flag t) nil [21602 21613])
+            ("INIT_TSS" variable (:constant-flag t) nil [21688 21696])
+            ("thread_saved_pc" variable (:constant-flag t) nil [21902 21917])
+            ("task_pt_regs" variable (:constant-flag t) nil [21971 21983])
+            ("KSTK_ESP" function
+               (:prototype-flag t
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("task" variable
+                       (:pointer 1
+                        :type ("task_struct" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [22061 22086]))                  
+                :type "unsigned long")
+                nil [22031 22087])
+            ("DECLARE_PER_CPU" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [22165 22179])
+                    ("" variable (:type ("old_rsp" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [22180 22188]))                  
+                :type "int")
+                nil [22149 22189])
+            ("start_thread" function
+               (:prototype-flag t
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("regs" variable
+                       (:pointer 1
+                        :type ("pt_regs" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [22244 22265])
+                    ("new_ip" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [22266 22287])
+                    ("new_sp" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [22300 22321]))                  
+                :type "void")
+                nil [22219 22322])
+            ("TASK_UNMAPPED_BASE" variable (:constant-flag t) nil [22431 22449])
+            ("KSTK_EIP" variable (:constant-flag t) nil [22487 22495])
+            ("GET_TSC_CTL" variable (:constant-flag t) nil [22611 22622])
+            ("SET_TSC_CTL" variable (:constant-flag t) nil [22656 22667])
+            ("get_tsc_mode" function
+               (:prototype-flag t
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("adr" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [22718 22736]))                  
+                :type "int")
+                nil [22694 22737])
+            ("set_tsc_mode" function
+               (:prototype-flag t
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("val" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [22762 22779]))                  
+                :type "int")
+                nil [22738 22780])
+            ("amd_get_nb_id" function
+               (:prototype-flag t
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("cpu" variable (:type "int") (reparse-symbol arg-sub-list) [22807 22815]))                  
+                :type "int")
+                nil [22782 22816])
+            ("aperfmperf" type
+               (:members 
+                  ( ("aperf" variable (:type ("u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [22839 22856])
+                    ("mperf" variable (:type ("u64" type (:type "class") nil nil)) (reparse-symbol classsubparts) [22839 22856]))                  
+                :type "struct")
+                nil [22818 22859])
+            ("get_aperfmperf" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("am" variable
+                       (:pointer 1
+                        :type ("aperfmperf" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [22895 22917]))                  
+                :type "void")
+                nil [22861 23048])
+            ("APERFMPERF_SHIFT" variable (:constant-flag t) nil [23058 23074])
+            ("calc_aperfmperf_ratio" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("old" variable
+                       (:pointer 1
+                        :type ("aperfmperf" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [23129 23152])
+                    ("" variable
+                       (:pointer 1
+                        :type ("aperfmperf" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [23161 23183]))                  
+                :type "unsigned long")
+                nil [23079 23387])
+            ("cpu_has_amd_erratum" variable (:constant-flag t) nil [24016 24035])
+            ("cpu_idle_wait" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [24099 24104]))                  
+                :type "void")
+                nil [24080 24105])
+            ("arch_align_stack" function
+               (:prototype-flag t
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("sp" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [24145 24162]))                  
+                :type "unsigned long")
+                nil [24107 24163])
+            ("free_init_pages" function
+               (:prototype-flag t
+                :typemodifiers ("extern")
+                :arguments 
+                  ( ("what" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [24192 24203])
+                    ("begin" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [24204 24224])
+                    ("end" variable (:type "unsigned long") (reparse-symbol arg-sub-list) [24225 24243]))                  
+                :type "void")
+                nil [24164 24244])
+            ("default_idle" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [24264 24269]))                  
+                :type "void")
+                nil [24246 24270])
+            ("set_pm_idle_to_default" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [24299 24304]))                  
+                :type "bool")
+                nil [24271 24305])
+            ("stop_this_cpu" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("dummy" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [24326 24338]))                  
+                :type "void")
+                nil [24307 24339]))          
+      :file "processor.h"
+      :pointmax 24375
+      :fsize 24374
+      :lastmodtime '(21569 50781)
+      :unmatched-syntax '((thing 23180 . 23183))
+      :lexical-table 
+        '(("X86_VENDOR_CENTAUR" . ((number "5" 3177 . 3178)))
+          ("X86_VENDOR_NUM" . ((number "9" 3260 . 3261)))
+          ("paravirt_enabled" (spp-arg-list nil 12714 . 12716) . ((number "0" 12717 . 12718)))
+          ("ARCH_MIN_MMSTRUCT_ALIGN" . ((number "0" 1446 . 1447)))
+          ("X86_VENDOR_CYRIX" . ((number "1" 3096 . 3097)))
+          ("GET_TSC_CTL" (spp-arg-list ("adr") 22622 . 22627) . ((symbol "get_tsc_mode" 22628 . 22640) (semantic-list "((adr))" 22640 . 22647)))
+          ("APERFMPERF_SHIFT" . ((number "10" 23075 . 23077)))
+          ("X86_VENDOR_INTEL" . ((number "0" 3069 . 3070)))
+          ("IO_BITMAP_BITS" . ((number "65536" 6093 . 6098)))
+          ("INVALID_IO_BITMAP_OFFSET" . ((number "0x8000" 6299 . 6305)))
+          ("INIT_THREAD" . ((semantic-list "{ \\
+	.sp0 = (unsigned long)&init_stack + sizeof(init_stack) \\
+}" 21615 . 21678)))
+          ("X86_VENDOR_UMC" . ((number "3" 3148 . 3149)))
+          ("KSTK_EIP" (spp-arg-list ("task") 22495 . 22501) . ((semantic-list "(task_pt_regs(task)->ip)" 22503 . 22527)))
+          ("X86_VENDOR_UNKNOWN" . ((number "0xff" 3290 . 3294)))
+          ("IA32_PAGE_OFFSET" . ((semantic-list "((current->personality & ADDR_LIMIT_3GB) ? \\
+					0xc0000000 : 0xFFFFe000)" 21244 . 21318)))
+          ("X86_VENDOR_TRANSMETA" . ((number "7" 3208 . 3209)))
+          ("IO_BITMAP_OFFSET" . ((symbol "offsetof" 6227 . 6235) (semantic-list "(struct tss_struct, io_bitmap)" 6235 . 6265)))
+          ("MXCSR_DEFAULT" . ((number "0x1f80" 6986 . 6992)))
+          ("TASK_SIZE" . ((semantic-list "(test_thread_flag(TIF_ADDR32) ? \\
+					IA32_PAGE_OFFSET : TASK_SIZE_MAX)" 21339 . 21411)))
+          ("STACK_TOP" . ((symbol "TASK_SIZE" 21546 . 21555)))
+          ("X86_VENDOR_AMD" . ((number "2" 3122 . 3123)))
+          ("cpu_data" (spp-arg-list ("cpu") 3714 . 3719) . ((symbol "boot_cpu_data" 3721 . 3734)))
+          ("__cpuid" . ((symbol "native_cpuid" 12677 . 12689)))
+          ("BASE_PREFETCH" . ((string "\"prefetcht0 (%1)\"" 18073 . 18090)))
+          ("HBP_NUM" . ((number "4" 1005 . 1006)))
+          ("ARCH_HAS_SPINLOCK_PREFETCH")
+          ("TASK_SIZE_MAX" . ((semantic-list "((1UL << 47) - PAGE_SIZE)" 21096 . 21121)))
+          ("STACK_TOP_MAX" . ((symbol "TASK_SIZE_MAX" 21579 . 21592)))
+          ("ARCH_MIN_TASKALIGN" . ((number "16" 1410 . 1412)))
+          ("_ASM_X86_PROCESSOR_H")
+          ("NET_IP_ALIGN" . ((number "0" 986 . 987)))
+          ("cpu_info" . ((symbol "boot_cpu_data" 3684 . 3697)))
+          ("IO_BITMAP_LONGS" . ((semantic-list "(IO_BITMAP_BYTES/sizeof(long))" 6170 . 6200)))
+          ("HAVE_ARCH_PICK_MMAP_LAYOUT" . ((number "1" 17897 . 17898)))
+          ("task_pt_regs" (spp-arg-list ("tsk") 21983 . 21988) . ((semantic-list "((struct pt_regs *)(tsk)->thread.sp0 - 1)" 21989 . 22030)))
+          ("X86_VENDOR_NSC" . ((number "8" 3234 . 3235)))
+          ("set_iopl_mask" . ((symbol "native_set_iopl_mask" 12867 . 12887)))
+          ("ARCH_HAS_PREFETCHW")
+          ("TASK_SIZE_OF" (spp-arg-list ("child") 21432 . 21439) . ((semantic-list "((test_tsk_thread_flag(child, TIF_ADDR32)) ? \\
+					IA32_PAGE_OFFSET : TASK_SIZE_MAX)" 21440 . 21525)))
+          ("INIT_TSS" . ((semantic-list "{ \\
+	.x86_tss.sp0 = (unsigned long)&init_stack + sizeof(init_stack) \\
+}" 21698 . 21769)))
+          ("thread_saved_pc" (spp-arg-list ("t") 21917 . 21920) . ((semantic-list "(*(unsigned long *)((t)->thread.sp - 8))" 21921 . 21961)))
+          ("IO_BITMAP_BYTES" . ((semantic-list "(IO_BITMAP_BITS/8)" 6125 . 6143)))
+          ("TASK_UNMAPPED_BASE" . ((semantic-list "(PAGE_ALIGN(TASK_SIZE / 3))" 22450 . 22477)))
+          ("SET_TSC_CTL" (spp-arg-list ("val") 22667 . 22672) . ((symbol "set_tsc_mode" 22673 . 22685) (semantic-list "((val))" 22685 . 22692)))
+          ("cpu_has_amd_erratum" (spp-arg-list ("x") 24035 . 24038) . ((semantic-list "(false)" 24039 . 24046)))
+          ("cache_line_size" (spp-arg-list nil 3937 . 3939) . ((semantic-list "(boot_cpu_data.x86_cache_alignment)" 3940 . 3975)))
+          )
+))
+  :file "!ssh:w4118@192.168.180.128:!home!w4118!hmwk2-prog!kernel!arch!x86!include!asm!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

@@ -1,0 +1,601 @@
+;; Object dlink/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "dlink/"
+  :tables
+  (list
+    (semanticdb-table "de620.c"
+      :major-mode 'c-mode
+      :tags 
+        '( ("version" variable
+               (:dereference 1
+                :typemodifiers ("static")
+                :default-value "\"de620.c: $Revision: 1.40 $,  Bjorn Ekwall <bj0rn@blox.se>\\n\""
+                :type "char")
+                nil [1633 1726])
+            ("DE620_CLONE" variable (:constant-flag t) nil [2592 2603])
+            ("READ_DELAY" variable (:constant-flag t) nil [2861 2871])
+            ("WRITE_DELAY" variable (:constant-flag t) nil [2961 2972])
+            ("linux/module.h" include (:system-flag t) nil [3558 3583])
+            ("linux/kernel.h" include (:system-flag t) nil [3584 3609])
+            ("linux/types.h" include (:system-flag t) nil [3610 3634])
+            ("linux/fcntl.h" include (:system-flag t) nil [3635 3659])
+            ("linux/string.h" include (:system-flag t) nil [3660 3685])
+            ("linux/interrupt.h" include (:system-flag t) nil [3686 3714])
+            ("linux/ioport.h" include (:system-flag t) nil [3715 3740])
+            ("linux/in.h" include (:system-flag t) nil [3741 3762])
+            ("linux/errno.h" include (:system-flag t) nil [3763 3787])
+            ("linux/init.h" include (:system-flag t) nil [3788 3811])
+            ("linux/inet.h" include (:system-flag t) nil [3812 3835])
+            ("linux/netdevice.h" include (:system-flag t) nil [3836 3864])
+            ("linux/etherdevice.h" include (:system-flag t) nil [3865 3895])
+            ("linux/skbuff.h" include (:system-flag t) nil [3896 3921])
+            ("asm/io.h" include (:system-flag t) nil [3923 3942])
+            ("de620.h" include nil nil [4015 4033])
+            ("byte" type
+               (:typedef ("unsigned char")
+                :type "typedef")
+                nil [4035 4062])
+            ("DE620_IO" variable (:constant-flag t) nil [4464 4472])
+            ("DE620_IRQ" variable (:constant-flag t) nil [4545 4554])
+            ("DATA_PORT" variable (:constant-flag t) nil [4573 4582])
+            ("STATUS_PORT" variable (:constant-flag t) nil [4608 4619])
+            ("COMMAND_PORT" variable (:constant-flag t) nil [4649 4661])
+            ("RUNT" variable (:constant-flag t) nil [4692 4696])
+            ("GIANT" variable (:constant-flag t) nil [4741 4746])
+            ("bnc" variable
+               (:typemodifiers ("static")
+                :type "int")
+                nil [5038 5053])
+            ("utp" variable
+               (:typemodifiers ("static")
+                :type "int")
+                nil [5054 5069])
+            ("io" variable
+               (:typemodifiers ("static")
+                :default-value "DE620_IO"
+                :type "int")
+                nil [5070 5096])
+            ("irq" variable
+               (:typemodifiers ("static")
+                :default-value "DE620_IRQ"
+                :type "int")
+                nil [5097 5124])
+            ("clone" variable
+               (:typemodifiers ("static")
+                :default-value "DE620_CLONE"
+                :type "int")
+                nil [5125 5156])
+            ("de620_lock" variable
+               (:typemodifiers ("static")
+                :type ("spinlock_t" type (:type "class") nil nil))
+                nil [5158 5187])
+            ("module_param" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("" variable (:type ("bnc" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5202 5206])
+                    ("" variable (:type "int") (reparse-symbol arg-sub-list) [5207 5211]))                  
+                :type "int")
+                nil [5189 5215])
+            ("module_param" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("" variable (:type ("utp" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5229 5233])
+                    ("" variable (:type "int") (reparse-symbol arg-sub-list) [5234 5238]))                  
+                :type "int")
+                nil [5216 5242])
+            ("module_param" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("" variable (:type ("io" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5256 5259])
+                    ("" variable (:type "int") (reparse-symbol arg-sub-list) [5260 5264]))                  
+                :type "int")
+                nil [5243 5268])
+            ("module_param" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("" variable (:type ("irq" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5282 5286])
+                    ("" variable (:type "int") (reparse-symbol arg-sub-list) [5287 5291]))                  
+                :type "int")
+                nil [5269 5295])
+            ("module_param" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("" variable (:type ("clone" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5309 5315])
+                    ("" variable (:type "int") (reparse-symbol arg-sub-list) [5316 5320]))                  
+                :type "int")
+                nil [5296 5324])
+            ("MODULE_PARM_DESC" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("" variable (:type ("bnc" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5342 5346]))                  
+                :type "int")
+                nil [5325 5378])
+            ("MODULE_PARM_DESC" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("" variable (:type ("utp" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5396 5400]))                  
+                :type "int")
+                nil [5379 5432])
+            ("MODULE_PARM_DESC" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("" variable (:type ("io" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5450 5453]))                  
+                :type "int")
+                nil [5433 5490])
+            ("MODULE_PARM_DESC" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("" variable (:type ("irq" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5508 5512]))                  
+                :type "int")
+                nil [5491 5543])
+            ("MODULE_PARM_DESC" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("" variable (:type ("clone" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5561 5567]))                  
+                :type "int")
+                nil [5544 5617])
+            ("de620_open" function
+               (:prototype-flag t
+                :typemodifiers ("static")
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("net_device" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [6000 6020]))                  
+                :type "int")
+                nil [5978 6021])
+            ("de620_close" function
+               (:prototype-flag t
+                :typemodifiers ("static")
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("net_device" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [6045 6065]))                  
+                :type "int")
+                nil [6022 6066])
+            ("de620_set_multicast_list" function
+               (:prototype-flag t
+                :typemodifiers ("static")
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("net_device" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [6104 6124]))                  
+                :type "void")
+                nil [6067 6125])
+            ("de620_start_xmit" function
+               (:prototype-flag t
+                :typemodifiers ("static")
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("sk_buff" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [6154 6171])
+                    ("" variable
+                       (:pointer 1
+                        :type ("net_device" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [6172 6192]))                  
+                :type "int")
+                nil [6126 6193])
+            ("de620_interrupt" function
+               (:prototype-flag t
+                :typemodifiers ("static")
+                :arguments 
+                  ( ("" variable (:type "int") (reparse-symbol arg-sub-list) [6262 6266])
+                    ("" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [6267 6274]))                  
+                :type ("irqreturn_t" type (:type "class") nil nil))
+                nil [6227 6275])
+            ("de620_rx_intr" function
+               (:prototype-flag t
+                :typemodifiers ("static")
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("net_device" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [6301 6321]))                  
+                :type "int")
+                nil [6276 6322])
+            ("adapter_init" function
+               (:prototype-flag t
+                :typemodifiers ("static")
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("net_device" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [6369 6389]))                  
+                :type "int")
+                nil [6345 6390])
+            ("read_eeprom" function
+               (:prototype-flag t
+                :typemodifiers ("static")
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("net_device" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [6414 6434]))                  
+                :type "int")
+                nil [6391 6435])
+            ("SCR_DEF" variable (:constant-flag t) nil [6481 6488])
+            ("TCR_DEF" variable (:constant-flag t) nil [6532 6539])
+            ("DE620_RX_START_PAGE" variable (:constant-flag t) nil [6591 6610])
+            ("DEF_NIC_CMD" variable (:constant-flag t) nil [6660 6671])
+            ("NIC_Cmd" variable
+               (:typemodifiers ("static")
+                :type ("byte" type (:type "class") nil nil))
+                nil [6692 6721])
+            ("next_rx_page" variable
+               (:typemodifiers ("static")
+                :type ("byte" type (:type "class") nil nil))
+                nil [6722 6756])
+            ("first_rx_page" variable
+               (:typemodifiers ("static")
+                :type ("byte" type (:type "class") nil nil))
+                nil [6757 6784])
+            ("last_rx_page" variable
+               (:typemodifiers ("static")
+                :type ("byte" type (:type "class") nil nil))
+                nil [6785 6811])
+            ("EIPRegister" variable
+               (:typemodifiers ("static")
+                :type ("byte" type (:type "class") nil nil))
+                nil [6812 6837])
+            ("nic_data" variable
+               (:typemodifiers ("static")
+                :type ("nic" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [6839 6940])
+            ("nic" type
+               (:members 
+                  ( ("NodeID" variable
+                       (:dereference 1
+                        :type ("byte" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6860 6875])
+                    ("RAM_Size" variable (:type ("byte" type (:type "class") nil nil)) (reparse-symbol classsubparts) [6877 6891])
+                    ("Model" variable (:type ("byte" type (:type "class") nil nil)) (reparse-symbol classsubparts) [6893 6904])
+                    ("Media" variable (:type ("byte" type (:type "class") nil nil)) (reparse-symbol classsubparts) [6906 6917])
+                    ("SCR" variable (:type ("byte" type (:type "class") nil nil)) (reparse-symbol classsubparts) [6919 6928]))                  
+                :type "struct")
+                nil [6839 6940])
+            ("de620_tx_buffs" variable (:constant-flag t) nil [7251 7265])
+            ("de620_flip_ds" variable (:constant-flag t) nil [7315 7328])
+            ("de620_ready" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("dev" variable
+                       (:pointer 1
+                        :type ("net_device" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [7541 7564]))                  
+                :type ("byte" type (:type "class") nil nil))
+                nil [7510 7769])
+            ("de620_send_command" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("dev" variable
+                       (:pointer 1
+                        :type ("net_device" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [7809 7832])
+                    ("cmd" variable (:type ("byte" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [7833 7842]))                  
+                :type "void")
+                nil [7771 8027])
+            ("de620_put_byte" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("dev" variable
+                       (:pointer 1
+                        :type ("net_device" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [8063 8086])
+                    ("value" variable (:type ("byte" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [8087 8098]))                  
+                :type "void")
+                nil [8029 8235])
+            ("de620_read_byte" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("dev" variable
+                       (:pointer 1
+                        :type ("net_device" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [8272 8295]))                  
+                :type ("byte" type (:type "class") nil nil))
+                nil [8237 8512])
+            ("de620_write_block" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("dev" variable
+                       (:pointer 1
+                        :type ("net_device" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [8551 8574])
+                    ("buffer" variable
+                       (:pointer 1
+                        :type ("byte" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [8575 8588])
+                    ("count" variable (:type "int") (reparse-symbol arg-sub-list) [8589 8599])
+                    ("pad" variable (:type "int") (reparse-symbol arg-sub-list) [8600 8608]))                  
+                :type "void")
+                nil [8514 9519])
+            ("de620_read_block" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("dev" variable
+                       (:pointer 1
+                        :type ("net_device" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [9557 9580])
+                    ("data" variable
+                       (:pointer 1
+                        :type ("byte" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [9581 9592])
+                    ("count" variable (:type "int") (reparse-symbol arg-sub-list) [9593 9603]))                  
+                :type "void")
+                nil [9521 10386])
+            ("de620_set_delay" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("dev" variable
+                       (:pointer 1
+                        :type ("net_device" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [10423 10446]))                  
+                :type "void")
+                nil [10388 10773])
+            ("de620_set_register" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("dev" variable
+                       (:pointer 1
+                        :type ("net_device" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [10813 10836])
+                    ("reg" variable (:type ("byte" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [10837 10846])
+                    ("value" variable (:type ("byte" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [10847 10858]))                  
+                :type "void")
+                nil [10775 10970])
+            ("de620_get_register" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("dev" variable
+                       (:pointer 1
+                        :type ("net_device" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [11010 11033])
+                    ("reg" variable (:type ("byte" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [11034 11043]))                  
+                :type ("byte" type (:type "class") nil nil))
+                nil [10972 11172])
+            ("de620_open" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("dev" variable
+                       (:pointer 1
+                        :type ("net_device" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [11509 11532]))                  
+                :type "int")
+                nil [11487 11862])
+            ("de620_close" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("dev" variable
+                       (:pointer 1
+                        :type ("net_device" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [11988 12011]))                  
+                :type "int")
+                nil [11965 12136])
+            ("de620_set_multicast_list" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("dev" variable
+                       (:pointer 1
+                        :type ("net_device" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [12369 12392]))                  
+                :type "void")
+                nil [12332 12666])
+            ("de620_timeout" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("dev" variable
+                       (:pointer 1
+                        :type ("net_device" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [12790 12813]))                  
+                :type "void")
+                nil [12764 13007])
+            ("de620_start_xmit" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("skb" variable
+                       (:pointer 1
+                        :type ("sk_buff" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [13173 13193])
+                    ("dev" variable
+                       (:pointer 1
+                        :type ("net_device" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [13194 13217]))                  
+                :type "int")
+                nil [13145 14377])
+            ("de620_interrupt" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("irq_in" variable (:type "int") (reparse-symbol arg-sub-list) [14523 14534])
+                    ("dev_id" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [14535 14548]))                  
+                :type ("irqreturn_t" type (:type "class") nil nil))
+                nil [14488 15093])
+            ("de620_rx_intr" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("dev" variable
+                       (:pointer 1
+                        :type ("net_device" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [15228 15251]))                  
+                :type "int")
+                nil [15203 18433])
+            ("adapter_init" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("dev" variable
+                       (:pointer 1
+                        :type ("net_device" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [18554 18577]))                  
+                :type "int")
+                nil [18530 20863])
+            ("de620_netdev_ops" variable
+               (:typemodifiers ("static")
+                :default-value "{
+	.ndo_open 		= de620_open,
+	.ndo_stop 		= de620_close,
+	.ndo_start_xmit 	= de620_start_xmit,
+	.ndo_tx_timeout 	= de620_timeout,
+	.ndo_set_rx_mode	= de620_set_multicast_list,
+	.ndo_change_mtu		= eth_change_mtu,
+	.ndo_set_mac_address 	= eth_mac_addr,
+	.ndo_validate_addr	= eth_validate_addr,
+}"
+                :type ("net_device_ops" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                nil [20865 21213])
+            ("de620_probe" function
+               (:arguments 
+                  ( ("unit" variable (:type "int") (reparse-symbol arg-sub-list) [21461 21470]))                  
+                :type ("__init" type (:type "class") nil nil))
+                nil [21442 23437])
+            ("sendit" variable (:constant-flag t) nil [23600 23606])
+            ("ReadAWord" function
+               (:arguments 
+                  ( ("dev" variable
+                       (:pointer 1
+                        :type ("net_device" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [23709 23732])
+                    ("from" variable (:type "int") (reparse-symbol arg-sub-list) [23733 23742]))                  
+                :type ("__init" type (:type "class") nil nil))
+                nil [23692 24979])
+            ("read_eeprom" function
+               (:arguments 
+                  ( ("dev" variable
+                       (:pointer 1
+                        :type ("net_device" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [25011 25034]))                  
+                :type ("__init" type (:type "class") nil nil))
+                nil [24992 26151])
+            ("MODULE_LICENSE" function
+               (:prototype-flag t
+                :type "int")
+                nil [26599 26621]))          
+      :file "de620.c"
+      :pointmax 26622
+      :fsize 26621
+      :lastmodtime '(21577 34052)
+      :unmatched-syntax '((thing 5568 . 5615) (thing 5513 . 5541) (thing 5454 . 5488) (thing 5401 . 5430) (thing 5347 . 5376) (thing 5321 . 5322) (thing 5292 . 5293) (thing 5265 . 5266) (thing 5239 . 5240) (thing 5212 . 5213) (thing 21422 . 21428) (thing 21429 . 21439) (thing 21440 . 21441) (thing 23670 . 23676) (thing 23677 . 23685) (thing 23686 . 23691) (thing 24981 . 24987) (thing 24988 . 24991) (thing 26614 . 26619))
+      :lexical-table 
+        '(("COMMAND_PORT" . ((semantic-list "(dev->base_addr + 2)" 4662 . 4682)))
+          ("DEF_NIC_CMD" . 
+              ((symbol "IRQEN" 6672 . 6677) (punctuation "|" 6678 . 6679) (symbol "ICEN" 6680 . 6684) (punctuation "|" 6685 . 6686) (symbol "DS1" 6687 . 6690)))
+          ("STATUS_PORT" . ((semantic-list "(dev->base_addr + 1)" 4620 . 4640)))
+          ("de620_flip_ds" (spp-arg-list ("dd") 7328 . 7332) . 
+              ((symbol "NIC_Cmd" 7333 . 7340) (punctuation "^" 7341 . 7342) (punctuation "=" 7342 . 7343) (symbol "DS0" 7344 . 7347) (punctuation "|" 7348 . 7349) (symbol "DS1" 7350 . 7353) (punctuation ";" 7353 . 7354) (symbol "outb" 7355 . 7359) (semantic-list "(NIC_Cmd, COMMAND_PORT)" 7359 . 7382) (punctuation ";" 7382 . 7383)))
+          ("DE620_IO" . ((number "0x378" 4473 . 4478)))
+          ("SCR_DEF" . 
+              ((symbol "NIBBLEMODE" 6489 . 6499) (punctuation "|" 6500 . 6501) (symbol "INTON" 6501 . 6506) (punctuation "|" 6507 . 6508) (symbol "SLEEP" 6509 . 6514) (punctuation "|" 6515 . 6516) (symbol "AUTOTX" 6517 . 6523)))
+          ("GIANT" . ((number "1514" 4747 . 4751)))
+          ("TCR_DEF" . ((symbol "RXPB" 6540 . 6544)))
+          ("READ_DELAY" . ((number "100" 2872 . 2875)))
+          ("RUNT" . ((number "60" 4697 . 4699)))
+          ("DE620_RX_START_PAGE" . ((number "12" 6611 . 6613)))
+          ("de620_tx_buffs" (spp-arg-list ("dd") 7265 . 7269) . ((semantic-list "(inb(STATUS_PORT) & (TXBF0 | TXBF1))" 7270 . 7306)))
+          ("DE620_CLONE" . ((number "0" 2604 . 2605)))
+          ("DATA_PORT" . ((semantic-list "(dev->base_addr)" 4583 . 4599)))
+          ("sendit" (spp-arg-list ("dev" "data") 23606 . 23616) . 
+              ((symbol "de620_set_register" 23617 . 23635) (semantic-list "(dev, W_EIP, data | EIPRegister)" 23635 . 23667) (punctuation ";" 23667 . 23668)))
+          ("WRITE_DELAY" . ((number "100" 2973 . 2976)))
+          ("DE620_IRQ" . ((number "7" 4555 . 4556)))
+          )
+)
+    (semanticdb-table "de620.h"
+      :file "de620.h"
+      :fsize 4970
+      :lastmodtime '(21577 34052)))
+  :file "!ssh:w4118@192.168.180.128:!home!w4118!hmwk4-prog!flo-kernel!drivers!net!ethernet!dlink!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

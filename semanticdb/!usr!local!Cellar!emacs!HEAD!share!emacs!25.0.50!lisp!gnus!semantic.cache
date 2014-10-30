@@ -1,0 +1,255 @@
+;; Object gnus/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "gnus/"
+  :tables
+  (list
+    (semanticdb-table "gnus-start.el.gz"
+      :major-mode 'emacs-lisp-mode
+      :tags 
+        '( ("gnus" include nil nil [879 894])
+            ("gnus-win" include nil nil [895 914])
+            ("gnus-int" include nil nil [915 934])
+            ("gnus-spec" include nil nil [935 955])
+            ("gnus-range" include nil nil [956 977])
+            ("gnus-util" include nil nil [978 998])
+            ("gnus-cloud" include nil nil [999 1020])
+            ("message-make-date" function (:prototype-flag t) nil [1021 1060])
+            ("gnus-agent-read-servers-validate" function (:prototype-flag t) nil [1061 1118])
+            ("gnus-agent-save-local" function (:prototype-flag t) nil [1119 1165])
+            ("gnus-agent-possibly-alter-active" function (:prototype-flag t) nil [1166 1223])
+            ("cl" include nil nil [1246 1259])
+            ("gnus-agent-covered-methods" variable nil nil [1262 1297])
+            ("gnus-agent-file-loading-local" variable nil nil [1298 1336])
+            ("gnus-agent-file-loading-cache" variable nil nil [1337 1375])
+            ("gnus-startup-file" variable (:default-value (nnheader-concat gnus-home-directory ".newsrc")) nil [1377 1568])
+            ("gnus-backup-startup-file" variable (:default-value (quote never)) nil [1570 1900])
+            ("gnus-save-startup-file-via-temp-buffer" variable (:default-value t) nil [1902 2335])
+            ("gnus-init-file" variable (:default-value (nnheader-concat gnus-home-directory ".gnus")) nil [2337 2565])
+            ("gnus-site-init-file" variable (:default-value (condition-case nil (concat (file-name-directory (directory-file-name installation-directory)) "site-lisp/gnus-init") (error nil))) nil [2567 2958])
+            ("gnus-use-dribble-file" variable
+               (:user-visible-flag t
+                :default-value t)
+                nil [2960 3232])
+            ("gnus-dribble-directory" variable (:user-visible-flag t) nil [3234 3481])
+            ("gnus-check-new-newsgroups" variable
+               (:user-visible-flag t
+                :default-value (quote ask-server))
+                nil [3483 5057])
+            ("gnus-check-bogus-newsgroups" variable (:user-visible-flag t) nil [5059 5382])
+            ("gnus-read-active-file" variable
+               (:user-visible-flag t
+                :default-value (quote some))
+                nil [5384 6147])
+            ("gnus-level-subscribed" variable
+               (:constant-flag t
+                :default-value 5)
+                nil [6149 6258])
+            ("gnus-level-unsubscribed" variable
+               (:constant-flag t
+                :default-value 7)
+                nil [6260 6698])
+            ("gnus-level-zombie" variable
+               (:constant-flag t
+                :default-value 8)
+                nil [6700 6776])
+            ("gnus-level-killed" variable
+               (:constant-flag t
+                :default-value 9)
+                nil [6778 6847])
+            ("gnus-level-default-subscribed" variable
+               (:user-visible-flag t
+                :default-value 3)
+                nil [6849 6998])
+            ("gnus-level-default-unsubscribed" variable
+               (:user-visible-flag t
+                :default-value 6)
+                nil [7000 7155])
+            ("gnus-activate-level" variable
+               (:user-visible-flag t
+                :default-value (1+ gnus-level-subscribed))
+                nil [7157 7446])
+            ("gnus-activate-foreign-newsgroups" variable
+               (:user-visible-flag t
+                :default-value 4)
+                nil [7448 8149])
+            ("gnus-read-newsrc-file" variable
+               (:user-visible-flag t
+                :default-value t)
+                nil [8151 8572])
+            ("gnus-save-newsrc-file" variable
+               (:user-visible-flag t
+                :default-value t)
+                nil [8574 8976])
+            ("gnus-save-killed-list" variable
+               (:user-visible-flag t
+                :default-value t)
+                nil [8978 9791])
+            ("gnus-ignored-newsgroups" variable
+               (:user-visible-flag t
+                :default-value (mapconcat (quote identity) (quote ("^to\\." "^[0-9. 	]+\\( \\|$\\)" "^[\"][\"#'()]")) "\\|"))
+                nil [9793 10296])
+            ("gnus-subscribe-newsgroup-method" variable
+               (:user-visible-flag t
+                :default-value (quote gnus-subscribe-zombies))
+                nil [10298 11339])
+            ("define-obsolete-variable-alias" code nil nil [11341 11450])
+            ("gnus-subscribe-newsgroup-functions" variable (:user-visible-flag t) nil [11451 11669])
+            ("gnus-subscribe-options-newsgroup-method" variable
+               (:user-visible-flag t
+                :default-value (quote gnus-subscribe-alphabetically))
+                nil [11671 12498])
+            ("gnus-subscribe-hierarchical-interactive" variable (:user-visible-flag t) nil [12500 12946])
+            ("gnus-auto-subscribed-categories" variable
+               (:user-visible-flag t
+                :default-value (quote (mail post-mail)))
+                nil [12948 13335])
+            ("gnus-auto-subscribed-groups" variable
+               (:user-visible-flag t
+                :default-value "^nnml\\|^nnfolder\\|^nnmbox\\|^nnmh\\|^nnbabyl\\|^nnmaildir\\|^nnimap")
+                nil [13337 13840])
+            ("gnus-options-subscribe" variable (:user-visible-flag t) nil [13842 14313])
+            ("gnus-options-not-subscribe" variable (:user-visible-flag t) nil [14315 14616])
+            ("gnus-modtime-botch" variable (:user-visible-flag t) nil [14618 14825])
+            ("gnus-check-bogus-groups-hook" variable nil nil [14827 14957])
+            ("gnus-startup-hook" variable nil nil [14959 15121])
+            ("gnus-before-startup-hook" variable nil nil [15123 15329])
+            ("gnus-before-resume-hook" variable nil nil [15331 15591])
+            ("gnus-started-hook" variable nil nil [15593 15712])
+            ("gnus-setup-news-hook" variable nil nil [15714 15862])
+            ("gnus-get-top-new-news-hook" variable nil nil [15864 16025])
+            ("gnus-get-new-news-hook" variable nil nil [16027 16157])
+            ("gnus-after-getting-new-news-hook" variable
+               (:user-visible-flag t
+                :default-value (quote (gnus-display-time-event-handler)))
+                nil [16159 16374])
+            ("gnus-read-newsrc-el-hook" variable nil nil [16376 16506])
+            ("gnus-save-newsrc-file-check-timestamp" variable nil nil [16508 16818])
+            ("gnus-save-newsrc-hook" variable nil nil [16820 16950])
+            ("gnus-save-quick-newsrc-hook" variable nil nil [16952 17138])
+            ("gnus-save-standard-newsrc-hook" variable nil nil [17140 17332])
+            ("gnus-group-mode-hook" variable nil nil [17334 17473])
+            ("gnus-always-read-dribble-file" variable nil nil [17475 17602])
+            ("gnus-ding-file-coding-system" variable (:default-value mm-universal-coding-system) nil [17714 17811])
+            ("gnus-newsrc-file-version" variable nil nil [17813 17850])
+            ("gnus-override-subscribe-method" variable nil nil [17851 17894])
+            ("gnus-dribble-buffer" variable nil nil [17895 17927])
+            ("gnus-newsrc-options" variable nil nil [17928 17998])
+            ("gnus-newsrc-options-n" variable nil nil [18000 18116])
+            ("gnus-newsrc-last-checked-date" variable nil nil [18118 18212])
+            ("gnus-current-startup-file" variable nil nil [18214 18291])
+            ("gnus-group-line-format" variable nil nil [18319 18350])
+            ("gnus-init-inhibit" variable nil nil [18403 18433])
+            ("gnus-read-init-file" function (:arguments ("inhibit-next")) nil [18434 18948])
+            ("gnus-subscribe-hierarchical-interactive" function (:arguments ("groups")) nil [18984 21583])
+            ("gnus-subscribe-randomly" function (:arguments ("newsgroup")) nil [21585 21729])
+            ("gnus-subscribe-alphabetically" function (:arguments ("newgroup")) nil [21731 22082])
+            ("gnus-subscribe-hierarchically" function (:arguments ("newgroup")) nil [22084 22966])
+            ("gnus-subscribe-interactively" function (:arguments ("group")) nil [22968 23287])
+            ("gnus-subscribe-zombies" function (:arguments ("group")) nil [23289 23403])
+            ("gnus-subscribe-killed" function (:arguments ("group")) nil [23405 23513])
+            ("gnus-subscribe-newsgroup" function (:arguments ("newsgroup" "next")) nil [23515 24145])
+            ("gnus-read-active-file-p" function nil nil [24147 24309])
+            ("gnus-current-headers" variable nil nil [24379 24408])
+            ("gnus-thread-indent-array" variable nil nil [24409 24442])
+            ("gnus-newsgroup-name" variable nil nil [24443 24471])
+            ("gnus-newsgroup-headers" variable nil nil [24472 24503])
+            ("gnus-group-list-mode" variable nil nil [24504 24533])
+            ("gnus-group-mark-positions" variable nil nil [24534 24568])
+            ("gnus-newsgroup-data" variable nil nil [24569 24597])
+            ("gnus-newsgroup-unreads" variable nil nil [24598 24629])
+            ("nnoo-state-alist" variable nil nil [24630 24655])
+            ("gnus-current-select-method" variable nil nil [24656 24691])
+            ("mail-sources" variable nil nil [24692 24713])
+            ("nnmail-scan-directory-mail-source-once" variable nil nil [24714 24761])
+            ("nnmail-split-history" variable nil nil [24762 24791])
+            ("nnmail-spool-file" variable nil nil [24792 24818])
+            ("gnus-close-all-servers" function (:user-visible-flag t) nil [24820 24969])
+            ("gnus-clear-system" function nil nil [24971 26687])
+            ("gnus-no-server-1" function
+               (:user-visible-flag t
+                :arguments ("arg" "slave"))
+                nil [26689 27318])
+            ("gnus-1" function
+               (:user-visible-flag t
+                :arguments ("arg" "dont-connect" "slave"))
+                nil [27320 29312])
+            ("gnus-start-draft-setup" function (:user-visible-flag t) nil [29314 29849])
+            ("gnus-dribble-ignore" variable nil nil [29879 29911])
+            ("gnus-dribble-eval-file" variable nil nil [29912 29947])
+            ("gnus-dribble-file-name" function nil nil [29949 30245])
+            ("gnus-dribble-enter" function (:arguments ("string" "regexp")) nil [30247 31333])
+            ("gnus-dribble-touch" function nil nil [31335 31420])
+            ("gnus-dribble-read-file" function nil nil [31422 33507])
+            ("gnus-dribble-eval-file" function nil nil [33509 33737])
+            ("gnus-dribble-delete-file" function nil nil [33739 34086])
+            ("gnus-dribble-save" function nil nil [34088 34285])
+            ("gnus-dribble-clear" function nil nil [34287 34514])
+            ("gnus-setup-news" function (:arguments ("rawfile" "level" "dont-connect")) nil [34561 38134])
+            ("gnus-call-subscribe-functions" function (:arguments ("method" "group")) nil [38136 38540])
+            ("gnus-find-new-newsgroups" function
+               (:user-visible-flag t
+                :arguments ("arg"))
+                nil [38542 41466])
+            ("gnus-matches-options-n" function (:arguments ("group")) nil [41468 42640])
+            ("gnus-ask-server-for-new-groups" function nil nil [42642 45133])
+            ("gnus-subscribe-group" function (:arguments ("group" "previous" "method")) nil [45135 45431])
+            ("gnus-group-change-level" function (:arguments ("entry" "level" "oldlevel" "previous" "fromkilled")) nil [46356 50391])
+            ("gnus-check-bogus-newsgroups" function (:arguments ("confirm")) nil [50393 52567])
+            ("gnus-check-duplicate-killed-groups" function (:user-visible-flag t) nil [52569 52873])
+            ("gnus-cache-active-hashtb" variable nil nil [52942 52975])
+            ("gnus-cache-possibly-alter-active" function (:arguments ("group" "active")) nil [52997 53432])
+            ("gnus-activate-group" function (:arguments ("group" "scan" "dont-check" "method" "dont-sub-check")) nil [53435 55537])
+            ("gnus-get-unread-articles-in-group" function (:arguments ("info" "active" "update")) nil [55539 58961])
+            ("gnus-get-unread-articles" function (:arguments ("level" "dont-connect" "one-level")) nil [59099 65681])
+            ("gnus-method-rank" function (:arguments ("type" "method")) nil [65683 66200])
+            ("gnus-read-active-for-groups" function (:arguments ("method" "infos" "early-data")) nil [66202 67548])
+            ("gnus-make-hashtable-from-newsrc-alist" function nil nil [67653 68941])
+            ("gnus-make-hashtable-from-killed" function nil nil [68943 69358])
+            ("gnus-parse-active" function nil nil [69360 69730])
+            ("gnus-make-articles-unread" function (:arguments ("group" "articles")) nil [69732 70514])
+            ("gnus-make-ascending-articles-unread" function (:arguments ("group" "articles")) nil [70516 73833])
+            ("gnus-update-active-hashtb-from-killed" function nil nil [73877 74248])
+            ("gnus-get-killed-groups" function nil nil [74250 75152])
+            ("gnus-read-active-file" function (:arguments ("force" "not-native")) nil [75201 76539])
+            ("gnus-read-active-file-1" function (:arguments ("method" "force")) nil [76541 78104])
+            ("gnus-read-active-file-2" function (:arguments ("groups" "method")) nil [78106 78680])
+            ("gnus-active-to-gnus-format" function (:arguments ("method" "hashtb" "ignore-errors" "real-active")) nil [78752 81975])
+            ("gnus-groups-to-gnus-format" function (:arguments ("method" "hashtb" "real-active")) nil [81977 83701])
+            ("gnus-read-newsrc-file" function (:arguments ("force")) nil [83703 85433])
+            ("gnus-clean-old-newsrc" function (:arguments ("force")) nil [85435 85513])
+            ("gnus-convert-old-newsrc" function nil nil [85515 89295])
+            ("gnus-convert-mark-converter-prompt" function (:arguments ("converter" "no-prompt")) nil [89297 89650])
+            ("gnus-convert-converter-needs-prompt" function (:arguments ("converter")) nil [89652 89850])
+            ("gnus-convert-old-ticks" function (:arguments ("converting-to")) nil [89852 90330])
+            ("gnus-load" function (:arguments ("file")) nil [90332 90839])
+            ("gnus-read-newsrc-el-file" function (:arguments ("file")) nil [90841 91998])
+            ("gnus-read-old-newsrc-el-file" function (:arguments ("file")) nil [92042 94004])
+            ("gnus-make-newsrc-file" function (:arguments ("file")) nil [94006 94379])
+            ("gnus-newsrc-to-gnus-format" function nil nil [94381 100896])
+            ("gnus-newsrc-parse-options" function (:arguments ("options")) nil [101534 103116])
+            ("defalias" code nil nil [103138 103261])
+            ("gnus-save-newsrc-file-last-timestamp" variable nil nil [103264 103313])
+            ("gnus-save-newsrc-file" function (:arguments ("force")) nil [103314 108313])
+            ("gnus-gnus-to-quick-newsrc-format" function (:arguments ("minimal" "name" "specific-variables")) nil [108315 109994])
+            ("gnus-strip-killed-list" function nil nil [109996 110291])
+            ("gnus-gnus-to-newsrc-format" function (:arguments ("foreign-ok")) nil [110293 112765])
+            ("gnus-slave-mode" variable nil nil [112799 112827])
+            ("gnus-slave-mode" function nil nil [112829 113122])
+            ("gnus-slave-save-newsrc" function nil nil [113124 113542])
+            ("gnus-master-read-slave-newsrc" function nil nil [113544 114749])
+            ("gnus-read-all-descriptions-files" function nil nil [114785 115098])
+            ("gnus-read-descriptions-file" function (:arguments ("method")) nil [115100 117820])
+            ("gnus-group-get-description" function (:arguments ("group")) nil [117822 118124])
+            ("gnus-declare-backend" function (:arguments ("name" "abilities")) nil [118141 118406])
+            ("gnus-set-default-directory" function nil nil [118408 118767])
+            ("gnus-display-time-event-handler" function nil nil [118769 118935])
+            ("gnus-check-reasonable-setup" function nil nil [118937 120165])
+            ("gnus-start" package nil nil [120167 120188]))          
+      :file "gnus-start.el.gz"
+      :pointmax 120218
+      :fsize 31104
+      :lastmodtime '(21573 41943 0 0)
+      :unmatched-syntax '((close-paren 103261 . 103262) (symbol 103119 . 103135) (open-paren 103118 . 103119) (close-paren 53432 . 53433) (symbol 52977 . 52994) (open-paren 52976 . 52977) (close-paren 1259 . 1260) (symbol 1226 . 1243) (open-paren 1225 . 1226))))
+  :file "!usr!local!Cellar!emacs!HEAD!share!emacs!25.0.50!lisp!gnus!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

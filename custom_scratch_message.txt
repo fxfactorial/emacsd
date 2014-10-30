@@ -33,6 +33,7 @@ ls > #<buffer *scratch*>
 9) With a rectange, can add prefix to all lines with C-x r t
 10) You can open emacs on a specific line of a file, like after grep
 use with: emacs "+<LINE_NUMER>" "FILE_NAME" note, quotes are needed.
+11) You can go back to where you last were with "C-u C-space"
 
 LaTeX Tips: 
 1) LaTeX is set up with math mode already on, so doing `-<something>
