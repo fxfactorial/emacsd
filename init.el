@@ -484,6 +484,7 @@
 			  (ggtags-mode)
 			  (define-key ggtags-mode-map (kbd "M-.") nil)
 			  (define-key ggtags-mode-map (kbd "M-,") nil)
+			  (define-key ggtags-mode-map (kbd "M-]") nil)
 			  (define-key ggtags-mode-map (kbd "M-'") 'ggtags-find-reference)
 			  ;;Doesn't really work well over tramp.
 ;;			  (flycheck-mode)
