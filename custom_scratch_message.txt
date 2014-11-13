@@ -1,0 +1,52 @@
+Semantic, Company Tips:
+1) When you're in in a foreign land, say linux kernel, be sure to 
+update the system headers include path, see the example on 
+os-class-semantic.  
+2) Semantic's jump functionality is awesome, but does require the 
+extra two definitions in this init.el. Semantic alone can jump 
+to definitions, do M-] to jump to a definition of a tag and M-[ 
+to come back to where you were, this include #includes.  
+3) Semantic is hooked up with company-mode as it's backend, so you 
+can do M-Tab and get auto-completion of functions! During the 
+auto-complete, do C-w to get a new temp buffer with the definition, 
+F1 for more documenation if any exists, and C-s to close that temp 
+buffer.  
+4) Company with semantic backing it can also do headers, use M-h 
+in an #include <..>.
+
+Org-Mode Tips: 
+1) C-o will insert your common defaults, its bound to a custom
+function.  
+2) C-e is basically the start of all export abilities.
+
+Misc Tips: 
+1) C-; is always available and will swap two buffers.  
+2) You can fold code with C-c C-t, this is just in C code at the moment.
+3) C-c C-c will call compile, then do C-x ` to go to errors, if any.
+4) Remember that you can sudo open a file via tramp, just try opening
+as usual, just add prefix of /sudo:: and emacs will ask for password. 
+5) Add prefixes to block of highlighted code with C-x r t. 
+6) In C code, do C-c C-i for all those common #includes
+7) You can redirect stuff in eshell directly to a buffer, like so
+ls > #<buffer *scratch*>
+8) Do C-c C-g to google for whatever is under point.
+9) With a rectange, can add prefix to all lines with C-x r t
+10) You can open emacs on a specific line of a file, like after grep
+use with: emacs "+<LINE_NUMER>" "FILE_NAME" note, quotes are needed.
+11) You can go back to where you last were with "C-u C-space"
+
+LaTeX Tips: 
+1) LaTeX is set up with math mode already on, so doing `-<something>
+gives you math macros, to get them enclosed in $$, do C-u
+`-<something> 
+2) C-c compiles, and hitting C-c again will open the PDF in evince.  
+3) C-c C-e gives you an easy way to make environments, its also smart 
+that it remembers the last environment you made.
+4) Doing C-c C-f C-i shows all possible things like emphasis or
+bolding. For example, C-c C-f C-b provides bold, C-e provides emphasis
+
+Helm Tips: 
+1) Helm beginning KBD is C-c C-f, key one is C-c C-f i, that opens up 
+Semantic Tags for that file.  
+2) M-s opens up all the available gtags, nice thing is it will make 
+gtags if you don't have them already.
