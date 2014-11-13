@@ -1,9 +1,0 @@
-;; Object include/
-;; SEMANTICDB Tags save file
-(semanticdb-project-database-file "include/"
-  :tables
-  (list
-)
-  :file "!ssh:w4118@192.168.180.128:!home!w4118!hmwk2-prog!kernel!include!semantic.cache"
-  :semantic-tag-version "2.0"
-  :semanticdb-version "2.2")
