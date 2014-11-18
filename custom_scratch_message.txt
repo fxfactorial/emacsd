@@ -19,22 +19,6 @@ Org-Mode Tips:
 function.  
 2) C-e is basically the start of all export abilities.
 
-Misc Tips: 
-1) C-; is always available and will swap two buffers.  
-2) You can fold code with C-c C-t, this is just in C code at the moment.
-3) C-c C-c will call compile, then do C-x ` to go to errors, if any.
-4) Remember that you can sudo open a file via tramp, just try opening
-as usual, just add prefix of /sudo:: and emacs will ask for password. 
-5) Add prefixes to block of highlighted code with C-x r t. 
-6) In C code, do C-c C-i for all those common #includes
-7) You can redirect stuff in eshell directly to a buffer, like so
-ls > #<buffer *scratch*>
-8) Do C-c C-g to google for whatever is under point.
-9) With a rectange, can add prefix to all lines with C-x r t
-10) You can open emacs on a specific line of a file, like after grep
-use with: emacs "+<LINE_NUMER>" "FILE_NAME" note, quotes are needed.
-11) You can go back to where you last were with "C-u C-space"
-
 LaTeX Tips: 
 1) LaTeX is set up with math mode already on, so doing `-<something>
 gives you math macros, to get them enclosed in $$, do C-u
@@ -50,3 +34,22 @@ Helm Tips:
 Semantic Tags for that file.  
 2) M-s opens up all the available gtags, nice thing is it will make 
 gtags if you don't have them already.
+
+Misc Tips: 
+1) C-; is always available and will swap two buffers.  
+2) You can fold code with C-c C-t, this is just in C code at the moment.
+3) C-c C-c will call compile, then do C-x ` to go to errors, if any.
+4) Remember that you can sudo open a file via tramp, just try opening
+as usual, just add prefix of /sudo:: and emacs will ask for password. 
+5) Add prefixes to block of highlighted code with C-x r t. 
+6) In C code, do C-c C-i for all those common #includes
+7) You can redirect stuff in eshell directly to a buffer, like so
+ls > #<buffer *scratch*>
+8) Do C-c C-g to google for whatever is under point.
+9) With a rectange, can add prefix to all lines with C-x r t
+10) You can open emacs on a specific line of a file, like after grep
+use with: emacs "+<LINE_NUMER>" "FILE_NAME" note, quotes are needed.
+11) You can go back to where you last were with "C-u C-space"
+12) C-return will cycle through the buffers
+13) M-return toggles the full screen
+14) Find all references of tag with M-'
