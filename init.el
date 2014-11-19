@@ -5,8 +5,8 @@
 (when window-system
   (set-frame-position nil 675 0)
   (set-frame-size nil 80 49))
-(global-set-key (kbd "<M-down>") 'forward-paragraph)
-(global-set-key (kbd "<M-up>") 'backward-paragraph)
+(global-set-key (kbd "M-n") 'forward-paragraph)
+(global-set-key (kbd "M-p") 'backward-paragraph)
 ;; Not sure why but dialog box still locks up emacs on OSX.
 ;; in any case, I dislike dialog boxes. 
 (setq use-dialog-box nil)
@@ -101,6 +101,19 @@
 		 (not (buffer-modified-p)))
 	(revert-buffer t t t) )))
   (message "Refreshed open files."))
+
+;; Switch top and bottom buffers. 
+(defun transpose-windows (arg)
+  "Transpose the buffers shown in two windows."
+  (interactive "p")
+  (let ((selector (if (>= arg 0) 'next-window 'previous-window)))
+    (while (/= arg 0)
+      (let ((this-win (window-buffer))
+	    (next-win (window-buffer (funcall selector))))
+	(set-window-buffer (selected-window) next-win)
+	(set-window-buffer (funcall selector) this-win)
+	(select-window (funcall selector)))
+      (setq arg (if (plusp arg) (1- arg) (1+ arg))))))
 
 ;; Issue about call-process not working well in CEDET over tramp 
 (defun my-call-process-hack (orig program &rest args)
@@ -275,8 +288,11 @@
 	     (setq mode-line-buffer-identification 'buffer-file-truename)))
 ;; Since not using line numbers, show me end of the buffer in the fringe
 (setq-default indicate-empty-lines t)
-;; Obviously only for two buffers
+;; Obviously the following two key bindings are only for two buffers
 (global-set-key (kbd "C-'") 'toggle-window-split)
+(global-set-key (kbd "M-'") 'transpose-windows)
+;; Revert all buffers, usually related to a git stash/pull/*
+(global-set-key (kbd "C-\\") 'revert-all-buffers)
 ;; Just for cycling through
 (global-set-key (kbd "<C-return>") 'next-buffer)
 ;; Native full screen
@@ -505,7 +521,7 @@
 			  (define-key ggtags-mode-map (kbd "M->") nil)
 			  (define-key ggtags-mode-map (kbd "M-,") nil)
 			  (define-key ggtags-mode-map (kbd "M-]") nil)
-			  (define-key ggtags-mode-map (kbd "M-'") 'ggtags-find-reference)
+			  (define-key ggtags-mode-map (kbd "M--") 'ggtags-find-reference)
 			  ;; Doesn't really work well over tramp, but otherwise its amazing. 
 			  ;; (flycheck-mode)
 			  (linux-c-mode)))

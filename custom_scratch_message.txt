@@ -1,7 +1,7 @@
 Semantic, Company Tips:
 1) When you're in in a foreign land, say linux kernel, be sure to 
 update the system headers include path, see the example on 
-os-class-semantic.  
+os-vm, which calls os-s
 2) Semantic's jump functionality is awesome, but does require the 
 extra two definitions in this init.el. Semantic alone can jump 
 to definitions, do M-] to jump to a definition of a tag and M-[ 
@@ -36,7 +36,7 @@ Semantic Tags for that file.
 gtags if you don't have them already.
 
 Misc Tips: 
-1) C-; is always available and will swap two buffers.  
+1) C-' is always available and will swap two buffers.  
 2) You can fold code with C-c C-t, this is just in C code at the moment.
 3) C-c C-c will call compile, then do C-x ` to go to errors, if any.
 4) Remember that you can sudo open a file via tramp, just try opening
@@ -52,4 +52,6 @@ use with: emacs "+<LINE_NUMER>" "FILE_NAME" note, quotes are needed.
 11) You can go back to where you last were with "C-u C-space"
 12) C-return will cycle through the buffers
 13) M-return toggles the full screen
-14) Find all references of tag with M-'
+14) Find all references of tag with M--
+15) Similar to 1, swap buffers top and bottom with M-'
+16) Pretty cool is M-\, dels white space between two words. 
