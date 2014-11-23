@@ -81,7 +81,7 @@
  '(display-battery-mode t)
  '(display-time-default-load-average nil)
  '(display-time-mode t)
- '(ede-project-directories (quote ("/ssh:os:/home/w4118/hmwk5-prog/flo-kernel")))
+ '(ede-project-directories (quote ("/ssh:os:/home/w4118/hmwk6-prog/flo-kernel")))
  '(flycheck-c/c++-gcc-executable "/usr/local/bin/gcc-4.9")
  '(flycheck-make-executable "/usr/bin/make")
  '(mail-user-agent (quote gnus-user-agent))
@@ -124,13 +124,13 @@
   "Only way to get semantic to play nicely with desired files,
    very strange, *remember* to add the trailing slash for directories."
   (interactive)
-  (setq company-c-headers-path-system '("/ssh:os:/home/w4118/hmwk5-prog/flo-kernel/arch/arm/include/"
-  					"/ssh:os:/home/w4118/hmwk5-prog/flo-kernel/include/"))
-  (setq company-c-headers-path-user '("/ssh:os:/home/w4118/hmwk5-prog/flo-kernel/include/"))
+  (setq company-c-headers-path-system '("/ssh:os:/home/w4118/hmwk6-prog/flo-kernel/arch/arm/include/"
+  					"/ssh:os:/home/w4118/hmwk6-prog/flo-kernel/include/"))
+  (setq company-c-headers-path-user '("/ssh:os:/home/w4118/hmwk6-prog/flo-kernel/include/"))
   (semantic-reset-system-include)
-  (setq semantic-dependency-include-path '("/ssh:os:/home/w4118/hmwk5-prog/flo-kernel/kernel/"))
-  (semantic-add-system-include "/ssh:os:/home/w4118/hmwk5-prog/flo-kernel/arch/arm/include/")
-  (semantic-add-system-include "/ssh:os:/home/w4118/hmwk5-prog/flo-kernel/include/")
+  (setq semantic-dependency-include-path '("/ssh:os:/home/w4118/hmwk6-prog/flo-kernel/kernel/"))
+  (semantic-add-system-include "/ssh:os:/home/w4118/hmwk6-prog/flo-kernel/arch/arm/include/")
+  (semantic-add-system-include "/ssh:os:/home/w4118/hmwk6-prog/flo-kernel/include/")
   (setq-default semantic-symref-tool 'global)
   ;;For tramp mainly 
   ;; (setq default-directory "/ssh:os:")
@@ -146,7 +146,7 @@
 	  "/home/w4118/utils/arm-2013.11/bin"))
   (setq compile-command (concat
 			 "make -j8 ARCH=arm CROSS_COMPILE=/home/w4118/utils/arm-eabi-4.6/bin/arm-eabi-"
-			 " -C /home/w4118/hmwk5-prog/flo-kernel"))
+			 " -C /home/w4118/hmwk6-prog/flo-kernel"))
   (advice-add 'call-process :around #'my-call-process-hack))
 
 ;; Since not using linum-mode anymore, no sense to run this code. 
@@ -191,7 +191,7 @@
 
 (defun os-vm ()
   (interactive)
-  (find-file "/ssh:os:~/hmwk5-prog/flo-kernel/mm/expose.c")
+  (find-file "/ssh:os:~/hmwk6-prog/flo-kernel/kernel/gps.c")
   (os-s))
 
 (defun toggle-window-split ()
@@ -276,8 +276,8 @@
 (column-number-mode)
 (window-number-meta-mode)
 (display-time-mode t)
-(add-to-list 'custom-theme-load-path 
-	     "~/.emacs.d/elpa/tronesque-theme-20140922.256")
+;; (add-to-list 'custom-theme-load-path 
+;; 	     "~/.emacs.d/elpa/tronesque-theme-20140922.256")
 (fringe-mode 10)
 (tool-bar-mode -1)
 ;; Default for emacs jumps like crazy, this is the sane answer. 
@@ -458,28 +458,6 @@
 ;;Javascript hook, this is a better major mode than default one
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
-;;Helm Mode, somewhat advanced for me, don't need it yet. 
-;; (global-set-key (kbd "C-c C-f") 'helm-command-prefix)
-;; (global-unset-key (kbd "C-x c"))
-;; (define-key helm-gtags-mode-map (kbd "M-s") 'helm-gtags-select)
-;; (setq helm-quick-update                     t ; do not display invisible candidates
-;;       helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
-;;       helm-buffers-fuzzy-matching           t ; fuzzy matching buffer names when non--nil
-;;       helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
-;;       helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
-;;       helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
-;;       helm-ff-file-name-history-use-recentf t
-;;       helm-gtags-ignore-case t
-;;       helm-gtags-auto-update t
-;;       helm-gtags-use-input-at-cursor t
-;;       helm-gtags-pulse-at-cursor t
-;;       helm-gtags-prefix-key "\C-cg"
-;;       helm-gtags-suggested-key-mapping t)
-;; (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
-;; (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
-;; (helm-mode)
-;; (helm-gtags-mode)
-
 ;; C Code
 (add-hook 'c-mode-hook '(lambda ()
 			  (setq-local show-trailing-whitespace t)
@@ -519,6 +497,8 @@
 			  (define-key ggtags-mode-map (kbd "M-.") nil)
 			  (define-key ggtags-mode-map (kbd "M-<") nil)
 			  (define-key ggtags-mode-map (kbd "M->") nil)
+			  (define-key ggtags-mode-map (kbd "M-n") nil)
+			  (define-key ggtags-mode-map (kbd "M-p") nil)
 			  (define-key ggtags-mode-map (kbd "M-,") nil)
 			  (define-key ggtags-mode-map (kbd "M-]") nil)
 			  (define-key ggtags-mode-map (kbd "M--") 'ggtags-find-reference)
