@@ -54,4 +54,6 @@ use with: emacs "+<LINE_NUMER>" "FILE_NAME" note, quotes are needed.
 13) M-return toggles the full screen
 14) Find all references of tag with M--
 15) Similar to 1, swap buffers top and bottom with M-'
-16) Pretty cool is M-\, dels white space between two words. 
+16) Pretty cool is M-\, dels white space between two words.
+17) C-l l will restart point to become the top of the buffer. 
+18) M-+ gives a count of lines, words and characters, pretty neat.

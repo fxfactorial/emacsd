@@ -53,6 +53,7 @@
 (require 'package)
 (require 'helm-config)
 (require 'helm-gtags)
+(require 'ox-md)
 (require 'company)
 (require 'cc-mode)
 
@@ -71,6 +72,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
+;; '(org-export-backends '(ascii html icalendar latex md))
  '(custom-safe-themes
    (quote
     ("442c946bc5c40902e11b0a56bd12edc4d00d7e1c982233545979968e02deb2bc"
@@ -81,7 +83,6 @@
  '(display-battery-mode t)
  '(display-time-default-load-average nil)
  '(display-time-mode t)
- '(ede-project-directories (quote ("/ssh:os:/home/w4118/hmwk6-prog/flo-kernel")))
  '(flycheck-c/c++-gcc-executable "/usr/local/bin/gcc-4.9")
  '(flycheck-make-executable "/usr/bin/make")
  '(mail-user-agent (quote gnus-user-agent))
@@ -92,7 +93,7 @@
 
 ;; Custom Functions
 (defun revert-all-buffers ()
-  "Refreshes all open buffers from their respective files."
+  "Refreshes all open buffers from their respective files, think git use case"
   (interactive)
   (dolist (buf (buffer-list))
     (with-current-buffer buf
@@ -101,6 +102,11 @@
 		 (not (buffer-modified-p)))
 	(revert-buffer t t t) )))
   (message "Refreshed open files."))
+
+;; Came from dgutov, https://github.com/company-mode/company-mode/issues/50
+(defun add-pcomplete-to-capf ()
+  (add-hook 'completion-at-point-functions
+	    'pcomplete-completions-at-point nil t))
 
 ;; Switch top and bottom buffers. 
 (defun transpose-windows (arg)
@@ -293,9 +299,12 @@
 (global-set-key (kbd "M-'") 'transpose-windows)
 ;; Revert all buffers, usually related to a git stash/pull/*
 (global-set-key (kbd "C-\\") 'revert-all-buffers)
-;; Just for cycling through
+;; Just for cycling through in the same buffer
 (global-set-key (kbd "<C-return>") 'next-buffer)
-;; Native full screen
+;; Shift focus to next buffer, same thing as C-x o, but faster.
+(global-set-key (kbd "<kp-enter>") 'other-window)
+(global-set-key (kbd "<kp-delete>") 'previous-multiframe-window)
+;; Native full screen, pretty nice.
 (global-set-key (kbd "<M-return>") 'toggle-frame-fullscreen)
 ;; I hate this (its the list-buffer), always mistakenly call it and never want it.
 (global-unset-key (kbd "C-x C-b"))
@@ -348,10 +357,13 @@
 ;; the contenxt and so -> for structs doesn't give completion.
 ;; with clang first as well, you can't do C-w to go to definition,
 ;; but that's okay since you can do it with semantic anyway with M-]/[
+;; In any case, I prefer using gcc instead of clang, at least for the moment.
+;; the capf, (means completion at point functions), is mainly here for org-mode
 (setq company-backends '(company-semantic
 			 company-c-headers
 			 company-bbdb
-			 company-ghc))
+			 company-ghc
+			 company-capf))
 
 ;; LateX Related Code
 (add-hook 'LaTeX-mode-hook (lambda ()
@@ -379,7 +391,8 @@
 
 ;; Python Stuff
 ;; Get these variables set before the inferior mode comes up, otherwise too late.
-(setq python-shell-interpreter "/usr/local/bin/ipython3"
+;; Might as well just use this VM 
+(setq python-shell-interpreter "~/.emacs.d/.python-environments/default/bin/ipython"
       python-shell-interpreter-args ""
       python-shell-prompt-regexp "In \\[[0-9]+\\]: "
       python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
@@ -416,7 +429,9 @@
 			      	;; `run-python'. This ensures new values let-bound in
 			      	;; `python-shell-make-comint' are locally set.
 			      	(set (make-local-variable 'python-shell-interpreter) interpreter)
-			      	(set (make-local-variable 'python-shell-interpreter-args) args))))
+			      	(set (make-local-variable 'python-shell-interpreter-args) args))
+			      (flycheck-mode)
+			      (setq-local show-trailing-whitespace t)))
 
 ;; Haskell Stuff
 (add-hook 'haskell-mode-hook (lambda ()
@@ -445,7 +460,27 @@
 (add-hook 'org-mode-hook (lambda ()
 			   (flyspell-mode)
 			   (auto-fill-mode)
-			   (define-key org-mode-map (kbd "C-o") 'my-org-defaults)))
+			   (company-mode)
+			   (define-key org-mode-map
+			     (kbd "C-c p")
+			     'org-publish-current-project)
+			   (define-key org-mode-map
+			     (kbd "C-o")
+			     'my-org-defaults)))
+;; TODO, this shouldn't need to be a separate call, should be
+;; part of the hook above. 
+(add-hook 'org-mode-hook #'add-pcomplete-to-capf)
+
+(setq org-publish-project-alist
+      '(("blog" . (:base-directory "~/Repos/octopress/source/_org_posts/"
+				   :base-extension "org"
+				   :publishing-directory "~/Repos/octopress/source/_posts/"
+				   :sub-superscript ""
+				   :recursive t
+				   :publishing-function org-html-publish-to-html
+				   :headline-levels 4
+				   :html-extension "markdown"
+				   :body-only t))))
 ;; Basic text files
 (add-hook 'text-mode-hook 'auto-fill-mode)
 
@@ -458,36 +493,39 @@
 ;;Javascript hook, this is a better major mode than default one
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
+;; Common things wanted in all C like languages. 
+(add-hook 'c-mode-common-hook '(lambda ()
+				 (setq-local show-trailing-whitespace t)
+				 (auto-complete-mode -1)
+				 (company-mode)
+				 (define-key company-mode-map (kbd "M-h") 'company-c-headers)
+				 (hs-minor-mode)
+				 (define-key hs-minor-mode-map (kbd "C-c C-t") 'hs-toggle-hiding)
+				 (flycheck-mode)
+				 (setq helm-quick-update                     t ; do not display invisible candidates
+				       helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
+				       helm-buffers-fuzzy-matching           t ; fuzzy matching buffer names when non--nil
+				       helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
+				       helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
+				       helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
+				       helm-ff-file-name-history-use-recentf t
+				       helm-gtags-ignore-case t
+				       helm-gtags-auto-update t
+				       helm-gtags-use-input-at-cursor t
+				       helm-gtags-pulse-at-cursor t
+				       helm-gtags-prefix-key "\C-cg"
+				       helm-gtags-suggested-key-mapping t)
+				 (global-set-key (kbd "C-c C-f") 'helm-command-prefix)
+				 (global-unset-key (kbd "C-x c"))
+				 (linux-c-mode)))
+
 ;; C Code
 (add-hook 'c-mode-hook '(lambda ()
-			  (setq-local show-trailing-whitespace t)
 			  (semantic-mode)
-			  (auto-complete-mode -1)
-			  (company-mode)
-			  (global-set-key (kbd "C-c C-f") 'helm-command-prefix)
-			  (global-unset-key (kbd "C-x c"))
 			  (define-key helm-gtags-mode-map (kbd "M-s") 'helm-gtags-select)
-			  (setq helm-quick-update                     t ; do not display invisible candidates
-				helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
-				helm-buffers-fuzzy-matching           t ; fuzzy matching buffer names when non--nil
-				helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
-				helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
-				helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
-				helm-ff-file-name-history-use-recentf t
-				helm-gtags-ignore-case t
-				helm-gtags-auto-update t
-				helm-gtags-use-input-at-cursor t
-				helm-gtags-pulse-at-cursor t
-				helm-gtags-prefix-key "\C-cg"
-				helm-gtags-suggested-key-mapping t)
 			  (helm-gtags-mode)
 			  (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
 			  (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
-			  ;;Too complex for me right now. 
-			  ;;(helm-mode)
-			  (define-key company-mode-map (kbd "M-h") 'company-c-headers)
-			  (hs-minor-mode)
-			  (define-key hs-minor-mode-map (kbd "C-c C-t") 'hs-toggle-hiding)
 			  (define-key c-mode-map (kbd "C-c C-c") 'compile)
 			  (semantic-mru-bookmark-mode)
 			  (define-key semantic-mode-map (kbd "M-]") 'semantic-ia-fast-jump)
@@ -501,8 +539,44 @@
 			  (define-key ggtags-mode-map (kbd "M-p") nil)
 			  (define-key ggtags-mode-map (kbd "M-,") nil)
 			  (define-key ggtags-mode-map (kbd "M-]") nil)
-			  (define-key ggtags-mode-map (kbd "M--") 'ggtags-find-reference)
-			  ;; Doesn't really work well over tramp, but otherwise its amazing. 
-			  ;; (flycheck-mode)
-			  (linux-c-mode)))
+			  (define-key ggtags-mode-map (kbd "M--") 'ggtags-find-reference)))
+
+;; Yassnippet
+(setq yas-snippet-dirs '("~/.emacs.d/snippets"))
+(yas-global-mode)
+(yas--initialize)
+
+;; Objective-C
+(add-to-list 'auto-mode-alist '("\\.mm\\'" . objc-mode))
+
+;; (add-to-list 'load-path "~/.emacs.d/emaXcode")
+;; (setq emaXcode-yas-objc-header-directories-list
+;;       '("/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Foundation.framework/Headers/"
+;; 	"/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/UIKit.framework/Headers"))
+(add-hook 'objc-mode-hook '(lambda ()
+			     (setq company-backends '(company-capf
+						      company-clang
+						      company-yasnippet))
+			     (setq company-clang-arguments '("-F/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/"));; This can be returned to later.
+			     ;; This currently assumes you opened up emacs from the root directory of the project, need to fix later.
+			     ;; Need to make the configuration switch from Debug to Release, maybe the sdk as well later, quite a few configurations...
+			     (setq compile-command "xcodebuild -project /Users/Edgar/Documents/Steps/Steps.xcodeproj -configuration Debug -sdk iphoneos8.1")
+			     (define-key objc-mode-map (kbd "C-c C-b") '(lambda ()
+									  (call-process-shell-command "ios-deploy -db Debug-iphoneos/Steps.app")))
+			     ;; "-I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/CoreFoundation.framework"))
+			     ;; This somewhat needs to be smarter, or maybe I can just handle it? 
+			     (setq company-c-headers-path-system '("/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Foundation.framework/Headers/"
+								   "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/UIKit.framework/Headers/"))
+			     (add-to-list 'magic-mode-alist
+					  `(,(lambda ()
+					       (and (string= (file-name-extension buffer-file-name) "h")
+						    (re-search-forward "@\\<interface\\>" 
+								       magic-mode-regexp-match-limit t)))
+					    . objc-mode))
+			     (define-key objc-mode-map (kbd "C-c C-c") 'compile)
+			     (define-key objc-mode-map (kbd "C-=") 'ff-find-other-file)
+			     (define-key objc-mode-map (kbd "C-,") 'company-yasnippet)
+			     (define-key objc-mode-map (kbd "C-.") 'company-clang)))
+
+;; (require 'emaXcode)))
 
