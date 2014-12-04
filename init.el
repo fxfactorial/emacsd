@@ -71,25 +71,46 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(auto-insert-query nil)
  '(column-number-mode t)
-;; '(org-export-backends '(ascii html icalendar latex md))
  '(custom-safe-themes
    (quote
-    ("442c946bc5c40902e11b0a56bd12edc4d00d7e1c982233545979968e02deb2bc"
-     "e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e"
-     "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879"
-     "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4"
-     "ee6081af57dd389d9c94be45d49cf75d7d737c4a78970325165c7d8cb6eb9e34" default)))
+    ("442c946bc5c40902e11b0a56bd12edc4d00d7e1c982233545979968e02deb2bc" "e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "ee6081af57dd389d9c94be45d49cf75d7d737c4a78970325165c7d8cb6eb9e34" default)))
  '(display-battery-mode t)
  '(display-time-default-load-average nil)
  '(display-time-mode t)
  '(flycheck-c/c++-gcc-executable "/usr/local/bin/gcc-4.9")
  '(flycheck-make-executable "/usr/bin/make")
  '(mail-user-agent (quote gnus-user-agent))
+ '(org-startup-indented t)
  '(solarized-distinct-fringe-background t)
  '(solarized-high-contrast-mode-line t)
  '(solarized-use-more-italic t)
  '(tool-bar-mode nil))
+
+;; Skeletons definitions for common includes.
+(define-skeleton my-org-defaults
+  "Org defaults I use"
+  nil
+  "#+AUTHOR:   Edgar Aroutiounian\n"
+  "#+EMAIL:    edgar.factorial@gmail.com\n"
+  "#+LANGUAGE: en\n"
+  "#+OPTIONS:  toc:nil num:0\n")
+
+(define-skeleton my-c-defaults
+  "Usual includes that I use for C coding"
+  nil
+  "#include <stdio.h>\n"
+  "#include <stdlib.h>\n"
+  "#include <unistd.h>\n"
+  "#include <ctype.h>\n"
+  "#include <string.h>\n"
+  "\n"
+  "\n"
+  "int main (int argc, char **argv)\n"
+  "{\n"
+  "\treturn 0;\n"
+  "}")
 
 ;; Custom Functions
 (defun revert-all-buffers ()
@@ -178,22 +199,15 @@
 ;;   (interactive)
 ;;   (shell-command "find . -type f -iname \"\*.[chS]\" | xargs etags -a"))
 
-(defun my-org-defaults ()
-  "Adds some common stuff I always use to an org mode text file"
-  (interactive)
-  (mapc 'insert '("#+AUTHOR: Edgar Aroutiounian\n"
-		  "#+STARTUP: indent\n"
-		  "#+OPTIONS: toc:nil\n"))
-  (org-mode-restart))
-
-(defun default-c-includes ()
-  "Hate typing this same crap out each time"
-  (interactive)
-  (mapc 'insert '("#include <stdio.h>\n"
-		  "#include <stdlib.h>\n"
-		  "#include <unistd.h>\n"
-		  "#include <ctype.h>\n"
-		  "#include <string.h>\n")))
+;; Not used anymore because of skeleton, but keeping for the
+;; code sample, mainly the mapc 'insert '(list)
+;; (defun my-org-defaults ()
+;;   "Adds some common stuff I always use to an org mode text file"
+;;   (interactive)
+;;   (mapc 'insert '("#+AUTHOR: Edgar Aroutiounian\n"
+;; 		  "#+STARTUP: indent\n"
+;; 		  "#+OPTIONS: toc:nil\n"))
+;;   (org-mode-restart))
 
 (defun os-vm ()
   (interactive)
@@ -245,7 +259,34 @@
 	(setq first (cdr (car (cdr alist)))))
     (semantic-mrub-switch-tags first)))
 
+(defun read-lines (filePath)
+  "Return a list of lines of a file at filePath."
+  (with-temp-buffer
+    (insert-file-contents filePath)
+    (split-string (buffer-string) "\n" t)))
+
+;; This takes care of all my irc needs.
+(defun irc-connect ()
+  "Connect to IRC, register nick, open commonly used channels"
+  (interactive)
+  (setq erc-max-buffer-size 20000)
+  (setq erc-autojoin-channels-alist '(("freenode.net" "#c" "#emacs")))
+  (setq erc-hide-list '("JOIN" "PART" "QUIT"))
+  ;; This is obviously untracked, if you copy my init.el,
+  ;; either delete this code or provide your own creds
+  (let ((acc (read-lines "~/.emacs.d/these-erc-creds")))
+    (setq erc-nick (car acc))  
+    (setq erc-password (nth 1 acc)))
+  (add-hook 'erc-after-connect '(lambda (server nick)
+				  (erc-message
+				   "PRIVMSG"
+				   (concat "NickServ identify " erc-password))))
+  ;; This is what actually does the connection
+  (erc :server "irc.freenode.net" :port 6667
+       :nick "Algebr" :full-name user-full-name))
+
 ;; Misc things
+(global-set-key (kbd "C-M-e") 'irc-connect)
 (global-set-key (kbd "C-c C-g") 'google-this-noconfirm)
 ;; Love ido, idiot for not using it earlier. 
 (setq ido-everywhere t)
@@ -262,12 +303,14 @@
 (add-hook 'shell-mode-hook (lambda ()
 			     (set-process-query-on-exit-flag
 			      (get-process "shell") nil)))
-
 ;; Don't prompt me when I want to clear the buffer
 (put 'erase-buffer 'disabled nil)
 
 ;; Visuals, but note that some visuals also set in custom.
+(auto-insert-mode)
 (abbrev-mode -1)
+(define-auto-insert "\\.org\\'" 'my-org-defaults)
+(define-auto-insert "\\.c\\'" 'my-c-defaults)
 (display-battery-mode 1)
 (electric-indent-mode 1)
 (electric-pair-mode 1)
@@ -292,7 +335,8 @@
 (add-hook 'find-file-hooks
 	  '(lambda ()
 	     (setq mode-line-buffer-identification 'buffer-file-truename)))
-;; Since not using line numbers, show me end of the buffer in the fringe
+;; Since not using line numbers, show me end of the buffer in the
+;; fringe
 (setq-default indicate-empty-lines t)
 ;; Obviously the following two key bindings are only for two buffers
 (global-set-key (kbd "C-'") 'toggle-window-split)
@@ -302,11 +346,12 @@
 ;; Just for cycling through in the same buffer
 (global-set-key (kbd "<C-return>") 'next-buffer)
 ;; Shift focus to next buffer, same thing as C-x o, but faster.
-(global-set-key (kbd "<kp-enter>") 'other-window)
-(global-set-key (kbd "<kp-delete>") 'previous-multiframe-window)
+(global-set-key (kbd "<C-M-right>") 'other-window)
+(global-set-key (kbd "<C-M-left>") 'previous-multiframe-window)
 ;; Native full screen, pretty nice.
 (global-set-key (kbd "<M-return>") 'toggle-frame-fullscreen)
-;; I hate this (its the list-buffer), always mistakenly call it and never want it.
+;; I hate this (its the list-buffer), always mistakenly call it and
+;; never want it.
 (global-unset-key (kbd "C-x C-b"))
 (when window-system
   (load-theme 'solarized-dark))
@@ -389,6 +434,19 @@
 				;; Basically poll the file for changes. 
 				(auto-revert-mode)))
 
+(add-hook 'inf-ruby-mode '(lambda ()
+			    (set-process-query-on-exit-flag
+			     (get-process "ruby") nil)))
+;; Ruby stuff
+(add-hook 'ruby-mode-hook '(lambda ()
+			     ;; (setq company-backends '(company-robe))))
+			     ;;			    (auto-complete-mode -1)
+			     (robe-mode)))
+;;			    (robe-start)
+;; (set-process-query-on-exit-flag
+;;  (get-process "ruby") nil)
+;;			    (company-mode)))
+
 ;; Python Stuff
 ;; Get these variables set before the inferior mode comes up, otherwise too late.
 ;; Might as well just use this VM 
@@ -409,6 +467,8 @@
 				       	(get-process "Python") nil)))
 
 (add-hook 'python-mode-hook (lambda ()
+			      (hs-minor-mode)
+			      (define-key hs-minor-mode-map (kbd "C-c C-t") 'hs-toggle-hiding)
 			      (jedi:setup)
 			      (setq jedi:setup-keys t
 				    jedi:complete-on-dot t
@@ -463,12 +523,11 @@
 			   (company-mode)
 			   (define-key org-mode-map
 			     (kbd "C-c p")
-			     'org-publish-current-project)
-			   (define-key org-mode-map
-			     (kbd "C-o")
-			     'my-org-defaults)))
+			     'org-publish-current-project)))
+
 ;; TODO, this shouldn't need to be a separate call, should be
-;; part of the hook above. 
+;; part of the hook above.
+;; https://github.com/company-mode/company-mode/issues/50
 (add-hook 'org-mode-hook #'add-pcomplete-to-capf)
 
 (setq org-publish-project-alist
@@ -530,7 +589,6 @@
 			  (semantic-mru-bookmark-mode)
 			  (define-key semantic-mode-map (kbd "M-]") 'semantic-ia-fast-jump)
 			  (define-key semantic-mode-map (kbd "M-[") 'semantic-ia-fast-jump-back)
-			  (define-key c-mode-map (kbd "C-c C-i") 'default-c-includes)
 			  (ggtags-mode)
 			  (define-key ggtags-mode-map (kbd "M-.") nil)
 			  (define-key ggtags-mode-map (kbd "M-<") nil)
@@ -542,9 +600,9 @@
 			  (define-key ggtags-mode-map (kbd "M--") 'ggtags-find-reference)))
 
 ;; Yassnippet
-(setq yas-snippet-dirs '("~/.emacs.d/snippets"))
-(yas-global-mode)
-(yas--initialize)
+;; (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
+;; (yas-global-mode)
+;; (yas--initialize)
 
 ;; Objective-C
 (add-to-list 'auto-mode-alist '("\\.mm\\'" . objc-mode))
@@ -555,8 +613,8 @@
 ;; 	"/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/UIKit.framework/Headers"))
 (add-hook 'objc-mode-hook '(lambda ()
 			     (setq company-backends '(company-capf
-						      company-clang
-						      company-yasnippet))
+						      company-clang))
+			     ;; company-yasnippet))
 			     (setq company-clang-arguments '("-F/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/"));; This can be returned to later.
 			     ;; This currently assumes you opened up emacs from the root directory of the project, need to fix later.
 			     ;; Need to make the configuration switch from Debug to Release, maybe the sdk as well later, quite a few configurations...
@@ -575,7 +633,7 @@
 					    . objc-mode))
 			     (define-key objc-mode-map (kbd "C-c C-c") 'compile)
 			     (define-key objc-mode-map (kbd "C-=") 'ff-find-other-file)
-			     (define-key objc-mode-map (kbd "C-,") 'company-yasnippet)
+			     ;; (define-key objc-mode-map (kbd "C-,") 'company-yasnippet)
 			     (define-key objc-mode-map (kbd "C-.") 'company-clang)))
 
 ;; (require 'emaXcode)))
