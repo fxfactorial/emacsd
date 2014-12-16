@@ -95,6 +95,8 @@
   "#+AUTHOR:   Edgar Aroutiounian\n"
   "#+EMAIL:    edgar.factorial@gmail.com\n"
   "#+LANGUAGE: en\n"
+  "#+LATEX_HEADER: \\usepackage{lmodern}\n"
+  "#+LATEX_HEADER: \\usepackage[T1]{fontenc}\n"
   "#+OPTIONS:  toc:nil num:0\n")
 
 (define-skeleton my-c-defaults
@@ -147,34 +149,35 @@
   (apply (if (equal program cedet-global-command) #'process-file orig)
          program args))
 
-(defun os-s ()
-  "Only way to get semantic to play nicely with desired files,
-   very strange, *remember* to add the trailing slash for directories."
-  (interactive)
-  (setq company-c-headers-path-system '("/ssh:os:/home/w4118/hmwk6-prog/flo-kernel/arch/arm/include/"
-  					"/ssh:os:/home/w4118/hmwk6-prog/flo-kernel/include/"))
-  (setq company-c-headers-path-user '("/ssh:os:/home/w4118/hmwk6-prog/flo-kernel/include/"))
-  (semantic-reset-system-include)
-  (setq semantic-dependency-include-path '("/ssh:os:/home/w4118/hmwk6-prog/flo-kernel/kernel/"))
-  (semantic-add-system-include "/ssh:os:/home/w4118/hmwk6-prog/flo-kernel/arch/arm/include/")
-  (semantic-add-system-include "/ssh:os:/home/w4118/hmwk6-prog/flo-kernel/include/")
-  (setq-default semantic-symref-tool 'global)
-  ;;For tramp mainly 
-  ;; (setq default-directory "/ssh:os:")
-  ;;Doesn't seem to work since this is a function defined in the shell? 
-  ;; (local-set-key (kbd "M-z") '(lambda () 
-  ;; 				(shell-command "b")))
-  (mapc (lambda (item)
-	  (add-to-list 'tramp-remote-path item))
-	'("/home/w4118/utils/android-sdk-linux/tools"
-	  "/home/w4118/utils/android-sdk-linux/platform-tools"
-	  "/home/w4118/utils/arm-eabi-4.6/bin"
-	  "/home/w4118/utils/bin"
-	  "/home/w4118/utils/arm-2013.11/bin"))
-  (setq compile-command (concat
-			 "make -j8 ARCH=arm CROSS_COMPILE=/home/w4118/utils/arm-eabi-4.6/bin/arm-eabi-"
-			 " -C /home/w4118/hmwk6-prog/flo-kernel"))
-  (advice-add 'call-process :around #'my-call-process-hack))
+;; Used in Operating System Course, not needed anymore.
+;; (defun os-s ()
+;;   "Only way to get semantic to play nicely with desired files,
+;;    very strange, *remember* to add the trailing slash for directories."
+;;   (interactive)
+;;   (setq company-c-headers-path-system '("/ssh:os:/home/w4118/hmwk6-prog/flo-kernel/arch/arm/include/"
+;;   					"/ssh:os:/home/w4118/hmwk6-prog/flo-kernel/include/"))
+;;   (setq company-c-headers-path-user '("/ssh:os:/home/w4118/hmwk6-prog/flo-kernel/include/"))
+;;   (semantic-reset-system-include)
+;;   (setq semantic-dependency-include-path '("/ssh:os:/home/w4118/hmwk6-prog/flo-kernel/kernel/"))
+;;   (semantic-add-system-include "/ssh:os:/home/w4118/hmwk6-prog/flo-kernel/arch/arm/include/")
+;;   (semantic-add-system-include "/ssh:os:/home/w4118/hmwk6-prog/flo-kernel/include/")
+;;   (setq-default semantic-symref-tool 'global)
+;;   ;;For tramp mainly 
+;;   ;; (setq default-directory "/ssh:os:")
+;;   ;;Doesn't seem to work since this is a function defined in the shell? 
+;;   ;; (local-set-key (kbd "M-z") '(lambda () 
+;;   ;; 				(shell-command "b")))
+;;   (mapc (lambda (item)
+;; 	  (add-to-list 'tramp-remote-path item))
+;; 	'("/home/w4118/utils/android-sdk-linux/tools"
+;; 	  "/home/w4118/utils/android-sdk-linux/platform-tools"
+;; 	  "/home/w4118/utils/arm-eabi-4.6/bin"
+;; 	  "/home/w4118/utils/bin"
+;; 	  "/home/w4118/utils/arm-2013.11/bin"))
+;;   (setq compile-command (concat
+;; 			 "make -j8 ARCH=arm CROSS_COMPILE=/home/w4118/utils/arm-eabi-4.6/bin/arm-eabi-"
+;; 			 " -C /home/w4118/hmwk6-prog/flo-kernel"))
+;;   (advice-add 'call-process :around #'my-call-process-hack))
 
 ;; Since not using linum-mode anymore, no sense to run this code. 
 ;; (define-global-minor-mode this-linum-mode linum-mode
@@ -209,10 +212,10 @@
 ;; 		  "#+OPTIONS: toc:nil\n"))
 ;;   (org-mode-restart))
 
-(defun os-vm ()
-  (interactive)
-  (find-file "/ssh:os:~/hmwk6-prog/flo-kernel/kernel/gps.c")
-  (os-s))
+;; (defun os-vm ()
+;;   (interactive)
+;;   (find-file "/ssh:os:~/hmwk6-prog/flo-kernel/kernel/gps.c")
+;;   (os-s))
 
 (defun toggle-window-split ()
   (interactive)
@@ -287,6 +290,7 @@
 
 ;; Misc things
 (global-set-key (kbd "C-M-e") 'irc-connect)
+(global-set-key (kbd "C-M-p") 'run-python)
 (global-set-key (kbd "C-c C-g") 'google-this-noconfirm)
 ;; Love ido, idiot for not using it earlier. 
 (setq ido-everywhere t)
@@ -450,8 +454,8 @@
 ;; Python Stuff
 ;; Get these variables set before the inferior mode comes up, otherwise too late.
 ;; Might as well just use this VM 
-(setq python-shell-interpreter "~/.emacs.d/.python-environments/default/bin/ipython"
-      python-shell-interpreter-args ""
+(setq python-shell-interpreter "/usr/local/bin/ipython3"
+      python-shell-interpreter-args "--matplotlib=osx --colors=Linux"
       python-shell-prompt-regexp "In \\[[0-9]+\\]: "
       python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
       python-shell-completion-setup-code
@@ -467,16 +471,15 @@
 				       	(get-process "Python") nil)))
 
 (add-hook 'python-mode-hook (lambda ()
+			      (electric-pair-mode nil)
 			      (hs-minor-mode)
 			      (define-key hs-minor-mode-map (kbd "C-c C-t") 'hs-toggle-hiding)
+			      (define-key python-mode-map (kbd "M-q") 'python-fill-paren)
 			      (jedi:setup)
 			      (setq jedi:setup-keys t
-				    jedi:complete-on-dot t
-				    jedi:environment-virtualenv '("virtualenv"
-								  "--system-site-packages"
-								  "--quiet"
-								  "--python"
-								  "/usr/local/bin/python3"))
+				    jedi:server-args '("--sys-path"
+						       "/usr/local/Cellar/python3/3.4.2_1/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages")
+				    jedi:complete-on-dot t)
 			      ;; Forgot what this was for..think some os x issues. 
 			      (setenv "LC_CTYPE" "UTF-8")
 			      ;; keeping a consistent interface for autocomplete type things. 
@@ -517,6 +520,15 @@
 ;; 			      (merlin-mode)))
 
 ;; Orgmode Stuff
+;; This is for syntax highling in pdf exports
+(add-to-list 'org-latex-packages-alist '("" "minted"))
+(setq org-latex-listings 'minted)
+(setq org-latex-create-formula-image-program 'imagemagick)
+(setq org-latex-pdf-process
+      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
 (add-hook 'org-mode-hook (lambda ()
 			   (flyspell-mode)
 			   (auto-fill-mode)
@@ -554,6 +566,7 @@
 
 ;; Common things wanted in all C like languages. 
 (add-hook 'c-mode-common-hook '(lambda ()
+				 (define-key c-mode-map (kbd "C-=") 'ff-find-other-file)
 				 (setq-local show-trailing-whitespace t)
 				 (auto-complete-mode -1)
 				 (company-mode)
@@ -605,36 +618,36 @@
 ;; (yas--initialize)
 
 ;; Objective-C
-(add-to-list 'auto-mode-alist '("\\.mm\\'" . objc-mode))
+;; (add-to-list 'auto-mode-alist '("\\.mm\\'" . objc-mode))
 
 ;; (add-to-list 'load-path "~/.emacs.d/emaXcode")
 ;; (setq emaXcode-yas-objc-header-directories-list
 ;;       '("/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Foundation.framework/Headers/"
 ;; 	"/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/UIKit.framework/Headers"))
-(add-hook 'objc-mode-hook '(lambda ()
-			     (setq company-backends '(company-capf
-						      company-clang))
-			     ;; company-yasnippet))
-			     (setq company-clang-arguments '("-F/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/"));; This can be returned to later.
-			     ;; This currently assumes you opened up emacs from the root directory of the project, need to fix later.
-			     ;; Need to make the configuration switch from Debug to Release, maybe the sdk as well later, quite a few configurations...
-			     (setq compile-command "xcodebuild -project /Users/Edgar/Documents/Steps/Steps.xcodeproj -configuration Debug -sdk iphoneos8.1")
-			     (define-key objc-mode-map (kbd "C-c C-b") '(lambda ()
-									  (call-process-shell-command "ios-deploy -db Debug-iphoneos/Steps.app")))
-			     ;; "-I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/CoreFoundation.framework"))
-			     ;; This somewhat needs to be smarter, or maybe I can just handle it? 
-			     (setq company-c-headers-path-system '("/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Foundation.framework/Headers/"
-								   "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/UIKit.framework/Headers/"))
-			     (add-to-list 'magic-mode-alist
-					  `(,(lambda ()
-					       (and (string= (file-name-extension buffer-file-name) "h")
-						    (re-search-forward "@\\<interface\\>" 
-								       magic-mode-regexp-match-limit t)))
-					    . objc-mode))
-			     (define-key objc-mode-map (kbd "C-c C-c") 'compile)
-			     (define-key objc-mode-map (kbd "C-=") 'ff-find-other-file)
-			     ;; (define-key objc-mode-map (kbd "C-,") 'company-yasnippet)
-			     (define-key objc-mode-map (kbd "C-.") 'company-clang)))
+;; (add-hook 'objc-mode-hook '(lambda ()
+;; 			     (setq company-backends '(company-capf
+;; 						      company-clang))
+;; 			     ;; company-yasnippet))
+;; 			     (setq company-clang-arguments '("-F/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/"));; This can be returned to later.
+;; 			     ;; This currently assumes you opened up emacs from the root directory of the project, need to fix later.
+;; 			     ;; Need to make the configuration switch from Debug to Release, maybe the sdk as well later, quite a few configurations...
+;; 			     (setq compile-command "xcodebuild -project /Users/Edgar/Documents/Steps/Steps.xcodeproj -configuration Debug -sdk iphoneos8.1")
+;; 			     (define-key objc-mode-map (kbd "C-c C-b") '(lambda ()
+;; 									  (call-process-shell-command "ios-deploy -db Debug-iphoneos/Steps.app")))
+;; 			     ;; "-I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/CoreFoundation.framework"))
+;; 			     ;; This somewhat needs to be smarter, or maybe I can just handle it? 
+;; 			     (setq company-c-headers-path-system '("/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Foundation.framework/Headers/"
+;; 								   "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/UIKit.framework/Headers/"))
+;; 			     (add-to-list 'magic-mode-alist
+;; 					  `(,(lambda ()
+;; 					       (and (string= (file-name-extension buffer-file-name) "h")
+;; 						    (re-search-forward "@\\<interface\\>" 
+;; 								       magic-mode-regexp-match-limit t)))
+;; 					    . objc-mode))
+;; 			     (define-key objc-mode-map (kbd "C-c C-c") 'compile)
+;; 			     (define-key objc-mode-map (kbd "C-=") 'ff-find-other-file)
+;; 			     ;; (define-key objc-mode-map (kbd "C-,") 'company-yasnippet)
+;; 			     (define-key objc-mode-map (kbd "C-.") 'company-clang)))
 
 ;; (require 'emaXcode)))
 
