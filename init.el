@@ -1,6 +1,6 @@
 ;; OS X specifics
-(setq mac-option-modifier 'super)
-(setq mac-command-modifier 'meta)
+(setq mac-option-modifier 'super
+      mac-command-modifier 'meta)
 ;; I like it to have emacs open on right half of screen. 
 (when window-system
   (set-frame-position nil 675 0)
@@ -9,9 +9,9 @@
 (global-set-key (kbd "M-p") 'backward-paragraph)
 ;; Not sure why but dialog box still locks up emacs on OSX.
 ;; in any case, I dislike dialog boxes. 
-(setq use-dialog-box nil)
-(setq user-full-name "Edgar Aroutiounian")
-(setq user-mail-address "edgar.factorial@gmail.com")
+(setq use-dialog-box nil
+      user-full-name "Edgar Aroutiounian"
+      user-mail-address "edgar.factorial@gmail.com")
 
 ;; Giving myself this helpful buffer, otherwise way to many damn key
 ;; bindings to remember!
@@ -113,6 +113,18 @@
   "{\n"
   "\treturn 0;\n"
   "}")
+
+(define-skeleton my-objc-defaults
+  "Objcs barebones"
+  nil
+  "#include <Cocoa/Cocoa.h>\n"
+  "\n"
+  "\n"
+  "int main(int argc, char **argv)\n"
+  "{\n"
+  ;; Assuming this is for desktop app
+  "\treturn NSApplicationMain(argc, argv);\n"
+  "}\n")
 
 ;; Custom Functions
 (defun revert-all-buffers ()
@@ -311,10 +323,13 @@
 (put 'erase-buffer 'disabled nil)
 
 ;; Visuals, but note that some visuals also set in custom.
+(show-paren-mode)
 (auto-insert-mode)
 (abbrev-mode -1)
 (define-auto-insert "\\.org\\'" 'my-org-defaults)
 (define-auto-insert "\\.c\\'" 'my-c-defaults)
+(define-auto-insert "\\.m\\'" 'my-objc-defaults)
+(define-auto-insert "\\.mm\\'" 'my-objc-defaults)
 (display-battery-mode 1)
 (electric-indent-mode 1)
 (electric-pair-mode 1)
@@ -323,7 +338,9 @@
 ;; in any case, have to use this wrapper function cause linum-mode
 ;; fucks up doc-view, just in case you ever want to go back. 
 ;; (this-linum-mode 1)
-(setq inhibit-startup-message t)
+(setq inhibit-startup-message t
+      scroll-step 1)
+      
 (window-number-mode)
 (mouse-avoidance-mode 'banish)
 (column-number-mode)
@@ -334,7 +351,6 @@
 (fringe-mode 10)
 (tool-bar-mode -1)
 ;; Default for emacs jumps like crazy, this is the sane answer. 
-(setq scroll-step 1)
 ;; Gives me the full name of the buffer, hate just having foo.c
 (add-hook 'find-file-hooks
 	  '(lambda ()
@@ -357,6 +373,12 @@
 ;; I hate this (its the list-buffer), always mistakenly call it and
 ;; never want it.
 (global-unset-key (kbd "C-x C-b"))
+;; Undefine the regex searches so that they can be better used elsewhere
+(global-unset-key (kbd "C-M-s"))
+(global-unset-key (kbd "C-M-r"))
+;; Make searches be regex searches!
+(global-set-key (kbd "C-s") 'isearch-forward-regexp)
+(global-set-key (kbd "C-r") 'isearch-backward-regexp)
 (when window-system
   (load-theme 'solarized-dark))
 ;; My other favorite theme. 
@@ -383,12 +405,12 @@
 ;; the appropriate modes, eitherwise the globalness of it is annoying when
 ;; doing say Python and C, or rather anything else and C. 
 (global-semantic-idle-scheduler-mode 1)
-(global-semantic-decoration-mode 1)
 (global-semantic-idle-summary-mode 1)
 (global-semantic-stickyfunc-mode 1)
 (global-semantic-idle-local-symbol-highlight-mode 1)
 (global-semantic-mru-bookmark-mode 1)
 (global-semanticdb-minor-mode 1)
+(global-semantic-decoration-mode 1)
 (global-cedet-m3-minor-mode 1)
 (semanticdb-enable-gnu-global-databases 'c-mode t)
 (global-semantic-show-unmatched-syntax-mode t)
@@ -522,9 +544,9 @@
 ;; Orgmode Stuff
 ;; This is for syntax highling in pdf exports
 (add-to-list 'org-latex-packages-alist '("" "minted"))
-(setq org-latex-listings 'minted)
-(setq org-latex-create-formula-image-program 'imagemagick)
-(setq org-latex-pdf-process
+(setq org-latex-listings 'minted
+      org-latex-create-formula-image-program 'imagemagick
+      org-latex-pdf-process
       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
@@ -559,36 +581,54 @@
 ;; (setq warning-minimum-log-level "error")
 ;; Don't really need these, they are more annoying than anything
 (setq make-backup-files nil)
-;; (setq debug-on-error t)
+;;(setq debug-on-error t)
 
 ;;Javascript hook, this is a better major mode than default one
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
+;; C++ stuff, basically just be aware of it.
+(add-to-list 'auto-mode-alist '("\\.cc\\'" . c-mode))
+(add-to-list 'auto-mode-alist '("\\.cpp\\'" . c-mode))
+
+;; Helm stuff
+(setq helm-quick-update                     t ; do not display invisible candidates
+      helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
+      helm-buffers-fuzzy-matching           t ; fuzzy matching buffer names when non--nil
+      helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
+      helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
+      helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
+      helm-ff-file-name-history-use-recentf t
+      helm-gtags-ignore-case t
+      helm-gtags-auto-update t
+      helm-gtags-use-input-at-cursor t
+      helm-gtags-pulse-at-cursor t
+      helm-gtags-prefix-key "\C-cg"
+      helm-gtags-suggested-key-mapping t)
+
+;; emacs lisp stuff
+(add-hook 'emacs-lisp-mode-hook '(lambda ()
+				   (global-set-key (kbd "C-M-s") 'eval-buffer)
+				   (semantic-mode)
+				   (paredit-mode)
+				   (flycheck-mode)
+				   (global-set-key (kbd "C-c C-f") 'helm-command-prefix)
+				   (define-key semantic-mode-map (kbd "M-]") 'semantic-ia-fast-jump)
+				   (define-key semantic-mode-map (kbd "M-[") 'semantic-ia-fast-jump-back)
+				   (global-unset-key (kbd "C-x c"))))
 
 ;; Common things wanted in all C like languages. 
 (add-hook 'c-mode-common-hook '(lambda ()
 				 (define-key c-mode-map (kbd "C-=") 'ff-find-other-file)
 				 (setq-local show-trailing-whitespace t)
-				 (auto-complete-mode -1)
 				 (company-mode)
 				 (define-key company-mode-map (kbd "M-h") 'company-c-headers)
 				 (hs-minor-mode)
 				 (define-key hs-minor-mode-map (kbd "C-c C-t") 'hs-toggle-hiding)
 				 (flycheck-mode)
-				 (setq helm-quick-update                     t ; do not display invisible candidates
-				       helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
-				       helm-buffers-fuzzy-matching           t ; fuzzy matching buffer names when non--nil
-				       helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
-				       helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
-				       helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
-				       helm-ff-file-name-history-use-recentf t
-				       helm-gtags-ignore-case t
-				       helm-gtags-auto-update t
-				       helm-gtags-use-input-at-cursor t
-				       helm-gtags-pulse-at-cursor t
-				       helm-gtags-prefix-key "\C-cg"
-				       helm-gtags-suggested-key-mapping t)
 				 (global-set-key (kbd "C-c C-f") 'helm-command-prefix)
 				 (global-unset-key (kbd "C-x c"))
+				 (auto-complete-mode -1)
+				 (abbrev-mode -1)
 				 (linux-c-mode)))
 
 ;; C Code
@@ -624,14 +664,26 @@
 ;; (setq emaXcode-yas-objc-header-directories-list
 ;;       '("/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Foundation.framework/Headers/"
 ;; 	"/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/UIKit.framework/Headers"))
+
+;; My appledev-mode code
+(add-to-list 'load-path "~/appledev-mode")
+(require 'appledev)
+(setq appledev-project-platform 'ios
+      appledev-project-root "~/picture_note/"
+      appledev-project-name "PictureNotes")
+
+(add-hook 'objc-mode-hook (lambda ()
+			    (appledev-mode)))
+
 ;; (add-hook 'objc-mode-hook '(lambda ()
+;; 			     (company-mode)
 ;; 			     (setq company-backends '(company-capf
 ;; 						      company-clang))
 ;; 			     ;; company-yasnippet))
 ;; 			     (setq company-clang-arguments '("-F/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/"));; This can be returned to later.
 ;; 			     ;; This currently assumes you opened up emacs from the root directory of the project, need to fix later.
 ;; 			     ;; Need to make the configuration switch from Debug to Release, maybe the sdk as well later, quite a few configurations...
-;; 			     (setq compile-command "xcodebuild -project /Users/Edgar/Documents/Steps/Steps.xcodeproj -configuration Debug -sdk iphoneos8.1")
+;; 			     ;;(setq compile-command "xcodebuild -project /Users/Edgar/Documents/Steps/Steps.xcodeproj -configuration Debug -sdk iphoneos8.1")
 ;; 			     (define-key objc-mode-map (kbd "C-c C-b") '(lambda ()
 ;; 									  (call-process-shell-command "ios-deploy -db Debug-iphoneos/Steps.app")))
 ;; 			     ;; "-I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/CoreFoundation.framework"))
@@ -647,7 +699,4 @@
 ;; 			     (define-key objc-mode-map (kbd "C-c C-c") 'compile)
 ;; 			     (define-key objc-mode-map (kbd "C-=") 'ff-find-other-file)
 ;; 			     ;; (define-key objc-mode-map (kbd "C-,") 'company-yasnippet)
-;; 			     (define-key objc-mode-map (kbd "C-.") 'company-clang)))
-
-;; (require 'emaXcode)))
-
+;; 			     (define-key objc-mode-map (kbd "M-/") 'company-clang)))
