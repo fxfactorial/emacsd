@@ -585,6 +585,14 @@
 
 ;;Javascript hook, this is a better major mode than default one
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(add-hook 'js2-mode-hook (lambda ()
+			   (define-key js2-mode-map (kbd "M-/") 'tern-ac-complete)
+			   (js2-mode-toggle-warnings-and-errors)
+			   (tern-mode)))
+(eval-after-load 'tern
+   '(progn
+      (require 'tern-auto-complete)
+      (tern-ac-setup)))
 
 ;; C++ stuff, basically just be aware of it.
 (add-to-list 'auto-mode-alist '("\\.cc\\'" . c-mode))
@@ -609,7 +617,7 @@
 (add-hook 'emacs-lisp-mode-hook '(lambda ()
 				   (global-set-key (kbd "C-M-s") 'eval-buffer)
 				   (semantic-mode)
-				   (paredit-mode)
+				   ;;(paredit-mode)
 				   (flycheck-mode)
 				   (global-set-key (kbd "C-c C-f") 'helm-command-prefix)
 				   (define-key semantic-mode-map (kbd "M-]") 'semantic-ia-fast-jump)
