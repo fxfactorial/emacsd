@@ -46,6 +46,9 @@
 (require 'semantic/analyze/refs)
 (require 'semantic/analyze/complete)
 (require 'semantic/bovine/gcc)
+(require 'semantic/sb)
+(require 'semantic/java)
+(require 'semantic/db-javap)
 (require 'semantic/mru-bookmark)
 (require 'semantic)
 (require 'window-number)
@@ -75,7 +78,13 @@
  '(column-number-mode t)
  '(custom-safe-themes
    (quote
-    ("442c946bc5c40902e11b0a56bd12edc4d00d7e1c982233545979968e02deb2bc" "e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "ee6081af57dd389d9c94be45d49cf75d7d737c4a78970325165c7d8cb6eb9e34" default)))
+    ("a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0"
+     "442c946bc5c40902e11b0a56bd12edc4d00d7e1c982233545979968e02deb2bc"
+     "e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e"
+     "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879"
+     "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4"
+     "ee6081af57dd389d9c94be45d49cf75d7d737c4a78970325165c7d8cb6eb9e34"
+     default)))
  '(display-battery-mode t)
  '(display-time-default-load-average nil)
  '(display-time-mode t)
@@ -198,6 +207,14 @@
 ;;                      (list 'doc-view-mode)))
 ;;       (linum-mode))))
 
+(defun rukkus-shell ()
+  ;; TODO Add changing the directory to
+  ;; dev-python and starting up vagrant. 
+  "Opens up the rukkus shell immediately"
+  (interactive)
+  (let ((default-directory "/ssh:rukkus:/vagrant/"))
+    (shell)))
+
 (defun linux-c-mode ()
   "C mode with adjusted defaults for use with the linux kernel."
   (interactive)
@@ -285,7 +302,11 @@
   "Connect to IRC, register nick, open commonly used channels"
   (interactive)
   (setq erc-max-buffer-size 20000)
-  (setq erc-autojoin-channels-alist '(("freenode.net" "#c" "#emacs")))
+  (setq erc-autojoin-channels-alist '(("freenode.net"
+				       "#c"
+				       "#macdev"
+				       "#iphonedev"
+				       "#emacs")))
   (setq erc-hide-list '("JOIN" "PART" "QUIT"))
   ;; This is obviously untracked, if you copy my init.el,
   ;; either delete this code or provide your own creds
@@ -304,6 +325,7 @@
 (global-set-key (kbd "C-M-e") 'irc-connect)
 (global-set-key (kbd "C-M-p") 'run-python)
 (global-set-key (kbd "C-c C-g") 'google-this-noconfirm)
+(global-set-key (kbd "M-m") 'rukkus-shell)
 ;; Love ido, idiot for not using it earlier. 
 (setq ido-everywhere t)
 (ido-mode 1)
@@ -476,8 +498,10 @@
 ;; Python Stuff
 ;; Get these variables set before the inferior mode comes up, otherwise too late.
 ;; Might as well just use this VM 
-(setq python-shell-interpreter "/usr/local/bin/ipython3"
-      python-shell-interpreter-args "--matplotlib=osx --colors=Linux"
+(setq python-shell-interpreter "/usr/local/bin/ipython"
+      ;; TODO Need to make this smarter about whether I'm on the 
+      ;; vagrant machine or not. 
+      ;;python-shell-interpreter-args "--matplotlib=osx --colors=Linux"
       python-shell-prompt-regexp "In \\[[0-9]+\\]: "
       python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
       python-shell-completion-setup-code
@@ -494,13 +518,22 @@
 
 (add-hook 'python-mode-hook (lambda ()
 			      (electric-pair-mode nil)
+			      (semantic-mode -1)
+			      (setq indent-tabs-mode t)
+			      (setq-local tab-width 4)
+			      (setq-local python-indent 4)
 			      (hs-minor-mode)
-			      (define-key hs-minor-mode-map (kbd "C-c C-t") 'hs-toggle-hiding)
-			      (define-key python-mode-map (kbd "M-q") 'python-fill-paren)
+			      (define-key hs-minor-mode-map (kbd "C-c C-t")
+				'hs-toggle-hiding)
+			      (define-key python-mode-map (kbd "M-q")
+				'python-fill-paren)
 			      (jedi:setup)
 			      (setq jedi:setup-keys t
 				    jedi:server-args '("--sys-path"
-						       "/usr/local/Cellar/python3/3.4.2_1/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages")
+						       ;; Python 2, had to change for Rukkus
+						       "/usr/local/Cellar/python/2.7.9/Frameworks/Python.framework/Versions/Current/lib/python2.7/site-packages")
+						       ;;Python 3 support 
+						       ;;"/usr/local/Cellar/python3/3.4.2_1/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages")
 				    jedi:complete-on-dot t)
 			      ;; Forgot what this was for..think some os x issues. 
 			      (setenv "LC_CTYPE" "UTF-8")
@@ -510,13 +543,22 @@
 			      	    (args python-shell-interpreter-args))
 			      	(when python-shell--parent-buffer
 			      	  (python-util-clone-local-variables python-shell--parent-buffer))
-			      	;; Users can override default values for these vars when calling
-			      	;; `run-python'. This ensures new values let-bound in
-			      	;; `python-shell-make-comint' are locally set.
+			      ;; 	;; Users can override default values for these vars when calling
+			      ;; 	;; `run-python'. This ensures new values let-bound in
+			      ;; 	;; `python-shell-make-comint' are locally set.
 			      	(set (make-local-variable 'python-shell-interpreter) interpreter)
 			      	(set (make-local-variable 'python-shell-interpreter-args) args))
-			      (flycheck-mode)
+			      ;; Its so damn loud
+			      ;;(flycheck-mode)
 			      (setq-local show-trailing-whitespace t)))
+
+;; SQL Stuff
+;; Just remember,
+;;http://truongtx.me/2014/08/23/setup-emacs-as-an-sql-database-client/
+(load-file "~/.emacs.d/sql_dbs.el")
+(add-hook 'sql-interactive-mode-hook
+	  (lambda ()
+	    (toggle-truncate-lines)))
 
 ;; Haskell Stuff
 (add-hook 'haskell-mode-hook (lambda ()
@@ -524,22 +566,31 @@
 			       (ghc-init)
 			       (auto-complete-mode -1)
 			       (company-mode 1)))
+;; Ocaml code
+(add-hook 'tuareg-mode-hook (lambda ()
+			      (dolist (var
+				       (car (read-from-string
+					     (shell-command-to-string "opam config env --sexp"))))
+				(setenv (car var) (cadr var)))
+			      ;; Update the emacs path
+			      (setq exec-path (split-string (getenv "PATH") path-separator))
+			      ;; Update the emacs load path
+			      (push (concat (getenv "OCAML_TOPLEVEL_PATH") "/../../share/emacs/site-lisp") load-path)
+			      ;; Automatically load utop.el
+			      (autoload 'utop "utop" "Toplevel for OCaml" t)
+			      (autoload 'utop-setup-ocaml-buffer "utop" "Toplevel for OCaml" t)
+			      (utop-setup-ocaml-buffer)
+			      (push "/Users/Edgar/.opam/system/share/emacs/site-lisp" load-path)
+			      ;;(push "/home/edgar/.opam/system/share/emacs/site-lisp" load-path)
+			      (setq merlin-command "/Users/Edgar/.opam/system/bin/ocamlmerlin")
+			      (autoload 'merlin-mode "merlin" "Merlin mode" t)
+			      (auto-complete-mode -1)
+			      (company-mode)
+			      (merlin-mode)))
 
-;;OCaml Stuff
-;;Uninstalled all ocaml stuff so this is not needed right now. 
-;; (add-hook 'tuareg-mode-hook (lambda ()
-;; 			      (dolist (var
-;; 				       (car (read-from-string
-;; 					     (shell-command-to-string "opam config env --sexp"))))
-;; 				(setenv (car var) (cadr var)))
-;; 			      (push (concat (getenv "OCAML_TOPLEVEL_PATH") "/../../share/emacs/site-lisp") load-path)
-;; 			      (autoload 'utop "utop" "Toplevel for OCaml" t)
-;; 			      (autoload 'utop-setup-ocaml-buffer "utop" "Toplevel for OCaml" t)
-;; 			      (utop-setup-ocaml-buffer)
-;; 			      (push "/Users/Edgar/.opam/system/share/emacs/site-lisp" load-path)
-;; 			      (setq merlin-command "/Users/Edgar/.opam/system/bin/ocamlmerlin")
-;; 			      (autoload 'merlin-mode "merlin" "Merlin mode" t)
-;; 			      (merlin-mode)))
+(add-hook 'utop-mode-hook (lambda ()
+			    (set-process-query-on-exit-flag
+			     (get-process "utop") nil)))
 
 ;; Orgmode Stuff
 ;; This is for syntax highling in pdf exports
@@ -555,6 +606,7 @@
 			   (flyspell-mode)
 			   (auto-fill-mode)
 			   (company-mode)
+			   (semantic-mode -1)
 			   (define-key org-mode-map
 			     (kbd "C-c p")
 			     'org-publish-current-project)))
@@ -585,6 +637,7 @@
 
 ;;Javascript hook, this is a better major mode than default one
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.json\\'" . js2-mode))
 (add-hook 'js2-mode-hook (lambda ()
 			   (define-key js2-mode-map (kbd "M-/") 'tern-ac-complete)
 			   (js2-mode-toggle-warnings-and-errors)
@@ -674,14 +727,14 @@
 ;; 	"/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/UIKit.framework/Headers"))
 
 ;; My appledev-mode code
-(add-to-list 'load-path "~/appledev-mode")
-(require 'appledev)
-(setq appledev-project-platform 'ios
-      appledev-project-root "~/picture_note/"
-      appledev-project-name "PictureNotes")
+;; (add-to-list 'load-path "~/appledev-mode")
+;; (require 'appledev)
+;; (setq appledev-project-platform 'ios
+;;       appledev-project-root "~/picture_note/"
+;;       appledev-project-name "PictureNotes")
 
-(add-hook 'objc-mode-hook (lambda ()
-			    (appledev-mode)))
+;; (add-hook 'objc-mode-hook (lambda ()
+;; 			    (appledev-mode)))
 
 ;; (add-hook 'objc-mode-hook '(lambda ()
 ;; 			     (company-mode)
