@@ -39,26 +39,8 @@
 (add-to-list 'load-path "~/.emacs.d/elpa/helm-20141008.2145")
 (add-to-list 'load-path "~/.emacs.d/elpa/helm-gtags-20141005.243")
 
-;; All Requires done relatively early.
-(require 'password-cache)
-(require 'semantic/senator)
-(require 'semantic/ia)
-(require 'semantic/analyze/refs)
-(require 'semantic/analyze/complete)
-(require 'semantic/bovine/gcc)
-(require 'semantic/sb)
-(require 'semantic/java)
-(require 'semantic/db-javap)
-(require 'semantic/mru-bookmark)
-(require 'semantic)
-(require 'window-number)
-(require 'predictive)
-(require 'package)
-(require 'helm-config)
-(require 'helm-gtags)
-(require 'ox-md)
-(require 'company)
-(require 'cc-mode)
+(autoload 'window-number-mode "window-number")
+(autoload 'company-mode "company")
 
 ;;Melpa stuff, elpa is the offical package archive, melpa is the
 ;;community extension with stuff on github and melpa itself.
@@ -78,19 +60,14 @@
  '(column-number-mode t)
  '(custom-safe-themes
    (quote
-    ("a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0"
-     "442c946bc5c40902e11b0a56bd12edc4d00d7e1c982233545979968e02deb2bc"
-     "e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e"
-     "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879"
-     "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4"
-     "ee6081af57dd389d9c94be45d49cf75d7d737c4a78970325165c7d8cb6eb9e34"
-     default)))
+    ("a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "442c946bc5c40902e11b0a56bd12edc4d00d7e1c982233545979968e02deb2bc" "e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "ee6081af57dd389d9c94be45d49cf75d7d737c4a78970325165c7d8cb6eb9e34" default)))
  '(display-battery-mode t)
  '(display-time-default-load-average nil)
  '(display-time-mode t)
  '(flycheck-c/c++-gcc-executable "/usr/local/bin/gcc-4.9")
  '(flycheck-make-executable "/usr/bin/make")
  '(mail-user-agent (quote gnus-user-agent))
+ '(merlin-use-auto-complete-mode nil)
  '(org-startup-indented t)
  '(solarized-distinct-fringe-background t)
  '(solarized-high-contrast-mode-line t)
@@ -304,6 +281,8 @@
   (setq erc-max-buffer-size 20000)
   (setq erc-autojoin-channels-alist '(("freenode.net"
 				       "#c"
+				       "#ocaml"
+				       "#ocsigen"
 				       "#macdev"
 				       "#iphonedev"
 				       "#emacs")))
@@ -362,7 +341,7 @@
 ;; (this-linum-mode 1)
 (setq inhibit-startup-message t
       scroll-step 1)
-      
+
 (window-number-mode)
 (mouse-avoidance-mode 'banish)
 (column-number-mode)
@@ -403,9 +382,9 @@
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
 (when window-system
   (load-theme 'solarized-dark))
-;; My other favorite theme. 
-;; (load-theme 'tronesque)
-;; (tronesque-mode-line))
+  ;; My other favorite theme. 
+  ;; (load-theme 'tronesque)
+  ;; (tronesque-mode-line))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -519,7 +498,7 @@
 (add-hook 'python-mode-hook (lambda ()
 			      (electric-pair-mode nil)
 			      (semantic-mode -1)
-			      (setq indent-tabs-mode t)
+			      (setq-local indent-tabs-mode t)
 			      (setq-local tab-width 4)
 			      (setq-local python-indent 4)
 			      (hs-minor-mode)
@@ -532,8 +511,8 @@
 				    jedi:server-args '("--sys-path"
 						       ;; Python 2, had to change for Rukkus
 						       "/usr/local/Cellar/python/2.7.9/Frameworks/Python.framework/Versions/Current/lib/python2.7/site-packages")
-						       ;;Python 3 support 
-						       ;;"/usr/local/Cellar/python3/3.4.2_1/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages")
+				    ;;Python 3 support 
+				    ;;"/usr/local/Cellar/python3/3.4.2_1/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages")
 				    jedi:complete-on-dot t)
 			      ;; Forgot what this was for..think some os x issues. 
 			      (setenv "LC_CTYPE" "UTF-8")
@@ -543,9 +522,9 @@
 			      	    (args python-shell-interpreter-args))
 			      	(when python-shell--parent-buffer
 			      	  (python-util-clone-local-variables python-shell--parent-buffer))
-			      ;; 	;; Users can override default values for these vars when calling
-			      ;; 	;; `run-python'. This ensures new values let-bound in
-			      ;; 	;; `python-shell-make-comint' are locally set.
+				;; 	;; Users can override default values for these vars when calling
+				;; 	;; `run-python'. This ensures new values let-bound in
+				;; 	;; `python-shell-make-comint' are locally set.
 			      	(set (make-local-variable 'python-shell-interpreter) interpreter)
 			      	(set (make-local-variable 'python-shell-interpreter-args) args))
 			      ;; Its so damn loud
@@ -567,6 +546,9 @@
 			       (auto-complete-mode -1)
 			       (company-mode 1)))
 ;; Ocaml code
+;; the eliom file description is for web programming stuff. 
+(add-to-list 'auto-mode-alist '("\\.eliom\\'" . tuareg-mode))
+(add-to-list 'auto-mode-alist '("\\.options\\'" . makefile-mode))
 (add-hook 'tuareg-mode-hook (lambda ()
 			      (dolist (var
 				       (car (read-from-string
@@ -580,29 +562,33 @@
 			      (autoload 'utop "utop" "Toplevel for OCaml" t)
 			      (autoload 'utop-setup-ocaml-buffer "utop" "Toplevel for OCaml" t)
 			      (utop-setup-ocaml-buffer)
-			      (push "/Users/Edgar/.opam/system/share/emacs/site-lisp" load-path)
+			      (push "/Users/Edgar/.opam/4.02.1/share/emacs/site-lisp" load-path)
 			      ;;(push "/home/edgar/.opam/system/share/emacs/site-lisp" load-path)
-			      (setq merlin-command "/Users/Edgar/.opam/system/bin/ocamlmerlin")
+			      (setq merlin-command "/Users/Edgar/.opam/4.02.1/bin/ocamlmerlin")
 			      (autoload 'merlin-mode "merlin" "Merlin mode" t)
 			      (auto-complete-mode -1)
+			      (setq-local indent-tabs-mode nil)
+			      ;;(require 'ocp-index)
 			      (company-mode)
+			      ;; (require 'ocp-indent)
+			      (autoload 'ocp-indent "ocp-indent")
 			      (merlin-mode)))
 
 (add-hook 'utop-mode-hook (lambda ()
 			    (set-process-query-on-exit-flag
 			     (get-process "utop") nil)))
 
-;; Orgmode Stuff
-;; This is for syntax highling in pdf exports
-(add-to-list 'org-latex-packages-alist '("" "minted"))
-(setq org-latex-listings 'minted
-      org-latex-create-formula-image-program 'imagemagick
-      org-latex-pdf-process
-      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
-
 (add-hook 'org-mode-hook (lambda ()
+			   ;; Orgmode Stuff
+			   ;; This is for syntax highling in pdf exports
+			   (require 'ox-md)
+			   (add-to-list 'org-latex-packages-alist '("" "minted"))
+			   (setq org-latex-listings 'minted
+				 org-latex-create-formula-image-program 'imagemagick
+				 org-latex-pdf-process
+				 '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+				   "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+				   "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 			   (flyspell-mode)
 			   (auto-fill-mode)
 			   (company-mode)
@@ -635,6 +621,9 @@
 (setq make-backup-files nil)
 ;;(setq debug-on-error t)
 
+(add-hook 'css-mode-hook (lambda ()
+			   (define-key css-mode-map (kbd "M-/") 'ac-start )))
+
 ;;Javascript hook, this is a better major mode than default one
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json\\'" . js2-mode))
@@ -643,9 +632,9 @@
 			   (js2-mode-toggle-warnings-and-errors)
 			   (tern-mode)))
 (eval-after-load 'tern
-   '(progn
-      (require 'tern-auto-complete)
-      (tern-ac-setup)))
+  '(progn
+     (require 'tern-auto-complete)
+     (tern-ac-setup)))
 
 ;; C++ stuff, basically just be aware of it.
 (add-to-list 'auto-mode-alist '("\\.cc\\'" . c-mode))
@@ -679,6 +668,8 @@
 
 ;; Common things wanted in all C like languages. 
 (add-hook 'c-mode-common-hook '(lambda ()
+				 (require 'helm-config)
+				 (require 'helm-gtags)
 				 (define-key c-mode-map (kbd "C-=") 'ff-find-other-file)
 				 (setq-local show-trailing-whitespace t)
 				 (company-mode)
