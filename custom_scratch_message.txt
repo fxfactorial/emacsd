@@ -46,4 +46,14 @@ use with: emacs "+<LINE_NUMER>" "FILE_NAME" note, quotes are needed.
 
 Python Code
 1) C-c . is going to a definition.
-2) C-c , is coming back from where you were. 
+2) C-c , is coming back from where you were.
+3) M-., regular tags works but you need to use ctags with:
+ctags -e -R --languages=python.
+
+DevOps stuff
+1) s3cmd uses environment variables inside zshrc, aws I think makes
+its own dot file
+2) do s3cmd ls to get the machines, can do s3cmd ls <specific_machine>
+3) do aws redshift describe-clusters to see what clusters are out
+there, everything for can do aws redshift
+

@@ -20,9 +20,6 @@
      (insert-file-contents "~/.emacs.d/custom_scratch_message.txt")
      (setq initial-scratch-message (buffer-string)))))
 
-;; this took many, many hours to get working correctly. 
-(load-file "~/.emacs.d/cedet/cedet-devel-load.elc")
-
 ;; El-get stuff to sync up most stuff
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 (unless (require 'el-get nil 'noerror)
@@ -38,6 +35,8 @@
 ;; everything helm/company related, just handle it manually.
 (add-to-list 'load-path "~/.emacs.d/elpa/helm-20141008.2145")
 (add-to-list 'load-path "~/.emacs.d/elpa/helm-gtags-20141005.243")
+;; this took many, many hours to get working correctly. 
+(load-file "~/.emacs.d/cedet/cedet-devel-load.elc")
 
 (autoload 'window-number-mode "window-number")
 (autoload 'company-mode "company")
@@ -184,12 +183,10 @@
 ;;                      (list 'doc-view-mode)))
 ;;       (linum-mode))))
 
-(defun rukkus-shell ()
-  ;; TODO Add changing the directory to
-  ;; dev-python and starting up vagrant. 
-  "Opens up the rukkus shell immediately"
+(defun dev-shell ()
+  "Opens up the dev shell immediately"
   (interactive)
-  (let ((default-directory "/ssh:rukkus:/vagrant/"))
+  (let ((default-directory "/ssh:dev:/dev/gar"))
     (shell)))
 
 (defun linux-c-mode ()
@@ -477,7 +474,7 @@
 ;; Python Stuff
 ;; Get these variables set before the inferior mode comes up, otherwise too late.
 ;; Might as well just use this VM 
-(setq python-shell-interpreter "/usr/local/bin/ipython"
+(setq python-shell-interpreter "/usr/local/bin/ipython3"
       ;; TODO Need to make this smarter about whether I'm on the 
       ;; vagrant machine or not. 
       ;;python-shell-interpreter-args "--matplotlib=osx --colors=Linux"
@@ -510,9 +507,9 @@
 			      (setq jedi:setup-keys t
 				    jedi:server-args '("--sys-path"
 						       ;; Python 2, had to change for Rukkus
-						       "/usr/local/Cellar/python/2.7.9/Frameworks/Python.framework/Versions/Current/lib/python2.7/site-packages")
+						       ;; "/usr/local/Cellar/python/2.7.9/Frameworks/Python.framework/Versions/Current/lib/python2.7/site-packages")
 				    ;;Python 3 support 
-				    ;;"/usr/local/Cellar/python3/3.4.2_1/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages")
+				    "/usr/local/Cellar/python3/3.4.2_1/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages")
 				    jedi:complete-on-dot t)
 			      ;; Forgot what this was for..think some os x issues. 
 			      (setenv "LC_CTYPE" "UTF-8")
@@ -545,10 +542,13 @@
 			       (ghc-init)
 			       (auto-complete-mode -1)
 			       (company-mode 1)))
+
+
 ;; Ocaml code
 ;; the eliom file description is for web programming stuff. 
 (add-to-list 'auto-mode-alist '("\\.eliom\\'" . tuareg-mode))
 (add-to-list 'auto-mode-alist '("\\.options\\'" . makefile-mode))
+(autoload 'camldebug "camldebug" "Run the Caml Debugger" t)
 (add-hook 'tuareg-mode-hook (lambda ()
 			      (dolist (var
 				       (car (read-from-string
@@ -570,8 +570,7 @@
 			      (setq-local indent-tabs-mode nil)
 			      ;;(require 'ocp-index)
 			      (company-mode)
-			      ;; (require 'ocp-indent)
-			      (autoload 'ocp-indent "ocp-indent")
+			      (require 'ocp-indent)
 			      (merlin-mode)))
 
 (add-hook 'utop-mode-hook (lambda ()
@@ -668,6 +667,8 @@
 
 ;; Common things wanted in all C like languages. 
 (add-hook 'c-mode-common-hook '(lambda ()
+
+
 				 (require 'helm-config)
 				 (require 'helm-gtags)
 				 (define-key c-mode-map (kbd "C-=") 'ff-find-other-file)
