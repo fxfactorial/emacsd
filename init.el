@@ -31,10 +31,12 @@
       (eval-print-last-sexp))))
 (el-get 'sync)
 
+(load-file "~/.emacs.d/omake.el")
 ;; Creator of helm doesn't want to update his stuff for el-get, so
 ;; everything helm/company related, just handle it manually.
 (add-to-list 'load-path "~/.emacs.d/elpa/helm-20141008.2145")
 (add-to-list 'load-path "~/.emacs.d/elpa/helm-gtags-20141005.243")
+
 ;; this took many, many hours to get working correctly. 
 (load-file "~/.emacs.d/cedet/cedet-devel-load.elc")
 
@@ -56,6 +58,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(auto-insert-query nil)
+ '(browse-url-browser-function (quote browse-url-chromium))
  '(column-number-mode t)
  '(custom-safe-themes
    (quote
@@ -71,7 +74,8 @@
  '(solarized-distinct-fringe-background t)
  '(solarized-high-contrast-mode-line t)
  '(solarized-use-more-italic t)
- '(tool-bar-mode nil))
+ '(tool-bar-mode nil)
+ '(web-mode-attr-indent-offset 2))
 
 ;; Skeletons definitions for common includes.
 (define-skeleton my-org-defaults
@@ -83,6 +87,15 @@
   "#+LATEX_HEADER: \\usepackage{lmodern}\n"
   "#+LATEX_HEADER: \\usepackage[T1]{fontenc}\n"
   "#+OPTIONS:  toc:nil num:0\n")
+
+(define-skeleton my-html-defaults
+  "Minimum HTML needed"
+  nil
+  "<!DOCTYPE html>\n"
+  "<meta charset=\"utf-8\">\n"
+  "<body>\n"
+  "<script src=></script>\n"
+  "</body>\n")
 
 (define-skeleton my-c-defaults
   "Usual includes that I use for C coding"
@@ -98,6 +111,10 @@
   "{\n"
   "\treturn 0;\n"
   "}")
+(define-skeleton my-js-defaults
+  "strict mode declaration for js"
+  nil
+  "\"use strict\";\n")
 
 (define-skeleton my-objc-defaults
   "Objcs barebones"
@@ -277,12 +294,9 @@
   (interactive)
   (setq erc-max-buffer-size 20000)
   (setq erc-autojoin-channels-alist '(("freenode.net"
-				       "#c"
 				       "#ocaml"
-				       "#ocsigen"
-				       "#macdev"
-				       "#iphonedev"
-				       "#emacs")))
+				       "#d3.js"
+				       "##workingset")))
   (setq erc-hide-list '("JOIN" "PART" "QUIT"))
   ;; This is obviously untracked, if you copy my init.el,
   ;; either delete this code or provide your own creds
@@ -301,7 +315,6 @@
 (global-set-key (kbd "C-M-e") 'irc-connect)
 (global-set-key (kbd "C-M-p") 'run-python)
 (global-set-key (kbd "C-c C-g") 'google-this-noconfirm)
-(global-set-key (kbd "M-m") 'rukkus-shell)
 ;; Love ido, idiot for not using it earlier. 
 (setq ido-everywhere t)
 (ido-mode 1)
@@ -328,6 +341,8 @@
 (define-auto-insert "\\.c\\'" 'my-c-defaults)
 (define-auto-insert "\\.m\\'" 'my-objc-defaults)
 (define-auto-insert "\\.mm\\'" 'my-objc-defaults)
+(define-auto-insert "\\.html\\'" 'my-html-defaults)
+(define-auto-insert "\\.js\\'" 'my-js-defaults)
 (display-battery-mode 1)
 (electric-indent-mode 1)
 (electric-pair-mode 1)
@@ -428,7 +443,10 @@
 ;; but that's okay since you can do it with semantic anyway with M-]/[
 ;; In any case, I prefer using gcc instead of clang, at least for the moment.
 ;; the capf, (means completion at point functions), is mainly here for org-mode
-(setq company-backends '(company-semantic
+(setq company-clang-arguments
+      '("-F" "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks"))
+(setq company-backends '(company-clang
+			 company-semantic
 			 company-c-headers
 			 company-bbdb
 			 company-ghc
@@ -505,11 +523,9 @@
 				'python-fill-paren)
 			      (jedi:setup)
 			      (setq jedi:setup-keys t
-				    jedi:server-args '("--sys-path"
-						       ;; Python 2, had to change for Rukkus
-						       ;; "/usr/local/Cellar/python/2.7.9/Frameworks/Python.framework/Versions/Current/lib/python2.7/site-packages")
-				    ;;Python 3 support 
-				    "/usr/local/Cellar/python3/3.4.2_1/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages")
+				    jedi:server-args
+				    '("--sys-path"
+				      "/usr/local/Cellar/python3/3.4.3/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages")
 				    jedi:complete-on-dot t)
 			      ;; Forgot what this was for..think some os x issues. 
 			      (setenv "LC_CTYPE" "UTF-8")
@@ -562,15 +578,16 @@
 			      (autoload 'utop "utop" "Toplevel for OCaml" t)
 			      (autoload 'utop-setup-ocaml-buffer "utop" "Toplevel for OCaml" t)
 			      (utop-setup-ocaml-buffer)
-			      (push "/Users/Edgar/.opam/4.02.1/share/emacs/site-lisp" load-path)
-			      ;;(push "/home/edgar/.opam/system/share/emacs/site-lisp" load-path)
-			      (setq merlin-command "/Users/Edgar/.opam/4.02.1/bin/ocamlmerlin")
+			      ;; Why can't this be automated by tuareg mode anyway? 
+			      (push "/Users/Edgar/.opam/rwo/share/emacs/site-lisp" load-path)
+			      (setq merlin-command "/Users/Edgar/.opam/rwo/bin/ocamlmerlin")
 			      (autoload 'merlin-mode "merlin" "Merlin mode" t)
 			      (auto-complete-mode -1)
 			      (setq-local indent-tabs-mode nil)
 			      ;;(require 'ocp-index)
 			      (company-mode)
 			      (require 'ocp-indent)
+			      (setq-local show-trailing-whitespace t)
 			      (merlin-mode)))
 
 (add-hook 'utop-mode-hook (lambda ()
@@ -620,16 +637,40 @@
 (setq make-backup-files nil)
 ;;(setq debug-on-error t)
 
+;;Web crap
+(eval-after-load 'browse-url
+  `(progn
+     (fset 'browse-url-default-browser #'browse-url-chromium)
+     (setq browse-url-chromium-program
+	   "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")))
+
+(add-hook 'html-mode-hook (lambda ()
+			    (web-mode)
+			    (setq web-mode-ac-sources-alist
+				  '(("css" . (ac-source-css-property))
+				    ("html" . (ac-source-words-in-buffer ac-source-abbrev)))
+				  )))
+
 (add-hook 'css-mode-hook (lambda ()
 			   (define-key css-mode-map (kbd "M-/") 'ac-start )))
+(add-hook 'scss-mode-hook (lambda ()
+			    (setq-local scss-compile-at-save t)
+			    (setq-local scss-output-directory "../css")
+			    (auto-complete-mode)
+			    (define-key css-mode-map (kbd "M-/") 'ac-start )))
 
 ;;Javascript hook, this is a better major mode than default one
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json\\'" . js2-mode))
+
 (add-hook 'js2-mode-hook (lambda ()
 			   (define-key js2-mode-map (kbd "M-/") 'tern-ac-complete)
-			   (js2-mode-toggle-warnings-and-errors)
 			   (tern-mode)))
+
+(add-hook 'swift-mode-hook (lambda ()
+			     (auto-complete-mode)
+			     (define-key swift-mode-map (kbd "M-/") 'ac-start)))
+
 (eval-after-load 'tern
   '(progn
      (require 'tern-auto-complete)
@@ -753,3 +794,4 @@
 ;; 			     (define-key objc-mode-map (kbd "C-=") 'ff-find-other-file)
 ;; 			     ;; (define-key objc-mode-map (kbd "C-,") 'company-yasnippet)
 ;; 			     (define-key objc-mode-map (kbd "M-/") 'company-clang)))
+

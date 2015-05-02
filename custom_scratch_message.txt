@@ -57,3 +57,16 @@ its own dot file
 3) do aws redshift describe-clusters to see what clusters are out
 there, everything for can do aws redshift
 
+OCaml
+1) #use will read, compile and execute source code given. 
+2) #load is like loading compiled stuff, so example:
+#load "unix.cma" for libraries or #load "compiled.cmo" for an
+executable.
+load's path includes ~/.opam/<current_compiler>/lib/ocaml
+3) #require is like loading up a package, so #require "netstring"
+4) 
+
+JavaScript
+1) Using tern, go to the defintion with M-. and comeback with M-,
+2) Using tern, get the type with C-c C-c
+3) Hide function defintions with C-c C-f
