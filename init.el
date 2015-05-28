@@ -4,7 +4,7 @@
 ;; I like it to have emacs open on right half of screen. 
 (when window-system
   (set-frame-position nil 675 0)
-  (set-frame-size nil 80 49))
+  (set-frame-size nil 90 49))
 (global-set-key (kbd "M-n") 'forward-paragraph)
 (global-set-key (kbd "M-p") 'backward-paragraph)
 ;; Not sure why but dialog box still locks up emacs on OSX.
@@ -30,7 +30,7 @@
       (goto-char (point-max))
       (eval-print-last-sexp))))
 (el-get 'sync)
-
+(package-initialize)
 (load-file "~/.emacs.d/omake.el")
 ;; Creator of helm doesn't want to update his stuff for el-get, so
 ;; everything helm/company related, just handle it manually.
@@ -62,7 +62,7 @@
  '(column-number-mode t)
  '(custom-safe-themes
    (quote
-    ("a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "442c946bc5c40902e11b0a56bd12edc4d00d7e1c982233545979968e02deb2bc" "e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "ee6081af57dd389d9c94be45d49cf75d7d737c4a78970325165c7d8cb6eb9e34" default)))
+    ("4ff23437b3166eeb7ca9fa026b2b030bba7c0dfdc1ff94df14dfb1bcaee56c78" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
  '(display-battery-mode t)
  '(display-time-default-load-average nil)
  '(display-time-mode t)
@@ -295,8 +295,8 @@
   (setq erc-max-buffer-size 20000)
   (setq erc-autojoin-channels-alist '(("freenode.net"
 				       "#ocaml"
-				       "#d3.js"
-				       "##workingset")))
+				       "#macdev"
+				       "#swift-lang")))
   (setq erc-hide-list '("JOIN" "PART" "QUIT"))
   ;; This is obviously untracked, if you copy my init.el,
   ;; either delete this code or provide your own creds
@@ -333,6 +333,9 @@
 ;; Don't prompt me when I want to clear the buffer
 (put 'erase-buffer 'disabled nil)
 
+;; Tree
+(global-set-key (kbd "s-1") 'neotree-toggle)
+(set-scroll-bar-mode nil)
 ;; Visuals, but note that some visuals also set in custom.
 (show-paren-mode)
 (auto-insert-mode)
@@ -392,11 +395,22 @@
 ;; Make searches be regex searches!
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
+
+(global-linum-mode 1)
+(global-hl-line-mode 1)
+(defadvice linum-update-window (around linum-dynamic activate)
+  (let* ((w (length (number-to-string
+                     (count-lines (point-min) (point-max)))))
+         (linum-format (concat " %" (number-to-string w) "d ")))
+    ad-do-it))
+(hlinum-activate)
+(fringe-mode -1)
 (when window-system
-  (load-theme 'solarized-dark))
-  ;; My other favorite theme. 
-  ;; (load-theme 'tronesque)
-  ;; (tronesque-mode-line))
+  (load-theme 'spacegray))
+;; (load-theme 'solarized-dark))
+;; My other favorite theme. 
+;; (load-theme 'tronesque)
+;; (tronesque-mode-line))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -404,6 +418,13 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:height 110 :family "Monaco")))))
+;;  '(cursor ((t (:background "#BADA55" :foreground "#F7A6EA" :inverse-video t))))
+;;  '(font-lock-builtin-face ((t (:background "#002B36" :foreground "Magenta" :slant italic :weight bold))))
+;; '(font-lock-function-name-face ((t (:background "#002B36" :foreground "#F76120"))))
+;; '(font-lock-preprocessor-face ((t (:foreground "Cyan")))))
+
+;;(set-face-foreground 'default "#79B84F")
+(setq default-frame-alist '((cursor-color . "#BADA55")))
 
 ;; Stuff for gnus, want to use gmail, see ~/.gnus
 (add-hook 'message-mode-hook (lambda ()
@@ -578,9 +599,6 @@
 			      (autoload 'utop "utop" "Toplevel for OCaml" t)
 			      (autoload 'utop-setup-ocaml-buffer "utop" "Toplevel for OCaml" t)
 			      (utop-setup-ocaml-buffer)
-			      ;; Why can't this be automated by tuareg mode anyway? 
-			      (push "/Users/Edgar/.opam/rwo/share/emacs/site-lisp" load-path)
-			      (setq merlin-command "/Users/Edgar/.opam/rwo/bin/ocamlmerlin")
 			      (autoload 'merlin-mode "merlin" "Merlin mode" t)
 			      (auto-complete-mode -1)
 			      (setq-local indent-tabs-mode nil)
@@ -653,6 +671,7 @@
 
 (add-hook 'css-mode-hook (lambda ()
 			   (define-key css-mode-map (kbd "M-/") 'ac-start )))
+
 (add-hook 'scss-mode-hook (lambda ()
 			    (setq-local scss-compile-at-save t)
 			    (setq-local scss-output-directory "../css")
