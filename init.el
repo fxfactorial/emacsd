@@ -4,7 +4,7 @@
 ;; I like it to have emacs open on right half of screen. 
 (when window-system
   (set-frame-position nil 675 0)
-  (set-frame-size nil 90 49))
+  (set-frame-size nil 85 49))
 (global-set-key (kbd "M-n") 'forward-paragraph)
 (global-set-key (kbd "M-p") 'backward-paragraph)
 ;; Not sure why but dialog box still locks up emacs on OSX.
@@ -62,7 +62,7 @@
  '(column-number-mode t)
  '(custom-safe-themes
    (quote
-    ("4ff23437b3166eeb7ca9fa026b2b030bba7c0dfdc1ff94df14dfb1bcaee56c78" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
+    ("442c946bc5c40902e11b0a56bd12edc4d00d7e1c982233545979968e02deb2bc" "4ff23437b3166eeb7ca9fa026b2b030bba7c0dfdc1ff94df14dfb1bcaee56c78" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
  '(display-battery-mode t)
  '(display-time-default-load-average nil)
  '(display-time-mode t)
@@ -71,6 +71,9 @@
  '(mail-user-agent (quote gnus-user-agent))
  '(merlin-use-auto-complete-mode nil)
  '(org-startup-indented t)
+ '(semantic-c-dependency-system-include-path
+   (quote
+    ("/usr/include" "/usr/local/lib/ocaml" "/usr/local/include")))
  '(solarized-distinct-fringe-background t)
  '(solarized-high-contrast-mode-line t)
  '(solarized-use-more-italic t)
@@ -210,10 +213,19 @@
   "C mode with adjusted defaults for use with the linux kernel."
   (interactive)
   (setq c-set-style "linux")
-  (setq c-brace-offset -8)
+  ;; (setq c-brace-offset -4)
+  (setq c-default-style "linux"))
+  ;; (setq c-basic-offset 4)
+  ;; (setq tab-width 4))
+
+(defun objc-offsets ()
+  "C mode with adjusted defaults for use with the linux kernel."
+  (interactive)
+  (setq c-set-style "linux")
+  (setq c-brace-offset -4)
   (setq c-default-style "linux")
-  (setq c-basic-offset 8)
-  (setq tab-width 8))
+  (setq c-basic-offset 4)
+  (setq tab-width 4))
 
 ;; Not really needed anymore since using global for basically everything
 ;; just keeping this for legacy interest. 
@@ -466,11 +478,11 @@
 ;; the capf, (means completion at point functions), is mainly here for org-mode
 (setq company-clang-arguments
       '("-F" "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks"))
-(setq company-backends '(company-clang
+(setq company-backends '(;;company-clang
 			 company-semantic
 			 company-c-headers
 			 company-bbdb
-			 company-ghc
+;;			 company-ghc
 			 company-capf))
 
 ;; LateX Related Code
@@ -516,7 +528,7 @@
 (setq python-shell-interpreter "/usr/local/bin/ipython3"
       ;; TODO Need to make this smarter about whether I'm on the 
       ;; vagrant machine or not. 
-      ;;python-shell-interpreter-args "--matplotlib=osx --colors=Linux"
+      python-shell-interpreter-args "--matplotlib=osx --colors=Linux"
       python-shell-prompt-regexp "In \\[[0-9]+\\]: "
       python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
       python-shell-completion-setup-code
@@ -546,7 +558,7 @@
 			      (setq jedi:setup-keys t
 				    jedi:server-args
 				    '("--sys-path"
-				      "/usr/local/Cellar/python3/3.4.3/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages")
+				      "/usr/local/Cellar/python3/3.4.3_2/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages")
 				    jedi:complete-on-dot t)
 			      ;; Forgot what this was for..think some os x issues. 
 			      (setenv "LC_CTYPE" "UTF-8")
@@ -568,7 +580,7 @@
 ;; SQL Stuff
 ;; Just remember,
 ;;http://truongtx.me/2014/08/23/setup-emacs-as-an-sql-database-client/
-(load-file "~/.emacs.d/sql_dbs.el")
+;;(load-file "~/.emacs.d/sql_dbs.el")
 (add-hook 'sql-interactive-mode-hook
 	  (lambda ()
 	    (toggle-truncate-lines)))
@@ -596,15 +608,18 @@
 			      ;; Update the emacs load path
 			      (push (concat (getenv "OCAML_TOPLEVEL_PATH") "/../../share/emacs/site-lisp") load-path)
 			      ;; Automatically load utop.el
-			      (autoload 'utop "utop" "Toplevel for OCaml" t)
+			      (autoload 'utop-minor-mode "utop" "Minor mode for utop" t)
 			      (autoload 'utop-setup-ocaml-buffer "utop" "Toplevel for OCaml" t)
-			      (utop-setup-ocaml-buffer)
 			      (autoload 'merlin-mode "merlin" "Merlin mode" t)
+			      (utop-minor-mode)
 			      (auto-complete-mode -1)
 			      (setq-local indent-tabs-mode nil)
 			      ;;(require 'ocp-index)
 			      (company-mode)
 			      (require 'ocp-indent)
+			      (setq indent-line-function 'ocp-indent-line
+				    indent-region-function 'ocp-indent-region)
+			      (load-file "/Users/Edgar/.opam/working/share/emacs/site-lisp/ocp-indent.el")
 			      (setq-local show-trailing-whitespace t)
 			      (merlin-mode)))
 
@@ -616,6 +631,7 @@
 			   ;; Orgmode Stuff
 			   ;; This is for syntax highling in pdf exports
 			   (require 'ox-md)
+			   (require 'ox-gfm)
 			   (add-to-list 'org-latex-packages-alist '("" "minted"))
 			   (setq org-latex-listings 'minted
 				 org-latex-create-formula-image-program 'imagemagick
@@ -637,15 +653,34 @@
 (add-hook 'org-mode-hook #'add-pcomplete-to-capf)
 
 (setq org-publish-project-alist
-      '(("blog" . (:base-directory "~/Repos/octopress/source/_org_posts/"
-				   :base-extension "org"
-				   :publishing-directory "~/Repos/octopress/source/_posts/"
-				   :sub-superscript ""
-				   :recursive t
-				   :publishing-function org-html-publish-to-html
-				   :headline-levels 4
-				   :html-extension "markdown"
-				   :body-only t))))
+      '(("blog" . (:base-directory "~/Repos/gar_site/src/org_mode_src_blog/"
+		   :base-extension "org"
+		   :publishing-directory "~/Repos/gar_site/src/blog_generated/"
+		   :sub-superscript ""
+		   :recursive t
+		   :publishing-function org-html-publish-to-html
+		   :headline-levels 4
+		   :html-extension "html"
+		   :body-only t))
+	("other" . (:base-directory "~/Repos/gar_site/src/org_mode_src_etc/"
+		   :base-extension "org"
+		   :publishing-directory "~/Repos/gar_site/src/etc_generated/"
+		   :sub-superscript ""
+		   :recursive t
+		   :publishing-function org-html-publish-to-html
+		   :headline-levels 4
+		   :html-extension "html"
+		   :body-only t))))
+      ;; '(("blog" . (:base-directory "~/Repos/octopress/source/_org_posts/"
+      ;; 				   :base-extension "org"
+      ;; 				   :publishing-directory "~/Repos/octopress/source/_posts/"
+      ;; 				   :sub-superscript ""
+      ;; 				   :recursive t
+      ;; 				   :publishing-function org-html-publish-to-html
+      ;; 				   :headline-levels 4
+      ;; 				   :html-extension "markdown"
+      ;; 				   :body-only t))))
+
 ;; Basic text files
 (add-hook 'text-mode-hook 'auto-fill-mode)
 
@@ -727,34 +762,40 @@
 
 ;; Common things wanted in all C like languages. 
 (add-hook 'c-mode-common-hook '(lambda ()
-
-
 				 (require 'helm-config)
 				 (require 'helm-gtags)
-				 (define-key c-mode-map (kbd "C-=") 'ff-find-other-file)
+				 (define-key c-mode-map (kbd "C-=")
+				   'ff-find-other-file)
 				 (setq-local show-trailing-whitespace t)
 				 (company-mode)
-				 (define-key company-mode-map (kbd "M-h") 'company-c-headers)
+				 (define-key company-mode-map (kbd "M-h")
+				   'company-c-headers)
 				 (hs-minor-mode)
-				 (define-key hs-minor-mode-map (kbd "C-c C-t") 'hs-toggle-hiding)
+				 (define-key hs-minor-mode-map (kbd "C-c C-t")
+				   'hs-toggle-hiding)
 				 (flycheck-mode)
-				 (global-set-key (kbd "C-c C-f") 'helm-command-prefix)
+				 (global-set-key (kbd "C-c C-f")
+						 'helm-command-prefix)
 				 (global-unset-key (kbd "C-x c"))
 				 (auto-complete-mode -1)
 				 (abbrev-mode -1)
 				 (linux-c-mode)))
-
 ;; C Code
 (add-hook 'c-mode-hook '(lambda ()
 			  (semantic-mode)
-			  (define-key helm-gtags-mode-map (kbd "M-s") 'helm-gtags-select)
+			  (define-key helm-gtags-mode-map (kbd "M-s")
+			    'helm-gtags-select)
 			  (helm-gtags-mode)
-			  (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
-			  (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
+			  (define-key helm-gtags-mode-map (kbd "M-.")
+			    'helm-gtags-dwim)
+			  (define-key helm-gtags-mode-map (kbd "M-,")
+			    'helm-gtags-pop-stack)
 			  (define-key c-mode-map (kbd "C-c C-c") 'compile)
 			  (semantic-mru-bookmark-mode)
-			  (define-key semantic-mode-map (kbd "M-]") 'semantic-ia-fast-jump)
-			  (define-key semantic-mode-map (kbd "M-[") 'semantic-ia-fast-jump-back)
+			  (define-key semantic-mode-map (kbd "M-]")
+			    'semantic-ia-fast-jump)
+			  (define-key semantic-mode-map (kbd "M-[")
+			    'semantic-ia-fast-jump-back)
 			  (ggtags-mode)
 			  (define-key ggtags-mode-map (kbd "M-.") nil)
 			  (define-key ggtags-mode-map (kbd "M-<") nil)
@@ -763,54 +804,8 @@
 			  (define-key ggtags-mode-map (kbd "M-p") nil)
 			  (define-key ggtags-mode-map (kbd "M-,") nil)
 			  (define-key ggtags-mode-map (kbd "M-]") nil)
-			  (define-key ggtags-mode-map (kbd "M--") 'ggtags-find-reference)))
+			  (define-key ggtags-mode-map (kbd "M--")
+			    'ggtags-find-reference)))
 
-;; Yassnippet
-;; (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
-;; (yas-global-mode)
-;; (yas--initialize)
-
-;; Objective-C
-;; (add-to-list 'auto-mode-alist '("\\.mm\\'" . objc-mode))
-
-;; (add-to-list 'load-path "~/.emacs.d/emaXcode")
-;; (setq emaXcode-yas-objc-header-directories-list
-;;       '("/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Foundation.framework/Headers/"
-;; 	"/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/UIKit.framework/Headers"))
-
-;; My appledev-mode code
-;; (add-to-list 'load-path "~/appledev-mode")
-;; (require 'appledev)
-;; (setq appledev-project-platform 'ios
-;;       appledev-project-root "~/picture_note/"
-;;       appledev-project-name "PictureNotes")
-
-;; (add-hook 'objc-mode-hook (lambda ()
-;; 			    (appledev-mode)))
-
-;; (add-hook 'objc-mode-hook '(lambda ()
-;; 			     (company-mode)
-;; 			     (setq company-backends '(company-capf
-;; 						      company-clang))
-;; 			     ;; company-yasnippet))
-;; 			     (setq company-clang-arguments '("-F/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/"));; This can be returned to later.
-;; 			     ;; This currently assumes you opened up emacs from the root directory of the project, need to fix later.
-;; 			     ;; Need to make the configuration switch from Debug to Release, maybe the sdk as well later, quite a few configurations...
-;; 			     ;;(setq compile-command "xcodebuild -project /Users/Edgar/Documents/Steps/Steps.xcodeproj -configuration Debug -sdk iphoneos8.1")
-;; 			     (define-key objc-mode-map (kbd "C-c C-b") '(lambda ()
-;; 									  (call-process-shell-command "ios-deploy -db Debug-iphoneos/Steps.app")))
-;; 			     ;; "-I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/CoreFoundation.framework"))
-;; 			     ;; This somewhat needs to be smarter, or maybe I can just handle it? 
-;; 			     (setq company-c-headers-path-system '("/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Foundation.framework/Headers/"
-;; 								   "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/UIKit.framework/Headers/"))
-;; 			     (add-to-list 'magic-mode-alist
-;; 					  `(,(lambda ()
-;; 					       (and (string= (file-name-extension buffer-file-name) "h")
-;; 						    (re-search-forward "@\\<interface\\>" 
-;; 								       magic-mode-regexp-match-limit t)))
-;; 					    . objc-mode))
-;; 			     (define-key objc-mode-map (kbd "C-c C-c") 'compile)
-;; 			     (define-key objc-mode-map (kbd "C-=") 'ff-find-other-file)
-;; 			     ;; (define-key objc-mode-map (kbd "C-,") 'company-yasnippet)
-;; 			     (define-key objc-mode-map (kbd "M-/") 'company-clang)))
-
+(add-hook 'objc-mode-hook '(lambda ()
+			     (objc-offsets)))
