@@ -47,6 +47,12 @@
 ;;community extension with stuff on github and melpa itself.
 (add-to-list 'package-archives 
 	     '("melpa" . "http://melpa.milkbox.net/packages/"))
+
+(add-to-list 'package-archives
+             '("melpa-stable" . "http://stable.melpa.org/packages/")
+             t)
+
+
 ;;Not sure what the . is, not function composition...
 (add-to-list 'package-archives 
 	     '("marmalade" . "http://marmalade-repo.org/packages/"))
@@ -62,18 +68,20 @@
  '(column-number-mode t)
  '(custom-safe-themes
    (quote
-    ("442c946bc5c40902e11b0a56bd12edc4d00d7e1c982233545979968e02deb2bc" "4ff23437b3166eeb7ca9fa026b2b030bba7c0dfdc1ff94df14dfb1bcaee56c78" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
+    ("8fed5e4b89cf69107d524c4b91b4a4c35bcf1b3563d5f306608f0c48f580fdf8" "442c946bc5c40902e11b0a56bd12edc4d00d7e1c982233545979968e02deb2bc" "4ff23437b3166eeb7ca9fa026b2b030bba7c0dfdc1ff94df14dfb1bcaee56c78" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
  '(display-battery-mode t)
  '(display-time-default-load-average nil)
  '(display-time-mode t)
  '(flycheck-c/c++-gcc-executable "/usr/local/bin/gcc-4.9")
  '(flycheck-make-executable "/usr/bin/make")
+ '(haskell-process-type (quote cabal-repl))
+ '(haskell-tags-on-save t)
  '(mail-user-agent (quote gnus-user-agent))
  '(merlin-use-auto-complete-mode nil)
  '(org-startup-indented t)
  '(semantic-c-dependency-system-include-path
    (quote
-    ("/usr/include" "/usr/local/lib/ocaml" "/usr/local/include")))
+    ("/usr/include" "/usr/local/lib/ocaml" "/usr/local/include" "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Foundation.framework/Versions/C/Headers")))
  '(solarized-distinct-fringe-background t)
  '(solarized-high-contrast-mode-line t)
  '(solarized-use-more-italic t)
@@ -87,6 +95,7 @@
   "#+AUTHOR:   Edgar Aroutiounian\n"
   "#+EMAIL:    edgar.factorial@gmail.com\n"
   "#+LANGUAGE: en\n"
+  "#+STARTUP: indent\n"
   "#+LATEX_HEADER: \\usepackage{lmodern}\n"
   "#+LATEX_HEADER: \\usepackage[T1]{fontenc}\n"
   "#+OPTIONS:  toc:nil num:0\n")
@@ -213,19 +222,16 @@
   "C mode with adjusted defaults for use with the linux kernel."
   (interactive)
   (setq c-set-style "linux")
-  ;; (setq c-brace-offset -4)
   (setq c-default-style "linux"))
-  ;; (setq c-basic-offset 4)
-  ;; (setq tab-width 4))
 
-(defun objc-offsets ()
+(defun linux-c-mode-for-objc ()
   "C mode with adjusted defaults for use with the linux kernel."
   (interactive)
   (setq c-set-style "linux")
-  (setq c-brace-offset -4)
+  (setq c-brace-offset -2)
   (setq c-default-style "linux")
-  (setq c-basic-offset 4)
-  (setq tab-width 4))
+  (setq c-basic-offset 2)
+  (setq tab-width 2))
 
 ;; Not really needed anymore since using global for basically everything
 ;; just keeping this for legacy interest. 
@@ -354,8 +360,7 @@
 (abbrev-mode -1)
 (define-auto-insert "\\.org\\'" 'my-org-defaults)
 (define-auto-insert "\\.c\\'" 'my-c-defaults)
-(define-auto-insert "\\.m\\'" 'my-objc-defaults)
-(define-auto-insert "\\.mm\\'" 'my-objc-defaults)
+(define-auto-insert "\\.m\\'" 'my-c-defaults)
 (define-auto-insert "\\.html\\'" 'my-html-defaults)
 (define-auto-insert "\\.js\\'" 'my-js-defaults)
 (display-battery-mode 1)
@@ -418,24 +423,17 @@
 (hlinum-activate)
 (fringe-mode -1)
 (when window-system
-  (load-theme 'spacegray))
+  (load-theme 'cyberpunk))
+  ;; (load-theme 'spacegray))
 ;; (load-theme 'solarized-dark))
 ;; My other favorite theme. 
 ;; (load-theme 'tronesque)
 ;; (tronesque-mode-line))
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:height 110 :family "Monaco")))))
-;;  '(cursor ((t (:background "#BADA55" :foreground "#F7A6EA" :inverse-video t))))
-;;  '(font-lock-builtin-face ((t (:background "#002B36" :foreground "Magenta" :slant italic :weight bold))))
-;; '(font-lock-function-name-face ((t (:background "#002B36" :foreground "#F76120"))))
-;; '(font-lock-preprocessor-face ((t (:foreground "Cyan")))))
-
-;;(set-face-foreground 'default "#79B84F")
+;; Visuals
+(set-face-attribute 'default nil :family "Monaco" :height 110)
+;; Supposedly to help with showing emojis in editor but it doesn't work 
+;; (set-fontset-font t 'unicode "Symbola" nil 'prepend)
 (setq default-frame-alist '((cursor-color . "#BADA55")))
 
 ;; Stuff for gnus, want to use gmail, see ~/.gnus
@@ -476,13 +474,18 @@
 ;; but that's okay since you can do it with semantic anyway with M-]/[
 ;; In any case, I prefer using gcc instead of clang, at least for the moment.
 ;; the capf, (means completion at point functions), is mainly here for org-mode
+;; (setq company-clang-arguments
+;;       '("-F" "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks"))
 (setq company-clang-arguments
-      '("-F" "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks"))
-(setq company-backends '(;;company-clang
+      '("-F" "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Foundation.framework/"
+	;; "-I" "/System/Library/Frameworks/Foundation.framework/Headers"
+	"-I" "/usr/local/lib/ocaml/"))
+
+(setq company-backends '(company-clang
 			 company-semantic
 			 company-c-headers
-			 company-bbdb
-;;			 company-ghc
+			 ;; company-bbdb
+			 ;; company-ghc
 			 company-capf))
 
 ;; LateX Related Code
@@ -586,12 +589,28 @@
 	    (toggle-truncate-lines)))
 
 ;; Haskell Stuff
+(let ((my-cabal-path (expand-file-name "~/.cabal/bin")))
+  (setenv "PATH" (concat my-cabal-path path-separator (getenv "PATH")))
+  (add-to-list 'exec-path my-cabal-path))
+(autoload 'ghc-init "ghc" nil t)
+(autoload 'ghc-debug "ghc" nil t)
 (add-hook 'haskell-mode-hook (lambda ()
-			       (interactive-haskell-mode)
 			       (ghc-init)
+			       (semantic-mode -1)
+			       ;; (interactive-haskell-mode)
+			       (setq haskell-process-type 'cabal-repl
+				     haskell-process-log t
+				     haskell-interactive-popup-errors nil
+				     haskell-process-auto-import-loaded-modules
+				     t)
 			       (auto-complete-mode -1)
+			       (turn-on-haskell-indentation)
+			       (structured-haskell-mode)
+			       (define-key haskell-mode-map
+				 (kbd "<s-down>") 'forward-paragraph)
+			       (define-key haskell-mode-map
+				 (kbd "<s-up>") 'backward-paragraph)
 			       (company-mode 1)))
-
 
 ;; Ocaml code
 ;; the eliom file description is for web programming stuff. 
@@ -627,11 +646,17 @@
 			    (set-process-query-on-exit-flag
 			     (get-process "utop") nil)))
 
+(defun org-font-lock-ensure ()
+  (font-lock-fontify-buffer))
+
+(add-to-list 'load-path "~/.emacs.d/o-blog/lisp")
+
 (add-hook 'org-mode-hook (lambda ()
 			   ;; Orgmode Stuff
 			   ;; This is for syntax highling in pdf exports
 			   (require 'ox-md)
 			   (require 'ox-gfm)
+			   (semantic-mode -1)
 			   (add-to-list 'org-latex-packages-alist '("" "minted"))
 			   (setq org-latex-listings 'minted
 				 org-latex-create-formula-image-program 'imagemagick
@@ -652,25 +677,25 @@
 ;; https://github.com/company-mode/company-mode/issues/50
 (add-hook 'org-mode-hook #'add-pcomplete-to-capf)
 
-(setq org-publish-project-alist
-      '(("blog" . (:base-directory "~/Repos/gar_site/src/org_mode_src_blog/"
-		   :base-extension "org"
-		   :publishing-directory "~/Repos/gar_site/src/blog_generated/"
-		   :sub-superscript ""
-		   :recursive t
-		   :publishing-function org-html-publish-to-html
-		   :headline-levels 4
-		   :html-extension "html"
-		   :body-only t))
-	("other" . (:base-directory "~/Repos/gar_site/src/org_mode_src_etc/"
-		   :base-extension "org"
-		   :publishing-directory "~/Repos/gar_site/src/etc_generated/"
-		   :sub-superscript ""
-		   :recursive t
-		   :publishing-function org-html-publish-to-html
-		   :headline-levels 4
-		   :html-extension "html"
-		   :body-only t))))
+;; (setq org-publish-project-alist
+;;       '(("blog" . (:base-directory "~/Repos/gar_site/src/org_mode_src_blog/"
+;; 		   :base-extension "org"
+;; 		   :publishing-directory "~/Repos/gar_site/src/blog_generated/"
+;; 		   :sub-superscript ""
+;; 		   :recursive t
+;; 		   :publishing-function org-html-publish-to-html
+;; 		   :headline-levels 4
+;; 		   :html-extension "html"
+;; 		   :body-only t))
+;; 	("other" . (:base-directory "~/Repos/gar_site/src/org_mode_src_etc/"
+;; 		   :base-extension "org"
+;; 		   :publishing-directory "~/Repos/gar_site/src/etc_generated/"
+;; 		   :sub-superscript ""
+;; 		   :recursive t
+;; 		   :publishing-function org-html-publish-to-html
+;; 		   :headline-levels 4
+;; 		   :html-extension "html"
+;; 		   :body-only t))))
       ;; '(("blog" . (:base-directory "~/Repos/octopress/source/_org_posts/"
       ;; 				   :base-extension "org"
       ;; 				   :publishing-directory "~/Repos/octopress/source/_posts/"
@@ -808,4 +833,21 @@
 			    'ggtags-find-reference)))
 
 (add-hook 'objc-mode-hook '(lambda ()
-			     (objc-offsets)))
+			     (linux-c-mode-for-objc)))
+
+;; Configuration for blogging
+(require 'org-page)
+(setq op/repository-directory "/Users/Edgar/Repos/fxfactorial.github.io/"
+      op/site-domain "hyegar.com"
+      op/personal-disqus-shortname "hyegar"
+      op/site-main-title "Edgar Aroutiounian"
+      op/site-sub-title "Thoughts and Musings"
+      op/category-ignore-list '("static")
+      op/personal-github-link "http://github.com/fxfactorial"
+      op/personal-google-analytics-id "UA-57031124-1")
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
