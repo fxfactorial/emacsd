@@ -41,7 +41,9 @@
 (load-file "~/.emacs.d/cedet/cedet-devel-load.elc")
 
 (autoload 'window-number-mode "window-number")
+;; (add-to-list 'company-c-headers-path-system "/usr/local/include/c++/5.2.0")
 (autoload 'company-mode "company")
+(semantic-add-system-include "/usr/local/include/c++/5.2.0")
 
 ;;Melpa stuff, elpa is the offical package archive, melpa is the
 ;;community extension with stuff on github and melpa itself.
@@ -81,7 +83,9 @@
  '(org-startup-indented t)
  '(semantic-c-dependency-system-include-path
    (quote
-    ("/usr/include" "/usr/local/lib/ocaml" "/usr/local/include" "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Foundation.framework/Versions/C/Headers")))
+    ("/usr/include" "/usr/local/lib/ocaml"
+     "/usr/local/include"
+     "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Foundation.framework/Versions/C/Headers")))
  '(solarized-distinct-fringe-background t)
  '(solarized-high-contrast-mode-line t)
  '(solarized-use-more-italic t)
@@ -121,7 +125,7 @@
   "\n"
   "int main (int argc, char **argv)\n"
   "{\n"
-  "\treturn 0;\n"
+  "  return 0;\n"
   "}")
 (define-skeleton my-js-defaults
   "strict mode declaration for js"
@@ -129,16 +133,11 @@
   "\"use strict\";\n")
 
 (define-skeleton my-objc-defaults
-  "Objcs barebones"
+  "Objective-C barebones"
   nil
   "#include <Cocoa/Cocoa.h>\n"
   "\n"
-  "\n"
-  "int main(int argc, char **argv)\n"
-  "{\n"
-  ;; Assuming this is for desktop app
-  "\treturn NSApplicationMain(argc, argv);\n"
-  "}\n")
+  "\n")
 
 ;; Custom Functions
 (defun revert-all-buffers ()
@@ -211,6 +210,7 @@
 ;;     (when (not (memq major-mode
 ;;                      (list 'doc-view-mode)))
 ;;       (linum-mode))))
+
 
 (defun dev-shell ()
   "Opens up the dev shell immediately"
@@ -339,7 +339,10 @@
 ;; Use the path set up by zsh, aka the ~/.zshrc. 
 (exec-path-from-shell-initialize)
 ;; Annoying issue with TRAMP constantly asking for password
+(require 'tramp)
+(setq tramp-default-method "ssh")
 (setq password-cache-expiry nil)
+
 ;; Keep the history between sessions, very nice to have.
 (savehist-mode 1)
 (global-set-key (kbd "M-/") 'company-complete)
@@ -478,7 +481,8 @@
 ;;       '("-F" "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks"))
 (setq company-clang-arguments
       '("-F" "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Foundation.framework/"
-	;; "-I" "/System/Library/Frameworks/Foundation.framework/Headers"
+	"-F" "/System/Library/Frameworks/Foundation.framework/Headers/"
+	"-F" "/System/Library/Frameworks/SceneKit.framework/Headers/"
 	"-I" "/usr/local/lib/ocaml/"))
 
 (setq company-backends '(company-clang
@@ -549,7 +553,7 @@
 (add-hook 'python-mode-hook (lambda ()
 			      (electric-pair-mode nil)
 			      (semantic-mode -1)
-			      (setq-local indent-tabs-mode t)
+			      (setq-local indent-tabs-mode nil)
 			      (setq-local tab-width 4)
 			      (setq-local python-indent 4)
 			      (hs-minor-mode)
@@ -561,7 +565,7 @@
 			      (setq jedi:setup-keys t
 				    jedi:server-args
 				    '("--sys-path"
-				      "/usr/local/Cellar/python3/3.4.3_2/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages")
+				      "/usr/local/Cellar/python3/3.5.0/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages")
 				    jedi:complete-on-dot t)
 			      ;; Forgot what this was for..think some os x issues. 
 			      (setenv "LC_CTYPE" "UTF-8")
@@ -630,6 +634,7 @@
 			      (autoload 'utop-minor-mode "utop" "Minor mode for utop" t)
 			      (autoload 'utop-setup-ocaml-buffer "utop" "Toplevel for OCaml" t)
 			      (autoload 'merlin-mode "merlin" "Merlin mode" t)
+			      (setq-local merlin-completion-with-doc t)
 			      (utop-minor-mode)
 			      (auto-complete-mode -1)
 			      (setq-local indent-tabs-mode nil)
@@ -756,8 +761,8 @@
      (tern-ac-setup)))
 
 ;; C++ stuff, basically just be aware of it.
-(add-to-list 'auto-mode-alist '("\\.cc\\'" . c-mode))
-(add-to-list 'auto-mode-alist '("\\.cpp\\'" . c-mode))
+(add-to-list 'auto-mode-alist '("\\.cc\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
 
 ;; Helm stuff
 (setq helm-quick-update                     t ; do not display invisible candidates
@@ -803,8 +808,11 @@
 						 'helm-command-prefix)
 				 (global-unset-key (kbd "C-x c"))
 				 (auto-complete-mode -1)
-				 (abbrev-mode -1)
-				 (linux-c-mode)))
+				 (add-to-list
+				  'company-c-headers-path-system
+				  "/usr/local/include/c++/5.2.0")
+				 (abbrev-mode -1)))
+				 ;; (linux-c-mode)))
 ;; C Code
 (add-hook 'c-mode-hook '(lambda ()
 			  (semantic-mode)
@@ -832,7 +840,31 @@
 			  (define-key ggtags-mode-map (kbd "M--")
 			    'ggtags-find-reference)))
 
+(defun objc-in-header-file ()
+  (let* ((filename (buffer-file-name))
+         (extension (car (last (split-string filename "\\.")))))
+    (string= "h" extension)))
+
+(defun objc-jump-to-extension (extension)
+  (let* ((filename (buffer-file-name))
+         (file-components (append (butlast (split-string filename
+                                                         "\\."))
+                                  (list extension))))
+    (find-file (mapconcat 'identity file-components "."))))
+
+;;; Assumes that Header and Source file are in same directory
+(defun objc-jump-between-header-source ()
+  (interactive)
+  (if (objc-in-header-file)
+      (objc-jump-to-extension "m")
+    (objc-jump-to-extension "h")))
+
+(defun objc-mode-customizations ()
+  (define-key objc-mode-map (kbd "C-c t") 'objc-jump-between-header-source))
+
+
 (add-hook 'objc-mode-hook '(lambda ()
+			     (objc-mode-customizations)
 			     (linux-c-mode-for-objc)))
 
 ;; Configuration for blogging
@@ -845,9 +877,3 @@
       op/category-ignore-list '("static")
       op/personal-github-link "http://github.com/fxfactorial"
       op/personal-google-analytics-id "UA-57031124-1")
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
