@@ -163,25 +163,25 @@
           (select-window first-win)
           (if this-win-2nd (other-window 1))))))
 
-;; (defadvice push-mark
-;;     (around semantic-mru-bookmark activate)
-;;   "Push a mark at LOCATION with NOMSG and ACTIVATE passed to `push-mark’.
-;;    If `semantic-mru-bookmark-mode’ is active, also push a tag
-;;    onto the mru bookmark stack."
-;;   (semantic-mrub-push semantic-mru-bookmark-ring (point) 'mark)
-;;   ad-do-it)
+(defadvice push-mark
+    (around semantic-mru-bookmark activate)
+  "Push a mark at LOCATION with NOMSG and ACTIVATE passed to `push-mark’.
+   If `semantic-mru-bookmark-mode’ is active, also push a tag
+   onto the mru bookmark stack."
+  (semantic-mrub-push semantic-mru-bookmark-ring (point) 'mark)
+  ad-do-it)
 
-;; (defun semantic-ia-fast-jump-back ()
-;;   (interactive)
-;;   (if (ring-empty-p (oref semantic-mru-bookmark-ring ring))
-;;       (error "Semantic Bookmark ring is currently empty"))
-;;   (let* ((ring (oref semantic-mru-bookmark-ring ring))
-;; 	 (alist (semantic-mrub-ring-to-assoc-list ring))
-;; 	 (first (cdr (car alist))))
-;;     (if (semantic-equivalent-tag-p (oref first tag)
-;; 				   (semantic-current-tag))
-;; 	(setq first (cdr (car (cdr alist)))))
-;;     (semantic-mrub-switch-tags first)))
+(defun semantic-ia-fast-jump-back ()
+  (interactive)
+  (if (ring-empty-p (oref semantic-mru-bookmark-ring ring))
+      (error "Semantic Bookmark ring is currently empty"))
+  (let* ((ring (oref semantic-mru-bookmark-ring ring))
+	 (alist (semantic-mrub-ring-to-assoc-list ring))
+	 (first (cdr (car alist))))
+    (if (semantic-equivalent-tag-p (oref first tag)
+				   (semantic-current-tag))
+	(setq first (cdr (car (cdr alist)))))
+    (semantic-mrub-switch-tags first)))
 
 ;; This takes care of all my irc needs.
 (defun irc-connect ()
@@ -532,24 +532,28 @@
 	     (global-unset-key (kbd "C-x c"))))
 
 ;; ;; Common things wanted in all C like languages. 
-(add-hook 'c-mode-common-hook
-	  '(lambda ()
-	     (load-file "~/.emacs.d/cedet/cedet-devel-load.elc")
-	     (semantic-mode)
-	     (semantic-decoration-mode)
-	     (semantic-show-unmatched-syntax-mode)
-	     (semantic-idle-local-symbol-highlight-mode)
-	     (semantic-idle-scheduler-mode)
-	     (semantic-idle-summary-mode)
-	     (semantic-stickyfunc-mode)
-	     (semantic-add-system-include "/usr/local/include/c++/5.2.0")
-	     (define-key c-mode-map (kbd "C-=") 'ff-find-other-file)
-	     (setq-local show-trailing-whitespace t)
-	     (company-mode)
-	     (add-to-list 'company-backends 'company-c-headers)
-	     (define-key company-mode-map (kbd "M-h") 'company-c-headers)
-	     (flycheck-mode)
-	     (abbrev-mode -1)))
+(add-hook
+ 'c-mode-common-hook
+ '(lambda ()
+    (load-file "~/.emacs.d/cedet/cedet-devel-load.elc")
+    (semantic-mode)
+    (semantic-decoration-mode)
+    (semantic-show-unmatched-syntax-mode)
+    (semantic-idle-local-symbol-highlight-mode)
+    (semantic-idle-scheduler-mode)
+    (global-semantic-mru-bookmark-mode)
+    (semantic-idle-summary-mode)
+    (semantic-stickyfunc-mode)
+    (semantic-add-system-include "/usr/local/include/c++/5.2.0")
+    (define-key semantic-mode-map (kbd "M-]") 'semantic-ia-fast-jump)
+    (define-key semantic-mode-map (kbd "M-[") 'semantic-ia-fast-jump-back)
+    (define-key c-mode-map (kbd "C-=") 'ff-find-other-file)
+    (setq-local show-trailing-whitespace t)
+    (company-mode)
+    (add-to-list 'company-backends 'company-c-headers)
+    (define-key company-mode-map (kbd "M-h") 'company-c-headers)
+    (flycheck-mode)
+    (abbrev-mode -1)))
 
 ;; ;; C Code
 ;; (add-hook 'c-mode-hook '(lambda ()
