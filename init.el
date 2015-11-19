@@ -38,9 +38,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
- '(company-c-headers-path-system
-   (quote
-    ("/usr/include/" "/usr/local/include/" "/usr/local/include/c++/5.2.0/")))
+ ;; '(company-c-headers-path-system
+ ;;   (quote
+ ;;    ("/usr/include/" "/usr/local/include/" "/usr/local/include/c++/5.2.0/")))
  '(custom-safe-themes
    (quote
     ("d3df47c843c22d8f0177fe3385ae95583dc8811bd6968240f7da42fd9aa51b0b" default)))
@@ -137,21 +137,6 @@
 (defun my-call-process-hack (orig program &rest args)
   (apply (if (equal program cedet-global-command) #'process-file orig)
          program args))
-
-;; (defun linux-c-mode ()
-;;   "C mode with adjusted defaults for use with the linux kernel."
-;;   (interactive)
-;;   (setq c-set-style "linux")
-;;   (setq c-default-style "linux"))
-
-;; (defun linux-c-mode-for-objc ()
-;;   "C mode with adjusted defaults for use with the linux kernel."
-;;   (interactive)
-;;   (setq c-set-style "linux")
-;;   (setq c-brace-offset -2)
-;;   (setq c-default-style "linux")
-;;   (setq c-basic-offset 2)
-;;   (setq tab-width 2))
 
 (defun toggle-window-split ()
   (interactive)
@@ -501,7 +486,7 @@
 ;; ;; Debugging Stuff
 ;; ;; (setq warning-minimum-log-level "error")
 ;; ;; Don't really need these, they are more annoying than anything
-;; (setq make-backup-files nil)
+(setq make-backup-files nil)
 ;; ;;(setq debug-on-error t)
 
 (add-hook 'html-mode-hook
