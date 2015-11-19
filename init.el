@@ -236,7 +236,7 @@
 (set-scroll-bar-mode nil)
 ;; ;; Visuals, but note that some visuals also set in custom.
 ;; (show-paren-mode)
-;; (auto-insert-mode)
+(auto-insert-mode)
 (abbrev-mode -1)
 (define-auto-insert "\\.org\\'" 'my-org-defaults)
 (define-auto-insert "\\.c\\'" 'my-c-defaults)
