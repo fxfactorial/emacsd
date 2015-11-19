@@ -20,75 +20,39 @@
      (insert-file-contents "~/.emacs.d/custom_scratch_message.txt")
      (setq initial-scratch-message (buffer-string)))))
 
-;; El-get stuff to sync up most stuff
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-    (let (el-get-master-branch)
-      (goto-char (point-max))
-      (eval-print-last-sexp))))
-(el-get 'sync)
 (package-initialize)
-(load-file "~/.emacs.d/omake.el")
-;; Creator of helm doesn't want to update his stuff for el-get, so
-;; everything helm/company related, just handle it manually.
-(add-to-list 'load-path "~/.emacs.d/elpa/helm-20141008.2145")
-(add-to-list 'load-path "~/.emacs.d/elpa/helm-gtags-20141005.243")
-
-;; this took many, many hours to get working correctly. 
-(load-file "~/.emacs.d/cedet/cedet-devel-load.elc")
 
 (autoload 'window-number-mode "window-number")
 ;; (add-to-list 'company-c-headers-path-system "/usr/local/include/c++/5.2.0")
 (autoload 'company-mode "company")
-(semantic-add-system-include "/usr/local/include/c++/5.2.0")
 
 ;;Melpa stuff, elpa is the offical package archive, melpa is the
 ;;community extension with stuff on github and melpa itself.
 (add-to-list 'package-archives 
 	     '("melpa" . "http://melpa.milkbox.net/packages/"))
 
-(add-to-list 'package-archives
-             '("melpa-stable" . "http://stable.melpa.org/packages/")
-             t)
-
-
-;;Not sure what the . is, not function composition...
-(add-to-list 'package-archives 
-	     '("marmalade" . "http://marmalade-repo.org/packages/"))
-
-;;Getting custom in before we set the tron theme
+;; ;;Getting custom in before we set the tron theme
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(auto-insert-query nil)
- '(browse-url-browser-function (quote browse-url-chromium))
  '(column-number-mode t)
+ '(company-c-headers-path-system
+   (quote
+    ("/usr/include/" "/usr/local/include/" "/usr/local/include/c++/5.2.0/")))
  '(custom-safe-themes
    (quote
-    ("8fed5e4b89cf69107d524c4b91b4a4c35bcf1b3563d5f306608f0c48f580fdf8" "442c946bc5c40902e11b0a56bd12edc4d00d7e1c982233545979968e02deb2bc" "4ff23437b3166eeb7ca9fa026b2b030bba7c0dfdc1ff94df14dfb1bcaee56c78" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
+    ("d3df47c843c22d8f0177fe3385ae95583dc8811bd6968240f7da42fd9aa51b0b" default)))
  '(display-battery-mode t)
  '(display-time-default-load-average nil)
  '(display-time-mode t)
  '(flycheck-c/c++-gcc-executable "/usr/local/bin/gcc-4.9")
  '(flycheck-make-executable "/usr/bin/make")
- '(haskell-process-type (quote cabal-repl))
- '(haskell-tags-on-save t)
- '(mail-user-agent (quote gnus-user-agent))
- '(merlin-use-auto-complete-mode nil)
  '(org-startup-indented t)
  '(semantic-c-dependency-system-include-path
    (quote
-    ("/usr/include" "/usr/local/lib/ocaml"
-     "/usr/local/include"
-     "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Foundation.framework/Versions/C/Headers")))
- '(solarized-distinct-fringe-background t)
- '(solarized-high-contrast-mode-line t)
- '(solarized-use-more-italic t)
+    ("/usr/include" "/usr/local/lib/ocaml" "/usr/local/include" "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Foundation.framework/Versions/C/Headers")))
  '(tool-bar-mode nil)
  '(web-mode-attr-indent-offset 2))
 
@@ -174,86 +138,20 @@
   (apply (if (equal program cedet-global-command) #'process-file orig)
          program args))
 
-;; Used in Operating System Course, not needed anymore.
-;; (defun os-s ()
-;;   "Only way to get semantic to play nicely with desired files,
-;;    very strange, *remember* to add the trailing slash for directories."
+;; (defun linux-c-mode ()
+;;   "C mode with adjusted defaults for use with the linux kernel."
 ;;   (interactive)
-;;   (setq company-c-headers-path-system '("/ssh:os:/home/w4118/hmwk6-prog/flo-kernel/arch/arm/include/"
-;;   					"/ssh:os:/home/w4118/hmwk6-prog/flo-kernel/include/"))
-;;   (setq company-c-headers-path-user '("/ssh:os:/home/w4118/hmwk6-prog/flo-kernel/include/"))
-;;   (semantic-reset-system-include)
-;;   (setq semantic-dependency-include-path '("/ssh:os:/home/w4118/hmwk6-prog/flo-kernel/kernel/"))
-;;   (semantic-add-system-include "/ssh:os:/home/w4118/hmwk6-prog/flo-kernel/arch/arm/include/")
-;;   (semantic-add-system-include "/ssh:os:/home/w4118/hmwk6-prog/flo-kernel/include/")
-;;   (setq-default semantic-symref-tool 'global)
-;;   ;;For tramp mainly 
-;;   ;; (setq default-directory "/ssh:os:")
-;;   ;;Doesn't seem to work since this is a function defined in the shell? 
-;;   ;; (local-set-key (kbd "M-z") '(lambda () 
-;;   ;; 				(shell-command "b")))
-;;   (mapc (lambda (item)
-;; 	  (add-to-list 'tramp-remote-path item))
-;; 	'("/home/w4118/utils/android-sdk-linux/tools"
-;; 	  "/home/w4118/utils/android-sdk-linux/platform-tools"
-;; 	  "/home/w4118/utils/arm-eabi-4.6/bin"
-;; 	  "/home/w4118/utils/bin"
-;; 	  "/home/w4118/utils/arm-2013.11/bin"))
-;;   (setq compile-command (concat
-;; 			 "make -j8 ARCH=arm CROSS_COMPILE=/home/w4118/utils/arm-eabi-4.6/bin/arm-eabi-"
-;; 			 " -C /home/w4118/hmwk6-prog/flo-kernel"))
-;;   (advice-add 'call-process :around #'my-call-process-hack))
+;;   (setq c-set-style "linux")
+;;   (setq c-default-style "linux"))
 
-;; Since not using linum-mode anymore, no sense to run this code. 
-;; (define-global-minor-mode this-linum-mode linum-mode
-;;   (lambda ()
-;;     (when (not (memq major-mode
-;;                      (list 'doc-view-mode)))
-;;       (linum-mode))))
-
-
-(defun dev-shell ()
-  "Opens up the dev shell immediately"
-  (interactive)
-  (let ((default-directory "/ssh:dev:/dev/gar"))
-    (shell)))
-
-(defun linux-c-mode ()
-  "C mode with adjusted defaults for use with the linux kernel."
-  (interactive)
-  (setq c-set-style "linux")
-  (setq c-default-style "linux"))
-
-(defun linux-c-mode-for-objc ()
-  "C mode with adjusted defaults for use with the linux kernel."
-  (interactive)
-  (setq c-set-style "linux")
-  (setq c-brace-offset -2)
-  (setq c-default-style "linux")
-  (setq c-basic-offset 2)
-  (setq tab-width 2))
-
-;; Not really needed anymore since using global for basically everything
-;; just keeping this for legacy interest. 
-;; (defun make-etags ()
-;;   "Execute shell command to build tags, but better options available"
+;; (defun linux-c-mode-for-objc ()
+;;   "C mode with adjusted defaults for use with the linux kernel."
 ;;   (interactive)
-;;   (shell-command "find . -type f -iname \"\*.[chS]\" | xargs etags -a"))
-
-;; Not used anymore because of skeleton, but keeping for the
-;; code sample, mainly the mapc 'insert '(list)
-;; (defun my-org-defaults ()
-;;   "Adds some common stuff I always use to an org mode text file"
-;;   (interactive)
-;;   (mapc 'insert '("#+AUTHOR: Edgar Aroutiounian\n"
-;; 		  "#+STARTUP: indent\n"
-;; 		  "#+OPTIONS: toc:nil\n"))
-;;   (org-mode-restart))
-
-;; (defun os-vm ()
-;;   (interactive)
-;;   (find-file "/ssh:os:~/hmwk6-prog/flo-kernel/kernel/gps.c")
-;;   (os-s))
+;;   (setq c-set-style "linux")
+;;   (setq c-brace-offset -2)
+;;   (setq c-default-style "linux")
+;;   (setq c-basic-offset 2)
+;;   (setq tab-width 2))
 
 (defun toggle-window-split ()
   (interactive)
@@ -280,31 +178,25 @@
           (select-window first-win)
           (if this-win-2nd (other-window 1))))))
 
-(defadvice push-mark
-    (around semantic-mru-bookmark activate)
-  "Push a mark at LOCATION with NOMSG and ACTIVATE passed to `push-mark’.
-   If `semantic-mru-bookmark-mode’ is active, also push a tag
-   onto the mru bookmark stack."
-  (semantic-mrub-push semantic-mru-bookmark-ring (point) 'mark)
-  ad-do-it)
+;; (defadvice push-mark
+;;     (around semantic-mru-bookmark activate)
+;;   "Push a mark at LOCATION with NOMSG and ACTIVATE passed to `push-mark’.
+;;    If `semantic-mru-bookmark-mode’ is active, also push a tag
+;;    onto the mru bookmark stack."
+;;   (semantic-mrub-push semantic-mru-bookmark-ring (point) 'mark)
+;;   ad-do-it)
 
-(defun semantic-ia-fast-jump-back ()
-  (interactive)
-  (if (ring-empty-p (oref semantic-mru-bookmark-ring ring))
-      (error "Semantic Bookmark ring is currently empty"))
-  (let* ((ring (oref semantic-mru-bookmark-ring ring))
-	 (alist (semantic-mrub-ring-to-assoc-list ring))
-	 (first (cdr (car alist))))
-    (if (semantic-equivalent-tag-p (oref first tag)
-				   (semantic-current-tag))
-	(setq first (cdr (car (cdr alist)))))
-    (semantic-mrub-switch-tags first)))
-
-(defun read-lines (filePath)
-  "Return a list of lines of a file at filePath."
-  (with-temp-buffer
-    (insert-file-contents filePath)
-    (split-string (buffer-string) "\n" t)))
+;; (defun semantic-ia-fast-jump-back ()
+;;   (interactive)
+;;   (if (ring-empty-p (oref semantic-mru-bookmark-ring ring))
+;;       (error "Semantic Bookmark ring is currently empty"))
+;;   (let* ((ring (oref semantic-mru-bookmark-ring ring))
+;; 	 (alist (semantic-mrub-ring-to-assoc-list ring))
+;; 	 (first (cdr (car alist))))
+;;     (if (semantic-equivalent-tag-p (oref first tag)
+;; 				   (semantic-current-tag))
+;; 	(setq first (cdr (car (cdr alist)))))
+;;     (semantic-mrub-switch-tags first)))
 
 ;; This takes care of all my irc needs.
 (defun irc-connect ()
@@ -329,72 +221,60 @@
   (erc :server "irc.freenode.net" :port 6667
        :nick "Algebr" :full-name user-full-name))
 
-;; Misc things
-(global-set-key (kbd "C-M-e") 'irc-connect)
+;; ;; Misc things
+;; (global-set-key (kbd "C-M-e") 'irc-connect)
 (global-set-key (kbd "C-M-p") 'run-python)
-(global-set-key (kbd "C-c C-g") 'google-this-noconfirm)
 ;; Love ido, idiot for not using it earlier. 
 (setq ido-everywhere t)
 (ido-mode 1)
 ;; Use the path set up by zsh, aka the ~/.zshrc. 
-(exec-path-from-shell-initialize)
-;; Annoying issue with TRAMP constantly asking for password
-(require 'tramp)
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
+;; ;; Annoying issue with TRAMP constantly asking for password
+;; (require 'tramp)
 (setq tramp-default-method "ssh")
 (setq password-cache-expiry nil)
 
-;; Keep the history between sessions, very nice to have.
+;; ;; Keep the history between sessions, very nice to have.
 (savehist-mode 1)
 (global-set-key (kbd "M-/") 'company-complete)
-;; Just kill the shell, don't ask me.
-;; I do a lambda so that its not evaluated at init load time. 
+;; ;; Just kill the shell, don't ask me.
+;; ;; I do a lambda so that its not evaluated at init load time. 
 (add-hook 'shell-mode-hook (lambda ()
 			     (set-process-query-on-exit-flag
 			      (get-process "shell") nil)))
 ;; Don't prompt me when I want to clear the buffer
 (put 'erase-buffer 'disabled nil)
 
-;; Tree
+;; ;; Tree
 (global-set-key (kbd "s-1") 'neotree-toggle)
 (set-scroll-bar-mode nil)
-;; Visuals, but note that some visuals also set in custom.
-(show-paren-mode)
-(auto-insert-mode)
+;; ;; Visuals, but note that some visuals also set in custom.
+;; (show-paren-mode)
+;; (auto-insert-mode)
 (abbrev-mode -1)
 (define-auto-insert "\\.org\\'" 'my-org-defaults)
 (define-auto-insert "\\.c\\'" 'my-c-defaults)
 (define-auto-insert "\\.m\\'" 'my-c-defaults)
 (define-auto-insert "\\.html\\'" 'my-html-defaults)
 (define-auto-insert "\\.js\\'" 'my-js-defaults)
-(display-battery-mode 1)
-(electric-indent-mode 1)
 (electric-pair-mode 1)
-;; I used to use linum-mode but its not really worth it, more like
-;; a crutch for beginning programmers, besides I see it in the mode line.
-;; in any case, have to use this wrapper function cause linum-mode
-;; fucks up doc-view, just in case you ever want to go back. 
-;; (this-linum-mode 1)
 (setq inhibit-startup-message t
       scroll-step 1)
 
 (window-number-mode)
-(mouse-avoidance-mode 'banish)
-(column-number-mode)
 (window-number-meta-mode)
-(display-time-mode t)
-;; (add-to-list 'custom-theme-load-path 
-;; 	     "~/.emacs.d/elpa/tronesque-theme-20140922.256")
+(mouse-avoidance-mode 'banish)
 (fringe-mode 10)
 (tool-bar-mode -1)
-;; Default for emacs jumps like crazy, this is the sane answer. 
-;; Gives me the full name of the buffer, hate just having foo.c
+;; ;; Gives me the full name of the buffer, hate just having foo.c
 (add-hook 'find-file-hooks
 	  '(lambda ()
 	     (setq mode-line-buffer-identification 'buffer-file-truename)))
-;; Since not using line numbers, show me end of the buffer in the
-;; fringe
+;; ;; Since not using line numbers, show me end of the buffer in the
+;; ;; fringe
 (setq-default indicate-empty-lines t)
-;; Obviously the following two key bindings are only for two buffers
+;; ;; Obviously the following two key bindings are only for two buffers
 (global-set-key (kbd "C-'") 'toggle-window-split)
 (global-set-key (kbd "M-'") 'transpose-windows)
 ;; Revert all buffers, usually related to a git stash/pull/*
@@ -425,116 +305,83 @@
     ad-do-it))
 (hlinum-activate)
 (fringe-mode -1)
-(when window-system
-  (load-theme 'cyberpunk))
-  ;; (load-theme 'spacegray))
-;; (load-theme 'solarized-dark))
-;; My other favorite theme. 
-;; (load-theme 'tronesque)
-;; (tronesque-mode-line))
 
-;; Visuals
+;; ;; Visuals
 (set-face-attribute 'default nil :family "Monaco" :height 110)
-;; Supposedly to help with showing emojis in editor but it doesn't work 
-;; (set-fontset-font t 'unicode "Symbola" nil 'prepend)
+;; ;; Supposedly to help with showing emojis in editor but it doesn't work 
+;; ;; (set-fontset-font t 'unicode "Symbola" nil 'prepend)
 (setq default-frame-alist '((cursor-color . "#BADA55")))
 
-;; Stuff for gnus, want to use gmail, see ~/.gnus
-(add-hook 'message-mode-hook (lambda ()
-			       (load-file "~/.gnus")
-			       (company-mode)
-			       (flyspell-mode)
-			       (setq message-signature "Sent from my emacs")
-			       (local-set-key "<TAB>" 'bbdb-complete-name)
-			       (turn-on-auto-fill)))
+(when window-system
+  (add-hook 'after-init-hook 
+	    (lambda ()
+	      (load-theme 'material t))))
 
-;; Semantic Stuff, very important to me, should probably refactor this for
-;; the appropriate modes, eitherwise the globalness of it is annoying when
-;; doing say Python and C, or rather anything else and C. 
-(global-semantic-idle-scheduler-mode 1)
-(global-semantic-idle-summary-mode 1)
-(global-semantic-stickyfunc-mode 1)
-(global-semantic-idle-local-symbol-highlight-mode 1)
-(global-semantic-mru-bookmark-mode 1)
-(global-semanticdb-minor-mode 1)
-(global-semantic-decoration-mode 1)
-(global-cedet-m3-minor-mode 1)
-(semanticdb-enable-gnu-global-databases 'c-mode t)
-(global-semantic-show-unmatched-syntax-mode t)
-;; For custom stuff, see this example (Although I skip this crap and just do the stuff
-;; in os-s)
-;; (ede-cpp-root-project "NAME" :file "FILENAME"
-;;     :include-path '( "/include" "../include" "/c/include" )
-;;     :system-include-path '( "/usr/include/c++/3.2.2/" )
-;;     :spp-table '( ("MOOSE" . "")
-;;                   ("CONST" . "const") )
-;;     :spp-files '( "include/config.h" )
-;;     )
-;; If you do clang first, then you get awesome signatures in the
-;; popup for the functions. On the other hand, clang doesn't know
-;; the contenxt and so -> for structs doesn't give completion.
-;; with clang first as well, you can't do C-w to go to definition,
-;; but that's okay since you can do it with semantic anyway with M-]/[
-;; In any case, I prefer using gcc instead of clang, at least for the moment.
-;; the capf, (means completion at point functions), is mainly here for org-mode
+;; ;; Semantic Stuff, very important to me, should probably refactor this for
+;; ;; the appropriate modes, eitherwise the globalness of it is annoying when
+;; ;; doing say Python and C, or rather anything else and C. 
+;; (global-semantic-idle-scheduler-mode 1)
+;; (global-semantic-idle-summary-mode 1)
+;; (global-semantic-stickyfunc-mode 1)
+;; (global-semantic-idle-local-symbol-highlight-mode 1)
+;; (global-semantic-mru-bookmark-mode 1)
+;; (global-semanticdb-minor-mode 1)
+;; (global-semantic-decoration-mode 1)
+;; (global-cedet-m3-minor-mode 1)
+;; (semanticdb-enable-gnu-global-databases 'c-mode t)
+;; (global-semantic-show-unmatched-syntax-mode t)
+;; ;; For custom stuff, see this example (Although I skip this crap and just do the stuff
+;; ;; in os-s)
+;; ;; (ede-cpp-root-project "NAME" :file "FILENAME"
+;; ;;     :include-path '( "/include" "../include" "/c/include" )
+;; ;;     :system-include-path '( "/usr/include/c++/3.2.2/" )
+;; ;;     :spp-table '( ("MOOSE" . "")
+;; ;;                   ("CONST" . "const") )
+;; ;;     :spp-files '( "include/config.h" )
+;; ;;     )
+;; ;; If you do clang first, then you get awesome signatures in the
+;; ;; popup for the functions. On the other hand, clang doesn't know
+;; ;; the contenxt and so -> for structs doesn't give completion.
+;; ;; with clang first as well, you can't do C-w to go to definition,
+;; ;; but that's okay since you can do it with semantic anyway with M-]/[
+;; ;; In any case, I prefer using gcc instead of clang, at least for the moment.
+;; ;; the capf, (means completion at point functions), is mainly here for org-mode
+;; ;; (setq company-clang-arguments
+;; ;;       '("-F" "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks"))
 ;; (setq company-clang-arguments
-;;       '("-F" "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks"))
-(setq company-clang-arguments
-      '("-F" "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Foundation.framework/"
-	"-F" "/System/Library/Frameworks/Foundation.framework/Headers/"
-	"-F" "/System/Library/Frameworks/SceneKit.framework/Headers/"
-	"-I" "/usr/local/lib/ocaml/"))
+;;       '("-F" "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Foundation.framework/"
+;; 	"-F" "/System/Library/Frameworks/Foundation.framework/Headers/"
+;; 	"-F" "/System/Library/Frameworks/SceneKit.framework/Headers/"
+;; 	"-I" "/usr/local/lib/ocaml/"))
 
-(setq company-backends '(company-clang
-			 company-semantic
-			 company-c-headers
+;; (setq company-backends '(company-clang
+;; 			 company-semantic
+;; 			 company-c-headers
+;; 			 company-jedi
 			 ;; company-bbdb
 			 ;; company-ghc
-			 company-capf))
+			 ;; company-capf))
 
-;; LateX Related Code
-(add-hook 'LaTeX-mode-hook (lambda ()
-			     (mapc (lambda (item)
-				     (add-to-list 'load-path item))
-				   '("~/.emacs.d/el-get/predictive"
-				     "~/.emacs.d/el-get/predictive/latex"
-				     "~/.emacs.d/el-get/predictive/texinfo"
-				     "~/.emacs.d/el-get/predictive/html"))
-			     (predictive-mode)
-			     (flyspell-mode)
-			     (setq TeX-parse-self t)
-			     ;; Since I'm usually just using 1 file
-			     (setq-default TeX-master t)
-			     ;; Got tired of hitting m-q
-			     (turn-on-auto-fill)
-			     (LaTeX-math-mode)))
+;; ;; LateX Related Code
+;; (add-hook 'LaTeX-mode-hook (lambda ()
+;; 			     (mapc (lambda (item)
+;; 				     (add-to-list 'load-path item))
+;; 				   '("~/.emacs.d/el-get/predictive"
+;; 				     "~/.emacs.d/el-get/predictive/latex"
+;; 				     "~/.emacs.d/el-get/predictive/texinfo"
+;; 				     "~/.emacs.d/el-get/predictive/html"))
+;; 			     (predictive-mode)
+;; 			     (flyspell-mode)
+;; 			     (setq TeX-parse-self t)
+;; 			     ;; Since I'm usually just using 1 file
+;; 			     (setq-default TeX-master t)
+;; 			     ;; Got tired of hitting m-q
+;; 			     (turn-on-auto-fill)
+;; 			     (LaTeX-math-mode)))
 
-;; Doc-view mode, think viewing pdfs in emacs, pretty robust actually. 
-(add-hook 'doc-view-mode-hook (lambda ()
-				;; Improves resolution at cost of computation
-				(setq doc-view-resolution 300)
-				;; Basically poll the file for changes. 
-				(auto-revert-mode)))
-
-(add-hook 'inf-ruby-mode '(lambda ()
-			    (set-process-query-on-exit-flag
-			     (get-process "ruby") nil)))
-;; Ruby stuff
-(add-hook 'ruby-mode-hook '(lambda ()
-			     ;; (setq company-backends '(company-robe))))
-			     ;;			    (auto-complete-mode -1)
-			     (robe-mode)))
-;;			    (robe-start)
-;; (set-process-query-on-exit-flag
-;;  (get-process "ruby") nil)
-;;			    (company-mode)))
-
-;; Python Stuff
-;; Get these variables set before the inferior mode comes up, otherwise too late.
-;; Might as well just use this VM 
+;; ;; Python Stuff
+;; ;; Get these variables set before the inferior mode comes up, otherwise too late.
 (setq python-shell-interpreter "/usr/local/bin/ipython3"
-      ;; TODO Need to make this smarter about whether I'm on the 
-      ;; vagrant machine or not. 
       python-shell-interpreter-args "--matplotlib=osx --colors=Linux"
       python-shell-prompt-regexp "In \\[[0-9]+\\]: "
       python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
@@ -550,102 +397,71 @@
 					;; Just like killing the shell without asking me. 
 				       	(get-process "Python") nil)))
 
-(add-hook 'python-mode-hook (lambda ()
-			      (electric-pair-mode nil)
-			      (semantic-mode -1)
-			      (setq-local indent-tabs-mode nil)
-			      (setq-local tab-width 4)
-			      (setq-local python-indent 4)
-			      (hs-minor-mode)
-			      (define-key hs-minor-mode-map (kbd "C-c C-t")
-				'hs-toggle-hiding)
-			      (define-key python-mode-map (kbd "M-q")
-				'python-fill-paren)
-			      (jedi:setup)
-			      (setq jedi:setup-keys t
-				    jedi:server-args
-				    '("--sys-path"
-				      "/usr/local/Cellar/python3/3.5.0/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages")
-				    jedi:complete-on-dot t)
-			      ;; Forgot what this was for..think some os x issues. 
-			      (setenv "LC_CTYPE" "UTF-8")
-			      ;; keeping a consistent interface for autocomplete type things. 
-			      (define-key python-mode-map (kbd "M-/") 'jedi:complete)
-			      (let ((interpreter python-shell-interpreter)
-			      	    (args python-shell-interpreter-args))
-			      	(when python-shell--parent-buffer
-			      	  (python-util-clone-local-variables python-shell--parent-buffer))
-				;; 	;; Users can override default values for these vars when calling
-				;; 	;; `run-python'. This ensures new values let-bound in
-				;; 	;; `python-shell-make-comint' are locally set.
-			      	(set (make-local-variable 'python-shell-interpreter) interpreter)
-			      	(set (make-local-variable 'python-shell-interpreter-args) args))
-			      ;; Its so damn loud
-			      ;;(flycheck-mode)
-			      (setq-local show-trailing-whitespace t)))
-
-;; SQL Stuff
-;; Just remember,
-;;http://truongtx.me/2014/08/23/setup-emacs-as-an-sql-database-client/
-;;(load-file "~/.emacs.d/sql_dbs.el")
-(add-hook 'sql-interactive-mode-hook
+(add-hook 'python-mode-hook
 	  (lambda ()
-	    (toggle-truncate-lines)))
+	    ;; (electric-pair-mode nil)
+	    (setq-local indent-tabs-mode nil)
+	    (setq-local tab-width 4)
+	    (setq-local python-indent 4)
+	    (hs-minor-mode)
+	    (define-key hs-minor-mode-map (kbd "C-c C-t") 'hs-toggle-hiding)
+	    (define-key python-mode-map (kbd "M-q") 'python-fill-paren)
+	    ;; Forgot what this was for..think some os x issues. 
+	    (setenv "LC_CTYPE" "UTF-8")
+	    ;; keeping a consistent interface for autocomplete type things. 
+	    ;; (define-key python-mode-map (kbd "M-/") 'jedi:complete)
+	    (let ((interpreter python-shell-interpreter)
+		  (args python-shell-interpreter-args))
+	      (when python-shell--parent-buffer
+		(python-util-clone-local-variables python-shell--parent-buffer))
+	      ;; 	;; Users can override default values for these vars when calling
+	      ;; 	;; `run-python'. This ensures new values let-bound in
+	      ;; 	;; `python-shell-make-comint' are locally set.
+	      (set (make-local-variable 'python-shell-interpreter) interpreter)
+	      (set (make-local-variable 'python-shell-interpreter-args) args))
+	    ;; Its so damn loud
+	    ;;(flycheck-mode)
+	    (company-jedi)
+	    (setq-local show-trailing-whitespace t)))
 
-;; Haskell Stuff
-(let ((my-cabal-path (expand-file-name "~/.cabal/bin")))
-  (setenv "PATH" (concat my-cabal-path path-separator (getenv "PATH")))
-  (add-to-list 'exec-path my-cabal-path))
-(autoload 'ghc-init "ghc" nil t)
-(autoload 'ghc-debug "ghc" nil t)
-(add-hook 'haskell-mode-hook (lambda ()
-			       (ghc-init)
-			       (semantic-mode -1)
-			       ;; (interactive-haskell-mode)
-			       (setq haskell-process-type 'cabal-repl
-				     haskell-process-log t
-				     haskell-interactive-popup-errors nil
-				     haskell-process-auto-import-loaded-modules
-				     t)
-			       (auto-complete-mode -1)
-			       (turn-on-haskell-indentation)
-			       (structured-haskell-mode)
-			       (define-key haskell-mode-map
-				 (kbd "<s-down>") 'forward-paragraph)
-			       (define-key haskell-mode-map
-				 (kbd "<s-up>") 'backward-paragraph)
-			       (company-mode 1)))
+;; ;; SQL Stuff
+;; ;; Just remember,
+;; ;;http://truongtx.me/2014/08/23/setup-emacs-as-an-sql-database-client/
+;; ;;(load-file "~/.emacs.d/sql_dbs.el")
+;; (add-hook 'sql-interactive-mode-hook
+;; 	  (lambda ()
+;; 	    (toggle-truncate-lines)))
 
-;; Ocaml code
-;; the eliom file description is for web programming stuff. 
-(add-to-list 'auto-mode-alist '("\\.eliom\\'" . tuareg-mode))
-(add-to-list 'auto-mode-alist '("\\.options\\'" . makefile-mode))
-(autoload 'camldebug "camldebug" "Run the Caml Debugger" t)
-(add-hook 'tuareg-mode-hook (lambda ()
-			      (dolist (var
-				       (car (read-from-string
-					     (shell-command-to-string "opam config env --sexp"))))
-				(setenv (car var) (cadr var)))
-			      ;; Update the emacs path
-			      (setq exec-path (split-string (getenv "PATH") path-separator))
-			      ;; Update the emacs load path
-			      (push (concat (getenv "OCAML_TOPLEVEL_PATH") "/../../share/emacs/site-lisp") load-path)
-			      ;; Automatically load utop.el
-			      (autoload 'utop-minor-mode "utop" "Minor mode for utop" t)
-			      (autoload 'utop-setup-ocaml-buffer "utop" "Toplevel for OCaml" t)
-			      (autoload 'merlin-mode "merlin" "Merlin mode" t)
-			      (setq-local merlin-completion-with-doc t)
-			      (utop-minor-mode)
-			      (auto-complete-mode -1)
-			      (setq-local indent-tabs-mode nil)
-			      ;;(require 'ocp-index)
-			      (company-mode)
-			      (require 'ocp-indent)
-			      (setq indent-line-function 'ocp-indent-line
-				    indent-region-function 'ocp-indent-region)
-			      (load-file "/Users/Edgar/.opam/working/share/emacs/site-lisp/ocp-indent.el")
-			      (setq-local show-trailing-whitespace t)
-			      (merlin-mode)))
+;; ;; Ocaml code
+(add-hook
+ 'tuareg-mode-hook
+ (lambda ()
+   (dolist (var
+	    (car (read-from-string
+		  (shell-command-to-string "opam config env --sexp"))))
+     (setenv (car var) (cadr var)))
+   ;; Update the emacs path
+   (setq exec-path (split-string (getenv "PATH") path-separator))
+   ;; Update the emacs load path
+   (push
+    (concat
+     (getenv "OCAML_TOPLEVEL_PATH")
+     "/../../share/emacs/site-lisp")
+    load-path)
+   (company-mode)
+   (autoload 'utop-minor-mode "utop" "Minor mode for utop" t)
+   (autoload 'utop-setup-ocaml-buffer "utop" "Toplevel for OCaml" t)
+   (autoload 'merlin-mode "merlin" "Merlin mode" t)
+   (setq-local merlin-completion-with-doc t)
+   (utop-minor-mode)
+   (setq-local indent-tabs-mode nil)
+   (require 'ocp-indent)
+   (setq-local indent-line-function 'ocp-indent-line)
+   (setq-local indent-region-function 'ocp-indent-region)
+   (load-file
+    "/Users/Edgar/.opam/working/share/emacs/site-lisp/ocp-indent.el")
+   (setq-local show-trailing-whitespace t)
+   (merlin-mode)))
 
 (add-hook 'utop-mode-hook (lambda ()
 			    (set-process-query-on-exit-flag
@@ -654,85 +470,46 @@
 (defun org-font-lock-ensure ()
   (font-lock-fontify-buffer))
 
-(add-to-list 'load-path "~/.emacs.d/o-blog/lisp")
-
-(add-hook 'org-mode-hook (lambda ()
-			   ;; Orgmode Stuff
-			   ;; This is for syntax highling in pdf exports
-			   (require 'ox-md)
-			   (require 'ox-gfm)
-			   (semantic-mode -1)
-			   (add-to-list 'org-latex-packages-alist '("" "minted"))
-			   (setq org-latex-listings 'minted
-				 org-latex-create-formula-image-program 'imagemagick
-				 org-latex-pdf-process
-				 '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-				   "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-				   "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
-			   (flyspell-mode)
-			   (auto-fill-mode)
-			   (company-mode)
-			   (semantic-mode -1)
-			   (define-key org-mode-map
-			     (kbd "C-c p")
-			     'org-publish-current-project)))
+(add-hook
+ 'org-mode-hook
+ (lambda ()
+   ;; Orgmode Stuff
+   (require 'ox-gfm)
+   (add-to-list 'org-latex-packages-alist '("" "minted"))
+   (setq
+    org-latex-listings 'minted
+    org-latex-create-formula-image-program 'imagemagick
+    org-latex-pdf-process
+    '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+      "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+      "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+   (flyspell-mode)
+   (auto-fill-mode)
+   (company-mode)
+   (define-key org-mode-map
+     (kbd "C-c p")
+     'org-publish-current-project)))
 
 ;; TODO, this shouldn't need to be a separate call, should be
 ;; part of the hook above.
 ;; https://github.com/company-mode/company-mode/issues/50
 (add-hook 'org-mode-hook #'add-pcomplete-to-capf)
 
-;; (setq org-publish-project-alist
-;;       '(("blog" . (:base-directory "~/Repos/gar_site/src/org_mode_src_blog/"
-;; 		   :base-extension "org"
-;; 		   :publishing-directory "~/Repos/gar_site/src/blog_generated/"
-;; 		   :sub-superscript ""
-;; 		   :recursive t
-;; 		   :publishing-function org-html-publish-to-html
-;; 		   :headline-levels 4
-;; 		   :html-extension "html"
-;; 		   :body-only t))
-;; 	("other" . (:base-directory "~/Repos/gar_site/src/org_mode_src_etc/"
-;; 		   :base-extension "org"
-;; 		   :publishing-directory "~/Repos/gar_site/src/etc_generated/"
-;; 		   :sub-superscript ""
-;; 		   :recursive t
-;; 		   :publishing-function org-html-publish-to-html
-;; 		   :headline-levels 4
-;; 		   :html-extension "html"
-;; 		   :body-only t))))
-      ;; '(("blog" . (:base-directory "~/Repos/octopress/source/_org_posts/"
-      ;; 				   :base-extension "org"
-      ;; 				   :publishing-directory "~/Repos/octopress/source/_posts/"
-      ;; 				   :sub-superscript ""
-      ;; 				   :recursive t
-      ;; 				   :publishing-function org-html-publish-to-html
-      ;; 				   :headline-levels 4
-      ;; 				   :html-extension "markdown"
-      ;; 				   :body-only t))))
-
 ;; Basic text files
 (add-hook 'text-mode-hook 'auto-fill-mode)
 
-;; Debugging Stuff
-;; (setq warning-minimum-log-level "error")
-;; Don't really need these, they are more annoying than anything
-(setq make-backup-files nil)
-;;(setq debug-on-error t)
+;; ;; Debugging Stuff
+;; ;; (setq warning-minimum-log-level "error")
+;; ;; Don't really need these, they are more annoying than anything
+;; (setq make-backup-files nil)
+;; ;;(setq debug-on-error t)
 
-;;Web crap
-(eval-after-load 'browse-url
-  `(progn
-     (fset 'browse-url-default-browser #'browse-url-chromium)
-     (setq browse-url-chromium-program
-	   "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")))
-
-(add-hook 'html-mode-hook (lambda ()
-			    (web-mode)
-			    (setq web-mode-ac-sources-alist
-				  '(("css" . (ac-source-css-property))
-				    ("html" . (ac-source-words-in-buffer ac-source-abbrev)))
-				  )))
+(add-hook 'html-mode-hook
+	  (lambda ()
+	    (web-mode)
+	    (setq web-mode-ac-sources-alist
+		  '(("css" . (ac-source-css-property))
+		    ("html" . (ac-source-words-in-buffer ac-source-abbrev))))))
 
 (add-hook 'css-mode-hook (lambda ()
 			   (define-key css-mode-map (kbd "M-/") 'ac-start )))
@@ -743,132 +520,108 @@
 			    (auto-complete-mode)
 			    (define-key css-mode-map (kbd "M-/") 'ac-start )))
 
-;;Javascript hook, this is a better major mode than default one
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.json\\'" . js2-mode))
+;; ;;Javascript hook, this is a better major mode than default one
+;; (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+;; (add-to-list 'auto-mode-alist '("\\.json\\'" . js2-mode))
 
-(add-hook 'js2-mode-hook (lambda ()
-			   (define-key js2-mode-map (kbd "M-/") 'tern-ac-complete)
-			   (tern-mode)))
+;; (add-hook 'js2-mode-hook (lambda ()
+;; 			   (define-key js2-mode-map (kbd "M-/") 'tern-ac-complete)
+;; 			   (tern-mode)))
 
-(add-hook 'swift-mode-hook (lambda ()
-			     (auto-complete-mode)
-			     (define-key swift-mode-map (kbd "M-/") 'ac-start)))
 
-(eval-after-load 'tern
-  '(progn
-     (require 'tern-auto-complete)
-     (tern-ac-setup)))
+;; (eval-after-load 'tern
+;;   '(progn
+;;      (require 'tern-auto-complete)
+;;      (tern-ac-setup)))
 
-;; C++ stuff, basically just be aware of it.
-(add-to-list 'auto-mode-alist '("\\.cc\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
-
-;; Helm stuff
-(setq helm-quick-update                     t ; do not display invisible candidates
-      helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
-      helm-buffers-fuzzy-matching           t ; fuzzy matching buffer names when non--nil
-      helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
-      helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
-      helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
-      helm-ff-file-name-history-use-recentf t
-      helm-gtags-ignore-case t
-      helm-gtags-auto-update t
-      helm-gtags-use-input-at-cursor t
-      helm-gtags-pulse-at-cursor t
-      helm-gtags-prefix-key "\C-cg"
-      helm-gtags-suggested-key-mapping t)
+;; ;; C++ stuff, basically just be aware of it.
+;; (add-to-list 'auto-mode-alist '("\\.cc\\'" . c++-mode))
+;; (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
 
 ;; emacs lisp stuff
-(add-hook 'emacs-lisp-mode-hook '(lambda ()
-				   (global-set-key (kbd "C-M-s") 'eval-buffer)
-				   (semantic-mode)
-				   ;;(paredit-mode)
-				   (flycheck-mode)
-				   (global-set-key (kbd "C-c C-f") 'helm-command-prefix)
-				   (define-key semantic-mode-map (kbd "M-]") 'semantic-ia-fast-jump)
-				   (define-key semantic-mode-map (kbd "M-[") 'semantic-ia-fast-jump-back)
-				   (global-unset-key (kbd "C-x c"))))
+(add-hook 'emacs-lisp-mode-hook
+	  '(lambda ()
+	     (global-set-key (kbd "C-M-s") 'eval-buffer)
+	     (flycheck-mode)
+	     (company-mode)
+	     (global-unset-key (kbd "C-x c"))))
 
-;; Common things wanted in all C like languages. 
-(add-hook 'c-mode-common-hook '(lambda ()
-				 (require 'helm-config)
-				 (require 'helm-gtags)
-				 (define-key c-mode-map (kbd "C-=")
-				   'ff-find-other-file)
-				 (setq-local show-trailing-whitespace t)
-				 (company-mode)
-				 (define-key company-mode-map (kbd "M-h")
-				   'company-c-headers)
-				 (hs-minor-mode)
-				 (define-key hs-minor-mode-map (kbd "C-c C-t")
-				   'hs-toggle-hiding)
-				 (flycheck-mode)
-				 (global-set-key (kbd "C-c C-f")
-						 'helm-command-prefix)
-				 (global-unset-key (kbd "C-x c"))
-				 (auto-complete-mode -1)
-				 (add-to-list
-				  'company-c-headers-path-system
-				  "/usr/local/include/c++/5.2.0")
-				 (abbrev-mode -1)))
-				 ;; (linux-c-mode)))
-;; C Code
-(add-hook 'c-mode-hook '(lambda ()
-			  (semantic-mode)
-			  (define-key helm-gtags-mode-map (kbd "M-s")
-			    'helm-gtags-select)
-			  (helm-gtags-mode)
-			  (define-key helm-gtags-mode-map (kbd "M-.")
-			    'helm-gtags-dwim)
-			  (define-key helm-gtags-mode-map (kbd "M-,")
-			    'helm-gtags-pop-stack)
-			  (define-key c-mode-map (kbd "C-c C-c") 'compile)
-			  (semantic-mru-bookmark-mode)
-			  (define-key semantic-mode-map (kbd "M-]")
-			    'semantic-ia-fast-jump)
-			  (define-key semantic-mode-map (kbd "M-[")
-			    'semantic-ia-fast-jump-back)
-			  (ggtags-mode)
-			  (define-key ggtags-mode-map (kbd "M-.") nil)
-			  (define-key ggtags-mode-map (kbd "M-<") nil)
-			  (define-key ggtags-mode-map (kbd "M->") nil)
-			  (define-key ggtags-mode-map (kbd "M-n") nil)
-			  (define-key ggtags-mode-map (kbd "M-p") nil)
-			  (define-key ggtags-mode-map (kbd "M-,") nil)
-			  (define-key ggtags-mode-map (kbd "M-]") nil)
-			  (define-key ggtags-mode-map (kbd "M--")
-			    'ggtags-find-reference)))
+;; ;; Common things wanted in all C like languages. 
+(add-hook 'c-mode-common-hook
+	  '(lambda ()
+	     (load-file "~/.emacs.d/cedet/cedet-devel-load.elc")
+	     (semantic-mode)
+	     (semantic-decoration-mode)
+	     (semantic-show-unmatched-syntax-mode)
+	     (semantic-idle-local-symbol-highlight-mode)
+	     (semantic-idle-scheduler-mode)
+	     (semantic-idle-summary-mode)
+	     (semantic-stickyfunc-mode)
+	     (semantic-add-system-include "/usr/local/include/c++/5.2.0")
+	     (define-key c-mode-map (kbd "C-=") 'ff-find-other-file)
+	     (setq-local show-trailing-whitespace t)
+	     (company-mode)
+	     (add-to-list 'company-backends 'company-c-headers)
+	     (define-key company-mode-map (kbd "M-h") 'company-c-headers)
+	     (flycheck-mode)
+	     (abbrev-mode -1)))
 
-(defun objc-in-header-file ()
-  (let* ((filename (buffer-file-name))
-         (extension (car (last (split-string filename "\\.")))))
-    (string= "h" extension)))
+;; ;; C Code
+;; (add-hook 'c-mode-hook '(lambda ()
+;; 			  (semantic-mode)
+;; 			  (define-key helm-gtags-mode-map (kbd "M-s")
+;; 			    'helm-gtags-select)
+;; 			  (helm-gtags-mode)
+;; 			  (define-key helm-gtags-mode-map (kbd "M-.")
+;; 			    'helm-gtags-dwim)
+;; 			  (define-key helm-gtags-mode-map (kbd "M-,")
+;; 			    'helm-gtags-pop-stack)
+;; 			  (define-key c-mode-map (kbd "C-c C-c") 'compile)
+;; 			  (semantic-mru-bookmark-mode)
+;; 			  (define-key semantic-mode-map (kbd "M-]")
+;; 			    'semantic-ia-fast-jump)
+;; 			  (define-key semantic-mode-map (kbd "M-[")
+;; 			    'semantic-ia-fast-jump-back)
+;; 			  (ggtags-mode)
+;; 			  (define-key ggtags-mode-map (kbd "M-.") nil)
+;; 			  (define-key ggtags-mode-map (kbd "M-<") nil)
+;; 			  (define-key ggtags-mode-map (kbd "M->") nil)
+;; 			  (define-key ggtags-mode-map (kbd "M-n") nil)
+;; 			  (define-key ggtags-mode-map (kbd "M-p") nil)
+;; 			  (define-key ggtags-mode-map (kbd "M-,") nil)
+;; 			  (define-key ggtags-mode-map (kbd "M-]") nil)
+;; 			  (define-key ggtags-mode-map (kbd "M--")
+;; 			    'ggtags-find-reference)))
 
-(defun objc-jump-to-extension (extension)
-  (let* ((filename (buffer-file-name))
-         (file-components (append (butlast (split-string filename
-                                                         "\\."))
-                                  (list extension))))
-    (find-file (mapconcat 'identity file-components "."))))
+;; (defun objc-in-header-file ()
+;;   (let* ((filename (buffer-file-name))
+;;          (extension (car (last (split-string filename "\\.")))))
+;;     (string= "h" extension)))
 
-;;; Assumes that Header and Source file are in same directory
-(defun objc-jump-between-header-source ()
-  (interactive)
-  (if (objc-in-header-file)
-      (objc-jump-to-extension "m")
-    (objc-jump-to-extension "h")))
+;; (defun objc-jump-to-extension (extension)
+;;   (let* ((filename (buffer-file-name))
+;;          (file-components (append (butlast (split-string filename
+;;                                                          "\\."))
+;;                                   (list extension))))
+;;     (find-file (mapconcat 'identity file-components "."))))
 
-(defun objc-mode-customizations ()
-  (define-key objc-mode-map (kbd "C-c t") 'objc-jump-between-header-source))
+;; ;;; Assumes that Header and Source file are in same directory
+;; (defun objc-jump-between-header-source ()
+;;   (interactive)
+;;   (if (objc-in-header-file)
+;;       (objc-jump-to-extension "m")
+;;     (objc-jump-to-extension "h")))
+
+;; (defun objc-mode-customizations ()
+;;   (define-key objc-mode-map (kbd "C-c t") 'objc-jump-between-header-source))
 
 
-(add-hook 'objc-mode-hook '(lambda ()
-			     (objc-mode-customizations)
-			     (linux-c-mode-for-objc)))
+;; (add-hook 'objc-mode-hook '(lambda ()
+;; 			     (objc-mode-customizations)
+;; 			     (linux-c-mode-for-objc)))
 
-;; Configuration for blogging
-(require 'org-page)
+;; ;; Configuration for blogging
+;; (require 'org-page)
 (setq op/repository-directory "/Users/Edgar/Repos/fxfactorial.github.io/"
       op/site-domain "hyegar.com"
       op/personal-disqus-shortname "hyegar"
