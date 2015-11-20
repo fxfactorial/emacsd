@@ -163,16 +163,15 @@
           (select-window first-win)
           (if this-win-2nd (other-window 1))))))
 
-(defadvice push-mark
-    (around semantic-mru-bookmark activate)
-  "Push a mark at LOCATION with NOMSG and ACTIVATE passed to `push-mark’.
-   If `semantic-mru-bookmark-mode’ is active, also push a tag
-   onto the mru bookmark stack."
-  (semantic-mrub-push semantic-mru-bookmark-ring (point) 'mark)
-  ad-do-it)
-
 (defun semantic-ia-fast-jump-back ()
   (interactive)
+  (defadvice push-mark
+      (around semantic-mru-bookmark activate)
+    "Push a mark at LOCATION with NOMSG and ACTIVATE passed to `push-mark’.
+  If `semantic-mru-bookmark-mode’ is active, also push a tag
+  onto the mru bookmark stack."
+    (semantic-mrub-push semantic-mru-bookmark-ring (point) 'mark)
+    ad-do-it)
   (if (ring-empty-p (oref semantic-mru-bookmark-ring ring))
       (error "Semantic Bookmark ring is currently empty"))
   (let* ((ring (oref semantic-mru-bookmark-ring ring))
@@ -183,16 +182,20 @@
 	(setq first (cdr (car (cdr alist)))))
     (semantic-mrub-switch-tags first)))
 
+;; Needed for erc's reading of creds
+(defun read-lines (filePath)
+  "Return a list of lines of a file at filePath."
+  (with-temp-buffer
+    (insert-file-contents filePath)
+    (split-string (buffer-string) "\n" t)))
+
 ;; This takes care of all my irc needs.
 (defun irc-connect ()
   "Connect to IRC, register nick, open commonly used channels"
   (interactive)
-  (setq erc-max-buffer-size 20000)
-  (setq erc-autojoin-channels-alist '(("freenode.net"
-				       "#ocaml"
-				       "#macdev"
-				       "#swift-lang")))
-  (setq erc-hide-list '("JOIN" "PART" "QUIT"))
+  (setq erc-max-buffer-size 20000
+	erc-autojoin-channels-alist '(("freenode.net" "#ocaml"))
+	erc-hide-list '("JOIN" "PART" "QUIT"))
   ;; This is obviously untracked, if you copy my init.el,
   ;; either delete this code or provide your own creds
   (let ((acc (read-lines "~/.emacs.d/these-erc-creds")))
@@ -207,7 +210,7 @@
        :nick "Algebr" :full-name user-full-name))
 
 ;; ;; Misc things
-;; (global-set-key (kbd "C-M-e") 'irc-connect)
+(global-set-key (kbd "C-M-e") 'irc-connect)
 (global-set-key (kbd "C-M-p") 'run-python)
 ;; Love ido, idiot for not using it earlier. 
 (setq ido-everywhere t)
@@ -342,8 +345,7 @@
 (setq company-backends '(company-clang
 			 company-capf
 			 company-c-headers
-			 company-jedi
-			 company-semantic))
+			 company-jedi))
 
 ;; ;; LateX Related Code
 ;; (add-hook 'LaTeX-mode-hook (lambda ()
@@ -364,7 +366,7 @@
 
 ;; ;; Python Stuff
 ;; ;; Get these variables set before the inferior mode comes up, otherwise too late.
-(setq python-shell-interpreter "/usr/local/bin/ipython3"
+(setq python-shell-interpreter "/usr/local/bin/ipython2"
       python-shell-interpreter-args "--matplotlib=osx --colors=Linux"
       python-shell-prompt-regexp "In \\[[0-9]+\\]: "
       python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
@@ -375,37 +377,44 @@
       python-shell-completion-string-code
       "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
 
-(add-hook 'inferior-python-mode-hook (lambda ()
-				       (set-process-query-on-exit-flag
-					;; Just like killing the shell without asking me. 
-				       	(get-process "Python") nil)))
-
-(add-hook 'python-mode-hook
+(add-hook 'inferior-python-mode-hook
 	  (lambda ()
-	    ;; (electric-pair-mode nil)
-	    (setq-local indent-tabs-mode nil)
-	    (setq-local tab-width 4)
-	    (setq-local python-indent 4)
-	    (hs-minor-mode)
-	    (define-key hs-minor-mode-map (kbd "C-c C-t") 'hs-toggle-hiding)
-	    (define-key python-mode-map (kbd "M-q") 'python-fill-paren)
-	    ;; Forgot what this was for..think some os x issues. 
-	    (setenv "LC_CTYPE" "UTF-8")
-	    ;; keeping a consistent interface for autocomplete type things. 
-	    ;; (define-key python-mode-map (kbd "M-/") 'jedi:complete)
-	    (let ((interpreter python-shell-interpreter)
-		  (args python-shell-interpreter-args))
-	      (when python-shell--parent-buffer
-		(python-util-clone-local-variables python-shell--parent-buffer))
-	      ;; 	;; Users can override default values for these vars when calling
-	      ;; 	;; `run-python'. This ensures new values let-bound in
-	      ;; 	;; `python-shell-make-comint' are locally set.
-	      (set (make-local-variable 'python-shell-interpreter) interpreter)
-	      (set (make-local-variable 'python-shell-interpreter-args) args))
-	    ;; Its so damn loud
-	    ;;(flycheck-mode)
-	    (company-jedi)
-	    (setq-local show-trailing-whitespace t)))
+	    (set-process-query-on-exit-flag
+	     ;; Just like killing the shell without asking me. 
+	     (get-process "Python") nil)))
+
+(add-hook
+ 'python-mode-hook
+ (lambda ()
+   ;; (electric-pair-mode nil)
+   (setq-local indent-tabs-mode nil)
+   (setq-local tab-width 4)
+   (setq-local python-indent 4)
+   (hs-minor-mode)
+   (define-key hs-minor-mode-map (kbd "C-c C-t") 'hs-toggle-hiding)
+   (define-key python-mode-map (kbd "M-q") 'python-fill-paren)
+   ;; Need to adjust this to site_modules
+   ;; of python3 for doing python3 coding
+   ;; (setq jedi:server-args
+   ;; '("--sys-path"))
+   ;; Forgot what this was for..think some os x issues. 
+   (setenv "LC_CTYPE" "UTF-8")
+   ;; keeping a consistent interface for autocomplete type things. 
+   ;; (define-key python-mode-map (kbd "M-/") 'jedi:complete)
+   (let ((interpreter python-shell-interpreter)
+	 (args python-shell-interpreter-args))
+     (when python-shell--parent-buffer
+       (python-util-clone-local-variables python-shell--parent-buffer))
+     ;; 	;; Users can override default values for these vars when calling
+     ;; 	;; `run-python'. This ensures new values let-bound in
+     ;; 	;; `python-shell-make-comint' are locally set.
+     (set (make-local-variable 'python-shell-interpreter) interpreter)
+     (set (make-local-variable 'python-shell-interpreter-args) args))
+   ;; Its so damn loud
+   ;; (flycheck-mode)
+   (company-mode)
+   (company-quickhelp-mode)
+   (setq-local show-trailing-whitespace t)))
 
 ;; ;; SQL Stuff
 ;; ;; Just remember,
@@ -515,6 +524,7 @@
 	  '(lambda ()
 	     (global-set-key (kbd "C-M-s") 'eval-buffer)
 	     (flycheck-mode)
+;;	     (semantic-mode -1)
 	     (company-mode)
 	     (global-unset-key (kbd "C-x c"))))
 
