@@ -339,13 +339,11 @@
 ;; 	"-F" "/System/Library/Frameworks/SceneKit.framework/Headers/"
 ;; 	"-I" "/usr/local/lib/ocaml/"))
 
-;; (setq company-backends '(company-clang
-;; 			 company-semantic
-;; 			 company-c-headers
-;; 			 company-jedi
-			 ;; company-bbdb
-			 ;; company-ghc
-			 ;; company-capf))
+(setq company-backends '(company-clang
+			 company-capf
+			 company-c-headers
+			 company-jedi
+			 company-semantic))
 
 ;; ;; LateX Related Code
 ;; (add-hook 'LaTeX-mode-hook (lambda ()
@@ -455,25 +453,14 @@
 (defun org-font-lock-ensure ()
   (font-lock-fontify-buffer))
 
-(add-hook
- 'org-mode-hook
- (lambda ()
-   ;; Orgmode Stuff
-   (require 'ox-gfm)
-   (add-to-list 'org-latex-packages-alist '("" "minted"))
-   (setq
-    org-latex-listings 'minted
-    org-latex-create-formula-image-program 'imagemagick
-    org-latex-pdf-process
-    '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-      "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-      "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
-   (flyspell-mode)
-   (auto-fill-mode)
-   (company-mode)
-   (define-key org-mode-map
-     (kbd "C-c p")
-     'org-publish-current-project)))
+(add-hook 'org-mode-hook
+	  (lambda ()
+	    ;; Orgmode Stuff
+	    (require 'ox-gfm)
+	    (flyspell-mode)
+	    (auto-fill-mode)
+	    (semantic-mode -1)
+	    (company-mode)))
 
 ;; TODO, this shouldn't need to be a separate call, should be
 ;; part of the hook above.
@@ -487,7 +474,7 @@
 ;; ;; (setq warning-minimum-log-level "error")
 ;; ;; Don't really need these, they are more annoying than anything
 (setq make-backup-files nil)
-;; ;;(setq debug-on-error t)
+;; (setq debug-on-error t)
 
 (add-hook 'html-mode-hook
 	  (lambda ()
@@ -611,11 +598,12 @@
 
 ;; ;; Configuration for blogging
 ;; (require 'org-page)
-(setq op/repository-directory "/Users/Edgar/Repos/fxfactorial.github.io/"
-      op/site-domain "hyegar.com"
-      op/personal-disqus-shortname "hyegar"
-      op/site-main-title "Edgar Aroutiounian"
-      op/site-sub-title "Thoughts and Musings"
-      op/category-ignore-list '("static")
-      op/personal-github-link "http://github.com/fxfactorial"
-      op/personal-google-analytics-id "UA-57031124-1")
+(setq
+ op/repository-directory "/Users/Edgar/Repos/fxfactorial.github.io/"
+ op/site-domain "hyegar.com"
+ op/personal-disqus-shortname "hyegar"
+ op/site-main-title "Edgar Aroutiounian"
+ op/site-sub-title "Thoughts and Musings"
+ op/category-ignore-list '("static")
+ op/personal-github-link "http://github.com/fxfactorial"
+ op/personal-google-analytics-id "UA-57031124-1")
