@@ -285,7 +285,6 @@
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
 
 (global-linum-mode 1)
-(global-hl-line-mode 1)
 (defadvice linum-update-window (around linum-dynamic activate)
   (let* ((w (length (number-to-string
                      (count-lines (point-min) (point-max)))))
@@ -303,6 +302,7 @@
 (when window-system
   (add-hook 'after-init-hook 
 	    (lambda ()
+	      (global-hl-line-mode 1)
 	      (load-theme 'material t))))
 
 ;; ;; Semantic Stuff, very important to me, should probably refactor this for
@@ -468,6 +468,7 @@
 	    (require 'ox-gfm)
 	    (flyspell-mode)
 	    (auto-fill-mode)
+	    (setq-local org-pretty-entities-include-sub-superscripts t)
 	    (semantic-mode -1)
 	    (company-mode)))
 
@@ -524,7 +525,7 @@
 	  '(lambda ()
 	     (global-set-key (kbd "C-M-s") 'eval-buffer)
 	     (flycheck-mode)
-;;	     (semantic-mode -1)
+	     ;;	     (semantic-mode -1)
 	     (company-mode)
 	     (global-unset-key (kbd "C-x c"))))
 
@@ -607,7 +608,6 @@
 ;; 			     (linux-c-mode-for-objc)))
 
 ;; ;; Configuration for blogging
-;; (require 'org-page)
 (setq
  op/repository-directory "/Users/Edgar/Repos/fxfactorial.github.io/"
  op/site-domain "hyegar.com"
