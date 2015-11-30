@@ -38,9 +38,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
- ;; '(company-c-headers-path-system
- ;;   (quote
- ;;    ("/usr/include/" "/usr/local/include/" "/usr/local/include/c++/5.2.0/")))
  '(custom-safe-themes
    (quote
     ("d3df47c843c22d8f0177fe3385ae95583dc8811bd6968240f7da42fd9aa51b0b" default)))
@@ -50,9 +47,15 @@
  '(flycheck-c/c++-gcc-executable "/usr/local/bin/gcc-4.9")
  '(flycheck-make-executable "/usr/bin/make")
  '(org-startup-indented t)
+ '(package-selected-packages
+   (quote
+    (objc-font-lock window-number tuareg simple-httpd ox-gfm mustache material-theme js2-mode jade-mode htmlize hlinum flycheck exec-path-from-shell company-tern company-quickhelp company-jedi company-c-headers)))
  '(semantic-c-dependency-system-include-path
    (quote
-    ("/usr/include" "/usr/local/lib/ocaml" "/usr/local/include" "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Foundation.framework/Versions/C/Headers")))
+    ("/usr/include"
+     "/usr/local/lib/ocaml"
+     "/usr/local/include"
+     "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework/Headers")))
  '(tool-bar-mode nil)
  '(web-mode-attr-indent-offset 2))
 
@@ -204,12 +207,13 @@
   (add-hook 'erc-after-connect '(lambda (server nick)
 				  (erc-message
 				   "PRIVMSG"
-				   (concat "NickServ identify " erc-password))))
+1				   (concat "NickServ identify " erc-password))))
   ;; This is what actually does the connection
   (erc :server "irc.freenode.net" :port 6667
        :nick "Algebr" :full-name user-full-name))
 
-;; ;; Misc things
+;; Misc things
+(add-to-list 'auto-mode-alist '("\\zshrc\\'" . shell-script-mode))
 (global-set-key (kbd "C-M-e") 'irc-connect)
 (global-set-key (kbd "C-M-p") 'run-python)
 ;; Love ido, idiot for not using it earlier. 
@@ -334,18 +338,22 @@
 ;; ;; but that's okay since you can do it with semantic anyway with M-]/[
 ;; ;; In any case, I prefer using gcc instead of clang, at least for the moment.
 ;; ;; the capf, (means completion at point functions), is mainly here for org-mode
-;; ;; (setq company-clang-arguments
-;; ;;       '("-F" "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks"))
-;; (setq company-clang-arguments
-;;       '("-F" "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Foundation.framework/"
-;; 	"-F" "/System/Library/Frameworks/Foundation.framework/Headers/"
-;; 	"-F" "/System/Library/Frameworks/SceneKit.framework/Headers/"
-;; 	"-I" "/usr/local/lib/ocaml/"))
+;; (setq
+;;  company-clang-arguments
+;;  '("-F" "/System/Library/Frameworks/Foundation.framework/Versions/C/Headers"
+;;    "-F" "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Foundation.framework/Headers"))
+(setq company-clang-arguments
+      '("-F" "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Foundation.framework/Headers/"
+	"-F" "/System/Library/Frameworks/Foundation.framework/Headers/"
+	"-F" "/System/Library/Frameworks/SceneKit.framework/Headers/"
+	"-I" "/usr/local/lib/ocaml/"))
 
-(setq company-backends '(company-clang
-			 company-capf
-			 company-c-headers
-			 company-jedi))
+(setq company-backends
+      '(company-clang
+	company-semantic
+	company-c-headers
+	company-capf
+	company-jedi))
 
 ;; ;; LateX Related Code
 ;; (add-hook 'LaTeX-mode-hook (lambda ()
@@ -451,7 +459,7 @@
    (setq-local indent-line-function 'ocp-indent-line)
    (setq-local indent-region-function 'ocp-indent-region)
    (load-file
-    "/Users/Edgar/.opam/working/share/emacs/site-lisp/ocp-indent.el")
+    "/Users/Edgar/.opam/ios_coding/share/emacs/site-lisp/ocp-indent.el")
    (setq-local show-trailing-whitespace t)
    (merlin-mode)))
 
@@ -533,7 +541,7 @@
 (add-hook
  'c-mode-common-hook
  '(lambda ()
-    (load-file "~/.emacs.d/cedet/cedet-devel-load.elc")
+    ;; (load-file "~/.emacs.d/cedet/cedet-devel-load.elc")
     (semantic-mode)
     (semantic-decoration-mode)
     (semantic-show-unmatched-syntax-mode)
@@ -603,9 +611,10 @@
 ;;   (define-key objc-mode-map (kbd "C-c t") 'objc-jump-between-header-source))
 
 
-;; (add-hook 'objc-mode-hook '(lambda ()
-;; 			     (objc-mode-customizations)
-;; 			     (linux-c-mode-for-objc)))
+(add-hook 'objc-mode-hook
+	  '(lambda ()
+	     (abbrev-mode nil)
+	     (company-mode)))
 
 ;; ;; Configuration for blogging
 (setq
@@ -617,3 +626,9 @@
  op/category-ignore-list '("static")
  op/personal-github-link "http://github.com/fxfactorial"
  op/personal-google-analytics-id "UA-57031124-1")
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
