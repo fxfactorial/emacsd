@@ -21,7 +21,7 @@
      (setq initial-scratch-message (buffer-string)))))
 
 (package-initialize)
-
+(require 'org-page)
 (autoload 'window-number-mode "window-number")
 ;; (add-to-list 'company-c-headers-path-system "/usr/local/include/c++/5.2.0")
 (autoload 'company-mode "company")
@@ -49,13 +49,10 @@
  '(org-startup-indented t)
  '(package-selected-packages
    (quote
-    (objc-font-lock window-number tuareg simple-httpd ox-gfm mustache material-theme js2-mode jade-mode htmlize hlinum flycheck exec-path-from-shell company-tern company-quickhelp company-jedi company-c-headers)))
+    (nix-mode web-mode org-page objc-font-lock window-number tuareg simple-httpd ox-gfm mustache material-theme js2-mode jade-mode htmlize hlinum flycheck exec-path-from-shell company-tern company-quickhelp company-jedi company-c-headers)))
  '(semantic-c-dependency-system-include-path
    (quote
-    ("/usr/include"
-     "/usr/local/lib/ocaml"
-     "/usr/local/include"
-     "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework/Headers")))
+    ("/usr/include" "/usr/local/lib/ocaml" "/usr/local/include" "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework/Headers")))
  '(tool-bar-mode nil)
  '(web-mode-attr-indent-offset 2))
 
@@ -374,7 +371,7 @@
 
 ;; ;; Python Stuff
 ;; ;; Get these variables set before the inferior mode comes up, otherwise too late.
-(setq python-shell-interpreter "/usr/local/bin/ipython2"
+(setq python-shell-interpreter "/usr/local/bin/ipython"
       python-shell-interpreter-args "--matplotlib=osx --colors=Linux"
       python-shell-prompt-regexp "In \\[[0-9]+\\]: "
       python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
@@ -401,14 +398,18 @@
    (hs-minor-mode)
    (define-key hs-minor-mode-map (kbd "C-c C-t") 'hs-toggle-hiding)
    (define-key python-mode-map (kbd "M-q") 'python-fill-paren)
-   ;; Need to adjust this to site_modules
-   ;; of python3 for doing python3 coding
-   ;; (setq jedi:server-args
-   ;; '("--sys-path"))
+   (define-key python-mode-map (kbd "M-]") 'jedi:goto-definition)
+   (define-key python-mode-map (kbd "M-/") 'company-jedi)
+   (define-key python-mode-map (kbd "M-[") 'jedi:goto-definition-pop-marker)
+   (jedi:setup)
+   (setq
+    jedi:setup-keys t
+    jedi:server-args
+    '("--sys-path"
+      "/usr/local/Cellar/python3/3.5.1/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages")
+    jedi:complete-on-dot t)
    ;; Forgot what this was for..think some os x issues. 
    (setenv "LC_CTYPE" "UTF-8")
-   ;; keeping a consistent interface for autocomplete type things. 
-   ;; (define-key python-mode-map (kbd "M-/") 'jedi:complete)
    (let ((interpreter python-shell-interpreter)
 	 (args python-shell-interpreter-args))
      (when python-shell--parent-buffer
@@ -419,7 +420,7 @@
      (set (make-local-variable 'python-shell-interpreter) interpreter)
      (set (make-local-variable 'python-shell-interpreter-args) args))
    ;; Its so damn loud
-   ;; (flycheck-mode)
+   (flycheck-mode)
    (company-mode)
    (company-quickhelp-mode)
    (setq-local show-trailing-whitespace t)))
@@ -459,7 +460,7 @@
    (setq-local indent-line-function 'ocp-indent-line)
    (setq-local indent-region-function 'ocp-indent-region)
    (load-file
-    "/Users/Edgar/.opam/ios_coding/share/emacs/site-lisp/ocp-indent.el")
+    "/Users/Edgar/.opam/system/share/emacs/site-lisp/ocp-indent.el")
    (setq-local show-trailing-whitespace t)
    (merlin-mode)))
 
