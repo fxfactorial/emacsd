@@ -70,3 +70,6 @@ JavaScript
 1) Using tern, go to the defintion with M-. and comeback with M-,
 2) Using tern, get the type with C-c C-c
 3) Hide function defintions with C-c C-f
+
+Nix
+1) source ~/.nix-profile/etc/profile.d/nix.sh 
