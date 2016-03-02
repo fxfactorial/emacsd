@@ -1,5 +1,4 @@
-(defvar osx-base-path "/Applications/Xcode.app/Contents/Developer/Platforms")
-(defvar frameworks "/System/Library/Frameworks")
+(defvar osx-base-path "/Applications/Xcode.app/Contents/Developer/Platforms/")
 
 (if (equal system-type 'darwin)
     ; Only the then clause needs a progn, else part doesn't need it.
@@ -13,29 +12,12 @@
 	    (concat "/Applications/Xcode.app/Contents/Developer/"
 		    "Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++")
 	    company-clang-arguments
-	    '("-std=c++11"
-	      "-F" (concat
-		    osx-base-path
-		    "/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk"
-		    frameworks
-		    "/Foundation.framework")
-	      "-I" (concat
-		    osx-base-path
-		    "/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk"
-		    frameworks
-		    "/JavaScriptCore.framework/Headers")
-	      "-F" (concat
-		    osx-base-path
-		    "/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk"
-		    frameworks
-		    "/JavaScriptCore.framework")
-	      "-I" (concat
-		    osx-base-path
-		    "/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/include")
-	      "-F" (concat 
-		    "/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk"
-		    frameworks
-		    "/WebKit.framework")
+	    `("-std=c++11"
+	      "-isysroot"
+	      ; If coding for iOS
+	      ;; (concat osx-base-path "iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk")
+	      ; If coding for OS X
+	      ,(concat osx-base-path "MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk")
 	      "-I" "/usr/local/Cellar/folly/0.48.0_1/include"
 	      "-I" "/usr/local/include/graphqlparser"
 	      "-I" "/usr/local/Cellar/folly/0.48.0_1/include"
