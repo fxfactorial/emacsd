@@ -1,10 +1,62 @@
-;; OS X specifics
-(setq mac-option-modifier 'super
-      mac-command-modifier 'meta)
-;; I like it to have emacs open on right half of screen. 
-(when window-system
-  (set-frame-position nil 675 0)
-  (set-frame-size nil 200 75))
+(defvar osx-base-path "/Applications/Xcode.app/Contents/Developer/Platforms")
+(defvar frameworks "/System/Library/Frameworks")
+
+(if (equal system-type 'darwin)
+    ; Only the then clause needs a progn, else part doesn't need it.
+    (progn
+      (set-face-attribute 'default nil :family "Monaco" :height 110)
+      ;; Forgot what this was for..think some os x issues. 
+      (setenv "LC_CTYPE" "UTF-8")
+      (setq mac-option-modifier 'super
+	    flycheck-make-executable "/usr/local/bin/make"
+	    company-clang-executable
+	    (concat "/Applications/Xcode.app/Contents/Developer/"
+		    "Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++")
+	    company-clang-arguments
+	    '("-std=c++11"
+	      "-F" (concat
+		    osx-base-path
+		    "/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk"
+		    frameworks
+		    "/Foundation.framework")
+	      "-I" (concat
+		    osx-base-path
+		    "/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk"
+		    frameworks
+		    "/JavaScriptCore.framework/Headers")
+	      "-F" (concat
+		    osx-base-path
+		    "/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk"
+		    frameworks
+		    "/JavaScriptCore.framework")
+	      "-I" (concat
+		    osx-base-path
+		    "/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/include")
+	      "-F" (concat 
+		    "/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk"
+		    frameworks
+		    "/WebKit.framework")
+	      "-I" "/usr/local/Cellar/folly/0.48.0_1/include"
+	      "-I" "/usr/local/include/graphqlparser"
+	      "-I" "/usr/local/Cellar/folly/0.48.0_1/include"
+	      "-I" "/usr/include/c++/4.2.1"
+	      "-I" "/usr/local/lib/ocaml/")
+	    flycheck-c/c++-clang-executable
+	    (concat "/Applications/Xcode.app/Contents/Developer/"
+		    "Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++")
+	    mac-command-modifier 'meta))
+  (set-face-attribute 'default nil :height 110)
+  (setq company-clang-executable "armv7-apple-darwin11-clang"
+	company-clang-arguments '("-std=c++11"
+				  "-isysroot"
+				  "/home/gar/.nix-profile/iPhoneOS9.2.sdk"
+				  "-I/usr/local/lib/ocaml/")))
+
+(setq company-backends '(company-clang
+			 company-capf
+			 company-c-headers
+			 company-jedi))
+
 (global-set-key (kbd "M-n") 'forward-paragraph)
 (global-set-key (kbd "M-p") 'backward-paragraph)
 ;; Not sure why but dialog box still locks up emacs on OSX.
@@ -22,7 +74,6 @@
 
 (package-initialize)
 (autoload 'window-number-mode "window-number")
-
 (autoload 'company-mode "company")
 
 ;;Melpa stuff, elpa is the offical package archive, melpa is the
@@ -39,22 +90,16 @@
  '(column-number-mode t)
  '(custom-safe-themes
    (quote
-    ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d3df47c843c22d8f0177fe3385ae95583dc8811bd6968240f7da42fd9aa51b0b" default)))
+    ("71ecffba18621354a1be303687f33b84788e13f40141580fa81e7840752d31bf"
+     "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4"
+     "d3df47c843c22d8f0177fe3385ae95583dc8811bd6968240f7da42fd9aa51b0b" default)))
  '(display-battery-mode t)
  '(display-time-default-load-average nil)
  '(display-time-mode t)
- '(flycheck-c/c++-clang-executable
-   "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++")
- '(flycheck-make-executable "/usr/local/bin/make")
- '(op/theme (quote phaer))
  '(org-startup-indented t)
  '(package-selected-packages
    (quote
-    (markdown-mode haskell-mode edbi sql-indent sqlup-mode company-shell company-web neotree spacegray-theme solarized-dark-theme ag magit ggtags ido-vertical-mode nix-mode web-mode objc-font-lock window-number tuareg simple-httpd ox-gfm mustache material-theme js2-mode jade-mode htmlize hlinum flycheck exec-path-from-shell company-tern company-quickhelp company-jedi company-c-headers)))
- '(solarized-distinct-doc-face t)
- '(solarized-distinct-fringe-background t)
- '(solarized-high-contrast-mode-line t)
- '(solarized-use-more-italic t)
+    (cyberpunk-theme markdown-mode haskell-mode edbi sql-indent sqlup-mode company-shell company-web neotree spacegray-theme solarized-dark-theme ag magit ggtags ido-vertical-mode nix-mode web-mode objc-font-lock window-number tuareg simple-httpd ox-gfm mustache material-theme js2-mode jade-mode htmlize hlinum flycheck exec-path-from-shell company-tern company-quickhelp company-jedi company-c-headers)))
  '(tool-bar-mode nil)
  '(web-mode-attr-indent-offset 2))
 
@@ -135,11 +180,6 @@
 	(select-window (funcall selector)))
       (setq arg (if (plusp arg) (1- arg) (1+ arg))))))
 
-;; Issue about call-process not working well in CEDET over tramp 
-(defun my-call-process-hack (orig program &rest args)
-  (apply (if (equal program cedet-global-command) #'process-file orig)
-         program args))
-
 (defun toggle-window-split ()
   (interactive)
   (if (= (count-windows) 2)
@@ -165,26 +205,6 @@
           (select-window first-win)
           (if this-win-2nd (other-window 1))))))
 
-(defun semantic-ia-fast-jump-back ()
-  "Code."
-  (interactive)
-  (defadvice push-mark
-      (around semantic-mru-bookmark activate)
-    "Push a mark at LOCATION with NOMSG and ACTIVATE passed to `push-mark’.
-  If `semantic-mru-bookmark-mode’ is active, also push a tag
-  onto the mru bookmark stack."
-    (semantic-mrub-push semantic-mru-bookmark-ring (point) 'mark)
-    ad-do-it)
-  (if (ring-empty-p (oref semantic-mru-bookmark-ring ring))
-      (error "Semantic Bookmark ring is currently empty"))
-  (let* ((ring (oref semantic-mru-bookmark-ring ring))
-	 (alist (semantic-mrub-ring-to-assoc-list ring))
-	 (first (cdr (car alist))))
-    (if (semantic-equivalent-tag-p (oref first tag)
-				   (semantic-current-tag))
-	(setq first (cdr (car (cdr alist)))))
-    (semantic-mrub-switch-tags first)))
-
 ;; Needed for erc's reading of creds
 (defun read-lines (filePath)
   "Return a list of lines of a file at filePath."
@@ -207,7 +227,7 @@
   (add-hook 'erc-after-connect '(lambda (server nick)
 				  (erc-message
 				   "PRIVMSG"
-				   1				   (concat "NickServ identify " erc-password))))
+				   (concat "NickServ identify " erc-password))))
   ;; This is what actually does the connection
   (erc :server "irc.freenode.net" :port 6667
        :nick "Algebr" :full-name user-full-name))
@@ -223,12 +243,11 @@
 ;; Use the path set up by zsh, aka the ~/.zshrc. 
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
-;; ;; Annoying issue with TRAMP constantly asking for password
-;; (require 'tramp)
+;; Annoying issue with TRAMP constantly asking for password
 (setq tramp-default-method "ssh")
 (setq password-cache-expiry nil)
 
-;; ;; Keep the history between sessions, very nice to have.
+;; Keep the history between sessions, very nice to have.
 (savehist-mode 1)
 (global-set-key (kbd "M-/") 'company-complete)
 ;; ;; Just kill the shell, don't ask me.
@@ -239,10 +258,10 @@
 ;; Don't prompt me when I want to clear the buffer
 (put 'erase-buffer 'disabled nil)
 
-;; ;; Tree
+;; Tree
 (global-set-key (kbd "s-1") 'neotree-toggle)
 (set-scroll-bar-mode nil)
-;; ;; Visuals, but note that some visuals also set in custom.
+;; Visuals, but note that some visuals also set in custom.
 (show-paren-mode)
 (auto-insert-mode)
 (abbrev-mode -1)
@@ -260,12 +279,10 @@
 (mouse-avoidance-mode 'banish)
 (fringe-mode 10)
 (tool-bar-mode -1)
-;; ;; Gives me the full name of the buffer, hate just having foo.c
+;; Gives me the full name of the buffer, hate just having foo.c
 (add-hook 'find-file-hooks
 	  '(lambda ()
 	     (setq mode-line-buffer-identification 'buffer-file-truename)))
-;; ;; Since not using line numbers, show me end of the buffer in the
-;; ;; fringe
 (setq-default indicate-empty-lines t)
 ;; ;; Obviously the following two key bindings are only for two buffers
 (global-set-key (kbd "C-'") 'toggle-window-split)
@@ -298,40 +315,11 @@
 (hlinum-activate)
 (fringe-mode -1)
 
-;; ;; Visuals
-(set-face-attribute 'default nil :family "Monaco" :height 110)
-;; ;; Supposedly to help with showing emojis in editor but it doesn't work 
-;; ;; (set-fontset-font t 'unicode "Symbola" nil 'prepend)
-(setq default-frame-alist '((cursor-color . "#BADA55")))
-
 (when window-system
   (add-hook 'after-init-hook 
 	    (lambda ()
 	      (global-hl-line-mode 1)
-	      (load-theme 'spacegray t))))
-
-(setq
- company-clang-executable
- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++"
- company-clang-arguments
- '("-std=c++11"
-   "-F" "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/Foundation.framework"
-   "-I" "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/JavaScriptCore.framework/Headers"
-   "-F" "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/JavaScriptCore.framework"
-   "-I" "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/include"
-   "-F" "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/WebKit.framework"
-   ;; "-F" "/System/Library/Frameworks/Foundation.framework"
-   "-I" "/usr/local/Cellar/folly/0.48.0_1/include"
-   "-I" "/usr/local/include/graphqlparser"
-   "-I" "/usr/local/Cellar/folly/0.48.0_1/include"
-   "-I" "/usr/include/c++/4.2.1"
-   "-I" "/usr/local/lib/ocaml/")
-
-company-backends
-'(company-clang
-  company-capf
-  company-c-headers
-  company-jedi))
+	      (load-theme 'cyberpunk t))))
 
 ;; ;; LateX Related Code
 ;; (add-hook 'LaTeX-mode-hook (lambda ()
@@ -350,8 +338,8 @@ company-backends
 ;; 			     (turn-on-auto-fill)
 ;; 			     (LaTeX-math-mode)))
 
-;; ;; Python Stuff
-;; ;; Get these variables set before the inferior mode comes up, otherwise too late.
+;; Python Stuff
+;; Get these variables set before the inferior mode comes up, otherwise too late.
 (setq python-shell-interpreter "ipython"
       python-shell-interpreter-args "--matplotlib=osx --colors=Linux"
       python-shell-prompt-regexp "In \\[[0-9]+\\]: "
@@ -383,14 +371,12 @@ company-backends
    (define-key python-mode-map (kbd "M-/") 'company-jedi)
    (define-key python-mode-map (kbd "M-[") 'jedi:goto-definition-pop-marker)
    (jedi:setup)
-   (setq
-    jedi:setup-keys t
-    jedi:server-args
-    '("--sys-path"
-      "/usr/local/Cellar/python3/3.5.1/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages")
-    jedi:complete-on-dot t)
-   ;; Forgot what this was for..think some os x issues. 
-   (setenv "LC_CTYPE" "UTF-8")
+   (setq jedi:setup-keys t
+	 jedi:server-args
+	 '("--sys-path"
+	   (concat "/usr/local/Cellar/python3/3.5.1/Frameworks/Python.framework"
+		   "/Versions/3.5/lib/python3.5/site-packages"))
+	 jedi:complete-on-dot t)
    (let ((interpreter python-shell-interpreter)
 	 (args python-shell-interpreter-args))
      (when python-shell--parent-buffer
@@ -406,10 +392,9 @@ company-backends
    (company-quickhelp-mode)
    (setq-local show-trailing-whitespace t)))
 
-;; ;; SQL Stuff
-;; ;; Just remember,
-;; ;;http://truongtx.me/2014/08/23/setup-emacs-as-an-sql-database-client/
-;; ;;(load-file "~/.emacs.d/sql_dbs.el")
+;; SQL Stuff
+;; Just remember,
+;;http://truongtx.me/2014/08/23/setup-emacs-as-an-sql-database-client/
 
 (load-file "~/.emacs.d/sql_dbs.el")
 
@@ -440,19 +425,22 @@ company-backends
      "/../../share/emacs/site-lisp")
     load-path)
    (company-mode)
+   (require 'ocp-indent)
    (autoload 'utop-minor-mode "utop" "Minor mode for utop" t)
    (autoload 'utop-setup-ocaml-buffer "utop" "Toplevel for OCaml" t)
    (autoload 'merlin-mode "merlin" "Merlin mode" t)
-   (setq-local merlin-completion-with-doc t)
    (utop-minor-mode)
    (company-quickhelp-mode)
+   ;; Important to note that setq-local is a macro and it needs to be
+   ;; separate calls, not like setq
+   (setq-local merlin-completion-with-doc t)
    (setq-local indent-tabs-mode nil)
-   (require 'ocp-indent)
+   (setq-local show-trailing-whitespace t)
    (setq-local indent-line-function 'ocp-indent-line)
    (setq-local indent-region-function 'ocp-indent-region)
-   (load-file
-    "/Users/Edgar/.opam/system/share/emacs/site-lisp/ocp-indent.el")
-   (setq-local show-trailing-whitespace t)
+   (if (equal system-type 'darwin)
+       (load-file "/Users/Edgar/.opam/working/share/emacs/site-lisp/ocp-indent.el")
+     (load-file "/home/gar/.opam/working/share/emacs/site-lisp/ocp-indent.el"))
    (merlin-mode)))
 
 (add-hook 'utop-mode-hook (lambda ()
@@ -479,31 +467,31 @@ company-backends
 ;; Basic text files
 (add-hook 'text-mode-hook 'auto-fill-mode)
 
-;; ;; Debugging Stuff
-;; ;; (setq warning-minimum-log-level "error")
-;; ;; Don't really need these, they are more annoying than anything
+;; Debugging Stuff
+;; (setq warning-minimum-log-level "error")
+;; Don't really need these, they are more annoying than anything
 (setq make-backup-files nil)
 ;; (setq debug-on-error t)
 
-;; (add-hook 'html-mode-hook
-;; 	  (lambda ()
-;; 	    (web-mode)
-;; 	    (setq web-mode-ac-sources-alist
-;; 		  '(("css" . (ac-source-css-property))
-;; 		    ("html" . (ac-source-words-in-buffer ac-source-abbrev))))))
+(add-hook 'html-mode-hook
+	  (lambda ()
+	    (web-mode)
+	    (setq web-mode-ac-sources-alist
+		  '(("css" . (ac-source-css-property))
+		    ("html" . (ac-source-words-in-buffer ac-source-abbrev))))))
 
 (add-hook 'css-mode-hook (lambda ()
 			   (define-key css-mode-map (kbd "M-/")
 			     'ac-start )))
 
-(add-hook 'scss-mode-hook (lambda ()
-			    (setq-local scss-compile-at-save t)
-			    (setq-local scss-output-directory "../css")
-			    (auto-complete-mode)
-			    (define-key css-mode-map (kbd "M-/")
-			      'ac-start )))
+;; (add-hook 'scss-mode-hook (lambda ()
+;; 			    (setq-local scss-compile-at-save t)
+;; 			    (setq-local scss-output-directory "../css")
+;; 			    (auto-complete-mode)
+;; 			    (define-key css-mode-map (kbd "M-/")
+;; 			      'ac-start )))
 
-;; ;;Javascript hook, this is a better major mode than default one
+;;Javascript hook, this is a better major mode than default one
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json\\'" . js2-mode))
 
@@ -514,14 +502,14 @@ company-backends
 			   (tern-mode)))
 
 
-;; (eval-after-load 'tern
-;;   '(progn
-;;      (require 'tern-auto-complete)
-;;      (tern-ac-setup)))
+(eval-after-load 'tern
+  '(progn
+     (require 'tern-auto-complete)
+     (tern-ac-setup)))
 
-;; ;; C++ stuff, basically just be aware of it.
-;; (add-to-list 'auto-mode-alist '("\\.cc\\'" . c++-mode))
-;; (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
+;; C++ stuff, basically just be aware of it.
+(add-to-list 'auto-mode-alist '("\\.cc\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
 
 ;; emacs lisp stuff
 (add-hook 'emacs-lisp-mode-hook
@@ -583,20 +571,10 @@ company-backends
 	    (add-to-list 'company-c-headers-path-system
 			 "/usr/local/include/c++/5.3.0")))
 
+(add-to-list 'auto-mode-alist '("\\.mm\\'" . objc-mode))
 (add-to-list 'auto-mode-alist '("\\.xm\\'" . objc-mode))
 
 (add-hook 'objc-mode-hook
 	  '(lambda ()
 	     (abbrev-mode nil)
 	     (company-mode)))
-
-;; ;; Configuration for blogging
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
-(add-to-list 'auto-mode-alist '("\\.xm\\'" . objc-mode))
-(add-to-list 'auto-mode-alist '("\\.mm\\'" . objc-mode))
