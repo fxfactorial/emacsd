@@ -1,4 +1,5 @@
-(defvar osx-base-path "/Applications/Xcode.app/Contents/Developer/Platforms/")
+(defvar osx-base-path
+  "/Applications/Xcode.app/Contents/Developer/Platforms/")
 
 (if (equal system-type 'darwin)
     ; Only the then clause needs a progn, else part doesn't need it.
@@ -15,9 +16,11 @@
 	    `("-std=c++11"
 	      "-isysroot"
 	      ; If coding for iOS
-	      ;; (concat osx-base-path "iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk")
+	      ;; (concat osx-base-path
+	      ; "iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk")
 	      ; If coding for OS X
-	      ,(concat osx-base-path "MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk")
+	      ,(concat osx-base-path
+		       "MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk")
 	      "-I" "/usr/local/Cellar/folly/0.48.0_1/include"
 	      "-I" "/usr/local/include/graphqlparser"
 	      "-I" "/usr/local/Cellar/folly/0.48.0_1/include"
@@ -72,12 +75,10 @@
  '(column-number-mode t)
  '(custom-safe-themes
    (quote
-    ("71ecffba18621354a1be303687f33b84788e13f40141580fa81e7840752d31bf"
-     "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4"
-     "d3df47c843c22d8f0177fe3385ae95583dc8811bd6968240f7da42fd9aa51b0b" default)))
- '(display-battery-mode t)
+    ("e97dbbb2b1c42b8588e16523824bc0cb3a21b91eefd6502879cf5baa1fa32e10" "71ecffba18621354a1be303687f33b84788e13f40141580fa81e7840752d31bf" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d3df47c843c22d8f0177fe3385ae95583dc8811bd6968240f7da42fd9aa51b0b" default)))
  '(display-time-default-load-average nil)
  '(display-time-mode t)
+ '(menu-bar-mode nil)
  '(org-startup-indented t)
  '(package-selected-packages
    (quote
@@ -301,7 +302,7 @@
   (add-hook 'after-init-hook 
 	    (lambda ()
 	      (global-hl-line-mode 1)
-	      (load-theme 'cyberpunk t))))
+	      (load-theme 'material t))))
 
 ;; ;; LateX Related Code
 ;; (add-hook 'LaTeX-mode-hook (lambda ()
@@ -354,10 +355,12 @@
    (define-key python-mode-map (kbd "M-[") 'jedi:goto-definition-pop-marker)
    (jedi:setup)
    (setq jedi:setup-keys t
-	 jedi:server-args
-	 '("--sys-path"
-	   (concat "/usr/local/Cellar/python3/3.5.1/Frameworks/Python.framework"
-		   "/Versions/3.5/lib/python3.5/site-packages"))
+
+	 ;; jedi:server-args
+	 ;; '("--sys-path"
+	 ;;   (concat "/usr/local/Cellar/python3/3.5.1/Frameworks/Python.framework"
+	 ;; 	   "/Versions/3.5/lib/python3.5/site-packages"))
+
 	 jedi:complete-on-dot t)
    (let ((interpreter python-shell-interpreter)
 	 (args python-shell-interpreter-args))
@@ -394,18 +397,21 @@
 (add-hook
  'tuareg-mode-hook
  (lambda ()
-   (dolist (var
-	    (car (read-from-string
-		  (shell-command-to-string "opam config env --sexp"))))
-     (setenv (car var) (cadr var)))
-   ;; Update the emacs path
-   (setq exec-path (split-string (getenv "PATH") path-separator))
-   ;; Update the emacs load path
-   (push
-    (concat
-     (getenv "OCAML_TOPLEVEL_PATH")
-     "/../../share/emacs/site-lisp")
-    load-path)
+   ;; Add opam emacs directory to the load-path
+   (setq opam-share
+	 (substring
+	  (shell-command-to-string "opam config var share 2> /dev/null")
+	  0 -1))
+   (add-to-list 'load-path (concat opam-share "/emacs/site-lisp"))
+   ;; Load merlin-mode
+   (require 'merlin)
+   ;; Start merlin on ocaml files
+   (add-hook 'tuareg-mode-hook 'merlin-mode t)
+   (add-hook 'caml-mode-hook 'merlin-mode t)
+   ;; Enable auto-complete
+   (setq merlin-use-auto-complete-mode 'easy)
+   ;; Use opam switch to lookup ocamlmerlin binary
+   (setq merlin-command 'opam)
    (company-mode)
    (require 'ocp-indent)
    (autoload 'utop-minor-mode "utop" "Minor mode for utop" t)
@@ -560,3 +566,9 @@
 	  '(lambda ()
 	     (abbrev-mode nil)
 	     (company-mode)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
