@@ -383,7 +383,7 @@
 
 (load-file "~/.emacs.d/sql_dbs.el")
 
-(add-hook 'sql-mode
+(add-hook 'sql-mode-hook
 	  (lambda ()
 	    (sql-highlight-postgres-keywords)
 	    (load-library "sql-indent")
