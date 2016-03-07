@@ -387,7 +387,9 @@
 	  (lambda ()
 	    (sql-highlight-postgres-keywords)
 	    (load-library "sql-indent")
-	    (sqlup-mode)))
+	    (sqlup-mode)
+	    (define-key sql-mode-map (kbd "C-u")
+	      'sqlup-capitalize-keywords-in-region)))
 
 (add-hook 'sql-interactive-mode-hook
 	  (lambda ()
