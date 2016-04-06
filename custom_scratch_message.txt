@@ -64,7 +64,7 @@ OCaml
 executable.
 load's path includes ~/.opam/<current_compiler>/lib/ocaml
 3) #require is like loading up a package, so #require "netstring"
-4) 
+4) Do padding with : printf "%*s" 20 "hi";;
 
 JavaScript
 1) Using tern, go to the defintion with M-. and comeback with M-,

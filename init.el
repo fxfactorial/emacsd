@@ -355,12 +355,10 @@
    (define-key python-mode-map (kbd "M-[") 'jedi:goto-definition-pop-marker)
    (jedi:setup)
    (setq jedi:setup-keys t
-
 	 ;; jedi:server-args
 	 ;; '("--sys-path"
 	 ;;   (concat "/usr/local/Cellar/python3/3.5.1/Frameworks/Python.framework"
 	 ;; 	   "/Versions/3.5/lib/python3.5/site-packages"))
-
 	 jedi:complete-on-dot t)
    (let ((interpreter python-shell-interpreter)
 	 (args python-shell-interpreter-args))
