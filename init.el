@@ -13,18 +13,21 @@
 	    (concat "/Applications/Xcode.app/Contents/Developer/"
 		    "Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++")
 	    company-clang-arguments
-	    `("-std=c++11"
+	    `(
+	      "-std=c++11"
+	      "-stdlib=libc++"
 	      "-isysroot"
 	      ; If coding for iOS
-	      ;; (concat osx-base-path
-	      ; "iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk")
+	      ;; ,(concat osx-base-path
+	      ;; 	       "iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk")
 	      ; If coding for OS X
 	      ,(concat osx-base-path
-		       "MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk")
-	      "-I" "/usr/local/Cellar/folly/0.48.0_1/include"
-	      "-I" "/usr/local/include/graphqlparser"
+	      	       "MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk")
+	      ;; "-I" "/usr/local/Cellar/folly/0.48.0_1/include"
+	      ;; "-I" "/usr/local/include/graphqlparser"
 	      "-I" "/usr/local/Cellar/folly/0.48.0_1/include"
 	      "-I" "/usr/include/c++/4.2.1"
+	      "-I" "/usr/local/Cellar/tclap/1.2.1/include"
 	      "-I" "/usr/local/lib/ocaml/")
 	    flycheck-c/c++-clang-executable
 	    (concat "/Applications/Xcode.app/Contents/Developer/"
@@ -33,6 +36,7 @@
   (set-face-attribute 'default nil :height 110)
   (setq company-clang-executable "armv7-apple-darwin11-clang"
 	company-clang-arguments '("-std=c++11"
+				  "-stdlib=libc++"
 				  "-isysroot"
 				  "/home/gar/.nix-profile/iPhoneOS9.2.sdk"
 				  "-I/usr/local/lib/ocaml/")))
@@ -82,7 +86,7 @@
  '(org-startup-indented t)
  '(package-selected-packages
    (quote
-    (cyberpunk-theme markdown-mode haskell-mode edbi sql-indent sqlup-mode company-shell company-web neotree spacegray-theme solarized-dark-theme ag magit ggtags ido-vertical-mode nix-mode web-mode objc-font-lock window-number tuareg simple-httpd ox-gfm mustache material-theme js2-mode jade-mode htmlize hlinum flycheck exec-path-from-shell company-tern company-quickhelp company-jedi company-c-headers)))
+    (indent-guide tern-auto-complete cyberpunk-theme markdown-mode haskell-mode edbi sql-indent sqlup-mode company-shell company-web neotree spacegray-theme solarized-dark-theme ag magit ggtags ido-vertical-mode nix-mode web-mode objc-font-lock window-number tuareg simple-httpd ox-gfm mustache material-theme js2-mode jade-mode htmlize hlinum flycheck exec-path-from-shell company-tern company-quickhelp company-jedi company-c-headers)))
  '(tool-bar-mode nil)
  '(web-mode-attr-indent-offset 2))
 
@@ -245,6 +249,9 @@
 (global-set-key (kbd "s-1") 'neotree-toggle)
 (set-scroll-bar-mode nil)
 ;; Visuals, but note that some visuals also set in custom.
+;; Cool vertical indentation guides.
+(indent-guide-global-mode)
+(setq indent-guide-recursive t)
 (show-paren-mode)
 (auto-insert-mode)
 (abbrev-mode -1)
@@ -359,6 +366,10 @@
 	 ;; '("--sys-path"
 	 ;;   (concat "/usr/local/Cellar/python3/3.5.1/Frameworks/Python.framework"
 	 ;; 	   "/Versions/3.5/lib/python3.5/site-packages"))
+	 jedi:server-args
+	 `("--sys-path"
+	   ,(concat "/usr/local/Cellar/python3/3.5.1/Frameworks/Python.framework"
+	 	   "/Versions/3.5/lib/python3.5/site-packages"))
 	 jedi:complete-on-dot t)
    (let ((interpreter python-shell-interpreter)
 	 (args python-shell-interpreter-args))
@@ -572,3 +583,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(add-hook 'markdown-mode (lambda ()
+			   (ispell-minor-mode)))
+(add-hook 'makefile-mode-hook
+	  (lambda()
+	    (setq-local show-trailing-whitespace t)))
