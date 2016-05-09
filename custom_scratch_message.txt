@@ -49,6 +49,7 @@ Python Code
 2) C-c , is coming back from where you were.
 3) M-., regular tags works but you need to use ctags with:
 ctags -e -R --languages=python.
+4) C-c C-< will indent a region to the left.
 
 DevOps stuff
 1) s3cmd uses environment variables inside zshrc, aws I think makes
@@ -56,6 +57,7 @@ its own dot file
 2) do s3cmd ls to get the machines, can do s3cmd ls <specific_machine>
 3) do aws redshift describe-clusters to see what clusters are out
 there, everything for can do aws redshift
+4) Create arbtiary sized file:  dd if=/dev/zero of=output.dat  bs=1M  count=10
 
 OCaml
 1) #use will read, compile and execute source code given. 

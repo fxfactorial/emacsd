@@ -34,12 +34,17 @@
 		    "Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++")
 	    mac-command-modifier 'meta))
   (set-face-attribute 'default nil :height 110)
+  (setq flycheck-c/c++-clang-executable "armv7-apple-darwin11-clang")
+  (setq flycheck-clang-include-path
+	'("/home/gar/.nix-profile/iPhoneOS9.2.sdk/usr/include/c++/4.2.1"))
   (setq company-clang-executable "armv7-apple-darwin11-clang"
-	company-clang-arguments '("-std=c++11"
-				  "-stdlib=libc++"
-				  "-isysroot"
-				  "/home/gar/.nix-profile/iPhoneOS9.2.sdk"
-				  "-I/usr/local/lib/ocaml/")))
+	company-clang-arguments
+	'("-std=c++11"
+	  "-stdlib=libc++"
+	  "-isysroot"
+	  "/home/gar/.nix-profile/iPhoneOS9.2.sdk"
+	  "-I/home/gar/.nix-profile/iPhoneOS9.2.sdk/usr/include/c++/4.2.1"
+	  "-I/usr/local/lib/ocaml/")))
 
 (setq company-backends '(company-clang
 			 company-capf
