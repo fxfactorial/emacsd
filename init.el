@@ -82,13 +82,14 @@
     ("e97dbbb2b1c42b8588e16523824bc0cb3a21b91eefd6502879cf5baa1fa32e10" "71ecffba18621354a1be303687f33b84788e13f40141580fa81e7840752d31bf" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d3df47c843c22d8f0177fe3385ae95583dc8811bd6968240f7da42fd9aa51b0b" default)))
  '(display-time-default-load-average nil)
  '(display-time-mode t)
+ '(js2-include-node-externs t)
  '(menu-bar-mode nil)
  '(org-startup-indented t)
  '(package-selected-packages
    (quote
     (indent-guide tern-auto-complete cyberpunk-theme markdown-mode haskell-mode edbi sql-indent sqlup-mode company-shell company-web neotree spacegray-theme solarized-dark-theme ag magit ggtags ido-vertical-mode nix-mode web-mode objc-font-lock window-number tuareg simple-httpd ox-gfm mustache material-theme js2-mode jade-mode htmlize hlinum flycheck exec-path-from-shell company-tern company-quickhelp company-jedi company-c-headers)))
  '(tool-bar-mode nil)
- '(web-mode-attr-indent-offset 2))
+ '(web-mode-attr-indent-offset 0 t))
 
 ;; Skeletons definitions for common includes.
 (define-skeleton my-org-defaults
@@ -411,7 +412,8 @@
    ;; Add opam emacs directory to the load-path
    (setq opam-share
 	 (substring
-	  (shell-command-to-string "opam config var share 2> /dev/null")
+	  (shell-command-to-string
+	   "opam config var share 2> /dev/null")
 	  0 -1))
    (add-to-list 'load-path (concat opam-share "/emacs/site-lisp"))
    ;; Load merlin-mode
@@ -438,8 +440,13 @@
    (setq-local indent-line-function 'ocp-indent-line)
    (setq-local indent-region-function 'ocp-indent-region)
    (if (equal system-type 'darwin)
-       (load-file "/Users/Edgar/.opam/working/share/emacs/site-lisp/ocp-indent.el")
-     (load-file "/home/gar/.opam/working/share/emacs/site-lisp/ocp-indent.el"))
+       (load-file
+	(concat "/Users/Edgar/.opam/js_coding"
+		"/share/emacs/site-lisp/ocp-indent.el"))
+     (load-file
+      (concat
+       "/home/gar/.opam/js_coding/"
+       "share/emacs/site-lisp/ocp-indent.el")))
    (merlin-mode)))
 
 (add-hook 'utop-mode-hook (lambda ()
@@ -455,7 +462,8 @@
 	    (require 'ox-gfm)
 	    (flyspell-mode)
 	    (auto-fill-mode)
-	    (setq-local org-pretty-entities-include-sub-superscripts t)
+	    (setq-local
+	     org-pretty-entities-include-sub-superscripts t)
 	    (company-mode)))
 
 ;; TODO, this shouldn't need to be a separate call, should be
@@ -476,12 +484,29 @@
 	  (lambda ()
 	    (web-mode)
 	    (setq web-mode-ac-sources-alist
-		  '(("css" . (ac-source-css-property))
-		    ("html" . (ac-source-words-in-buffer ac-source-abbrev))))))
+		  '(("css" .
+		     (ac-source-css-property))
+		    ("html" .
+		     (ac-source-words-in-buffer
+		      ac-source-abbrev))))))
 
 (add-hook 'css-mode-hook (lambda ()
 			   (define-key css-mode-map (kbd "M-/")
 			     'ac-start )))
+
+(setq-default
+ ;; js2-mode
+ ;; web-mode
+ css-indent-offset 2
+ web-mode-markup-indent-offset 2
+ web-mode-css-indent-offset 2
+ web-mode-code-indent-offset 2
+ web-mode-attr-indent-offset 2)
+
+(with-eval-after-load 'web-mode
+  (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
+  (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
+  (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil)))
 
 ;; (add-hook 'scss-mode-hook (lambda ()
 ;; 			    (setq-local scss-compile-at-save t)
@@ -493,9 +518,12 @@
 ;;Javascript hook, this is a better major mode than default one
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json\\'" . js2-mode))
-
+(add-to-list 'interpreter-mode-alist '("node" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . js2-jsx-mode))
+(add-to-list 'interpreter-mode-alist '("node" . js2-jsx-mode))
 (add-hook 'js2-mode-hook (lambda ()
 			   (company-mode)
+			   (setq-local js2-basic-offset 2)
 			   (define-key js2-mode-map (kbd "M-/")
 			     'company-tern)
 			   (tern-mode)))
@@ -561,7 +589,7 @@
 
 (add-hook 'c++-mode-hook
 	  (lambda ()
-	    (setq-local flycheck-clang-language-standard "c++14")
+	    (setq-local flycheck-clang-language-standard "c++11")
 	    (setq-local company-async-timeout 5)
 	    (setq-local company-async-wait 0.10)
 	    (add-to-list
@@ -589,3 +617,23 @@
 (add-hook 'makefile-mode-hook
 	  (lambda()
 	    (setq-local show-trailing-whitespace t)))
+
+
+
+
+
+;; (setq opam
+;;       (substring
+;;        (shell-command-to-string "opam config var prefix 2> /dev/null")
+;;        0 -1))
+;; (add-to-list 'load-path (concat opam "/share/emacs/site-lisp"))
+;; (setq refmt-command (concat opam "/bin/refmt"))
+
+;; (require 'reason-mode)
+;; (require 'merlin)
+;; (setq merlin-ac-setup t)
+;; (add-hook 'reason-mode-hook
+;; 	  (lambda ()
+;; 	    (add-hook 'before-save-hook 'refmt-before-save)
+;; 	    (merlin-mode)))
+;; (setq merlin-default-flags (list ""))
