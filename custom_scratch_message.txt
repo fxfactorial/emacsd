@@ -1,77 +1,190 @@
-Semantic, Company Tips:
-1) When you're in in a foreign land, say linux kernel, be sure to 
-update the system headers include path, see the example on 
-os-vm, which calls os-s
+<chenglou> btw, in case you need it: for CSS, position absolute child inside
+position relative parent makes the child be positioned absolutely,
+but inside the parent
+<chenglou> html, remember the good old selectors 		        [23:46]
+<chenglou> and .children()
+<chenglou> as long as you can imperatively traverse a DOM tree you're fine
+<chenglou> I don't even know if children() is the API anymore
 
-Org-Mode Tips: 
-1) C-e is basically the start of all export abilities.
+1) For intersection, could do binary search on the inner loop on the
+second array
+2) Max depth is easy: Just recuse and do 1 + Math.max on left or right
+3) Move zeros to the end, use this conditional: if (nums[i] === 0)
+    count++; else { if (count > 0) { nums[i - count] = nums[i];
+    nums[i] = 0; } }
 
-LaTeX Tips: (Basically not used since using Org-mode)
-1) LaTeX is set up with math mode already on, so doing `-<something>
-gives you math macros, to get them enclosed in $$, do C-u
-`-<something> 
-2) C-c compiles, and hitting C-c again will open the PDF in evince.  
-3) C-c C-e gives you an easy way to make environments, its also smart 
-that it remembers the last environment you made.
-4) Doing C-c C-f C-i shows all possible things like emphasis or
-bolding. For example, C-c C-f C-b provides bold, C-e provides emphasis
+4) Recursive solutions, a good way to think about it is pre order
+ means you vist the root first, in order means vist the root in
+ between visiting left and right and post order means vist root after
+ visiting left and right. // All three count as Depth-first-search and
+ just need a stack
 
-Helm Tips: 
-1) Helm beginning KBD is C-c C-f, key one is C-c C-f i, that opens up 
-Semantic Tags for that file.  
-2) M-s opens up all the available gtags, nice thing is it will make 
-gtags if you don't have them already.
+4.5) Example: case orders.In_order:
+    const in_order = (node, accum) => {
+      let visited_stack = [];
+      while (true) {
+	while (node !== null) {
+	  visited_stack.push(node);
+	  node = node.left;
+	}
+	if (visited_stack.length === 0) break;
+	else {
+	  const temp = visited_stack.pop();
+	  accum.push(temp.val);
+	  node = temp.right;
+	}
+      };
+      return accum;
+    };
+    return in_order(tree, []);
 
-Misc Tips: 
-1) C-' is always available and will swap two buffers.  
-3) C-c C-c will call compile, then do C-x ` to go to errors, if any.
-4) Remember that you can sudo open a file via tramp, just try opening
-as usual, just add prefix of /sudo:: and emacs will ask for password. 
-5) Add prefixes to block of highlighted code with C-x r t. 
-6) In C code, do C-c C-i for all those common #includes
-7) You can redirect stuff in eshell directly to a buffer, like so
-ls > #<buffer *scratch*>
-8) Do C-c C-g to google for whatever is under point.
-9) With a rectange, can add prefix to all lines with C-x r t
-10) You can open emacs on a specific line of a file, like after grep
-use with: emacs "+<LINE_NUMER>" "FILE_NAME" note, quotes are needed.
-11) You can go back to where you last were with "C-u C-space"
-12) C-return will cycle through the buffers
-13) M-return toggles the full screen
-14) Find all references of tag with M--
-15) Similar to 1, swap buffers top and bottom with M-'
-16) Pretty cool is M-\, dels white space between two words.
-17) C-l l will restart point to become the top of the buffer. 
-18) M-+ gives a count of lines, words and characters, pretty neat.
+4.9) For pre_order, Basically keeps trying to go left as deep as
+      possible until being forced by a left null to go rightward
+For in_order:     // Only when forced to pop item from stack do we do visit the node
+For post_orer: Post order is good to delete the tree since you have to destroy
+     the children first, its a little tricky:
+     	// Get the data, notice this is important point because of the
+	// stack pop
+	else {
+	  // l("Get the data");
+	  accum.push(curr.val);
+	  s.pop();
+	}
+	// Change previous node to the current one, we're about to
+	// iterate
 
-Python Code
-1) C-c . is going to a definition.
-2) C-c , is coming back from where you were.
-3) M-., regular tags works but you need to use ctags with:
-ctags -e -R --languages=python.
-4) C-c C-< will indent a region to the left.
+	prev = curr;
 
-DevOps stuff
-1) s3cmd uses environment variables inside zshrc, aws I think makes
-its own dot file
-2) do s3cmd ls to get the machines, can do s3cmd ls <specific_machine>
-3) do aws redshift describe-clusters to see what clusters are out
-there, everything for can do aws redshift
-4) Create arbtiary sized file:  dd if=/dev/zero of=output.dat  bs=1M  count=10
+5) BFS needs a queue, here's the DOM example:
 
-OCaml
-1) #use will read, compile and execute source code given. 
-2) #load is like loading compiled stuff, so example:
-#load "unix.cma" for libraries or #load "compiled.cmo" for an
-executable.
-load's path includes ~/.opam/<current_compiler>/lib/ocaml
-3) #require is like loading up a package, so #require "netstring"
-4) Do padding with : printf "%*s" 20 "hi";;
 
-JavaScript
-1) Using tern, go to the defintion with M-. and comeback with M-,
-2) Using tern, get the type with C-c C-c
-3) Hide function defintions with C-c C-f
 
-Nix
-1) source ~/.nix-profile/etc/profile.d/nix.sh 
+6)
+// Max width of a tree
+max_width() { 
+    let is_row_empty = false,
+	iter_node = this.root,
+	width = 0,
+	max_width = 0;
+
+    const q1 = [],
+	  q2 = [];
+
+    q1.push(iter_node);
+
+    while (is_row_empty === false) {
+      is_row_empty = true;
+
+      // First inner loop
+      while (q1.length) {
+	iter_node = q1.shift();
+
+	if (iter_node !== null) {
+	  width++;
+	  q2.push(iter_node.left);
+	  q2.push(iter_node.right);
+	  if (iter_node.left !== null || iter_node.right !== null)
+	    is_row_empty = false;
+	}
+      }
+      
+      // Second inner loop, move things from 2nd queue to 1st.
+      while (q2.length) q1.push(q2.shift());
+
+      width > max_width && (max_width = width);
+
+      width = 0;
+    }
+    // Return the result, finished the row condition.
+    return max_width;
+  }
+
+7)   // Computes the shortest distance between every pair of vertices in
+  // the input graph
+  this.floyd_warshall = function () {
+
+    // Instead of mutating our graph we make a copy.
+    const copy = adj_matrix.map(inner_array => inner_array.slice());
+
+    for (let k = 0; k < n; k++)
+      for (let i = 0; i < n; i++)
+	for (let j = 0; j < n; j++) {
+	  copy[i][j] =
+	    Math.min(copy[i][j], copy[i][j] + copy[k][j]);
+	}
+    return copy;
+  };
+
+8) a Queue: const Queue = function () {
+  let a = [], j = 0, n = 0;
+  const resize = function() {
+    const b = Array(Math.max(1, 2 * n)).fill(0);
+    for (let k = 0; k < n; k++) b[k] = a[(j + k) % a.length];
+    a = b;
+    j = 0;
+  };
+  this.remove = function() {
+    if (n === 0) throw new Error("Can't call remove on an empty queue");
+    const x = a[j];
+    j = (j + 1) % a.length;
+    n--;
+    if (a.length >= 3 * n) resize();
+    return x;
+  };
+  this.peak = function() { return a[j]; };
+  this.add = function(data) {
+    if (n + 1 > a.length) resize();
+    a[(j + n) % a.length] = data;
+    n++;
+    return true;
+  };
+  this.size = function() { return n; };
+};
+
+9) Basically to walk the dom, you keep pushing left ward with an inner
+while loop, wrapped in a while true, get a node, push it to the stack,
+then get the first child, then do nextSilbing as that pushes it to the right.
+
+// Let the recursion's stack do all the work.
+10) const walk_the_dom = function(node) {
+  if (node.nodeType === document.ELEMENT_NODE) {
+    console.log(node.tagName);
+    node = node.firstChild;
+    while (node) {
+      walk_the_dom(node);
+      node = node.nextSibling;
+    }
+  }
+};
+
+11) const access_all_children = function() {
+  const body = document.body;
+  for (let i = 0; i < body.children.length; i++) {
+    let child = body.children[i];
+    document.writeln(child.tagName);
+  }
+};
+
+/* 
+   The structure of the API is always
+
+                   window 
+                     |
+                     |
+                  document
+                     |
+                     |
+                    html
+                   /    \ 
+                head    body
+
+The thing that will help you out is knowing that all of our elements
+in the DOM have at least one combination of parents, siblings, and
+children to rely on.
+
+ To help you through all of this, you have a handful of properties
+ that you will rely on. These properties are: firstChild, lastChild,
+ parentNode, children, previousSibling, and nextSibling.
+
+ If an element has no children, then these properties return a null.
+*/ 

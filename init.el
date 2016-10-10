@@ -1,3 +1,9 @@
+;; Hack because RMS doesn't want lldb in gud/emacs
+;; (load-file "~/.emacs.d/gud.el")
+
+(setq max-lisp-eval-depth 3000
+      exec-path-from-shell-check-startup-files nil)
+
 (defvar osx-base-path
   "/Applications/Xcode.app/Contents/Developer/Platforms/")
 
@@ -5,45 +11,59 @@
     ; Only the then clause needs a progn, else part doesn't need it.
     (progn
       (set-face-attribute 'default nil :family "Monaco" :height 110)
-      ;; Forgot what this was for..think some os x issues. 
+      ;; Forgot what this was for..think some os x issues.
       (setenv "LC_CTYPE" "UTF-8")
       (setq mac-option-modifier 'super
 	    flycheck-make-executable "/usr/local/bin/make"
-	    company-clang-executable
-	    (concat "/Applications/Xcode.app/Contents/Developer/"
-		    "Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++")
+	    flycheck-clang-include-path
+	    '("/Users/Edgar/.opam/working/lib/ocaml"
+	      "/usr/local/opt/icu4c/include"
+	      "/usr/local/include/glibmm-2.4"
+	      "/usr/local/opt/qt5/include"
+	      "/usr/local/include/gtkmm-3.0"
+	      "/usr/local/include/webkitgtk-4.0")
+	    company-clang-executable "/usr/bin/clang++"
+	    ;; (concat "/Applications/Xcode.app/Contents/Developer/"
+	    ;; 	    "Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++")
 	    company-clang-arguments
 	    `(
-	      "-std=c++11"
-	      "-stdlib=libc++"
-	      "-isysroot"
+	      "-std=c++14"
+	      ;; "-isysroot"
 	      ; If coding for iOS
 	      ;; ,(concat osx-base-path
 	      ;; 	       "iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk")
 	      ; If coding for OS X
-	      ,(concat osx-base-path
-	      	       "MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk")
+	      ;; ,(concat osx-base-path
+	      ;; 	       "MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk")
 	      ;; "-I" "/usr/local/Cellar/folly/0.48.0_1/include"
 	      ;; "-I" "/usr/local/include/graphqlparser"
-	      "-I" "/usr/local/Cellar/folly/0.48.0_1/include"
-	      "-I" "/usr/include/c++/4.2.1"
-	      "-I" "/usr/local/Cellar/tclap/1.2.1/include"
+	      ;; "-I" "/usr/local/Cellar/folly/0.48.0_1/include"
+	      ;; "-I" "/usr/local/Cellar/tclap/1.2.1/include"
+	      "-pthread"
+	      "-I" "/usr/include"
+	      "-I" "/usr/local/opt/qt5/include"
 	      "-I" "/usr/local/lib/ocaml/")
-	    flycheck-c/c++-clang-executable
-	    (concat "/Applications/Xcode.app/Contents/Developer/"
-		    "Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++")
+	    flycheck-c/c++-clang-executable "/usr/bin/clang++"
+	    ;; flycheck-clang-args `("-std=c++14"
+	    ;; 			  ,(concat "/Applications/Xcode.app/Contents/Developer/"
+	    ;; 				   "Platforms/MacOSX.platform/Developer/SDKs/"
+	    ;; 				   "MacOSX10.11.sdk/System/Library/Frameworks"
+	    ;; 				   "/Foundation.framework/Headers/"))
+	    ;; (concat "/Applications/Xcode.app/Contents/Developer/"
+	    ;; 	    "Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++")
 	    mac-command-modifier 'meta))
   (set-face-attribute 'default nil :height 110)
-  (setq flycheck-c/c++-clang-executable "armv7-apple-darwin11-clang")
-  (setq flycheck-clang-include-path
-	'("/home/gar/.nix-profile/iPhoneOS9.2.sdk/usr/include/c++/4.2.1"))
-  (setq company-clang-executable "armv7-apple-darwin11-clang"
+  (setq flycheck-c/c++-clang-executable "clang++"
+	flycheck-clang-include-path
+  	'("/opt/qt57/include"))
+  (add-to-list 'company-c-headers-path-system "/opt/qt5/include")
+  (setq company-clang-executable "clang"
 	company-clang-arguments
-	'("-std=c++11"
-	  "-stdlib=libc++"
-	  "-isysroot"
-	  "/home/gar/.nix-profile/iPhoneOS9.2.sdk"
-	  "-I/home/gar/.nix-profile/iPhoneOS9.2.sdk/usr/include/c++/4.2.1"
+	'("-std=c++14"
+	  "-x c++"
+	  "-pthread"
+	  "-I" "/opt/qt5/include"
+	  ;; "-stdlib=libc++"
 	  "-I/usr/local/lib/ocaml/")))
 
 (setq company-backends '(company-clang
@@ -84,15 +104,19 @@
  '(column-number-mode t)
  '(custom-safe-themes
    (quote
-    ("e97dbbb2b1c42b8588e16523824bc0cb3a21b91eefd6502879cf5baa1fa32e10" "71ecffba18621354a1be303687f33b84788e13f40141580fa81e7840752d31bf" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d3df47c843c22d8f0177fe3385ae95583dc8811bd6968240f7da42fd9aa51b0b" default)))
+    ("d8f76414f8f2dcb045a37eb155bfaa2e1d17b6573ed43fb1d18b936febc7bbc2" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "e56ee322c8907feab796a1fb808ceadaab5caba5494a50ee83a13091d5b1a10c" "cedd3b4295ac0a41ef48376e16b4745c25fa8e7b4f706173083f16d5792bb379" "e97dbbb2b1c42b8588e16523824bc0cb3a21b91eefd6502879cf5baa1fa32e10" "71ecffba18621354a1be303687f33b84788e13f40141580fa81e7840752d31bf" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d3df47c843c22d8f0177fe3385ae95583dc8811bd6968240f7da42fd9aa51b0b" default)))
  '(display-time-default-load-average nil)
  '(display-time-mode t)
+ '(js-indent-level 2)
+ '(js2-global-externs (quote ("fetch" "React" "ReactDOM" "marked")))
  '(js2-include-node-externs t)
  '(menu-bar-mode nil)
  '(org-startup-indented t)
  '(package-selected-packages
    (quote
-    (indent-guide tern-auto-complete cyberpunk-theme markdown-mode haskell-mode edbi sql-indent sqlup-mode company-shell company-web neotree spacegray-theme solarized-dark-theme ag magit ggtags ido-vertical-mode nix-mode web-mode objc-font-lock window-number tuareg simple-httpd ox-gfm mustache material-theme js2-mode jade-mode htmlize hlinum flycheck exec-path-from-shell company-tern company-quickhelp company-jedi company-c-headers)))
+    (utop ocp-indent merlin sqlite solarized-theme tronesque-theme rtags realgud cmake-mode indent-guide tern-auto-complete cyberpunk-theme markdown-mode haskell-mode edbi sql-indent sqlup-mode company-shell company-web neotree spacegray-theme solarized-dark-theme ag magit ggtags ido-vertical-mode nix-mode web-mode objc-font-lock window-number tuareg simple-httpd ox-gfm mustache material-theme js2-mode jade-mode htmlize hlinum flycheck exec-path-from-shell company-tern company-quickhelp company-jedi company-c-headers)))
+ '(solarized-high-contrast-mode-line t)
+ '(sql-indent-offset 2)
  '(tool-bar-mode nil)
  '(web-mode-attr-indent-offset 0 t))
 
@@ -144,6 +168,27 @@
   "\n")
 
 ;; Custom Functions
+(defun semantic-ia-fast-jump-back ()
+  "Code."
+  (interactive)
+  (defadvice push-mark
+      (around semantic-mru-bookmark activate)
+    "Push a mark at LOCATION with NOMSG and ACTIVATE passed to `push-mark’.
+  If `semantic-mru-bookmark-mode’ is active, also push a tag
+  onto the mru bookmark stack."
+    (semantic-mrub-push semantic-mru-bookmark-ring (point) 'mark)
+    ad-do-it)
+  (if (ring-empty-p (oref semantic-mru-bookmark-ring ring))
+      (error "Semantic Bookmark ring is currently empty"))
+  (let* ((ring (oref semantic-mru-bookmark-ring ring))
+        (alist (semantic-mrub-ring-to-assoc-list ring))
+        (first (cdr (car alist))))
+    (if (semantic-equivalent-tag-p (oref first tag)
+                                  (semantic-current-tag))
+       (setq first (cdr (car (cdr alist)))))
+    (semantic-mrub-switch-tags first)))
+
+
 (defun revert-all-buffers ()
   "Refreshes all open buffers from their respective files, think git use case"
   (interactive)
@@ -210,7 +255,8 @@
   "Connect to IRC, register nick, open commonly used channels"
   (interactive)
   (setq erc-max-buffer-size 20000
-	erc-autojoin-channels-alist '(("freenode.net" "#ocaml"))
+	erc-autojoin-channels-alist
+	'(("freenode.net" "#ocaml" "#javascript" "##re" "#macdev"))
 	erc-hide-list '("JOIN" "PART" "QUIT"))
   ;; This is obviously untracked, if you copy my init.el,
   ;; either delete this code or provide your own creds
@@ -257,7 +303,7 @@
 ;; Visuals, but note that some visuals also set in custom.
 ;; Cool vertical indentation guides.
 (indent-guide-global-mode)
-(setq indent-guide-recursive t)
+;; (setq indent-guide-recursive t)
 (show-paren-mode)
 (auto-insert-mode)
 (abbrev-mode -1)
@@ -309,7 +355,7 @@
          (linum-format (concat " %" (number-to-string w) "d ")))
     ad-do-it))
 (hlinum-activate)
-(fringe-mode -1)
+;; (fringe-mode -1)
 
 (when window-system
   (add-hook 'after-init-hook 
@@ -336,16 +382,16 @@
 
 ;; Python Stuff
 ;; Get these variables set before the inferior mode comes up, otherwise too late.
-(setq python-shell-interpreter "ipython"
-      python-shell-interpreter-args "--matplotlib=osx --colors=Linux"
-      python-shell-prompt-regexp "In \\[[0-9]+\\]: "
-      python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
-      python-shell-completion-setup-code
-      "from IPython.core.completerlib import module_completion"
-      python-shell-completion-module-string-code
-      "';'.join(module_completion('''%s'''))\n"
-      python-shell-completion-string-code
-      "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
+;; (setq python-shell-interpreter "ipython"
+;;       python-shell-interpreter-args "--matplotlib=osx --colors=Linux"
+;;       python-shell-prompt-regexp "In \\[[0-9]+\\]: "
+;;       python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
+;;       python-shell-completion-setup-code
+;;       "from IPython.core.completerlib import module_completion"
+;;       python-shell-completion-module-string-code
+;;       "';'.join(module_completion('''%s'''))\n"
+;;       python-shell-completion-string-code
+;;       "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
 
 (add-hook 'inferior-python-mode-hook
 	  (lambda ()
@@ -353,50 +399,50 @@
 	     ;; Just like killing the shell without asking me. 
 	     (get-process "Python") nil)))
 
-(add-hook
- 'python-mode-hook
- (lambda ()
-   ;; (electric-pair-mode nil)
-   (setq-local indent-tabs-mode nil)
-   (setq-local tab-width 4)
-   (setq-local python-indent 4)
-   (hs-minor-mode)
-   (define-key hs-minor-mode-map (kbd "C-c C-t") 'hs-toggle-hiding)
-   (define-key python-mode-map (kbd "M-q") 'python-fill-paren)
-   (define-key python-mode-map (kbd "M-]") 'jedi:goto-definition)
-   (define-key python-mode-map (kbd "M-/") 'company-jedi)
-   (define-key python-mode-map (kbd "M-[") 'jedi:goto-definition-pop-marker)
-   (jedi:setup)
-   (setq jedi:setup-keys t
-	 ;; jedi:server-args
-	 ;; '("--sys-path"
-	 ;;   (concat "/usr/local/Cellar/python3/3.5.1/Frameworks/Python.framework"
-	 ;; 	   "/Versions/3.5/lib/python3.5/site-packages"))
-	 jedi:server-args
-	 `("--sys-path"
-	   ,(concat "/usr/local/Cellar/python3/3.5.1/Frameworks/Python.framework"
-	 	   "/Versions/3.5/lib/python3.5/site-packages"))
-	 jedi:complete-on-dot t)
-   (let ((interpreter python-shell-interpreter)
-	 (args python-shell-interpreter-args))
-     (when python-shell--parent-buffer
-       (python-util-clone-local-variables python-shell--parent-buffer))
-     ;; 	;; Users can override default values for these vars when calling
-     ;; 	;; `run-python'. This ensures new values let-bound in
-     ;; 	;; `python-shell-make-comint' are locally set.
-     (set (make-local-variable 'python-shell-interpreter) interpreter)
-     (set (make-local-variable 'python-shell-interpreter-args) args))
-   ;; Its so damn loud
-   (flycheck-mode)
-   (company-mode)
-   (company-quickhelp-mode)
-   (setq-local show-trailing-whitespace t)))
+;; (add-hook
+;;  'python-mode-hook
+;;  (lambda ()
+;;    ;; (electric-pair-mode nil)
+;;    (setq-local indent-tabs-mode nil)
+;;    (setq-local tab-width 4)
+;;    (setq-local python-indent 4)
+;;    (hs-minor-mode)
+;;    (define-key hs-minor-mode-map (kbd "C-c C-t") 'hs-toggle-hiding)
+;;    (define-key python-mode-map (kbd "M-q") 'python-fill-paren)
+;;    (define-key python-mode-map (kbd "M-]") 'jedi:goto-definition)
+;;    (define-key python-mode-map (kbd "M-/") 'company-jedi)
+;;    (define-key python-mode-map (kbd "M-[") 'jedi:goto-definition-pop-marker)
+;;    (jedi:setup)
+;;    (setq jedi:setup-keys t
+;; 	 ;; jedi:server-args
+;; 	 ;; '("--sys-path"
+;; 	 ;;   (concat "/usr/local/Cellar/python3/3.5.1/Frameworks/Python.framework"
+;; 	 ;; 	   "/Versions/3.5/lib/python3.5/site-packages"))
+;; 	 jedi:server-args
+;; 	 `("--sys-path"
+;; 	   ,(concat "/usr/local/Cellar/python3/3.5.1/Frameworks/Python.framework"
+;; 	 	   "/Versions/3.5/lib/python3.5/site-packages"))
+;; 	 jedi:complete-on-dot t)
+;;    (let ((interpreter python-shell-interpreter)
+;; 	 (args python-shell-interpreter-args))
+;;      (when python-shell--parent-buffer
+;;        (python-util-clone-local-variables python-shell--parent-buffer))
+;;      ;; 	;; Users can override default values for these vars when calling
+;;      ;; 	;; `run-python'. This ensures new values let-bound in
+;;      ;; 	;; `python-shell-make-comint' are locally set.
+;;      (set (make-local-variable 'python-shell-interpreter) interpreter)
+;;      (set (make-local-variable 'python-shell-interpreter-args) args))
+;;    ;; Its so damn loud
+;;    (flycheck-mode)
+;;    (company-mode)
+;;    (company-quickhelp-mode)
+;;    (setq-local show-trailing-whitespace t)))
 
 ;; SQL Stuff
 ;; Just remember,
 ;;http://truongtx.me/2014/08/23/setup-emacs-as-an-sql-database-client/
 
-(load-file "~/.emacs.d/sql_dbs.el")
+;; (load-file "~/.emacs.d/sql_dbs.el")
 
 (add-hook 'sql-mode-hook
 	  (lambda ()
@@ -416,10 +462,10 @@
  (lambda ()
    ;; Add opam emacs directory to the load-path
    (setq opam-share
-	 (substring
-	  (shell-command-to-string
-	   "opam config var share 2> /dev/null")
-	  0 -1))
+   	 (substring
+   	  (shell-command-to-string
+   	   "opam config var share 2> /dev/null")
+   	  0 -1))
    (add-to-list 'load-path (concat opam-share "/emacs/site-lisp"))
    ;; Load merlin-mode
    (require 'merlin)
@@ -446,12 +492,12 @@
    (setq-local indent-region-function 'ocp-indent-region)
    (if (equal system-type 'darwin)
        (load-file
-	(concat "/Users/Edgar/.opam/js_coding"
-		"/share/emacs/site-lisp/ocp-indent.el"))
+   	(concat "/Users/Edgar/.opam/alba"
+   		"/share/emacs/site-lisp/ocp-indent.el"))
      (load-file
       (concat
-       "/home/gar/.opam/js_coding/"
-       "share/emacs/site-lisp/ocp-indent.el")))
+       "/home/gar/.opam/alba"
+       "/share/emacs/site-lisp/ocp-indent.el")))
    (merlin-mode)))
 
 (add-hook 'utop-mode-hook (lambda ()
@@ -496,8 +542,9 @@
 		      ac-source-abbrev))))))
 
 (add-hook 'css-mode-hook (lambda ()
+			   (company-mode)
 			   (define-key css-mode-map (kbd "M-/")
-			     'ac-start )))
+			     'company-clang )))
 
 (setq-default
  ;; js2-mode
@@ -522,22 +569,24 @@
 
 ;;Javascript hook, this is a better major mode than default one
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.json\\'" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.json\\'" . javascript-mode))
 (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js2-jsx-mode))
 (add-to-list 'interpreter-mode-alist '("node" . js2-jsx-mode))
+
 (add-hook 'js2-mode-hook (lambda ()
 			   (company-mode)
 			   (setq-local js2-basic-offset 2)
-			   (define-key js2-mode-map (kbd "M-/")
-			     'company-tern)
+			   (hs-minor-mode)
+			   (define-key js2-mode-map (kbd "M-<up>") 'hs-show-block)
+			   (define-key js2-mode-map (kbd "M-<down>") 'hs-hide-block)
+			   (define-key js2-mode-map (kbd "M-/") 'company-tern)
 			   (tern-mode)))
 
-
-(eval-after-load 'tern
-  '(progn
-     (require 'tern-auto-complete)
-     (tern-ac-setup)))
+;; (eval-after-load 'tern
+;;   '(progn
+;;      (require 'tern-auto-complete)
+;;      (tern-ac-setup)))
 
 ;; C++ stuff, basically just be aware of it.
 (add-to-list 'auto-mode-alist '("\\.cc\\'" . c++-mode))
@@ -551,39 +600,45 @@
 	     (company-mode)
 	     (global-unset-key (kbd "C-x c"))))
 
-;; ;; Common things wanted in all C like languages. 
+;; Common things wanted in all C like languages. 
 (add-hook
  'c-mode-common-hook
  '(lambda ()
-    (ggtags-mode)
-    ;; (semantic-mode)
-    ;; (global-semantic-mru-bookmark-mode)
-    (define-key ggtags-mode-map (kbd "M-.") nil)
-    (define-key ggtags-mode-map (kbd "M-<") nil)
-    (define-key ggtags-mode-map (kbd "M->") nil)
-    (define-key ggtags-mode-map (kbd "M-n") nil)
-    (define-key ggtags-mode-map (kbd "M-p") nil)
-    (add-to-list
-     'company-c-headers-path-system
-     "/Users/Edgar/.opam/working_code/lib/ocaml")
-    (add-to-list
-     'company-c-headers-path-system
-     "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/JavaScriptCore.framework/Headers")
-    (add-to-list
-     'company-c-headers-path-system
-     "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/WebKit.framework/Headers")
-    (add-to-list
-     'company-c-headers-path-system
-    "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Foundation.framework/Headers/")
-    (define-key ggtags-mode-map (kbd "M-,") nil)
-    (define-key ggtags-mode-map (kbd "M-]") nil)
+    (semantic-mode)
+    (global-semantic-idle-summary-mode)
+    (global-semantic-mru-bookmark-mode)
+    ;; (add-to-list 'company-c-headers-path-system
+    ;; 		 "/usr/local/include/glibmm-2.4")
+    ;; (add-to-list 'company-c-headers-path-system
+    ;; 		 "/usr/local/include/gtk-3.0")
+    ;; (add-to-list 'company-c-headers-path-system
+    ;; 		 "/usr/local/include/webkitgtk-4.0")
+    ;; (add-to-list 'company-c-headers-path-system
+    ;; 		 "/usr/local/opt/icu4c/include")
+    (add-to-list 'company-c-headers-path-system
+		 "/usr/local/opt/qt5/include")
+    (add-to-list 'company-c-headers-path-system
+		 "/opt/qt5/include")
+    (add-to-list 'company-c-headers-path-system
+		 "/Users/Edgar/.opam/working/lib/ocaml")
+    ;; (add-to-list
+    ;;  'company-c-headers-path-system
+    ;;  "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/JavaScriptCore.framework/Headers")
+    ;; (add-to-list
+    ;;  'company-c-headers-path-system
+    ;;  "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/WebKit.framework/Headers")
+    ;; (add-to-list
+    ;;  'company-c-headers-path-system
+    ;;  "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Foundation.framework/Headers/")
+    ;; (define-key ggtags-mode-map (kbd "M-,") nil)
+    ;; (define-key ggtags-mode-map (kbd "M-]") nil)
     ;; (define-key c-mode-map (kbd "C-.") 'ggtags-find-definition)
     ;; (define-key c-mode-map (kbd "C-,") 'ggtags-prev-mark)
     ;; (global-unset-key (kbd "C-]"))
     ;; (define-key c-mode-map (kbd "M-]") 'semantic-ia-fast-jump)
     ;; (define-key c-mode-map (kbd "M-[") 'semantic-ia-fast-jump-back)
-    ;; (define-key c++-mode-map (kbd "M-]") 'semantic-ia-fast-jump)
-    ;; (define-key c++-mode-map (kbd "M-[") 'semantic-ia-fast-jump-back)
+    (define-key c++-mode-map (kbd "M-]") 'semantic-ia-fast-jump)
+    (define-key c++-mode-map (kbd "M-[") 'semantic-ia-fast-jump-back)
     (define-key c-mode-map (kbd "C-=") 'ff-find-other-file)
     (setq-local show-trailing-whitespace t)
     (company-mode)
@@ -594,14 +649,14 @@
 
 (add-hook 'c++-mode-hook
 	  (lambda ()
-	    (setq-local flycheck-clang-language-standard "c++11")
+	    (setq-local flycheck-clang-language-standard "c++14")
 	    (setq-local company-async-timeout 5)
 	    (setq-local company-async-wait 0.10)
 	    (add-to-list
 	     'company-c-headers-path-system
 	     "/Users/Edgar/.opam/working/lib/ocaml")
 	    (add-to-list 'company-c-headers-path-system
-			 "/usr/local/include/c++/5.3.0")))
+			 "/usr/local/include/c++/6.1.0")))
 
 (add-to-list 'auto-mode-alist '("\\.mm\\'" . objc-mode))
 (add-to-list 'auto-mode-alist '("\\.xm\\'" . objc-mode))
@@ -623,9 +678,7 @@
 	  (lambda()
 	    (setq-local show-trailing-whitespace t)))
 
-
-
-
+;; Misc hacks
 
 ;; (setq opam
 ;;       (substring
@@ -642,3 +695,10 @@
 ;; 	    (add-hook 'before-save-hook 'refmt-before-save)
 ;; 	    (merlin-mode)))
 ;; (setq merlin-default-flags (list ""))
+
+(add-hook 'gud-mode-hook
+	  (lambda ()
+	    (gud-tooltip-mode)
+	    ;; (define-key gud-mode-map (kbd "TAB") 'comint-send-input)
+
+	    ))
