@@ -5,33 +5,34 @@
     ; Only the then clause needs a progn, else part doesn't need it.
     (progn
       (set-face-attribute 'default nil :family "Monaco" :height 110)
-      ;; Forgot what this was for..think some os x issues. 
+      ;; Forgot what this was for..think some os x issues.
       (setenv "LC_CTYPE" "UTF-8")
       (setq mac-option-modifier 'super
 	    flycheck-make-executable "/usr/local/bin/make"
 	    company-clang-executable
 	    (concat "/Applications/Xcode.app/Contents/Developer/"
-		    "Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++")
+	    	    "Toolchains/XcodeDefault.xctoolchain/usr/bin/clang")
 	    company-clang-arguments
 	    `(
-	      "-std=c++11"
-	      "-stdlib=libc++"
+	      "-std=c11"
+	      ;; "-std=c++14"
+	      ;; "-stdlib=libc++"
 	      "-isysroot"
 	      ; If coding for iOS
 	      ;; ,(concat osx-base-path
 	      ;; 	       "iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk")
 	      ; If coding for OS X
 	      ,(concat osx-base-path
-	      	       "MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk")
+	      	       "MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk")
 	      ;; "-I" "/usr/local/Cellar/folly/0.48.0_1/include"
 	      ;; "-I" "/usr/local/include/graphqlparser"
-	      "-I" "/usr/local/Cellar/folly/0.48.0_1/include"
-	      "-I" "/usr/include/c++/4.2.1"
-	      "-I" "/usr/local/Cellar/tclap/1.2.1/include"
+	      ;; "-I" "/usr/local/Cellar/folly/0.48.0_1/include"
+	      ;; "-I" "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"
+	      ;; "-I" "/usr/local/Cellar/tclap/1.2.1/include"
 	      "-I" "/usr/local/lib/ocaml/")
 	    flycheck-c/c++-clang-executable
 	    (concat "/Applications/Xcode.app/Contents/Developer/"
-		    "Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++")
+		    "Toolchains/XcodeDefault.xctoolchain/usr/bin/clang")
 	    mac-command-modifier 'meta))
   (set-face-attribute 'default nil :height 110)
   (setq flycheck-c/c++-clang-executable "armv7-apple-darwin11-clang")
@@ -54,7 +55,7 @@
 (global-set-key (kbd "M-n") 'forward-paragraph)
 (global-set-key (kbd "M-p") 'backward-paragraph)
 ;; Not sure why but dialog box still locks up emacs on OSX.
-;; in any case, I dislike dialog boxes. 
+;; in any case, I dislike dialog boxes.
 (setq use-dialog-box nil
       user-full-name "Edgar Aroutiounian"
       user-mail-address "edgar.factorial@gmail.com")
@@ -62,7 +63,7 @@
 ;; Giving myself this helpful buffer, otherwise way to many damn key
 ;; bindings to remember!
 ((lambda ()
-   (with-temp-buffer 
+   (with-temp-buffer
      (insert-file-contents "~/.emacs.d/custom_scratch_message.txt")
      (setq initial-scratch-message (buffer-string)))))
 
@@ -72,7 +73,7 @@
 
 ;;Melpa stuff, elpa is the offical package archive, melpa is the
 ;;community extension with stuff on github and melpa itself.
-(add-to-list 'package-archives 
+(add-to-list 'package-archives
 	     '("melpa" . "http://melpa.milkbox.net/packages/"))
 
 ;; ;;Getting custom in before we set the tron theme
@@ -84,7 +85,7 @@
  '(column-number-mode t)
  '(custom-safe-themes
    (quote
-    ("e97dbbb2b1c42b8588e16523824bc0cb3a21b91eefd6502879cf5baa1fa32e10" "71ecffba18621354a1be303687f33b84788e13f40141580fa81e7840752d31bf" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d3df47c843c22d8f0177fe3385ae95583dc8811bd6968240f7da42fd9aa51b0b" default)))
+    ("9c79dde113d5718497be6636b7358ec3ef3dad98d6c166fe88a8cdcd8b8abfc2" "e97dbbb2b1c42b8588e16523824bc0cb3a21b91eefd6502879cf5baa1fa32e10" "71ecffba18621354a1be303687f33b84788e13f40141580fa81e7840752d31bf" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d3df47c843c22d8f0177fe3385ae95583dc8811bd6968240f7da42fd9aa51b0b" default)))
  '(display-time-default-load-average nil)
  '(display-time-mode t)
  '(js2-include-node-externs t)
@@ -92,9 +93,11 @@
  '(org-startup-indented t)
  '(package-selected-packages
    (quote
-    (indent-guide tern-auto-complete cyberpunk-theme markdown-mode haskell-mode edbi sql-indent sqlup-mode company-shell company-web neotree spacegray-theme solarized-dark-theme ag magit ggtags ido-vertical-mode nix-mode web-mode objc-font-lock window-number tuareg simple-httpd ox-gfm mustache material-theme js2-mode jade-mode htmlize hlinum flycheck exec-path-from-shell company-tern company-quickhelp company-jedi company-c-headers)))
+    (zerodark-theme json-mode editorconfig tern indent-guide tern-auto-complete cyberpunk-theme markdown-mode haskell-mode edbi sql-indent sqlup-mode company-shell company-web neotree spacegray-theme solarized-dark-theme ag magit ido-vertical-mode nix-mode web-mode objc-font-lock window-number simple-httpd ox-gfm mustache material-theme js2-mode jade-mode htmlize hlinum flycheck exec-path-from-shell company-tern company-quickhelp company-jedi company-c-headers)))
  '(tool-bar-mode nil)
  '(web-mode-attr-indent-offset 0 t))
+
+;; (editorconfig-mode)
 
 ;; Skeletons definitions for common includes.
 (define-skeleton my-org-defaults
@@ -114,7 +117,7 @@
   "<!DOCTYPE html>\n"
   "<meta charset=\"utf-8\">\n"
   "<body>\n"
-  "<script src=></script>\n"
+  "  <script src=></script>\n"
   "</body>\n")
 
 (define-skeleton my-c-defaults
@@ -125,16 +128,13 @@
   "#include <unistd.h>\n"
   "#include <ctype.h>\n"
   "#include <string.h>\n"
+  "#include <stdbool.h>\n"
   "\n"
   "\n"
   "int main (int argc, char **argv)\n"
   "{\n"
   "  return 0;\n"
   "}")
-(define-skeleton my-js-defaults
-  "strict mode declaration for js"
-  nil
-  "\"use strict\";\n")
 
 (define-skeleton my-objc-defaults
   "Objective-C barebones"
@@ -160,7 +160,7 @@
   (add-hook 'completion-at-point-functions
 	    'pcomplete-completions-at-point nil t))
 
-;; Switch top and bottom buffers. 
+;; Switch top and bottom buffers.
 (defun transpose-windows (arg)
   "Transpose the buffers shown in two windows."
   (interactive "p")
@@ -215,7 +215,7 @@
   ;; This is obviously untracked, if you copy my init.el,
   ;; either delete this code or provide your own creds
   (let ((acc (read-lines "~/.emacs.d/these-erc-creds")))
-    (setq erc-nick (car acc))  
+    (setq erc-nick (car acc))
     (setq erc-password (nth 1 acc)))
   (add-hook 'erc-after-connect '(lambda (server nick)
 				  (erc-message
@@ -229,11 +229,11 @@
 (add-to-list 'auto-mode-alist '("\\zshrc\\'" . shell-script-mode))
 (global-set-key (kbd "C-M-e") 'irc-connect)
 (global-set-key (kbd "C-M-p") 'run-python)
-;; Love ido, idiot for not using it earlier. 
+;; Love ido, idiot for not using it earlier.
 (setq ido-everywhere t)
 (ido-mode 1)
 (ido-vertical-mode)
-;; Use the path set up by zsh, aka the ~/.zshrc. 
+;; Use the path set up by zsh, aka the ~/.zshrc.
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
 ;; Annoying issue with TRAMP constantly asking for password
@@ -244,7 +244,7 @@
 (savehist-mode 1)
 (global-set-key (kbd "M-/") 'company-complete)
 ;; ;; Just kill the shell, don't ask me.
-;; ;; I do a lambda so that its not evaluated at init load time. 
+;; ;; I do a lambda so that its not evaluated at init load time.
 (add-hook 'shell-mode-hook (lambda ()
 			     (company-mode)))
 
@@ -265,7 +265,6 @@
 (define-auto-insert "\\.c\\'" 'my-c-defaults)
 (define-auto-insert "\\.m\\'" 'my-c-defaults)
 (define-auto-insert "\\.html\\'" 'my-html-defaults)
-(define-auto-insert "\\.js\\'" 'my-js-defaults)
 (electric-pair-mode 1)
 (setq inhibit-startup-message t
       scroll-step 1)
@@ -312,10 +311,11 @@
 (fringe-mode -1)
 
 (when window-system
-  (add-hook 'after-init-hook 
+  (add-hook 'after-init-hook
 	    (lambda ()
 	      (global-hl-line-mode 1)
-	      (load-theme 'material t))))
+	      (load-theme 'zerodark t))))
+	      ;; (load-theme 'material t))))
 
 ;; ;; LateX Related Code
 ;; (add-hook 'LaTeX-mode-hook (lambda ()
@@ -350,7 +350,7 @@
 (add-hook 'inferior-python-mode-hook
 	  (lambda ()
 	    (set-process-query-on-exit-flag
-	     ;; Just like killing the shell without asking me. 
+	     ;; Just like killing the shell without asking me.
 	     (get-process "Python") nil)))
 
 (add-hook
@@ -396,7 +396,7 @@
 ;; Just remember,
 ;;http://truongtx.me/2014/08/23/setup-emacs-as-an-sql-database-client/
 
-(load-file "~/.emacs.d/sql_dbs.el")
+;;(load-file "~/.emacs.d/sql_dbs.el")
 
 (add-hook 'sql-mode-hook
 	  (lambda ()
@@ -410,6 +410,8 @@
 	  (lambda ()
 	    (toggle-truncate-lines)))
 
+
+(load "/Users/Edgar/.opam/working/share/emacs/site-lisp/tuareg-site-file")
 ;; OCaml code
 (add-hook
  'tuareg-mode-hook
@@ -420,6 +422,7 @@
 	  (shell-command-to-string
 	   "opam config var share 2> /dev/null")
 	  0 -1))
+   (message opam-share)
    (add-to-list 'load-path (concat opam-share "/emacs/site-lisp"))
    ;; Load merlin-mode
    (require 'merlin)
@@ -427,9 +430,9 @@
    (add-hook 'tuareg-mode-hook 'merlin-mode t)
    (add-hook 'caml-mode-hook 'merlin-mode t)
    ;; Enable auto-complete
-   (setq merlin-use-auto-complete-mode 'easy)
+;;   (setq merlin-use-auto-complete-mode 'easy)
    ;; Use opam switch to lookup ocamlmerlin binary
-   (setq merlin-command 'opam)
+;;   (setq merlin-command 'opam)
    (company-mode)
    (require 'ocp-indent)
    (autoload 'utop-minor-mode "utop" "Minor mode for utop" t)
@@ -446,11 +449,11 @@
    (setq-local indent-region-function 'ocp-indent-region)
    (if (equal system-type 'darwin)
        (load-file
-	(concat "/Users/Edgar/.opam/js_coding"
+	(concat "/Users/Edgar/.opam/working_"
 		"/share/emacs/site-lisp/ocp-indent.el"))
      (load-file
       (concat
-       "/home/gar/.opam/js_coding/"
+       "/home/gar/.opam/working/"
        "share/emacs/site-lisp/ocp-indent.el")))
    (merlin-mode)))
 
@@ -488,16 +491,18 @@
 (add-hook 'html-mode-hook
 	  (lambda ()
 	    (web-mode)
-	    (setq web-mode-ac-sources-alist
-		  '(("css" .
-		     (ac-source-css-property))
-		    ("html" .
-		     (ac-source-words-in-buffer
-		      ac-source-abbrev))))))
+	    (company-mode)
+	    (define-key web-mode-map (kbd "M-/") 'company-web-html)))
+	    ;; (setq web-mode-ac-sources-alist
+	    ;; 	  '(("css" .
+	    ;; 	     (ac-source-css-property))
+	    ;; 	    ("html" .
+	    ;; 	     (ac-source-words-in-buffer
+	    ;; 	      ac-source-abbrev))))))
 
 (add-hook 'css-mode-hook (lambda ()
-			   (define-key css-mode-map (kbd "M-/")
-			     'ac-start )))
+			   (company-mode)
+			   (define-key css-mode-map (kbd "M-/") 'company-css)))
 
 (setq-default
  ;; js2-mode
@@ -521,23 +526,21 @@
 ;; 			      'ac-start )))
 
 ;;Javascript hook, this is a better major mode than default one
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.json\\'" . js2-mode))
-(add-to-list 'interpreter-mode-alist '("node" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-jsx-mode))
+(add-to-list 'auto-mode-alist '("\\.json\\'" . json-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js2-jsx-mode))
 (add-to-list 'interpreter-mode-alist '("node" . js2-jsx-mode))
-(add-hook 'js2-mode-hook (lambda ()
-			   (company-mode)
-			   (setq-local js2-basic-offset 2)
-			   (define-key js2-mode-map (kbd "M-/")
-			     'company-tern)
-			   (tern-mode)))
 
-
-(eval-after-load 'tern
-  '(progn
-     (require 'tern-auto-complete)
-     (tern-ac-setup)))
+(add-hook 'js2-mode-hook
+	  (lambda ()
+	    (setq-local company-async-timeout 5)
+	    (company-mode)
+	    (setq-local js2-global-externs
+			'("fetch" "async" "Headers" "await" "WebSocket" "FormData"))
+	    (setq-local js2-basic-offset 2)
+	    (define-key js2-mode-map (kbd "M-/")
+	      'company-tern)
+	    (tern-mode)))
 
 ;; C++ stuff, basically just be aware of it.
 (add-to-list 'auto-mode-alist '("\\.cc\\'" . c++-mode))
@@ -551,39 +554,24 @@
 	     (company-mode)
 	     (global-unset-key (kbd "C-x c"))))
 
-;; ;; Common things wanted in all C like languages. 
+;; ;; Common things wanted in all C like languages.
 (add-hook
  'c-mode-common-hook
  '(lambda ()
-    (ggtags-mode)
     ;; (semantic-mode)
     ;; (global-semantic-mru-bookmark-mode)
-    (define-key ggtags-mode-map (kbd "M-.") nil)
-    (define-key ggtags-mode-map (kbd "M-<") nil)
-    (define-key ggtags-mode-map (kbd "M->") nil)
-    (define-key ggtags-mode-map (kbd "M-n") nil)
-    (define-key ggtags-mode-map (kbd "M-p") nil)
+    ;; (add-to-list
+    ;;  'company-c-headers-path-system
+    ;;  "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/JavaScriptCore.framework/Headers")
     (add-to-list
      'company-c-headers-path-system
-     "/Users/Edgar/.opam/working_code/lib/ocaml")
+     "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/JavaScriptCore.framework/Headers")
     (add-to-list
      'company-c-headers-path-system
-     "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/JavaScriptCore.framework/Headers")
-    (add-to-list
-     'company-c-headers-path-system
-     "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/WebKit.framework/Headers")
-    (add-to-list
-     'company-c-headers-path-system
-    "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Foundation.framework/Headers/")
-    (define-key ggtags-mode-map (kbd "M-,") nil)
-    (define-key ggtags-mode-map (kbd "M-]") nil)
-    ;; (define-key c-mode-map (kbd "C-.") 'ggtags-find-definition)
-    ;; (define-key c-mode-map (kbd "C-,") 'ggtags-prev-mark)
-    ;; (global-unset-key (kbd "C-]"))
-    ;; (define-key c-mode-map (kbd "M-]") 'semantic-ia-fast-jump)
-    ;; (define-key c-mode-map (kbd "M-[") 'semantic-ia-fast-jump-back)
-    ;; (define-key c++-mode-map (kbd "M-]") 'semantic-ia-fast-jump)
-    ;; (define-key c++-mode-map (kbd "M-[") 'semantic-ia-fast-jump-back)
+     "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/WebKit.framework/Headers")
+    ;; (add-to-list
+    ;;  'company-c-headers-path-system
+    ;; "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Foundation.framework/Headers/")
     (define-key c-mode-map (kbd "C-=") 'ff-find-other-file)
     (setq-local show-trailing-whitespace t)
     (company-mode)
@@ -594,14 +582,14 @@
 
 (add-hook 'c++-mode-hook
 	  (lambda ()
-	    (setq-local flycheck-clang-language-standard "c++11")
+	    (setq-local flycheck-clang-language-standard "c++14")
 	    (setq-local company-async-timeout 5)
 	    (setq-local company-async-wait 0.10)
 	    (add-to-list
 	     'company-c-headers-path-system
 	     "/Users/Edgar/.opam/working/lib/ocaml")
 	    (add-to-list 'company-c-headers-path-system
-			 "/usr/local/include/c++/5.3.0")))
+			 "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1")))
 
 (add-to-list 'auto-mode-alist '("\\.mm\\'" . objc-mode))
 (add-to-list 'auto-mode-alist '("\\.xm\\'" . objc-mode))
