@@ -7,15 +7,17 @@
       (set-face-attribute 'default nil :family "Monaco" :height 110)
       ;; Forgot what this was for..think some os x issues.
       (setenv "LC_CTYPE" "UTF-8")
+      ;;(setq 'flycheck-clang-include-path '("/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/include"))
       (setq mac-option-modifier 'super
 	    flycheck-make-executable "/usr/local/bin/make"
 	    company-clang-executable
 	    (concat "/Applications/Xcode.app/Contents/Developer/"
-	    	    "Toolchains/XcodeDefault.xctoolchain/usr/bin/clang")
+	    	    "Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++")
 	    company-clang-arguments
 	    `(
-	      "-std=c11"
-	      ;; "-std=c++14"
+	      ;; "-std=c11"
+	      "-std=c++14"
+	      "-ObjC++"
 	      ;; "-stdlib=libc++"
 	      "-isysroot"
 	      ; If coding for iOS
@@ -24,15 +26,18 @@
 	      ; If coding for OS X
 	      ,(concat osx-base-path
 	      	       "MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk")
-	      ;; "-I" "/usr/local/Cellar/folly/0.48.0_1/include"
+	      ;; "-I" "/Users/Edgar/Repos/hayots/MGSFragaria.framework/Headers"
 	      ;; "-I" "/usr/local/include/graphqlparser"
 	      ;; "-I" "/usr/local/Cellar/folly/0.48.0_1/include"
 	      ;; "-I" "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"
 	      ;; "-I" "/usr/local/Cellar/tclap/1.2.1/include"
-	      "-I" "/usr/local/lib/ocaml/")
+	      ;; "-I" "/usr/local/include/msgpack-c/include"
+	      "-I" "/usr/local/include"
+	      ;; "-I" "/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/include"
+	      "-I" "/Users/Edgar/.opam/fresh/lib/ocaml")
 	    flycheck-c/c++-clang-executable
 	    (concat "/Applications/Xcode.app/Contents/Developer/"
-		    "Toolchains/XcodeDefault.xctoolchain/usr/bin/clang")
+		    "Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++")
 	    mac-command-modifier 'meta))
   (set-face-attribute 'default nil :height 110)
   (setq flycheck-c/c++-clang-executable "armv7-apple-darwin11-clang")
@@ -94,6 +99,7 @@
  '(package-selected-packages
    (quote
     (zerodark-theme json-mode editorconfig tern indent-guide tern-auto-complete cyberpunk-theme markdown-mode haskell-mode edbi sql-indent sqlup-mode company-shell company-web neotree spacegray-theme solarized-dark-theme ag magit ido-vertical-mode nix-mode web-mode objc-font-lock window-number simple-httpd ox-gfm mustache material-theme js2-mode jade-mode htmlize hlinum flycheck exec-path-from-shell company-tern company-quickhelp company-jedi company-c-headers)))
+ '(send-mail-function (quote mailclient-send-it))
  '(tool-bar-mode nil)
  '(web-mode-attr-indent-offset 0 t))
 
@@ -115,7 +121,7 @@
   "Minimum HTML needed"
   nil
   "<!DOCTYPE html>\n"
-  "<meta charset=\"utf-8\">\n"
+  "<meta charset=\"utf-8\"/>\n"
   "<body>\n"
   "  <script src=></script>\n"
   "</body>\n")
@@ -143,9 +149,12 @@
   "\n"
   "\n")
 
+(define-skeleton
+  my-cpp-header-defaults "C++ Header files pragma" nil "#pragma once\n")
+
 ;; Custom Functions
 (defun revert-all-buffers ()
-  "Refreshes all open buffers from their respective files, think git use case"
+  "Refreshes all open buffers from their respective files, think git use case."
   (interactive)
   (dolist (buf (buffer-list))
     (with-current-buffer buf
@@ -210,7 +219,7 @@
   "Connect to IRC, register nick, open commonly used channels"
   (interactive)
   (setq erc-max-buffer-size 20000
-	erc-autojoin-channels-alist '(("freenode.net" "#ocaml"))
+	erc-autojoin-channels-alist '(("freenode.net" "#ocaml" "#c++-general" "#algorithms"))
 	erc-hide-list '("JOIN" "PART" "QUIT"))
   ;; This is obviously untracked, if you copy my init.el,
   ;; either delete this code or provide your own creds
@@ -257,12 +266,13 @@
 ;; Visuals, but note that some visuals also set in custom.
 ;; Cool vertical indentation guides.
 (indent-guide-global-mode)
-(setq indent-guide-recursive t)
+;; (setq indent-guide-recursive t)
 (show-paren-mode)
 (auto-insert-mode)
 (abbrev-mode -1)
 (define-auto-insert "\\.org\\'" 'my-org-defaults)
 (define-auto-insert "\\.c\\'" 'my-c-defaults)
+(define-auto-insert "\\.hpp\\'" 'my-cpp-header-defaults)
 (define-auto-insert "\\.m\\'" 'my-c-defaults)
 (define-auto-insert "\\.html\\'" 'my-html-defaults)
 (electric-pair-mode 1)
@@ -449,13 +459,14 @@
    (setq-local indent-region-function 'ocp-indent-region)
    (if (equal system-type 'darwin)
        (load-file
-	(concat "/Users/Edgar/.opam/working_"
+	(concat "/Users/Edgar/.opam/fresh"
 		"/share/emacs/site-lisp/ocp-indent.el"))
      (load-file
       (concat
        "/home/gar/.opam/working/"
        "share/emacs/site-lisp/ocp-indent.el")))
-   (merlin-mode)))
+   (merlin-mode)
+   (define-key merlin-mode-map (kbd "C-c C-f") 'merlin-document)))
 
 (add-hook 'utop-mode-hook (lambda ()
 			    (set-process-query-on-exit-flag
@@ -565,6 +576,9 @@
     ;;  "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/JavaScriptCore.framework/Headers")
     (add-to-list
      'company-c-headers-path-system
+     "/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/include")
+    (add-to-list
+     'company-c-headers-path-system
      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/JavaScriptCore.framework/Headers")
     (add-to-list
      'company-c-headers-path-system
@@ -584,10 +598,11 @@
 	  (lambda ()
 	    (setq-local flycheck-clang-language-standard "c++14")
 	    (setq-local company-async-timeout 5)
+	    (define-key c++-mode-map (kbd "C-=") 'ff-find-other-file)
 	    (setq-local company-async-wait 0.10)
 	    (add-to-list
 	     'company-c-headers-path-system
-	     "/Users/Edgar/.opam/working/lib/ocaml")
+	     "/Users/Edgar/.opam/fresh/lib/ocaml")
 	    (add-to-list 'company-c-headers-path-system
 			 "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1")))
 
