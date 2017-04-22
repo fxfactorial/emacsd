@@ -4,7 +4,8 @@
 (if (equal system-type 'darwin)
     ; Only the then clause needs a progn, else part doesn't need it.
     (progn
-      (set-face-attribute 'default nil :family "Monaco" :height 110)
+      ;; Amazing font
+      (set-face-attribute 'default nil :family "PragmataPro" :height 140)
       ;; Forgot what this was for..think some os x issues.
       (setenv "LC_CTYPE" "UTF-8")
       ;;(setq 'flycheck-clang-include-path '("/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/include"))
@@ -16,7 +17,7 @@
 	    company-clang-arguments
 	    `(
 	      ;; "-std=c11"
-	      "-std=c++14"
+	      ;; "-std=c++14"
 	      "-ObjC++"
 	      ;; "-stdlib=libc++"
 	      "-isysroot"
@@ -88,18 +89,19 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
- '(custom-safe-themes
-   (quote
-    ("9c79dde113d5718497be6636b7358ec3ef3dad98d6c166fe88a8cdcd8b8abfc2" "e97dbbb2b1c42b8588e16523824bc0cb3a21b91eefd6502879cf5baa1fa32e10" "71ecffba18621354a1be303687f33b84788e13f40141580fa81e7840752d31bf" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d3df47c843c22d8f0177fe3385ae95583dc8811bd6968240f7da42fd9aa51b0b" default)))
+  '(custom-safe-themes
+     (quote
+       ("a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d8f76414f8f2dcb045a37eb155bfaa2e1d17b6573ed43fb1d18b936febc7bbc2" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "cedd3b4295ac0a41ef48376e16b4745c25fa8e7b4f706173083f16d5792bb379" "38e64ea9b3a5e512ae9547063ee491c20bd717fe59d9c12219a0b1050b439cdd" "98cc377af705c0f2133bb6d340bf0becd08944a588804ee655809da5d8140de6" "9c79dde113d5718497be6636b7358ec3ef3dad98d6c166fe88a8cdcd8b8abfc2" "e97dbbb2b1c42b8588e16523824bc0cb3a21b91eefd6502879cf5baa1fa32e10" "71ecffba18621354a1be303687f33b84788e13f40141580fa81e7840752d31bf" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d3df47c843c22d8f0177fe3385ae95583dc8811bd6968240f7da42fd9aa51b0b" default)))
  '(display-time-default-load-average nil)
  '(display-time-mode t)
  '(js2-include-node-externs t)
  '(menu-bar-mode nil)
  '(org-startup-indented t)
- '(package-selected-packages
-   (quote
-    (zerodark-theme json-mode editorconfig tern indent-guide tern-auto-complete cyberpunk-theme markdown-mode haskell-mode edbi sql-indent sqlup-mode company-shell company-web neotree spacegray-theme solarized-dark-theme ag magit ido-vertical-mode nix-mode web-mode objc-font-lock window-number simple-httpd ox-gfm mustache material-theme js2-mode jade-mode htmlize hlinum flycheck exec-path-from-shell company-tern company-quickhelp company-jedi company-c-headers)))
+  '(package-selected-packages
+     (quote
+       (xref-js2 indium solarized-theme tronesque-theme zerodark-theme json-mode editorconfig tern indent-guide tern-auto-complete cyberpunk-theme markdown-mode haskell-mode edbi sql-indent sqlup-mode company-shell company-web neotree spacegray-theme solarized-dark-theme ag magit ido-vertical-mode nix-mode web-mode objc-font-lock window-number simple-httpd ox-gfm mustache material-theme js2-mode jade-mode htmlize hlinum flycheck exec-path-from-shell company-tern company-quickhelp company-jedi company-c-headers)))
  '(send-mail-function (quote mailclient-send-it))
+ '(show-paren-mode t)
  '(tool-bar-mode nil)
  '(web-mode-attr-indent-offset 0 t))
 
@@ -219,7 +221,7 @@
   "Connect to IRC, register nick, open commonly used channels"
   (interactive)
   (setq erc-max-buffer-size 20000
-	erc-autojoin-channels-alist '(("freenode.net" "#ocaml" "#c++-general" "#algorithms"))
+	erc-autojoin-channels-alist '(("freenode.net" "#ocaml" "#reactjs" "#javascript"))
 	erc-hide-list '("JOIN" "PART" "QUIT"))
   ;; This is obviously untracked, if you copy my init.el,
   ;; either delete this code or provide your own creds
@@ -324,7 +326,7 @@
   (add-hook 'after-init-hook
 	    (lambda ()
 	      (global-hl-line-mode 1)
-	      (load-theme 'zerodark t))))
+	      (load-theme 'spacegray t))))
 	      ;; (load-theme 'material t))))
 
 ;; ;; LateX Related Code
@@ -347,7 +349,7 @@
 ;; Python Stuff
 ;; Get these variables set before the inferior mode comes up, otherwise too late.
 (setq python-shell-interpreter "ipython"
-      python-shell-interpreter-args "--matplotlib=osx --colors=Linux"
+      ;; python-shell-interpreter-args "--matplotlib=osx --colors=Linux"
       python-shell-prompt-regexp "In \\[[0-9]+\\]: "
       python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
       python-shell-completion-setup-code
@@ -367,9 +369,15 @@
  'python-mode-hook
  (lambda ()
    ;; (electric-pair-mode nil)
-   (setq-local indent-tabs-mode nil)
-   (setq-local tab-width 4)
-   (setq-local python-indent 4)
+
+   ;; (setq-local indent-tabs-mode nil)
+   ;; (setq-local tab-width 4)
+   ;; (setq-local python-indent 4)
+   (setq-default indent-tabs-mode t)
+   (setq-default tab-width 4)
+   (setq-default py-indent-tabs-mode t)
+   (add-to-list 'write-file-functions 'delete-trailing-whitespace)
+
    (hs-minor-mode)
    (define-key hs-minor-mode-map (kbd "C-c C-t") 'hs-toggle-hiding)
    (define-key python-mode-map (kbd "M-q") 'python-fill-paren)
@@ -384,8 +392,8 @@
 	 ;; 	   "/Versions/3.5/lib/python3.5/site-packages"))
 	 jedi:server-args
 	 `("--sys-path"
-	   ,(concat "/usr/local/Cellar/python3/3.5.1/Frameworks/Python.framework"
-	 	   "/Versions/3.5/lib/python3.5/site-packages"))
+	   ,(concat "/usr/local/Cellar/python3/3.6.1/Frameworks/Python.framework"
+	 	   "/Versions/3.6/lib/python3.6/site-packages"))
 	 jedi:complete-on-dot t)
    (let ((interpreter python-shell-interpreter)
 	 (args python-shell-interpreter-args))
@@ -542,16 +550,31 @@
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js2-jsx-mode))
 (add-to-list 'interpreter-mode-alist '("node" . js2-jsx-mode))
 
+(add-hook 'json-mode-hook
+	  (lambda ()
+	    (editorconfig-mode)))
+
 (add-hook 'js2-mode-hook
 	  (lambda ()
-	    (setq-local company-async-timeout 5)
-	    (company-mode)
-	    (setq-local js2-global-externs
-			'("fetch" "async" "Headers" "await" "WebSocket" "FormData"))
+      (setq-default indent-tabs-mode t)
+      (setq-default tab-width 4)
+      (setq-local show-trailing-whitespace t)
 	    (setq-local js2-basic-offset 2)
-	    (define-key js2-mode-map (kbd "M-/")
-	      'company-tern)
-	    (tern-mode)))
+	    (setq-local company-async-timeout 10)
+	    (setq-local js2-global-externs
+        '("fetch" "async" "Headers" "await" "WebSocket"
+           "history" "AudioContext"
+           "FormData" "URLSearchParams"))
+	    (editorconfig-mode)
+      (add-to-list 'write-file-functions 'delete-trailing-whitespace)
+      (prettify-symbols-mode)
+	    (company-mode)
+      (tern-mode)
+	    (define-key js2-mode-map (kbd "M-/") 'company-tern)
+      (define-key js2-mode-map (kbd "M-.") nil)
+      (define-key tern-mode-keymap (kbd "M-.") nil)
+      (define-key tern-mode-keymap (kbd "M-,") nil)
+      (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
 
 ;; C++ stuff, basically just be aware of it.
 (add-to-list 'auto-mode-alist '("\\.cc\\'" . c++-mode))
@@ -625,10 +648,6 @@
 (add-hook 'makefile-mode-hook
 	  (lambda()
 	    (setq-local show-trailing-whitespace t)))
-
-
-
-
 
 ;; (setq opam
 ;;       (substring
