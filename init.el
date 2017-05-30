@@ -62,9 +62,11 @@
 (global-set-key (kbd "M-p") 'backward-paragraph)
 ;; Not sure why but dialog box still locks up emacs on OSX.
 ;; in any case, I dislike dialog boxes.
-(setq use-dialog-box nil
-      user-full-name "Edgar Aroutiounian"
-      user-mail-address "edgar.factorial@gmail.com")
+(setq
+  use-dialog-box nil
+  ring-bell-function 'ignore
+  user-full-name "Edgar Aroutiounian"
+  user-mail-address "edgar.factorial@gmail.com")
 
 ;; Giving myself this helpful buffer, otherwise way to many damn key
 ;; bindings to remember!
@@ -89,21 +91,21 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
-  '(custom-safe-themes
-     (quote
-       ("a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d8f76414f8f2dcb045a37eb155bfaa2e1d17b6573ed43fb1d18b936febc7bbc2" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "cedd3b4295ac0a41ef48376e16b4745c25fa8e7b4f706173083f16d5792bb379" "38e64ea9b3a5e512ae9547063ee491c20bd717fe59d9c12219a0b1050b439cdd" "98cc377af705c0f2133bb6d340bf0becd08944a588804ee655809da5d8140de6" "9c79dde113d5718497be6636b7358ec3ef3dad98d6c166fe88a8cdcd8b8abfc2" "e97dbbb2b1c42b8588e16523824bc0cb3a21b91eefd6502879cf5baa1fa32e10" "71ecffba18621354a1be303687f33b84788e13f40141580fa81e7840752d31bf" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d3df47c843c22d8f0177fe3385ae95583dc8811bd6968240f7da42fd9aa51b0b" default)))
+ '(custom-safe-themes
+   (quote
+    ("235dc2dd925f492667232ead701c450d5c6fce978d5676e54ef9ca6dd37f6ceb" "7c8478aeefb397014997d637632ef4a461b6d3ecf97d7f21556a32dc3ca01c8c" "5dc0ae2d193460de979a463b907b4b2c6d2c9c4657b2e9e66b8898d2592e3de5" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d8f76414f8f2dcb045a37eb155bfaa2e1d17b6573ed43fb1d18b936febc7bbc2" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "cedd3b4295ac0a41ef48376e16b4745c25fa8e7b4f706173083f16d5792bb379" "38e64ea9b3a5e512ae9547063ee491c20bd717fe59d9c12219a0b1050b439cdd" "98cc377af705c0f2133bb6d340bf0becd08944a588804ee655809da5d8140de6" "9c79dde113d5718497be6636b7358ec3ef3dad98d6c166fe88a8cdcd8b8abfc2" "e97dbbb2b1c42b8588e16523824bc0cb3a21b91eefd6502879cf5baa1fa32e10" "71ecffba18621354a1be303687f33b84788e13f40141580fa81e7840752d31bf" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d3df47c843c22d8f0177fe3385ae95583dc8811bd6968240f7da42fd9aa51b0b" default)))
  '(display-time-default-load-average nil)
  '(display-time-mode t)
  '(js2-include-node-externs t)
  '(menu-bar-mode nil)
  '(org-startup-indented t)
-  '(package-selected-packages
-     (quote
-       (xref-js2 indium solarized-theme tronesque-theme zerodark-theme json-mode editorconfig tern indent-guide tern-auto-complete cyberpunk-theme markdown-mode haskell-mode edbi sql-indent sqlup-mode company-shell company-web neotree spacegray-theme solarized-dark-theme ag magit ido-vertical-mode nix-mode web-mode objc-font-lock window-number simple-httpd ox-gfm mustache material-theme js2-mode jade-mode htmlize hlinum flycheck exec-path-from-shell company-tern company-quickhelp company-jedi company-c-headers)))
+ '(package-selected-packages
+   (quote
+    (rainbow-mode skewer-mode dash-at-point xref-js2 indium solarized-theme tronesque-theme zerodark-theme json-mode editorconfig tern indent-guide tern-auto-complete cyberpunk-theme markdown-mode haskell-mode edbi sql-indent sqlup-mode company-shell company-web neotree spacegray-theme solarized-dark-theme ag magit ido-vertical-mode nix-mode web-mode objc-font-lock window-number simple-httpd ox-gfm mustache material-theme js2-mode jade-mode htmlize hlinum flycheck exec-path-from-shell company-tern company-quickhelp company-jedi company-c-headers)))
  '(send-mail-function (quote mailclient-send-it))
  '(show-paren-mode t)
  '(tool-bar-mode nil)
- '(web-mode-attr-indent-offset 0 t))
+ '(web-mode-attr-indent-offset 0))
 
 ;; (editorconfig-mode)
 
@@ -123,10 +125,15 @@
   "Minimum HTML needed"
   nil
   "<!DOCTYPE html>\n"
-  "<meta charset=\"utf-8\"/>\n"
-  "<body>\n"
-  "  <script src=></script>\n"
-  "</body>\n")
+  "<html lang=\"en\">\n"
+  "  <meta charset=\"utf-8\" content=\"width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0\" name=\"viewport\">\n"
+  "  <head>\n"
+  "    <link href=\".css\" rel=\"stylesheet\" title=\"Default Style\">\n"
+  "  </head>\n"
+  "  <body>\n"
+  "    <script src=\".js\"></script>\n"
+  "  </body>\n"
+  "</html>\n")
 
 (define-skeleton my-c-defaults
   "Usual includes that I use for C coding"
@@ -326,7 +333,7 @@
   (add-hook 'after-init-hook
 	    (lambda ()
 	      (global-hl-line-mode 1)
-	      (load-theme 'spacegray t))))
+	      (load-theme 'solarized-dark t))))
 	      ;; (load-theme 'material t))))
 
 ;; ;; LateX Related Code
@@ -511,6 +518,7 @@
 	  (lambda ()
 	    (web-mode)
 	    (company-mode)
+	    (add-to-list 'write-file-functions 'delete-trailing-whitespace)
 	    (define-key web-mode-map (kbd "M-/") 'company-web-html)))
 	    ;; (setq web-mode-ac-sources-alist
 	    ;; 	  '(("css" .
@@ -519,16 +527,24 @@
 	    ;; 	     (ac-source-words-in-buffer
 	    ;; 	      ac-source-abbrev))))))
 
-(add-hook 'css-mode-hook (lambda ()
-			   (company-mode)
-			   (define-key css-mode-map (kbd "M-/") 'company-css)))
+(add-hook
+ 'css-mode-hook (lambda ()
+		  (company-mode)
+		  (rainbow-mode)
+		  (add-to-list 'write-file-functions 'delete-trailing-whitespace)
+		  (define-key css-mode-map (kbd "M-/") 'company-css)))
 
 (setq-default
  ;; js2-mode
  ;; web-mode
  css-indent-offset 2
  web-mode-markup-indent-offset 2
+ web-mode-enable-auto-pairing t
  web-mode-css-indent-offset 2
+ web-mode-enable-css-colorization t
+ web-mode-enable-comment-keywords t
+ web-mode-enable-current-element-highlight t
+ web-mode-enable-current-column-highlight t
  web-mode-code-indent-offset 2
  web-mode-attr-indent-offset 2)
 
@@ -548,6 +564,7 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-jsx-mode))
 (add-to-list 'auto-mode-alist '("\\.json\\'" . json-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js2-jsx-mode))
+(add-to-list 'auto-mode-alist '("\\.flow\\'" . js2-jsx-mode))
 (add-to-list 'interpreter-mode-alist '("node" . js2-jsx-mode))
 
 (add-hook 'json-mode-hook
@@ -568,10 +585,11 @@
 	    (editorconfig-mode)
       (add-to-list 'write-file-functions 'delete-trailing-whitespace)
       (prettify-symbols-mode)
-	    (company-mode)
+      (company-mode)
       (tern-mode)
-	    (define-key js2-mode-map (kbd "M-/") 'company-tern)
+      (define-key js2-mode-map (kbd "M-/") 'company-tern)
       (define-key js2-mode-map (kbd "M-.") nil)
+      (define-key js2-mode-map (kbd "C-h C-d") 'dash-at-point)
       (define-key tern-mode-keymap (kbd "M-.") nil)
       (define-key tern-mode-keymap (kbd "M-,") nil)
       (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
