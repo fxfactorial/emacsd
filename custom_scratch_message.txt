@@ -1,33 +1,33 @@
 Semantic, Company Tips:
-1) When you're in in a foreign land, say linux kernel, be sure to 
-update the system headers include path, see the example on 
+1) When you're in in a foreign land, say linux kernel, be sure to
+update the system headers include path, see the example on
 os-vm, which calls os-s
 
-Org-Mode Tips: 
+Org-Mode Tips:
 1) C-e is basically the start of all export abilities.
 
 LaTeX Tips: (Basically not used since using Org-mode)
 1) LaTeX is set up with math mode already on, so doing `-<something>
 gives you math macros, to get them enclosed in $$, do C-u
-`-<something> 
-2) C-c compiles, and hitting C-c again will open the PDF in evince.  
-3) C-c C-e gives you an easy way to make environments, its also smart 
+`-<something>
+2) C-c compiles, and hitting C-c again will open the PDF in evince.
+3) C-c C-e gives you an easy way to make environments, its also smart
 that it remembers the last environment you made.
 4) Doing C-c C-f C-i shows all possible things like emphasis or
 bolding. For example, C-c C-f C-b provides bold, C-e provides emphasis
 
-Helm Tips: 
-1) Helm beginning KBD is C-c C-f, key one is C-c C-f i, that opens up 
-Semantic Tags for that file.  
-2) M-s opens up all the available gtags, nice thing is it will make 
+Helm Tips:
+1) Helm beginning KBD is C-c C-f, key one is C-c C-f i, that opens up
+Semantic Tags for that file.
+2) M-s opens up all the available gtags, nice thing is it will make
 gtags if you don't have them already.
 
-Misc Tips: 
-1) C-' is always available and will swap two buffers.  
+Misc Tips:
+1) C-' is always available and will swap two buffers.
 3) C-c C-c will call compile, then do C-x ` to go to errors, if any.
 4) Remember that you can sudo open a file via tramp, just try opening
-as usual, just add prefix of /sudo:: and emacs will ask for password. 
-5) Add prefixes to block of highlighted code with C-x r t. 
+as usual, just add prefix of /sudo:: and emacs will ask for password.
+5) Add prefixes to block of highlighted code with C-x r t.
 6) In C code, do C-c C-i for all those common #includes
 7) You can redirect stuff in eshell directly to a buffer, like so
 ls > #<buffer *scratch*>
@@ -41,7 +41,7 @@ use with: emacs "+<LINE_NUMER>" "FILE_NAME" note, quotes are needed.
 14) Find all references of tag with M--
 15) Similar to 1, swap buffers top and bottom with M-'
 16) Pretty cool is M-\, dels white space between two words.
-17) C-l l will restart point to become the top of the buffer. 
+17) C-l l will restart point to become the top of the buffer.
 18) M-+ gives a count of lines, words and characters, pretty neat.
 
 Python Code
@@ -60,7 +60,7 @@ there, everything for can do aws redshift
 4) Create arbtiary sized file:  dd if=/dev/zero of=output.dat  bs=1M  count=10
 
 OCaml
-1) #use will read, compile and execute source code given. 
+1) #use will read, compile and execute source code given.
 2) #load is like loading compiled stuff, so example:
 #load "unix.cma" for libraries or #load "compiled.cmo" for an
 executable.
@@ -74,4 +74,11 @@ JavaScript
 3) Hide function defintions with C-c C-f
 
 Nix
-1) source ~/.nix-profile/etc/profile.d/nix.sh 
+1) source ~/.nix-profile/etc/profile.d/nix.sh
+
+ReactNative:
+Cover is like use the image size as it is and make it cover the given spacing
+
+Stretch is like take the image and make it fit the dimensions given, force it
+
+contain is like keep the ratio for the given sizing

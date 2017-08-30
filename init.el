@@ -8,7 +8,7 @@
       (set-face-attribute 'default nil :family "PragmataPro" :height 140)
       ;; Forgot what this was for..think some os x issues.
       (setenv "LC_CTYPE" "UTF-8")
-      ;;(setq 'flycheck-clang-include-path '("/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/include"))
+
       (setq mac-option-modifier 'super
 	    flycheck-make-executable "/usr/local/bin/make"
 	    company-clang-executable
@@ -17,8 +17,9 @@
 	    company-clang-arguments
 	    `(
 	      ;; "-std=c11"
-	      ;; "-std=c++14"
-	      "-ObjC++"
+	      "-x" "c++"
+	      "-std=c++14"
+	      ;; "-ObjC++"
 	      ;; "-stdlib=libc++"
 	      "-isysroot"
 	      ; If coding for iOS
@@ -32,10 +33,13 @@
 	      ;; "-I" "/usr/local/Cellar/folly/0.48.0_1/include"
 	      ;; "-I" "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"
 	      ;; "-I" "/usr/local/Cellar/tclap/1.2.1/include"
+	      "-I" "/Users/Edgar/Repos/react-native/ReactCommon/cxxreact"
+	      "-I" "/Users/Edgar/Repos/react-native/React/Base"
+	      "-I" "/Users/Edgar/Repos/react-native/ReactCommon/yoga/yoga"
 	      ;; "-I" "/usr/local/include/msgpack-c/include"
 	      "-I" "/usr/local/include"
-	      ;; "-I" "/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/include"
-	      "-I" "/Users/Edgar/.opam/fresh/lib/ocaml")
+	      "-I" "/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/include"
+	      "-I" "/Users/Edgar/.opam/working/lib/ocaml")
 	    flycheck-c/c++-clang-executable
 	    (concat "/Applications/Xcode.app/Contents/Developer/"
 		    "Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++")
@@ -91,17 +95,20 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
-  '(custom-safe-themes
-     (quote
-       ("235dc2dd925f492667232ead701c450d5c6fce978d5676e54ef9ca6dd37f6ceb" "7c8478aeefb397014997d637632ef4a461b6d3ecf97d7f21556a32dc3ca01c8c" "5dc0ae2d193460de979a463b907b4b2c6d2c9c4657b2e9e66b8898d2592e3de5" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d8f76414f8f2dcb045a37eb155bfaa2e1d17b6573ed43fb1d18b936febc7bbc2" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "cedd3b4295ac0a41ef48376e16b4745c25fa8e7b4f706173083f16d5792bb379" "38e64ea9b3a5e512ae9547063ee491c20bd717fe59d9c12219a0b1050b439cdd" "98cc377af705c0f2133bb6d340bf0becd08944a588804ee655809da5d8140de6" "9c79dde113d5718497be6636b7358ec3ef3dad98d6c166fe88a8cdcd8b8abfc2" "e97dbbb2b1c42b8588e16523824bc0cb3a21b91eefd6502879cf5baa1fa32e10" "71ecffba18621354a1be303687f33b84788e13f40141580fa81e7840752d31bf" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d3df47c843c22d8f0177fe3385ae95583dc8811bd6968240f7da42fd9aa51b0b" default)))
+ '(custom-safe-themes
+   (quote
+    ("28d0425aa6445f740b58eed58432a674a2a025c27ec9c535f29ccd4d06dd005c" "6de7c03d614033c0403657409313d5f01202361e35490a3404e33e46663c2596" "ed317c0a3387be628a48c4bbdb316b4fa645a414838149069210b66dd521733f" "938d8c186c4cb9ec4a8d8bc159285e0d0f07bad46edf20aa469a89d0d2a586ea" "235dc2dd925f492667232ead701c450d5c6fce978d5676e54ef9ca6dd37f6ceb" "7c8478aeefb397014997d637632ef4a461b6d3ecf97d7f21556a32dc3ca01c8c" "5dc0ae2d193460de979a463b907b4b2c6d2c9c4657b2e9e66b8898d2592e3de5" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d8f76414f8f2dcb045a37eb155bfaa2e1d17b6573ed43fb1d18b936febc7bbc2" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "cedd3b4295ac0a41ef48376e16b4745c25fa8e7b4f706173083f16d5792bb379" "38e64ea9b3a5e512ae9547063ee491c20bd717fe59d9c12219a0b1050b439cdd" "98cc377af705c0f2133bb6d340bf0becd08944a588804ee655809da5d8140de6" "9c79dde113d5718497be6636b7358ec3ef3dad98d6c166fe88a8cdcd8b8abfc2" "e97dbbb2b1c42b8588e16523824bc0cb3a21b91eefd6502879cf5baa1fa32e10" "71ecffba18621354a1be303687f33b84788e13f40141580fa81e7840752d31bf" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d3df47c843c22d8f0177fe3385ae95583dc8811bd6968240f7da42fd9aa51b0b" default)))
  '(display-time-default-load-average nil)
  '(display-time-mode t)
+ '(eclim-eclipse-dirs (quote ("/Applications/EclipseJava.app/Contents/Eclipse")))
+ '(eclim-executable "'/Applications/Eclipse Java.app/Contents/Eclipse/eclim'")
+ '(flycheck-clang-include-path '("/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/include" "/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/include/darwin"))
  '(js2-include-node-externs t)
  '(menu-bar-mode nil)
  '(org-startup-indented t)
-  '(package-selected-packages
-     (quote
-       (rjsx-mode flow-minor-mode prettier-js cobol-mode rainbow-mode skewer-mode dash-at-point xref-js2 indium solarized-theme tronesque-theme zerodark-theme json-mode editorconfig tern indent-guide tern-auto-complete cyberpunk-theme markdown-mode haskell-mode edbi sql-indent sqlup-mode company-shell company-web neotree spacegray-theme solarized-dark-theme ag magit ido-vertical-mode nix-mode web-mode objc-font-lock window-number simple-httpd ox-gfm mustache material-theme js2-mode jade-mode htmlize hlinum flycheck exec-path-from-shell company-tern company-quickhelp company-jedi company-c-headers)))
+ '(package-selected-packages
+   (quote
+    (company-emacs-eclim eclim rust-mode clang-format tuareg ample-theme flycheck-flow company-flow company-statistics rjsx-mode flow-minor-mode prettier-js cobol-mode rainbow-mode skewer-mode dash-at-point xref-js2 indium solarized-theme tronesque-theme zerodark-theme json-mode editorconfig tern indent-guide tern-auto-complete cyberpunk-theme markdown-mode haskell-mode edbi sql-indent sqlup-mode company-shell company-web neotree spacegray-theme solarized-dark-theme ag magit ido-vertical-mode nix-mode web-mode objc-font-lock window-number simple-httpd ox-gfm mustache material-theme js2-mode jade-mode htmlize hlinum flycheck exec-path-from-shell company-tern company-quickhelp company-jedi company-c-headers)))
  '(send-mail-function (quote mailclient-send-it))
  '(show-paren-mode t)
  '(tool-bar-mode nil)
@@ -134,6 +141,11 @@
   "    <script src=\".js\"></script>\n"
   "  </body>\n"
   "</html>\n")
+
+(define-skeleton jbuild-defaults
+  "jbuild version helper"
+  nil
+  "(jbuild_version 1)\n")
 
 (define-skeleton my-c-defaults
   "Usual includes that I use for C coding"
@@ -228,7 +240,9 @@
   "Connect to IRC, register nick, open commonly used channels"
   (interactive)
   (setq erc-max-buffer-size 20000
-	erc-autojoin-channels-alist '(("freenode.net" "#ocaml" "#reactjs" "#javascript"))
+	erc-autojoin-channels-alist '(("freenode.net" "##arabic"
+				       "#reactnative" "#css"
+				       "#ocaml" "#reactjs" "#javascript"))
 	erc-hide-list '("JOIN" "PART" "QUIT"))
   ;; This is obviously untracked, if you copy my init.el,
   ;; either delete this code or provide your own creds
@@ -281,6 +295,7 @@
 (abbrev-mode -1)
 (define-auto-insert "\\.org\\'" 'my-org-defaults)
 (define-auto-insert "\\.c\\'" 'my-c-defaults)
+;; (define-auto-insert "\\jbuild" 'jbuild-defaults)
 (define-auto-insert "\\.hpp\\'" 'my-cpp-header-defaults)
 (define-auto-insert "\\.m\\'" 'my-c-defaults)
 (define-auto-insert "\\.html\\'" 'my-html-defaults)
@@ -333,7 +348,7 @@
   (add-hook 'after-init-hook
 	    (lambda ()
 	      (global-hl-line-mode 1)
-	      (load-theme 'solarized-dark t))))
+	      (load-theme 'ample-flat t))))
 	      ;; (load-theme 'material t))))
 
 ;; ;; LateX Related Code
@@ -437,6 +452,51 @@
 
 
 (load "/Users/Edgar/.opam/working/share/emacs/site-lisp/tuareg-site-file")
+(add-to-list 'load-path "~/.emacs.d/reason")
+
+(defun chomp-end (str)
+  "Chomp tailing whitespace from STR."
+  (replace-regexp-in-string (rx (* (any " \t\n")) eos)
+                            ""
+                            str))
+
+(defun shell-cmd (cmd)
+  "Returns the stdout output of a shell command or nil if the command returned
+   an error"
+  (let ((stdoutput (chomp-end
+                    (with-output-to-string
+                      (with-current-buffer
+                          standard-output
+                        (process-file shell-file-name nil
+                                      '(t nil)  nil
+                                      shell-command-switch cmd))))))
+    (when (not (= (length stdoutput) 0))
+      stdoutput)))
+
+(let* ((refmt-bin (or (shell-cmd "refmt ----where")
+                      (shell-cmd "which refmt")))
+       (merlin-bin (or (shell-cmd "ocamlmerlin ----where")
+                       (shell-cmd "which ocamlmerlin")))
+       (merlin-base-dir (when merlin-bin
+                          (replace-regexp-in-string "bin/ocamlmerlin$" "" merlin-bin))))
+  ;; Add npm merlin.el to the emacs load path and tell emacs where to find ocamlmerlin
+  (when merlin-bin
+    (add-to-list 'load-path (concat merlin-base-dir "share/emacs/site-lisp/"))
+    (setq merlin-command merlin-bin))
+  (when refmt-bin
+    (setq refmt-command refmt-bin)))
+
+(require 'reason-mode)
+(add-to-list 'auto-mode-alist '("\\.re\\'" . reason-mode))
+(add-to-list 'auto-mode-alist '("\\.rei\\'" . reason-mode))
+
+(add-hook 'reason-mode-hook
+	  (lambda ()
+	    (require 'merlin)
+	    (company-mode)
+	    (add-hook 'before-save-hook 'refmt-before-save)
+	    (merlin-mode)))
+
 ;; OCaml code
 (add-hook
  'tuareg-mode-hook
@@ -474,7 +534,7 @@
    (setq-local indent-region-function 'ocp-indent-region)
    (if (equal system-type 'darwin)
        (load-file
-	(concat "/Users/Edgar/.opam/fresh"
+	(concat "/Users/Edgar/.opam/working"
 		"/share/emacs/site-lisp/ocp-indent.el"))
      (load-file
       (concat
@@ -564,9 +624,16 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
 ;; (add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
 (add-to-list 'auto-mode-alist '("\\.json\\'" . json-mode))
-(add-to-list 'auto-mode-alist '("\\.jsx\\'" . js2-jsx-mode))
-(add-to-list 'auto-mode-alist '("\\.flow\\'" . js2-jsx-mode))
-(add-to-list 'interpreter-mode-alist '("node" . js2-jsx-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
+(add-to-list 'auto-mode-alist '("\\.flow\\'" . rjsx-mode))
+(add-to-list 'interpreter-mode-alist '("node" . rjsx-mode))
+
+(add-hook 'java-mode-hook
+	  (lambda ()
+	    (require 'eclim)
+	    (company-emacs-eclim-setup)
+	    (eclim-mode)))
+
 
 (add-hook 'json-mode-hook
 	  (lambda ()
@@ -574,18 +641,23 @@
 
 (add-hook 'rjsx-mode-hook
 	  (lambda ()
+      (load-file "~/.emacs.d/emacs-flow-jsx-mode.el")
+      ;; (flow-jsx-mode)
+      (flow-minor-mode)
       (setq-default indent-tabs-mode t)
       (setq-default tab-width 2)
       (setq-default prettier-js-args
         '( "--bracket-spacing" "false"
            "--single-quote"
            "--jsx-bracket-same-line"
+           "--trailing-comma es5"
            ))
       (setq-local show-trailing-whitespace t)
 	    (setq-local js2-basic-offset 2)
 	    (setq-local company-async-timeout 10)
 	    (setq-local js2-global-externs
         '("fetch" "async" "Headers" "await" "WebSocket"
+           "__DEV__" "TextEncoder" "TextDecoder"
            "history" "AudioContext" "Draggable" "TweenLite"
            "FormData" "URLSearchParams"))
 	    (editorconfig-mode)
@@ -594,6 +666,7 @@
       (prettify-symbols-mode)
       (company-mode)
       (tern-mode)
+      (define-key tern-mode-keymap (kbd "C-c C-c") nil)
       (define-key js2-mode-map (kbd "M-/") 'company-tern)
       (define-key js2-mode-map (kbd "M-.") nil)
       (define-key js2-mode-map (kbd "C-h C-d") 'dash-at-point)
@@ -622,9 +695,12 @@
     ;; (add-to-list
     ;;  'company-c-headers-path-system
     ;;  "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/JavaScriptCore.framework/Headers")
+    (add-hook 'before-save-hook 'clang-format-buffer)
+    (flycheck-mode)
+;    (setq-local 'flycheck-clang-include-path '())
     (add-to-list
      'company-c-headers-path-system
-     "/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/include")
+     "/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/include")
     (add-to-list
      'company-c-headers-path-system
      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/JavaScriptCore.framework/Headers")
@@ -639,7 +715,6 @@
     (company-mode)
     (add-to-list 'company-backends 'company-c-headers)
     (define-key company-mode-map (kbd "M-h") 'company-c-headers)
-    (flycheck-mode)
     (abbrev-mode -1)))
 
 (add-hook 'c++-mode-hook
@@ -675,6 +750,7 @@
 	    (setq-local show-trailing-whitespace t)))
 
 (add-to-list 'auto-mode-alist '("\\.cbl\\'" . cobol-mode))
+(add-to-list 'auto-mode-alist '("\\jbuild\\'" . lisp-mode))
 
 
 ;; (setq opam
