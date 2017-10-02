@@ -17,8 +17,8 @@
 	    company-clang-arguments
 	    `(
 	      ;; "-std=c11"
-	      "-x" "c++"
-	      "-std=c++14"
+	      ;; "-x" "c++"
+	      "-std=c11"
 	      ;; "-ObjC++"
 	      ;; "-stdlib=libc++"
 	      "-isysroot"
@@ -36,6 +36,8 @@
 	      "-I" "/Users/Edgar/Repos/react-native/ReactCommon/cxxreact"
 	      "-I" "/Users/Edgar/Repos/react-native/React/Base"
 	      "-I" "/Users/Edgar/Repos/react-native/ReactCommon/yoga/yoga"
+         "-I"
+         "/Users/Edgar/Library/Android/sdk/ndk-bundle/platforms/android-19/arch-x86/usr/include"
 	      ;; "-I" "/usr/local/include/msgpack-c/include"
 	      "-I" "/usr/local/include"
 	      "-I" "/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/include"
@@ -94,21 +96,24 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(asm-comment-char 35)
  '(column-number-mode t)
  '(custom-safe-themes
    (quote
-    ("28d0425aa6445f740b58eed58432a674a2a025c27ec9c535f29ccd4d06dd005c" "6de7c03d614033c0403657409313d5f01202361e35490a3404e33e46663c2596" "ed317c0a3387be628a48c4bbdb316b4fa645a414838149069210b66dd521733f" "938d8c186c4cb9ec4a8d8bc159285e0d0f07bad46edf20aa469a89d0d2a586ea" "235dc2dd925f492667232ead701c450d5c6fce978d5676e54ef9ca6dd37f6ceb" "7c8478aeefb397014997d637632ef4a461b6d3ecf97d7f21556a32dc3ca01c8c" "5dc0ae2d193460de979a463b907b4b2c6d2c9c4657b2e9e66b8898d2592e3de5" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d8f76414f8f2dcb045a37eb155bfaa2e1d17b6573ed43fb1d18b936febc7bbc2" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "cedd3b4295ac0a41ef48376e16b4745c25fa8e7b4f706173083f16d5792bb379" "38e64ea9b3a5e512ae9547063ee491c20bd717fe59d9c12219a0b1050b439cdd" "98cc377af705c0f2133bb6d340bf0becd08944a588804ee655809da5d8140de6" "9c79dde113d5718497be6636b7358ec3ef3dad98d6c166fe88a8cdcd8b8abfc2" "e97dbbb2b1c42b8588e16523824bc0cb3a21b91eefd6502879cf5baa1fa32e10" "71ecffba18621354a1be303687f33b84788e13f40141580fa81e7840752d31bf" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d3df47c843c22d8f0177fe3385ae95583dc8811bd6968240f7da42fd9aa51b0b" default)))
+    ("86e2d09ebcfff3b7ec95543bce5a163384579a2bf2e2a81bfba8908b7a0c44df" "6570843991e40121f854432826e9fd175aec6bd382ef217b2c0c46da37f3af18" "28d0425aa6445f740b58eed58432a674a2a025c27ec9c535f29ccd4d06dd005c" "6de7c03d614033c0403657409313d5f01202361e35490a3404e33e46663c2596" "ed317c0a3387be628a48c4bbdb316b4fa645a414838149069210b66dd521733f" "938d8c186c4cb9ec4a8d8bc159285e0d0f07bad46edf20aa469a89d0d2a586ea" "235dc2dd925f492667232ead701c450d5c6fce978d5676e54ef9ca6dd37f6ceb" "7c8478aeefb397014997d637632ef4a461b6d3ecf97d7f21556a32dc3ca01c8c" "5dc0ae2d193460de979a463b907b4b2c6d2c9c4657b2e9e66b8898d2592e3de5" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d8f76414f8f2dcb045a37eb155bfaa2e1d17b6573ed43fb1d18b936febc7bbc2" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "cedd3b4295ac0a41ef48376e16b4745c25fa8e7b4f706173083f16d5792bb379" "38e64ea9b3a5e512ae9547063ee491c20bd717fe59d9c12219a0b1050b439cdd" "98cc377af705c0f2133bb6d340bf0becd08944a588804ee655809da5d8140de6" "9c79dde113d5718497be6636b7358ec3ef3dad98d6c166fe88a8cdcd8b8abfc2" "e97dbbb2b1c42b8588e16523824bc0cb3a21b91eefd6502879cf5baa1fa32e10" "71ecffba18621354a1be303687f33b84788e13f40141580fa81e7840752d31bf" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d3df47c843c22d8f0177fe3385ae95583dc8811bd6968240f7da42fd9aa51b0b" default)))
  '(display-time-default-load-average nil)
  '(display-time-mode t)
  '(eclim-eclipse-dirs (quote ("/Applications/EclipseJava.app/Contents/Eclipse")))
  '(eclim-executable "'/Applications/Eclipse Java.app/Contents/Eclipse/eclim'")
- '(flycheck-clang-include-path '("/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/include" "/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/include/darwin"))
+ '(flycheck-clang-include-path
+   (quote
+    ("/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/include" "/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/include/darwin")))
  '(js2-include-node-externs t)
  '(menu-bar-mode nil)
  '(org-startup-indented t)
  '(package-selected-packages
    (quote
-    (company-emacs-eclim eclim rust-mode clang-format tuareg ample-theme flycheck-flow company-flow company-statistics rjsx-mode flow-minor-mode prettier-js cobol-mode rainbow-mode skewer-mode dash-at-point xref-js2 indium solarized-theme tronesque-theme zerodark-theme json-mode editorconfig tern indent-guide tern-auto-complete cyberpunk-theme markdown-mode haskell-mode edbi sql-indent sqlup-mode company-shell company-web neotree spacegray-theme solarized-dark-theme ag magit ido-vertical-mode nix-mode web-mode objc-font-lock window-number simple-httpd ox-gfm mustache material-theme js2-mode jade-mode htmlize hlinum flycheck exec-path-from-shell company-tern company-quickhelp company-jedi company-c-headers)))
+    (company-go go-mode markdown-mode+ robe gradle-mode cmake-mode company-emacs-eclim eclim rust-mode clang-format tuareg ample-theme flycheck-flow company-flow company-statistics rjsx-mode flow-minor-mode prettier-js cobol-mode rainbow-mode skewer-mode dash-at-point xref-js2 indium solarized-theme tronesque-theme zerodark-theme json-mode editorconfig tern indent-guide tern-auto-complete cyberpunk-theme markdown-mode haskell-mode edbi sql-indent sqlup-mode company-shell company-web neotree spacegray-theme solarized-dark-theme ag magit ido-vertical-mode nix-mode web-mode objc-font-lock window-number simple-httpd ox-gfm mustache material-theme js2-mode jade-mode htmlize hlinum flycheck exec-path-from-shell company-tern company-quickhelp company-jedi company-c-headers)))
  '(send-mail-function (quote mailclient-send-it))
  '(show-paren-mode t)
  '(tool-bar-mode nil)
@@ -240,8 +245,7 @@
   "Connect to IRC, register nick, open commonly used channels"
   (interactive)
   (setq erc-max-buffer-size 20000
-	erc-autojoin-channels-alist '(("freenode.net" "##arabic"
-				       "#reactnative" "#css"
+	erc-autojoin-channels-alist '(("freenode.net" "#reactnative" "#css"
 				       "#ocaml" "#reactjs" "#javascript"))
 	erc-hide-list '("JOIN" "PART" "QUIT"))
   ;; This is obviously untracked, if you copy my init.el,
@@ -348,7 +352,7 @@
   (add-hook 'after-init-hook
 	    (lambda ()
 	      (global-hl-line-mode 1)
-	      (load-theme 'ample-flat t))))
+	      (load-theme 'material t))))
 	      ;; (load-theme 'material t))))
 
 ;; ;; LateX Related Code
@@ -431,6 +435,14 @@
    (company-mode)
    (company-quickhelp-mode)
    (setq-local show-trailing-whitespace t)))
+
+;; Go Code things
+
+(add-hook 'go-mode-hook
+	  (lambda ()
+	    (company-mode)
+	    (define-key go-mode-map (kbd "M-/") 'company-go)
+	    ))
 
 ;; SQL Stuff
 ;; Just remember,
@@ -643,14 +655,13 @@
 	  (lambda ()
       (load-file "~/.emacs.d/emacs-flow-jsx-mode.el")
       ;; (flow-jsx-mode)
-      (flow-minor-mode)
+      ;; (flow-minor-mode)
       (setq-default indent-tabs-mode t)
       (setq-default tab-width 2)
       (setq-default prettier-js-args
-        '( "--bracket-spacing" "false"
-           "--single-quote"
+        '( "--single-quote"
            "--jsx-bracket-same-line"
-           "--trailing-comma es5"
+           "--trailing-comma" "es5"
            ))
       (setq-local show-trailing-whitespace t)
 	    (setq-local js2-basic-offset 2)
@@ -695,7 +706,7 @@
     ;; (add-to-list
     ;;  'company-c-headers-path-system
     ;;  "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/JavaScriptCore.framework/Headers")
-    (add-hook 'before-save-hook 'clang-format-buffer)
+    ;; (add-hook 'before-save-hook 'clang-format-buffer)
     (flycheck-mode)
 ;    (setq-local 'flycheck-clang-include-path '())
     (add-to-list
@@ -747,11 +758,16 @@
 			   (ispell-minor-mode)))
 (add-hook 'makefile-mode-hook
 	  (lambda()
+      (setq-local tab-width 4)
 	    (setq-local show-trailing-whitespace t)))
 
 (add-to-list 'auto-mode-alist '("\\.cbl\\'" . cobol-mode))
 (add-to-list 'auto-mode-alist '("\\jbuild\\'" . lisp-mode))
 
+(add-hook 'ruby-mode-hook 'robe-mode)
+
+(eval-after-load 'company
+  '(push 'company-robe company-backends))
 
 ;; (setq opam
 ;;       (substring
