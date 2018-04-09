@@ -1,4 +1,5 @@
-;;; reason-mode.el --- A major emacs mode for editing Reason (based on rust-mode) -*-lexical-binding: t-*-
+;;; reason-indent.el --- Indentation functions for ReasonML -*-lexical-binding: t-*-
+
 ;; Portions Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
 
 ;;; Commentary:
@@ -7,6 +8,8 @@
 
 ;;; Code:
 
+(defconst reason-re-ident "[[:word:][:multibyte:]_][[:word:][:multibyte:]_[:digit:]]*")
+
 (defcustom reason-indent-offset 2
   "Indent Reason code by this number of spaces."
   :type 'integer
@@ -14,15 +17,27 @@
   :safe #'integerp)
 
 (defun reason-looking-back-str (str)
-  "Like `looking-back' but for fixed strings rather than regexps (so that it's not so slow)"
+  "Like `looking-back' but for fixed strings rather than regexps.
+Works around some regexp slowness.
+Argument STR string to search for."
   (let ((len (length str)))
     (and (> (point) len)
          (equal str (buffer-substring-no-properties (- (point) len) (point))))))
 
-(defun reason-paren-level () (nth 0 (syntax-ppss)))
-(defun reason-in-str-or-cmnt () (nth 8 (syntax-ppss)))
-(defun reason-rewind-past-str-cmnt () (goto-char (nth 8 (syntax-ppss))))
+(defun reason-paren-level ()
+  "Get the level of nesting inside parentheses."
+  (nth 0 (syntax-ppss)))
+
+(defun reason-in-str-or-cmnt ()
+  "Return whether point is currently inside a string or a comment."
+  (nth 8 (syntax-ppss)))
+
+(defun reason-rewind-past-str-cmnt ()
+  "Rewind past string or comment."
+  (goto-char (nth 8 (syntax-ppss))))
+
 (defun reason-rewind-irrelevant ()
+  "Rewind past irrelevant characters (whitespace of inside comments)."
   (interactive)
   (let ((starting (point)))
     (skip-chars-backward "[:space:]\n")
@@ -33,6 +48,7 @@
         (reason-rewind-irrelevant))))
 
 (defun reason-align-to-expr-after-brace ()
+  "Align the expression at point to the expression after the previous brace."
   (save-excursion
     (forward-char)
     ;; We don't want to indent out to the open bracket if the
@@ -43,10 +59,30 @@
         (backward-word 1))
       (current-column))))
 
+(defun reason-align-to-prev-expr ()
+  "Align the expression at point to the previous expression."
+  (let ((alignment (save-excursion
+                     (forward-char)
+                     ;; We don't want to indent out to the open bracket if the
+                     ;; open bracket ends the line
+                     (when (not (looking-at "[[:blank:]]*\\(?://.*\\)?$"))
+                       (if (looking-at "[[:space:]]")
+                           (progn
+                             (forward-word 1)
+                             (backward-word 1))
+                         (backward-char))
+                       (current-column)))))
+    (if (not alignment)
+        (save-excursion
+          (forward-char)
+          (forward-line)
+          (back-to-indentation)
+          (current-column))
+      alignment)))
 
 ;;; Start of a reason binding
 (defvar reason-binding
-  (regexp-opt '("let" "type")))
+  (regexp-opt '("let" "type" "module" "fun")))
 
 (defun reason-beginning-of-defun (&optional arg)
   "Move backward to the beginning of the current defun.
@@ -55,7 +91,7 @@ With ARG, move backward multiple defuns.  Negative ARG means
 move forward.
 
 This is written mainly to be used as `beginning-of-defun-function'.
-Don't move to the beginning of the line. `beginning-of-defun',
+Don't move to the beginning of the line.  `beginning-of-defun',
 which calls this, does that afterwards."
   (interactive "p")
   (re-search-backward (concat "^\\(" reason-binding "\\)\\_>")
@@ -67,7 +103,7 @@ which calls this, does that afterwards."
 With argument, do it that many times.
 Negative argument -N means move back to Nth preceding end of defun.
 
-Assume that this is called after beginning-of-defun. So point is
+Assume that this is called after ‘beginning-of-defun’.  So point is
 at the beginning of the defun body.
 
 This is written mainly to be used as `end-of-defun-function' for Reason."
@@ -85,39 +121,20 @@ This is written mainly to be used as `end-of-defun-function' for Reason."
     ;; There is no opening brace, so consider the whole buffer to be one "defun"
     (goto-char (point-max))))
 
-
 (defun reason-rewind-to-beginning-of-current-level-expr ()
+  "Rewind to the beginning of the expression on the current level of nesting."
   (interactive)
   (let ((current-level (reason-paren-level)))
     (back-to-indentation)
-    (when (looking-at "->")
+    (when (looking-at "=>")
       (reason-rewind-irrelevant)
       (back-to-indentation))
     (while (> (reason-paren-level) current-level)
       (backward-up-list)
-      (back-to-indentation))
-    ;; When we're in the where clause, skip over it.  First find out the start
-    ;; of the function and its paren level.
-    (let ((function-start nil) (function-level nil))
-      (save-excursion
-        (reason-beginning-of-defun)
-        (back-to-indentation)
-        ;; Avoid using multiple-value-bind
-        (setq function-start (point)
-              function-level (reason-paren-level)))
-      ;; On a where clause
-      (when (or (looking-at "\\bwhere\\b")
-                ;; or in one of the following lines, e.g.
-                ;; where A: Eq
-                ;;       B: Hash <- on this line
-                (and (save-excursion
-                       (re-search-backward "\\bwhere\\b" function-start t))
-                     (= current-level function-level)))
-        (goto-char function-start)))))
-
-
+      (back-to-indentation))))
 
 (defun reason-mode-indent-line ()
+  "Indent current line."
   (interactive)
   (let ((indent
          (save-excursion
@@ -132,23 +149,37 @@ This is written mainly to be used as `end-of-defun-function' for Reason."
                    ;; the inside of it correctly relative to the outside.
                    (if (= 0 level)
                        0
-                      (save-excursion
-                        (reason-rewind-irrelevant)
-                        ;; (backward-up-list)
-                        (reason-rewind-to-beginning-of-current-level-expr)
+                     (save-excursion
+                       (reason-rewind-irrelevant)
+                       (if (save-excursion
+                             (reason-rewind-to-beginning-of-current-level-expr)
+                             (looking-at "<"))
+                           (progn
+                             (reason-rewind-to-beginning-of-current-level-expr)
+                             (current-column))
+                           (progn
+                             (backward-up-list)
+                             (reason-rewind-to-beginning-of-current-level-expr)
 
-                        (if (or (looking-at "|") (looking-at "switch"))
-                            (current-column)
-                          (+ (current-column) reason-indent-offset))
+                             (cond
+                              ((looking-at "switch")
+                               (current-column))
 
-                        ))))
+                              ((looking-at "|")
+                               (+ (current-column) (* reason-indent-offset 2)))
+
+                              (t
+                               (let ((current-level (reason-paren-level)))
+                                 (save-excursion
+                                   (while (and (= current-level (reason-paren-level))
+                                               (not (looking-at reason-binding)))
+                                     (reason-rewind-irrelevant)
+                                     (reason-rewind-to-beginning-of-current-level-expr))
+                                   (+ (current-column) reason-indent-offset)))))))))))
              (cond
               ;; A function return type is indented to the corresponding function arguments
-              ((looking-at "->")
-               (save-excursion
-                 (backward-list)
-                 (or (reason-align-to-expr-after-brace)
-                     (+ baseline reason-indent-offset))))
+              ((looking-at "=>")
+               (+ baseline reason-indent-offset))
 
               ((reason-in-str-or-cmnt)
                (cond
@@ -167,8 +198,21 @@ This is written mainly to be used as `end-of-defun-function' for Reason."
                 ;;
                 (t (+ baseline (+ reason-indent-offset 1)))))
 
+              ((looking-at "</") (- baseline reason-indent-offset))
+
               ;; A closing brace is 1 level unindented
-              ((looking-at "}\\|)\\|\\]") (- baseline reason-indent-offset))
+              ((looking-at "}\\|)\\|\\]")
+               (save-excursion
+                 (reason-rewind-irrelevant)
+                 (let ((jsx? (reason-looking-back-str ">")))
+                   (backward-up-list)
+                   (reason-rewind-to-beginning-of-current-level-expr)
+                   (cond
+                    ((looking-at "switch") baseline)
+
+                    (jsx? (current-column))
+
+                    (t (- baseline reason-indent-offset))))))
 
               ;; Doc comments in /** style with leading * indent to line up the *s
               ((and (nth 4 (syntax-ppss)) (looking-at "*"))
@@ -187,72 +231,62 @@ This is written mainly to be used as `end-of-defun-function' for Reason."
                     ;; Point is now at the beginning of the containing set of braces
                     (reason-align-to-expr-after-brace)))
 
-                ;; When where-clauses are spread over multiple lines, clauses
-                ;; should be aligned on the type parameters.  In this case we
-                ;; take care of the second and following clauses (the ones
-                ;; that don't start with "where ")
-                (save-excursion
-                  ;; Find the start of the function, we'll use this to limit
-                  ;; our search for "where ".
-                  (let ((function-start nil) (function-level nil))
-                    (save-excursion
-                      (reason-beginning-of-defun)
-                      (back-to-indentation)
-                      ;; Avoid using multiple-value-bind
-                      (setq function-start (point)
-                            function-level (reason-paren-level)))
-                    ;; When we're not on a line starting with "where ", but
-                    ;; still on a where-clause line, go to "where "
-                    (when (and
-                           (not (looking-at "\\bwhere\\b"))
-                           ;; We're looking at something like "F: ..."
-                           (and (looking-at (concat reason-re-ident ":"))
-                                ;; There is a "where " somewhere after the
-                                ;; start of the function.
-                                (re-search-backward "\\bwhere\\b"
-                                                    function-start t)
-                                ;; Make sure we're not inside the function
-                                ;; already (e.g. initializing a struct) by
-                                ;; checking we are the same level.
-                                (= function-level level)))
-                      ;; skip over "where"
-                      (forward-char 5)
-                      ;; Unless "where" is at the end of the line
-                      (if (eolp)
-                          ;; in this case the type parameters bounds are just
-                          ;; indented once
-                          (+ baseline reason-indent-offset)
-                        ;; otherwise, skip over whitespace,
-                        (skip-chars-forward "[:space:]")
-                        ;; get the column of the type parameter and use that
-                        ;; as indentation offset
-                        (current-column)))))
-
                 (progn
                   (back-to-indentation)
-                  (cond ((looking-at (regexp-opt '("constraint" "and" "type")))
+                  (cond ((looking-at (regexp-opt '("and" "type")))
                          baseline)
                         ((save-excursion
-                         (reason-rewind-irrelevant)
-                         (= (point) 1))
+                           (reason-rewind-irrelevant)
+                           (= (point) 1))
                          baseline)
                         ((save-excursion
                            (while (looking-at "|")
                              (reason-rewind-irrelevant)
                              (back-to-indentation))
-                           (looking-at (regexp-opt '("type")))
-                           )
+                           (looking-at (regexp-opt '("type"))))
                          (+ baseline reason-indent-offset))
                         ((looking-at "|\\|/[/*]")
                          baseline)
+                        ((and (> level 0)
+                              (save-excursion
+                                (reason-rewind-irrelevant)
+                                (backward-up-list)
+                                (reason-rewind-to-beginning-of-current-level-expr)
+                                (looking-at "switch")))
+                         (+ baseline reason-indent-offset))
                         ((save-excursion
-                         (reason-rewind-irrelevant)
-                         (looking-back "[{;,\\[(]" (- (point) 2)))
+                           (reason-rewind-irrelevant)
+                           (looking-back "[{;,\\[(]" (- (point) 2)))
+                         baseline)
+                        ((and
+                          (save-excursion
+                            (reason-rewind-irrelevant)
+                            (reason-rewind-to-beginning-of-current-level-expr)
+                            (and (looking-at reason-binding)
+                                 (not (progn
+                                        (forward-sexp)
+                                        (forward-sexp)
+                                        (skip-chars-forward "[:space:]\n")
+                                        (looking-at "=")))))
+                          (not (save-excursion
+                                 (skip-chars-backward "[:space:]\n")
+                                 (reason-looking-back-str "=>"))))
+                         (save-excursion
+                           (reason-rewind-irrelevant)
+                           (backward-sexp)
+                           (reason-align-to-prev-expr)))
+                        ((save-excursion
+                           (reason-rewind-irrelevant)
+                           (looking-back "<\/.*?>" (- (point) 30)))
                          baseline)
                         (t
-                         (+ baseline reason-indent-offset)
-                         )
-                        )
+                         (save-excursion
+                           (reason-rewind-irrelevant)
+                           (reason-rewind-to-beginning-of-current-level-expr)
+
+                           (if (looking-at "|")
+                               baseline
+                             (+ baseline reason-indent-offset)))))
                   ;; Point is now at the beginning of the current line
                   ))))))))
 
