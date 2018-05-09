@@ -797,11 +797,6 @@
 (add-to-list 'auto-mode-alist '("\\.cbl\\'" . cobol-mode))
 (add-to-list 'auto-mode-alist '("\\jbuild\\'" . lisp-mode))
 
-(add-hook 'ruby-mode-hook 'robe-mode)
-
-(eval-after-load 'company
-  '(push 'company-robe company-backends))
-
 ;; (setq opam
 ;;       (substring
 ;;        (shell-command-to-string "opam config var prefix 2> /dev/null")
