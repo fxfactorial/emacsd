@@ -1,3 +1,6 @@
+;; (require 'cask "/usr/local/share/emacs/site-lisp/cask/cask.el")
+;; (cask-initialize)
+
 (defvar osx-base-path
   "/Applications/Xcode.app/Contents/Developer/Platforms/")
 
