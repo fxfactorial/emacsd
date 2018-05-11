@@ -1,74 +1,39 @@
-;; (require 'cask "/usr/local/share/emacs/site-lisp/cask/cask.el")
-;; (cask-initialize)
-
 (defvar osx-base-path
   "/Applications/Xcode.app/Contents/Developer/Platforms/")
 
 (if (equal system-type 'darwin)
-                                        ; Only the then clause needs a progn, else part doesn't need it.
-  (progn
-    ;; Amazing font
-    (set-face-attribute 'default nil :family "PragmataPro" :height 140)
-    ;; Forgot what this was for..think some os x issues.
-    (setenv "LC_CTYPE" "UTF-8")
-
-    (setq mac-option-modifier 'super
+    (progn
+      ;; Amazing font
+      (set-face-attribute 'default nil :family "PragmataPro" :height 140)
+      ;; Forgot what this was for..think some os x issues.
+      (setenv "LC_CTYPE" "UTF-8")
+      (setq mac-option-modifier 'super
 	    flycheck-make-executable "/usr/local/bin/make"
-	    company-clang-executable
-	    (concat "/Applications/Xcode.app/Contents/Developer/"
-        "Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++")
+	    company-clang-executable "/usr/bin/clang++"
 	    company-clang-arguments
 	    `(
-         ;; "-std=c++11"
-         ;; "-x" "c++"
-         ;; "-std=c11"
-         "-ObjC++"
-         ;; "-stdlib=libc++"
-         ;; "-fmodules"
-         ;; "-fcxx-modules"
-         "-isysroot"
-                                        ; If coding for iOS
-         ;; ,(concat osx-base-path
-         ;; 	       "iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk")
-                                        ; If coding for OS X
-         ;; Must use the one with numbers.
-         ,(concat osx-base-path
-            "MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk")
-         ;; "-I" "/Users/Edgar/Repos/hayots/MGSFragaria.framework/Headers"
-         ;; "-I" "/usr/local/include/graphqlparser"
-         ;; "-I" "/usr/local/Cellar/folly/0.48.0_1/include"
-         ;; "-I" "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"
-         ;; "-I" "/usr/local/Cellar/tclap/1.2.1/include"
-         "-I" "/Users/Edgar/Repos/react-native/ReactCommon/cxxreact"
-         "-I" "/Users/Edgar/Repos/react-native/React/Base"
-         "-I" "/Users/Edgar/Repos/react-native/ReactCommon/yoga/yoga"
-         "-I"
-         "/Users/Edgar/Library/Android/sdk/ndk-bundle/platforms/android-19/arch-x86/usr/include"
-         ;; "-I" "/usr/local/include/msgpack-c/include"
-         "-I" "/usr/local/include"
-         "-I" "/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/include"
-         "-I" "/Users/Edgar/.opam/working/lib/ocaml")
-	    flycheck-c/c++-clang-executable
-	    (concat "/Applications/Xcode.app/Contents/Developer/"
-		    "Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++")
+	      "-std=c++11"
+	      "-I" "/usr/local/include"
+	      )
+	    flycheck-c/c++-clang-executable "/usr/bin/clang++"
 	    mac-command-modifier 'meta))
   (set-face-attribute 'default nil :height 110)
   (setq flycheck-c/c++-clang-executable "armv7-apple-darwin11-clang")
   (setq flycheck-clang-include-path
-    '("/home/gar/.nix-profile/iPhoneOS9.2.sdk/usr/include/c++/4.2.1"))
+	'("/home/gar/.nix-profile/iPhoneOS9.2.sdk/usr/include/c++/4.2.1"))
   (setq company-clang-executable "armv7-apple-darwin11-clang"
-    company-clang-arguments
-    '("-std=c++11"
-       "-stdlib=libc++"
-       "-isysroot"
-       "/home/gar/.nix-profile/iPhoneOS9.2.sdk"
-       "-I/home/gar/.nix-profile/iPhoneOS9.2.sdk/usr/include/c++/4.2.1"
-       "-I/usr/local/lib/ocaml/")))
+	company-clang-arguments
+	'("-std=c++11"
+	  "-stdlib=libc++"
+	  "-isysroot"
+	  "/home/gar/.nix-profile/iPhoneOS9.2.sdk"
+	  "-I/home/gar/.nix-profile/iPhoneOS9.2.sdk/usr/include/c++/4.2.1"
+	  "-I/usr/local/lib/ocaml/")))
 
 (setq company-backends '(company-clang
-                          company-capf
-                          company-c-headers
-                          company-jedi))
+			 company-capf
+			 company-c-headers
+			 company-jedi))
 
 (global-set-key (kbd "M-n") 'forward-paragraph)
 (global-set-key (kbd "M-p") 'backward-paragraph)
@@ -79,7 +44,7 @@
   ring-bell-function 'ignore
   company-async-timeout 10
   user-full-name "Edgar Aroutiounian"
-  user-mail-address "edgar.factorial@gmail.com")
+  user-mail-address "edgar.aroutiounian@gm.com")
 
 ;; Giving myself this helpful buffer, otherwise way to many damn key
 ;; bindings to remember!
@@ -123,7 +88,7 @@
  '(org-startup-indented t)
  '(package-selected-packages
    (quote
-	(yaml-tomato yaml-mode dockerfile-mode vue-mode popup-complete company-jedi solaire-mode terraform-mode swift-mode doom-themes powerline multiple-cursors typescript-mode solidity-mode rainbow-blocks jdee groovy-mode gotham-theme company-go go-mode markdown-mode+ robe gradle-mode cmake-mode company-emacs-eclim eclim rust-mode clang-format tuareg ample-theme flycheck-flow company-flow company-statistics rjsx-mode flow-minor-mode prettier-js cobol-mode rainbow-mode skewer-mode dash-at-point xref-js2 indium solarized-theme tronesque-theme zerodark-theme json-mode editorconfig tern indent-guide tern-auto-complete cyberpunk-theme markdown-mode haskell-mode edbi sql-indent sqlup-mode company-shell company-web neotree spacegray-theme solarized-dark-theme ag magit ido-vertical-mode nix-mode web-mode objc-font-lock window-number simple-httpd ox-gfm mustache material-theme js2-mode jade-mode htmlize hlinum flycheck exec-path-from-shell company-tern company-quickhelp company-c-headers)))
+	(yaml-tomato yaml-mode dockerfile-mode vue-mode popup-complete company-jedi solaire-mode terraform-mode swift-mode doom-themes powerline multiple-cursors typescript-mode solidity-mode rainbow-blocks jdee groovy-mode gotham-theme company-go go-mode markdown-mode+ robe gradle-mode cmake-mode company-emacs-eclim eclim rust-mode clang-format tuareg ample-theme flycheck-flow company-flow company-statistics rjsx-mode flow-minor-mode prettier-js cobol-mode rainbow-mode skewer-mode dash-at-point xref-js2 indium solarized-theme tronesque-theme zerodark-theme json-mode tern indent-guide tern-auto-complete cyberpunk-theme markdown-mode haskell-mode edbi sql-indent sqlup-mode company-shell company-web neotree spacegray-theme solarized-dark-theme ag magit ido-vertical-mode nix-mode web-mode objc-font-lock window-number simple-httpd ox-gfm mustache material-theme js2-mode jade-mode htmlize hlinum flycheck exec-path-from-shell company-tern company-quickhelp company-c-headers)))
  '(refmt-width-mode (quote fill))
  '(send-mail-function (quote mailclient-send-it))
  '(show-paren-mode t)
@@ -132,8 +97,6 @@
  '(solarized-high-contrast-mode-line t)
  '(tool-bar-mode nil)
  '(web-mode-attr-indent-offset 0 t))
-
-;; (editorconfig-mode)
 
 ;; Skeletons definitions for common includes.
 (define-skeleton my-org-defaults
@@ -669,11 +632,9 @@
     )
   )
 
-
 (add-hook 'json-mode-hook
   (lambda ()
-    (prettier-js-mode)
-    (editorconfig-mode)))
+    (prettier-js-mode)))
 
 (add-hook 'rjsx-mode-hook
   (lambda ()
@@ -700,7 +661,6 @@
          "__DEV__" "TextEncoder" "TextDecoder"
          "history" "AudioContext" "Draggable" "TweenLite"
          "FormData" "URLSearchParams" "URL"))
-	  (editorconfig-mode)
     (add-to-list 'write-file-functions 'delete-trailing-whitespace)
     (prettify-symbols-mode)
     (company-mode)
