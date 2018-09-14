@@ -289,7 +289,7 @@
 
 (window-number-mode)
 (window-number-meta-mode)
-(mouse-avoidance-mode 'banish)
+
 (fringe-mode 10)
 (tool-bar-mode -1)
 ;; Gives me the full name of the buffer, hate just having foo.c
@@ -414,8 +414,6 @@
     (toggle-truncate-lines)))
 
 
-(add-to-list 'load-path "~/.emacs.d/reason")
-
 (defun chomp-end (str)
   "Chomp tailing whitespace from STR."
   (replace-regexp-in-string (rx (* (any " \t\n")) eos)
@@ -434,32 +432,6 @@
                            shell-command-switch cmd))))))
     (when (not (= (length stdoutput) 0))
       stdoutput)))
-
-(let* ((refmt-bin (or (shell-cmd "refmt ----where")
-                    (shell-cmd "which refmt")))
-        (merlin-bin (or (shell-cmd "ocamlmerlin ----where")
-                      (shell-cmd "which ocamlmerlin")))
-        (merlin-base-dir (when merlin-bin
-                           (replace-regexp-in-string "bin/ocamlmerlin$" "" merlin-bin))))
-  ;; Add npm merlin.el to the emacs load path and tell emacs where to find ocamlmerlin
-  (when merlin-bin
-    (add-to-list 'load-path (concat merlin-base-dir "share/emacs/site-lisp/"))
-    (setq merlin-command merlin-bin))
-  (when refmt-bin
-    (setq fill-column 120)
-    (setq refmt-command refmt-bin)))
-
-(require 'reason-mode)
-(add-to-list 'auto-mode-alist '("\\.re\\'" . reason-mode))
-(add-to-list 'auto-mode-alist '("\\.rei\\'" . reason-mode))
-
-(add-hook 'reason-mode-hook
-  (lambda ()
-    (require 'merlin)
-    (company-mode)
-    ;; (setq-local refmt-command "/Users/Edgar/.opam/latest/bin/refmt")
-    (add-hook 'before-save-hook 'refmt-before-save)
-    (merlin-mode)))
 
 ;; OCaml code
 (add-hook
@@ -483,7 +455,6 @@
     ;; Use opam switch to lookup ocamlmerlin binary
     ;;   (setq merlin-command 'opam)
     (company-mode)
-    (require 'ocp-indent)
     (autoload 'utop-minor-mode "utop" "Minor mode for utop" t)
     (autoload 'utop-setup-ocaml-buffer "utop" "Toplevel for OCaml" t)
     (autoload 'merlin-mode "merlin" "Merlin mode" t)
