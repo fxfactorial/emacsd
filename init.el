@@ -89,7 +89,7 @@
  '(org-startup-indented t)
  '(package-selected-packages
    (quote
-	(blacken docker-compose-mode bazel-mode protobuf-mode jedi yaml-tomato yaml-mode dockerfile-mode vue-mode popup-complete company-jedi solaire-mode terraform-mode swift-mode doom-themes powerline multiple-cursors typescript-mode solidity-mode rainbow-blocks jdee groovy-mode gotham-theme company-go go-mode markdown-mode+ robe gradle-mode cmake-mode company-emacs-eclim eclim rust-mode clang-format tuareg ample-theme flycheck-flow company-flow company-statistics rjsx-mode flow-minor-mode prettier-js cobol-mode rainbow-mode skewer-mode dash-at-point xref-js2 indium solarized-theme tronesque-theme zerodark-theme json-mode tern indent-guide tern-auto-complete cyberpunk-theme markdown-mode haskell-mode edbi sql-indent sqlup-mode company-shell company-web neotree spacegray-theme solarized-dark-theme ag magit ido-vertical-mode nix-mode web-mode objc-font-lock window-number simple-httpd ox-gfm mustache material-theme js2-mode jade-mode htmlize hlinum flycheck exec-path-from-shell company-tern company-quickhelp company-c-headers)))
+	(docker-tramp blacken docker-compose-mode bazel-mode protobuf-mode jedi yaml-tomato yaml-mode dockerfile-mode vue-mode popup-complete company-jedi solaire-mode terraform-mode swift-mode doom-themes powerline multiple-cursors typescript-mode solidity-mode rainbow-blocks jdee groovy-mode gotham-theme company-go go-mode markdown-mode+ robe gradle-mode cmake-mode company-emacs-eclim eclim rust-mode clang-format tuareg ample-theme flycheck-flow company-flow company-statistics rjsx-mode flow-minor-mode prettier-js cobol-mode rainbow-mode skewer-mode dash-at-point xref-js2 indium solarized-theme tronesque-theme zerodark-theme json-mode tern indent-guide tern-auto-complete cyberpunk-theme markdown-mode haskell-mode edbi sql-indent sqlup-mode company-shell company-web neotree spacegray-theme solarized-dark-theme ag magit ido-vertical-mode nix-mode web-mode objc-font-lock window-number simple-httpd ox-gfm mustache material-theme js2-mode jade-mode htmlize hlinum flycheck exec-path-from-shell company-tern company-quickhelp company-c-headers)))
  '(refmt-width-mode (quote fill))
  '(send-mail-function (quote mailclient-send-it))
  '(show-paren-mode t)
@@ -370,7 +370,6 @@
     (setq-default indent-tabs-mode t)
     (setq-default tab-width 4)
     (setq-default py-indent-tabs-mode t)
-    (define-key hs-minor-mode-map (kbd "C-c C-t") 'hs-toggle-hiding)
     (define-key python-mode-map (kbd "M-q") 'python-fill-paren)
     (define-key python-mode-map (kbd "M-]") 'jedi:goto-definition)
     (define-key python-mode-map (kbd "M-/") 'company-jedi)
