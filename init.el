@@ -223,9 +223,9 @@
   "Connect to IRC, register nick, open commonly used channels"
   (interactive)
   (setq erc-max-buffer-size 20000
-    erc-autojoin-channels-alist '(("freenode.net" "#reactnative" "#css"
-                                    "#ocaml" "#reactjs" "#javascript"))
-    erc-hide-list '("JOIN" "PART" "QUIT"))
+	erc-autojoin-channels-alist '(("freenode.net" "##machinelearning" "#python"
+                                       "#ocaml" "##statistics" "#scikit-learn"))
+	erc-hide-list '("JOIN" "PART" "QUIT"))
   ;; This is obviously untracked, if you copy my init.el,
   ;; either delete this code or provide your own creds
   (let ((acc (read-lines "~/.emacs.d/these-erc-creds")))
@@ -233,11 +233,11 @@
     (setq erc-password (nth 1 acc)))
   (add-hook 'erc-after-connect '(lambda (server nick)
                                   (erc-message
-                                    "PRIVMSG"
-                                    (concat "NickServ identify " erc-password))))
+                                   "PRIVMSG"
+                                   (concat "NickServ identify " erc-password))))
   ;; This is what actually does the connection
   (erc :server "irc.freenode.net" :port 6667
-    :nick "Algebr" :full-name user-full-name))
+       :nick "Algebr" :full-name user-full-name))
 
 ;; Misc things
 (add-to-list 'auto-mode-alist '("\\zshrc\\'" . shell-script-mode))
@@ -334,8 +334,8 @@
       (global-hl-line-mode 1)
       (solaire-mode)
       ;; (load-theme 'ample t))))
-      (load-theme 'material t))))
-      ;; (load-theme 'solarized-light t))))
+      ;; (load-theme 'material t))))
+      (load-theme 'solarized-dark t))))
       ;; (load-theme 'misterioso t))))
       ;; (load-theme 'doom-city-lights t))))
 ;; (load-theme 'material t))))
@@ -366,8 +366,9 @@
 (add-hook
   'python-mode-hook
   (lambda ()
-    (setq-local tab-width 4)
     (setq-default indent-tabs-mode t)
+	(setq-local python-shell-interpreter "ipython3")
+	(setq-local python-shell-interpreter-args "-i")
     (setq-default tab-width 4)
     (setq-default py-indent-tabs-mode t)
     (define-key python-mode-map (kbd "M-q") 'python-fill-paren)
