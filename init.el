@@ -9,10 +9,10 @@
       (setenv "LC_CTYPE" "UTF-8")
       (setq mac-option-modifier 'super
 	    flycheck-make-executable "/usr/local/bin/make"
-	    company-clang-executable "/usr/bin/clang++"
+	    company-clang-executable "/usr/bin/clang"
 	    company-clang-arguments
-	    `("-std=c++11" "-I" "/usr/local/include")
-	    flycheck-c/c++-clang-executable "/usr/bin/clang++"
+	    `("")
+	    flycheck-c/c++-clang-executable "/usr/bin/clang"
 	    mac-command-modifier 'meta))
   (set-face-attribute 'default nil :height 110)
   (setq company-clang-executable "/usr/bin/clang++-4.0"
@@ -224,7 +224,9 @@
   (interactive)
   (setq erc-max-buffer-size 20000
 	erc-autojoin-channels-alist '(("freenode.net" "##machinelearning" "#python"
-                                       "#ocaml" "##statistics" "#scikit-learn"))
+                                   "#ocaml" "##statistics" "#scikit-learn"
+								   "#pydata"
+								   ))
 	erc-hide-list '("JOIN" "PART" "QUIT"))
   ;; This is obviously untracked, if you copy my init.el,
   ;; either delete this code or provide your own creds
@@ -335,7 +337,7 @@
       (solaire-mode)
       ;; (load-theme 'ample t))))
       ;; (load-theme 'material t))))
-      (load-theme 'solarized-dark t))))
+      (load-theme 'solarized-light t))))
       ;; (load-theme 'misterioso t))))
       ;; (load-theme 'doom-city-lights t))))
 ;; (load-theme 'material t))))
@@ -607,34 +609,23 @@
 
 ;; ;; Common things wanted in all C like languages.
 (add-hook
-  'c-mode-common-hook
-  '(lambda ()
-     ;; (semantic-mode)
-     ;; (global-semantic-mru-bookmark-mode)
-     ;; (add-to-list
-     ;;  'company-c-headers-path-system
-     ;;  "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/JavaScriptCore.framework/Headers")
-     ;; (add-hook 'before-save-hook 'clang-format-buffer)
-     (flycheck-mode)
-                                        ;    (setq-local 'flycheck-clang-include-path '())
-     (add-to-list
-       'company-c-headers-path-system
-       "/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/include")
-     (add-to-list
-       'company-c-headers-path-system
-       "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/JavaScriptCore.framework/Headers")
-     (add-to-list
-       'company-c-headers-path-system
-       "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/WebKit.framework/Headers")
-     ;; (add-to-list
-     ;;  'company-c-headers-path-system
-     ;; "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Foundation.framework/Headers/")
-     (define-key c-mode-map (kbd "C-=") 'ff-find-other-file)
-     (setq-local show-trailing-whitespace t)
-     (company-mode)
-     (add-to-list 'company-backends 'company-c-headers)
-     (define-key company-mode-map (kbd "M-h") 'company-c-headers)
-     (abbrev-mode -1)))
+ 'c-mode-common-hook
+ '(lambda ()
+    (add-to-list 'write-file-functions 'delete-trailing-whitespace)
+    (flycheck-mode)
+    (define-key c-mode-map (kbd "C-=") 'ff-find-other-file)
+    (setq-local show-trailing-whitespace t)
+    (company-mode)
+    (add-to-list 'company-backends 'company-c-headers)
+    (define-key company-mode-map (kbd "M-h") 'company-c-headers)
+    (abbrev-mode -1)))
+
+(add-hook
+ 'c-mode-common-hook
+ (lambda ()
+   (add-hook 'before-save-hook 'clang-format-buffer nil 'local)
+   )
+ )
 
 (add-hook 'c++-mode-hook
   (lambda ()
