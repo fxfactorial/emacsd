@@ -82,3 +82,27 @@ Cover is like use the image size as it is and make it cover the given spacing
 Stretch is like take the image and make it fit the dimensions given, force it
 
 contain is like keep the ratio for the given sizing
+
+
+
+
+Notes: A tree is a graph with no loops
+
+
+A geometric interpretation of the quadratic form that hasn't been
+mentioned so far in the course: if x is a vector in R^n, and A is
+square, then Ax is also a vector in R^n. You can think of A as a
+function that changes one vector x in the space to a new vector
+Ax in the space. The quadratic form x^TAx is the inner product of
+the old vector x with the new vector Ax. A positive definite
+matrix guarantees that this inner product is positive. But the
+inner product is the product of the lengths of the two vectors, x
+and Ax, and the cosine of the angle between them. Ignoring their
+lengths, the fact that the quadratic form is always positive says
+that the cosine of the angle between them is always positive,
+which means that the angle is between -pi/2 and pi/2. Thus,
+whatever A does to x, the new vector can't be more than 90
+degrees away from the old vector. This is a form of stability,
+not in the length of the new vector (the eigenvalues of A could
+be large, so vectors could grow very large when A is applied to
+them), but in the direction of the new vector.
