@@ -81,7 +81,15 @@
     ("1068ae7acf99967cc322831589497fee6fb430490147ca12ca7dd3e38d9b552a" default)))
  '(package-selected-packages
    (quote
-    (go-guru company-solidity company-quickhelp company-jedi solaire-mode rust-mode hlinum indent-guide which-key rjsx-mode flycheck ample-theme material-theme jedi company-c-headers company-go solarized-theme zerodark-theme window-number powerline company go-mode))))
+    (go-guru company-solidity company-quickhelp company-jedi solaire-mode rust-mode hlinum indent-guide which-key rjsx-mode flycheck ample-theme material-theme jedi company-c-headers company-go solarized-theme zerodark-theme window-number powerline company go-mode)))
+ '(menu-bar-mode nil)
+ '(tool-bar-mode nil)
+ '(show-paren-mode t)
+ '(go-guru-hl-identifier-idle-time 0.25)
+ '(column-number-mode t)
+ '(display-time-mode t)
+ '(fill-column 100)
+ )
 
 ;; Skeletons definitions for common includes.
 
@@ -672,6 +680,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(go-guru-hl-identifier-face ((t (:inherit highlight
+					    :foreground "goldenrod2"
+					    :box nil
+					    :slant normal))))
  )
 
 (add-hook 'markdown-mode-hook
