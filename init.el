@@ -21,6 +21,11 @@
 		flycheck-c/c++-clang-executable "/usr/bin/clang++-4.0"
 		company-clang-rguments '("-std=c++17" "-stdlib=libc++")))
 
+(set-face-attribute 'default nil
+		    :family "PragmataPro Mono Liga"
+		    :height 140
+		    :width 'ultra-condensed)
+
   ;; (setq flycheck-c/c++-clang-executable "armv7-apple-darwin11-clang")
   ;; (setq flycheck-clang-include-path
   ;; 	'("/home/gar/.nix-profile/iPhoneOS9.2.sdk/usr/include/c++/4.2.1"))
@@ -71,37 +76,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector
-	 (vector "#ffffff" "#f36c60" "#8bc34a" "#fff59d" "#4dd0e1" "#b39ddb" "#81d4fa" "#263238"))
- '(asm-comment-char 35)
- '(column-number-mode t)
  '(custom-safe-themes
-	 (quote
-		("0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" "1068ae7acf99967cc322831589497fee6fb430490147ca12ca7dd3e38d9b552a" "d91ef4e714f05fff2070da7ca452980999f5361209e679ee988e3c432df24347" "e39ff005e524c331b08d613109bff0b55fc21c64914c4a243faa70f330015389" "8d805143f2c71cfad5207155234089729bb742a1cb67b7f60357fdd952044315" "2a7beed4f24b15f77160118320123d699282cbf196e0089f113245d4b729ba5d" "08ef1356470a9d3bf363ffab0705d90f8a492796e9db489936de4bde6a4fdb19" "bf798e9e8ff00d4bf2512597f36e5a135ce48e477ce88a0764cfb5d8104e8163" "36ca8f60565af20ef4f30783aa16a26d96c02df7b4e54e9900a5138fb33808da" "c9ddf33b383e74dac7690255dd2c3dfa1961a8e8a1d20e401c6572febef61045" "90bd0eb20a1cb155b5a076f698b3c72cfe775aa7ea93b7bfbc171eb250db5e20" "0b1ded82ebea8b76e3c17c628fe0d3c7aa46746c3efcf657f633d71989110585" "4f5fb2b25a9c71d584472abc5b6f850d616ac280a69e43df6e78ddf2b4aa68fa" "a24c5b3c12d147da6cef80938dca1223b7c7f70f2f382b26308eba014dc4833a" "77c3f5f5acaa5a276ca709ff82cce9b303f49d383415f740ba8bcc76570718b9" "7666b079fc1493b74c1f0c5e6857f3cf0389696f2d9b8791c892c696ab4a9b64" "53d1bb57dadafbdebb5fbd1a57c2d53d2b4db617f3e0e05849e78a4f78df3a1b" "2af26301bded15f5f9111d3a161b6bfb3f4b93ec34ffa95e42815396da9cb560" "4e21fb654406f11ab2a628c47c1cbe53bab645d32f2c807ee2295436f09103c6" "a142def5bab9c1d1964eb2bf7506e790fa09df44aa9f3e41abd198f00cd6577e" "2a1b4531f353ec68f2afd51b396375ac2547c078d035f51242ba907ad8ca19da" "f142c876b896c6ca19149cacd80ddd68a351f67f7fe3b786274ceee970276780" "ee89863f86247942d9fc404d47b2704475b146c079c1dcd2390d697ddfa9bdf4" "230302a8dba6a7d46cc37709795427e229e67d5e6817db4f90e370c67766cdb6" "732b807b0543855541743429c9979ebfb363e27ec91e82f463c91e68c772f6e3" "b550fc3d6f0407185ace746913449f6ed5ddc4a9f0cf3be218af4fb3127c7877" "d6922c974e8a78378eacb01414183ce32bc8dbf2de78aabcc6ad8172547cb074" "e8be55a51a7abac245c18f34cfcd7b4a3e02bc9e822476da53f5573e0c103d98" "86e2d09ebcfff3b7ec95543bce5a163384579a2bf2e2a81bfba8908b7a0c44df" "6570843991e40121f854432826e9fd175aec6bd382ef217b2c0c46da37f3af18" "28d0425aa6445f740b58eed58432a674a2a025c27ec9c535f29ccd4d06dd005c" "6de7c03d614033c0403657409313d5f01202361e35490a3404e33e46663c2596" "ed317c0a3387be628a48c4bbdb316b4fa645a414838149069210b66dd521733f" "938d8c186c4cb9ec4a8d8bc159285e0d0f07bad46edf20aa469a89d0d2a586ea" "235dc2dd925f492667232ead701c450d5c6fce978d5676e54ef9ca6dd37f6ceb" "7c8478aeefb397014997d637632ef4a461b6d3ecf97d7f21556a32dc3ca01c8c" "5dc0ae2d193460de979a463b907b4b2c6d2c9c4657b2e9e66b8898d2592e3de5" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d8f76414f8f2dcb045a37eb155bfaa2e1d17b6573ed43fb1d18b936febc7bbc2" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "cedd3b4295ac0a41ef48376e16b4745c25fa8e7b4f706173083f16d5792bb379" "38e64ea9b3a5e512ae9547063ee491c20bd717fe59d9c12219a0b1050b439cdd" "98cc377af705c0f2133bb6d340bf0becd08944a588804ee655809da5d8140de6" "9c79dde113d5718497be6636b7358ec3ef3dad98d6c166fe88a8cdcd8b8abfc2" "e97dbbb2b1c42b8588e16523824bc0cb3a21b91eefd6502879cf5baa1fa32e10" "71ecffba18621354a1be303687f33b84788e13f40141580fa81e7840752d31bf" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d3df47c843c22d8f0177fe3385ae95583dc8811bd6968240f7da42fd9aa51b0b" default)))
- '(display-time-default-load-average nil)
- '(display-time-mode t)
- '(fill-column 100)
- '(flycheck-clang-include-path
-	 (quote
-		("/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/include" "/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/include/darwin")))
- '(groovy-indent-offset 2)
- '(jedi:tooltip-method nil)
- '(js2-include-node-externs t)
- '(menu-bar-mode nil)
- '(mips-operator-column 4)
- '(mips-tab-width 4)
- '(org-startup-indented t)
+   (quote
+    ("1068ae7acf99967cc322831589497fee6fb430490147ca12ca7dd3e38d9b552a" default)))
  '(package-selected-packages
-	 (quote
-		(go-dlv pdf-view-restore mips-mode flycheck-rust racer ample-zen-theme which-key company-anaconda anaconda-mode docker-tramp blacken docker-compose-mode bazel-mode protobuf-mode jedi yaml-tomato yaml-mode dockerfile-mode vue-mode popup-complete company-jedi solaire-mode terraform-mode swift-mode doom-themes powerline multiple-cursors typescript-mode solidity-mode rainbow-blocks jdee groovy-mode gotham-theme company-go go-mode markdown-mode+ robe gradle-mode cmake-mode company-emacs-eclim eclim rust-mode clang-format tuareg ample-theme flycheck-flow company-flow company-statistics rjsx-mode flow-minor-mode prettier-js cobol-mode rainbow-mode skewer-mode dash-at-point xref-js2 indium solarized-theme tronesque-theme zerodark-theme json-mode tern indent-guide tern-auto-complete cyberpunk-theme markdown-mode haskell-mode edbi sql-indent sqlup-mode company-shell company-web neotree spacegray-theme solarized-dark-theme ag magit ido-vertical-mode nix-mode web-mode objc-font-lock window-number simple-httpd ox-gfm mustache material-theme js2-mode jade-mode htmlize hlinum flycheck exec-path-from-shell company-tern company-quickhelp company-c-headers)))
- '(refmt-width-mode (quote fill))
- '(send-mail-function (quote mailclient-send-it))
- '(show-paren-mode t)
- '(solarized-distinct-doc-face t)
- '(solarized-distinct-fringe-background t)
- '(solarized-high-contrast-mode-line t)
- '(tool-bar-mode nil)
- '(web-mode-attr-indent-offset 0 t))
+   (quote
+    (go-guru company-solidity company-quickhelp company-jedi solaire-mode rust-mode hlinum indent-guide which-key rjsx-mode flycheck ample-theme material-theme jedi company-c-headers company-go solarized-theme zerodark-theme window-number powerline company go-mode))))
 
 ;; Skeletons definitions for common includes.
 
@@ -417,8 +397,10 @@
 ;; Go Code things
 (add-hook 'go-mode-hook
   (lambda ()
+    (setq-local gofmt-command "goimports")
     (company-mode)
     (flycheck-mode)
+    (go-guru-hl-identifier-mode)
     (visual-line-mode)
     (powerline-default-theme)
     (setq-local tab-width 2)
@@ -427,7 +409,11 @@
     (setq-local company-echo-delay 0)                          ; remove annoying blinking
     (setq-local company-begin-commands '(self-insert-command))
     (add-hook 'before-save-hook #'gofmt-before-save)
-    (define-key go-mode-map (kbd "M-/") 'company-go)))
+    (local-set-key (kbd "M-.") 'godef-jump)
+    (local-set-key (kbd "M-,") 'pop-tag-mark)
+    (local-set-key (kbd "M-]") 'next-error)
+    (local-set-key (kbd "M-[") 'previous-error)
+    (local-set-key (kbd "M-/") 'company-go)))
 
 ;; SQL Stuff
 ;; Just remember,
