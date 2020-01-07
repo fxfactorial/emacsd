@@ -76,20 +76,20 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(column-number-mode t)
  '(custom-safe-themes
    (quote
-    ("1068ae7acf99967cc322831589497fee6fb430490147ca12ca7dd3e38d9b552a" default)))
- '(package-selected-packages
-   (quote
-    (go-guru company-solidity company-quickhelp company-jedi solaire-mode rust-mode hlinum indent-guide which-key rjsx-mode flycheck ample-theme material-theme jedi company-c-headers company-go solarized-theme zerodark-theme window-number powerline company go-mode)))
- '(menu-bar-mode nil)
- '(tool-bar-mode nil)
- '(show-paren-mode t)
- '(go-guru-hl-identifier-idle-time 0.25)
- '(column-number-mode t)
+    ("c433c87bd4b64b8ba9890e8ed64597ea0f8eb0396f4c9a9e01bd20a04d15d358" "1068ae7acf99967cc322831589497fee6fb430490147ca12ca7dd3e38d9b552a" default)))
  '(display-time-mode t)
  '(fill-column 100)
- )
+ '(go-guru-hl-identifier-idle-time 0.25)
+ '(go-guru-scope "github.com/...")
+ '(menu-bar-mode nil)
+ '(package-selected-packages
+   (quote
+    (tide typescript-mode vue-mode vue-html-mode company-tern rainbow-mode cuda-mode blacken yasnippet lsp-ui flycheck-rust use-package company-racer toml-mode cargo lsp-mode racer web-mode tern exec-path-from-shell go-imports ido-vertical-mode json-mode prettier-js multiple-cursors ag neotree go-guru company-solidity company-quickhelp company-jedi solaire-mode rust-mode hlinum indent-guide which-key rjsx-mode flycheck ample-theme material-theme jedi company-c-headers company-go solarized-theme zerodark-theme window-number powerline company go-mode)))
+ '(show-paren-mode t)
+ '(tool-bar-mode nil))
 
 ;; Skeletons definitions for common includes.
 
@@ -339,8 +339,8 @@
       (global-hl-line-mode 1)
       (solaire-mode)
       ;; (load-theme 'ample t))))
-      (load-theme 'material t))))
-      ;; (load-theme 'zerodark t))))
+      ;; (load-theme 'material t))))
+      (load-theme 'zerodark t))))
       ;; (load-theme 'misterioso t))))
       ;; (load-theme 'doom-city-lights t))))
 ;; (load-theme 'material t))))
@@ -525,6 +525,7 @@
   (lambda ()
     (web-mode)
     (company-mode)
+    (prettier-js-mode)
     (add-to-list 'write-file-functions 'delete-trailing-whitespace)
     (define-key web-mode-map (kbd "M-/") 'company-web-html)))
 ;; (setq web-mode-ac-sources-alist
@@ -680,11 +681,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(go-guru-hl-identifier-face ((t (:inherit highlight
-					    :foreground "goldenrod2"
-					    :box nil
-					    :slant normal))))
- )
+ '(go-guru-hl-identifier-face ((t (:inherit highlight :foreground "goldenrod2" :box nil :slant normal)))))
 
 (add-hook 'markdown-mode-hook
   (lambda ()
@@ -719,22 +716,44 @@
 (put 'downcase-region 'disabled nil)
 
 ; rust code, it finally happened.
-(add-hook 'rust-mode-hook #'racer-mode)
-(add-hook 'racer-mode-hook #'eldoc-mode)
-(add-hook 'racer-mode-hook #'company-mode)
 
 (add-hook 'mips-mode-hook
 	  '(lambda ()
 	     (define-key mips-mode-map (kbd "M-/") 'dabbrev-expand)
 	     ))
 
+(add-hook 'rust-mode-hook #'racer-mode)
+(add-hook 'racer-mode-hook #'eldoc-mode)
+(add-hook 'racer-mode-hook #'company-mode)
+
+(use-package lsp-mode
+  :commands lsp
+  :config (require 'lsp-clients))
+
+(use-package lsp-ui)
+
 (require 'rust-mode)
 (add-hook 'rust-mode-hook
 	  '(lambda ()
-	     (define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
+	     (use-package toml-mode)
+	     (use-package rust-mode
+	     		  :hook (rust-mode . lsp))
+	     (use-package cargo
+	     		  :hook (rust-mode . cargo-minor-mode))
+	     (use-package flycheck-rust
+	     		  :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+	     (lsp)
+	     (lsp-ui-mode)
+	     (yas-minor-mode)
+	     (define-key rust-mode-map (kbd "M-/") #'company-indent-or-complete-common)
+	     (define-key rust-mode-map (kbd "M-[") #'cargo-process-build)
+	     (define-key rust-mode-map (kbd "M-]") #'cargo-process-run)
+	     (define-key rust-mode-map (kbd "M-|") #'racer-describe-tooltip)
 	     (setq company-tooltip-align-annotations t)
+	     (setq company-minimum-prefix-length 1)
 	     (setq rust-format-on-save t)
-	     ))
+	     )
+	  )
 
 
 
