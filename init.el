@@ -79,15 +79,22 @@
  '(column-number-mode t)
  '(custom-safe-themes
    (quote
-    ("c433c87bd4b64b8ba9890e8ed64597ea0f8eb0396f4c9a9e01bd20a04d15d358" "1068ae7acf99967cc322831589497fee6fb430490147ca12ca7dd3e38d9b552a" default)))
+    ("36ca8f60565af20ef4f30783aa16a26d96c02df7b4e54e9900a5138fb33808da" "00445e6f15d31e9afaa23ed0d765850e9cd5e929be5e8e63b114a3346236c44c" "bf798e9e8ff00d4bf2512597f36e5a135ce48e477ce88a0764cfb5d8104e8163" "2809bcb77ad21312897b541134981282dc455ccd7c14d74cc333b6e549b824f3" "c433c87bd4b64b8ba9890e8ed64597ea0f8eb0396f4c9a9e01bd20a04d15d358" "1068ae7acf99967cc322831589497fee6fb430490147ca12ca7dd3e38d9b552a" default)))
  '(display-time-mode t)
  '(fill-column 100)
  '(go-guru-hl-identifier-idle-time 0.25)
  '(go-guru-scope "github.com/...")
+ '(lsp-rust-all-features t)
+ '(lsp-rust-analyzer-cargo-all-targets t)
+ '(lsp-rust-analyzer-display-chaining-hints t)
+ '(lsp-rust-analyzer-display-parameter-hints t)
+ '(lsp-rust-analyzer-lru-capacity 256)
+ '(lsp-rust-analyzer-server-command (quote ("/home/edgar/.local/bin/rust-analyzer")))
+ '(lsp-rust-analyzer-server-display-inlay-hints t)
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (tide typescript-mode vue-mode vue-html-mode company-tern rainbow-mode cuda-mode blacken yasnippet lsp-ui flycheck-rust use-package company-racer toml-mode cargo lsp-mode racer web-mode tern exec-path-from-shell go-imports ido-vertical-mode json-mode prettier-js multiple-cursors ag neotree go-guru company-solidity company-quickhelp company-jedi solaire-mode rust-mode hlinum indent-guide which-key rjsx-mode flycheck ample-theme material-theme jedi company-c-headers company-go solarized-theme zerodark-theme window-number powerline company go-mode)))
+    (company-lsp systemd protobuf-mode magit yaml-mode dockerfile-mode tide typescript-mode vue-mode vue-html-mode company-tern rainbow-mode cuda-mode blacken yasnippet lsp-ui flycheck-rust use-package company-racer toml-mode cargo lsp-mode racer web-mode tern exec-path-from-shell go-imports ido-vertical-mode json-mode prettier-js multiple-cursors ag neotree go-guru company-solidity company-quickhelp company-jedi solaire-mode rust-mode hlinum indent-guide which-key rjsx-mode flycheck ample-theme material-theme jedi company-c-headers company-go solarized-theme zerodark-theme window-number powerline company go-mode)))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
@@ -233,8 +240,7 @@
   "Connect to IRC, register nick, open commonly used channels"
   (interactive)
   (setq erc-max-buffer-size 20000
-	erc-autojoin-channels-alist '(("freenode.net" "##machinelearning" "#python" "simavr"
-				       "##electronics" "#arduino" "#numpy" "#ocaml" "##statistics"))
+	erc-autojoin-channels-alist '(("freenode.net"  "#rust"))
 	erc-hide-list '("JOIN" "PART" "QUIT"))
   ;; This is obviously untracked, if you copy my init.el,
   ;; either delete this code or provide your own creds
@@ -268,7 +274,7 @@
 
 ;; Keep the history between sessions, very nice to have.
 (savehist-mode 1)
-(global-set-key (kbd "M-/") 'company-complete)
+;; (global-set-key (kbd "M-/") 'company-complete)
 ;; ;; Just kill the shell, don't ask me.
 ;; ;; I do a lambda so that its not evaluated at init load time.
 (add-hook 'shell-mode-hook (lambda ()
@@ -340,7 +346,7 @@
       (solaire-mode)
       ;; (load-theme 'ample t))))
       ;; (load-theme 'material t))))
-      (load-theme 'zerodark t))))
+      (load-theme 'ample t))))
       ;; (load-theme 'misterioso t))))
       ;; (load-theme 'doom-city-lights t))))
 ;; (load-theme 'material t))))
@@ -407,6 +413,7 @@
   (lambda ()
     (setq-local gofmt-command "goimports")
     (company-mode)
+    (company-quickhelp-mode)
     (flycheck-mode)
     (go-guru-hl-identifier-mode)
     (visual-line-mode)
@@ -607,7 +614,7 @@
     ;; (setq-local js2-mode-show-strict-warnings nil)
 	  (setq-local js2-global-externs
       '("fetch" "async" "Headers" "await" "WebSocket"
-				"Blob" "FileReader"
+				"Blob" "FileReader" "exports"
          "__DEV__" "TextEncoder" "TextDecoder"
          "history" "AudioContext" "Draggable" "TweenLite"
          "FormData" "URLSearchParams" "URL"))
@@ -735,27 +742,32 @@
 (require 'rust-mode)
 (add-hook 'rust-mode-hook
 	  '(lambda ()
+	     (yas-minor-mode)
 	     (use-package toml-mode)
-	     (use-package rust-mode
-	     		  :hook (rust-mode . lsp))
 	     (use-package cargo
 	     		  :hook (rust-mode . cargo-minor-mode))
 	     (use-package flycheck-rust
 	     		  :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 	     (lsp)
 	     (lsp-ui-mode)
-	     (yas-minor-mode)
-	     (define-key rust-mode-map (kbd "M-/") #'company-indent-or-complete-common)
+	     ;; (define-key rust-mode-map (kbd "M-/") #'company-indent-)
 	     (define-key rust-mode-map (kbd "M-[") #'cargo-process-build)
 	     (define-key rust-mode-map (kbd "M-]") #'cargo-process-run)
 	     (define-key rust-mode-map (kbd "M-|") #'racer-describe-tooltip)
+	     ; Don't need flymake anymore
+	     (flymake-mode)
 	     (setq company-tooltip-align-annotations t)
 	     (setq company-minimum-prefix-length 1)
 	     (setq rust-format-on-save t)
 	     )
 	  )
 
-
+(add-hook 'typescript-mode
+	  '(lambda()
+	     (tern-mode)
+	     (js2-mode)
+	     (prettier-js-mode))
+	  )
 
 (require 'tramp)
 (add-to-list 'tramp-methods
@@ -1008,3 +1020,22 @@
 ;; https://github.com/lumiknit/emacs-pragmatapro-ligatures/blob/master/pragmatapro-lig.el
 (load "~/.emacs.d/pragmatapro-lig")
 (pragmatapro-lig-global-mode)
+
+(defvar bzg-big-fringe-mode nil)
+(define-minor-mode bzg-big-fringe-mode
+  "Minor mode to use big fringe in the current buffer."
+  :init-value nil
+  :global t
+  :variable bzg-big-fringe-mode
+  :group 'editing-basics
+  (if (not bzg-big-fringe-mode)
+      (progn
+    (set-fringe-style nil)
+    (setcdr (assq 'continuation fringe-indicator-alist)
+        '(left-curly-arrow right-curly-arrow)))
+    (progn
+      (set-fringe-style
+       (max (/ (* (- (window-total-width) 140) (frame-char-width)) 2) 8))
+
+      (setcdr (assq 'continuation fringe-indicator-alist)
+        '(nil nil)))))
