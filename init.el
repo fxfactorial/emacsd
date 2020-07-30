@@ -68,7 +68,8 @@
 ;;Melpa stuff, elpa is the offical package archive, melpa is the
 ;;community extension with stuff on github and melpa itself.
 (add-to-list 'package-archives
-  '("melpa" . "http://melpa.milkbox.net/packages/"))
+             '("melpa" . "https://melpa.org/packages/") t)
+
 
 ;; ;;Getting custom in before we set the tron theme
 (custom-set-variables
@@ -78,8 +79,7 @@
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(custom-safe-themes
-   (quote
-    ("36ca8f60565af20ef4f30783aa16a26d96c02df7b4e54e9900a5138fb33808da" "00445e6f15d31e9afaa23ed0d765850e9cd5e929be5e8e63b114a3346236c44c" "bf798e9e8ff00d4bf2512597f36e5a135ce48e477ce88a0764cfb5d8104e8163" "2809bcb77ad21312897b541134981282dc455ccd7c14d74cc333b6e549b824f3" "c433c87bd4b64b8ba9890e8ed64597ea0f8eb0396f4c9a9e01bd20a04d15d358" "1068ae7acf99967cc322831589497fee6fb430490147ca12ca7dd3e38d9b552a" default)))
+   '("36ca8f60565af20ef4f30783aa16a26d96c02df7b4e54e9900a5138fb33808da" "00445e6f15d31e9afaa23ed0d765850e9cd5e929be5e8e63b114a3346236c44c" "bf798e9e8ff00d4bf2512597f36e5a135ce48e477ce88a0764cfb5d8104e8163" "2809bcb77ad21312897b541134981282dc455ccd7c14d74cc333b6e549b824f3" "c433c87bd4b64b8ba9890e8ed64597ea0f8eb0396f4c9a9e01bd20a04d15d358" "1068ae7acf99967cc322831589497fee6fb430490147ca12ca7dd3e38d9b552a" default))
  '(display-time-mode t)
  '(fill-column 100)
  '(go-guru-hl-identifier-idle-time 0.25)
@@ -89,12 +89,12 @@
  '(lsp-rust-analyzer-display-chaining-hints t)
  '(lsp-rust-analyzer-display-parameter-hints t)
  '(lsp-rust-analyzer-lru-capacity 256)
- '(lsp-rust-analyzer-server-command (quote ("/home/edgar/.local/bin/rust-analyzer")))
+ '(lsp-rust-analyzer-server-command '("/home/edgar/.local/bin/rust-analyzer"))
  '(lsp-rust-analyzer-server-display-inlay-hints t)
+ '(lsp-ui-sideline-show-hover t)
  '(menu-bar-mode nil)
  '(package-selected-packages
-   (quote
-    (company-lsp systemd protobuf-mode magit yaml-mode dockerfile-mode tide typescript-mode vue-mode vue-html-mode company-tern rainbow-mode cuda-mode blacken yasnippet lsp-ui flycheck-rust use-package company-racer toml-mode cargo lsp-mode racer web-mode tern exec-path-from-shell go-imports ido-vertical-mode json-mode prettier-js multiple-cursors ag neotree go-guru company-solidity company-quickhelp company-jedi solaire-mode rust-mode hlinum indent-guide which-key rjsx-mode flycheck ample-theme material-theme jedi company-c-headers company-go solarized-theme zerodark-theme window-number powerline company go-mode)))
+   '(solidity-flycheck solidity-mode lsp-treemacs company-lsp systemd protobuf-mode magit yaml-mode dockerfile-mode tide typescript-mode vue-mode vue-html-mode company-tern rainbow-mode cuda-mode blacken yasnippet lsp-ui flycheck-rust use-package company-racer toml-mode cargo lsp-mode racer web-mode tern exec-path-from-shell go-imports ido-vertical-mode json-mode prettier-js multiple-cursors ag neotree go-guru company-solidity company-quickhelp company-jedi solaire-mode rust-mode hlinum indent-guide which-key rjsx-mode flycheck ample-theme material-theme jedi company-c-headers company-go solarized-theme zerodark-theme window-number powerline company go-mode))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
@@ -729,33 +729,33 @@
 	     (define-key mips-mode-map (kbd "M-/") 'dabbrev-expand)
 	     ))
 
-(add-hook 'rust-mode-hook #'racer-mode)
-(add-hook 'racer-mode-hook #'eldoc-mode)
-(add-hook 'racer-mode-hook #'company-mode)
+(require 'company-lsp)
+(push 'company-lsp company-backends)
 
 (use-package lsp-mode
   :commands lsp
   :config (require 'lsp-clients))
-
 (use-package lsp-ui)
+(use-package rust-mode
+  :hook (rust-mode . lsp))
+(use-package toml-mode)
+(use-package cargo
+  :hook (rust-mode . cargo-minor-mode))
+(use-package flycheck-rust
+  :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+
 
 (require 'rust-mode)
 (add-hook 'rust-mode-hook
 	  '(lambda ()
+	     (lsp-ui-sideline)
 	     (yas-minor-mode)
-	     (use-package toml-mode)
-	     (use-package cargo
-	     		  :hook (rust-mode . cargo-minor-mode))
-	     (use-package flycheck-rust
-	     		  :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
-	     (lsp)
-	     (lsp-ui-mode)
-	     ;; (define-key rust-mode-map (kbd "M-/") #'company-indent-)
+	     (define-key rust-mode-map (kbd "M-/") #'company-indent-or-complete-common)
 	     (define-key rust-mode-map (kbd "M-[") #'cargo-process-build)
 	     (define-key rust-mode-map (kbd "M-]") #'cargo-process-run)
 	     (define-key rust-mode-map (kbd "M-|") #'racer-describe-tooltip)
 	     ; Don't need flymake anymore
-	     (flymake-mode)
+	     (lsp-treemacs-sync-mode 1)
 	     (setq company-tooltip-align-annotations t)
 	     (setq company-minimum-prefix-length 1)
 	     (setq rust-format-on-save t)
@@ -1039,3 +1039,11 @@
 
       (setcdr (assq 'continuation fringe-indicator-alist)
         '(nil nil)))))
+
+
+;; smart contract crap
+(add-hook 'solidity-mode-hook
+	  (lambda ()
+	    (set (make-local-variable 'company-backends)
+		 (append '((company-solidity company-capf company-dabbrev-code))
+			 company-backends))))
