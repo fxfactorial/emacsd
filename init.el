@@ -1,4 +1,10 @@
+(setq create-lockfiles nil)
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+;disable backup
+(setq backup-inhibited t)
+;disable auto save
+(setq auto-save-default nil)
+(setq make-backup-files nil)
 
 (defvar osx-base-path
   "/Applications/Xcode.app/Contents/Developer/Platforms/")
@@ -79,7 +85,7 @@
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(custom-safe-themes
-   '("36ca8f60565af20ef4f30783aa16a26d96c02df7b4e54e9900a5138fb33808da" "00445e6f15d31e9afaa23ed0d765850e9cd5e929be5e8e63b114a3346236c44c" "bf798e9e8ff00d4bf2512597f36e5a135ce48e477ce88a0764cfb5d8104e8163" "2809bcb77ad21312897b541134981282dc455ccd7c14d74cc333b6e549b824f3" "c433c87bd4b64b8ba9890e8ed64597ea0f8eb0396f4c9a9e01bd20a04d15d358" "1068ae7acf99967cc322831589497fee6fb430490147ca12ca7dd3e38d9b552a" default))
+	 '("36ca8f60565af20ef4f30783aa16a26d96c02df7b4e54e9900a5138fb33808da" "00445e6f15d31e9afaa23ed0d765850e9cd5e929be5e8e63b114a3346236c44c" "bf798e9e8ff00d4bf2512597f36e5a135ce48e477ce88a0764cfb5d8104e8163" "2809bcb77ad21312897b541134981282dc455ccd7c14d74cc333b6e549b824f3" "c433c87bd4b64b8ba9890e8ed64597ea0f8eb0396f4c9a9e01bd20a04d15d358" "1068ae7acf99967cc322831589497fee6fb430490147ca12ca7dd3e38d9b552a" default))
  '(display-time-mode t)
  '(fill-column 100)
  '(go-guru-hl-identifier-idle-time 0.25)
@@ -94,7 +100,7 @@
  '(lsp-ui-sideline-show-hover t)
  '(menu-bar-mode nil)
  '(package-selected-packages
-   '(solidity-flycheck solidity-mode lsp-treemacs company-lsp systemd protobuf-mode magit yaml-mode dockerfile-mode tide typescript-mode vue-mode vue-html-mode company-tern rainbow-mode cuda-mode blacken yasnippet lsp-ui flycheck-rust use-package company-racer toml-mode cargo lsp-mode racer web-mode tern exec-path-from-shell go-imports ido-vertical-mode json-mode prettier-js multiple-cursors ag neotree go-guru company-solidity company-quickhelp company-jedi solaire-mode rust-mode hlinum indent-guide which-key rjsx-mode flycheck ample-theme material-theme jedi company-c-headers company-go solarized-theme zerodark-theme window-number powerline company go-mode))
+	 '(vyper-mode company-web xref-js2 solidity-flycheck solidity-mode lsp-treemacs company-lsp systemd protobuf-mode magit yaml-mode dockerfile-mode tide typescript-mode vue-mode vue-html-mode company-tern rainbow-mode cuda-mode blacken yasnippet lsp-ui flycheck-rust use-package company-racer toml-mode cargo lsp-mode racer web-mode tern exec-path-from-shell go-imports ido-vertical-mode json-mode prettier-js multiple-cursors ag neotree go-guru company-solidity company-quickhelp company-jedi solaire-mode rust-mode hlinum indent-guide which-key rjsx-mode flycheck ample-theme material-theme jedi company-c-headers company-go solarized-theme zerodark-theme window-number powerline company go-mode))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
@@ -1041,9 +1047,18 @@
         '(nil nil)))))
 
 
+(setq solidity-solc-path "/usr/bin/solc")
+(setq solidity-solium-path "/snap/bin/solium")
+(setq solidity-flycheck-solc-checker-active t)
+(setq solidity-flycheck-solium-checker-active t)
+(setq flycheck-solidity-solc-addstd-contracts t)
+(add-to-list 'flycheck-checkers 'solidity-checker)
+
 ;; smart contract crap
 (add-hook 'solidity-mode-hook
 	  (lambda ()
+	    (company-mode)
 	    (set (make-local-variable 'company-backends)
 		 (append '((company-solidity company-capf company-dabbrev-code))
-			 company-backends))))
+			 company-backends))
+	    (local-set-key (kbd "M-/") 'company-solidity)))
