@@ -1,3 +1,8 @@
+(setq solidity-solc-path "/usr/bin/solc")
+(setq solidity-solium-path "/snap/bin/solium")
+(setq solidity-flycheck-solc-checker-active t)
+(setq solidity-flycheck-solium-checker-active t)
+(setq flycheck-solidity-solc-addstd-contracts t)
 (setq create-lockfiles nil)
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 ;disable backup
@@ -85,7 +90,7 @@
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(custom-safe-themes
-	 '("36ca8f60565af20ef4f30783aa16a26d96c02df7b4e54e9900a5138fb33808da" "00445e6f15d31e9afaa23ed0d765850e9cd5e929be5e8e63b114a3346236c44c" "bf798e9e8ff00d4bf2512597f36e5a135ce48e477ce88a0764cfb5d8104e8163" "2809bcb77ad21312897b541134981282dc455ccd7c14d74cc333b6e549b824f3" "c433c87bd4b64b8ba9890e8ed64597ea0f8eb0396f4c9a9e01bd20a04d15d358" "1068ae7acf99967cc322831589497fee6fb430490147ca12ca7dd3e38d9b552a" default))
+	 '("c9ddf33b383e74dac7690255dd2c3dfa1961a8e8a1d20e401c6572febef61045" "d4f8fcc20d4b44bf5796196dbeabec42078c2ddb16dcb6ec145a1c610e0842f3" "7f1d414afda803f3244c6fb4c2c64bea44dac040ed3731ec9d75275b9e831fe5" "c560237b7505f67a271def31c706151afd7aa6eba9f69af77ec05bde5408dbcd" "36ca8f60565af20ef4f30783aa16a26d96c02df7b4e54e9900a5138fb33808da" "00445e6f15d31e9afaa23ed0d765850e9cd5e929be5e8e63b114a3346236c44c" "bf798e9e8ff00d4bf2512597f36e5a135ce48e477ce88a0764cfb5d8104e8163" "2809bcb77ad21312897b541134981282dc455ccd7c14d74cc333b6e549b824f3" "c433c87bd4b64b8ba9890e8ed64597ea0f8eb0396f4c9a9e01bd20a04d15d358" "1068ae7acf99967cc322831589497fee6fb430490147ca12ca7dd3e38d9b552a" default))
  '(display-time-mode t)
  '(fill-column 100)
  '(go-guru-hl-identifier-idle-time 0.25)
@@ -100,11 +105,22 @@
  '(lsp-ui-sideline-show-hover t)
  '(menu-bar-mode nil)
  '(package-selected-packages
-	 '(vyper-mode company-web xref-js2 solidity-flycheck solidity-mode lsp-treemacs company-lsp systemd protobuf-mode magit yaml-mode dockerfile-mode tide typescript-mode vue-mode vue-html-mode company-tern rainbow-mode cuda-mode blacken yasnippet lsp-ui flycheck-rust use-package company-racer toml-mode cargo lsp-mode racer web-mode tern exec-path-from-shell go-imports ido-vertical-mode json-mode prettier-js multiple-cursors ag neotree go-guru company-solidity company-quickhelp company-jedi solaire-mode rust-mode hlinum indent-guide which-key rjsx-mode flycheck ample-theme material-theme jedi company-c-headers company-go solarized-theme zerodark-theme window-number powerline company go-mode))
+	 '(company-box spacegray-theme vyper-mode company-web xref-js2 solidity-flycheck solidity-mode lsp-treemacs systemd protobuf-mode magit yaml-mode dockerfile-mode tide typescript-mode vue-mode vue-html-mode company-tern rainbow-mode cuda-mode blacken yasnippet lsp-ui flycheck-rust use-package company-racer toml-mode cargo lsp-mode racer web-mode tern exec-path-from-shell go-imports ido-vertical-mode json-mode prettier-js multiple-cursors ag neotree go-guru company-solidity company-quickhelp company-jedi solaire-mode rust-mode hlinum indent-guide which-key rjsx-mode flycheck ample-theme material-theme jedi company-c-headers company-go solarized-theme zerodark-theme window-number powerline company go-mode))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
 ;; Skeletons definitions for common includes.
+
+(use-package lsp-mode)
+(use-package lsp-ui)
+(use-package rust-mode
+  :hook (rust-mode . lsp))
+(use-package toml-mode)
+(use-package cargo
+  :hook (rust-mode . cargo-minor-mode))
+(use-package flycheck-rust
+  :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+
 
 (define-skeleton my-html-defaults
   "Minimum HTML needed"
@@ -350,9 +366,9 @@
     (lambda ()
       (global-hl-line-mode 1)
       (solaire-mode)
-      ;; (load-theme 'ample t))))
-      ;; (load-theme 'material t))))
       (load-theme 'ample t))))
+      ;; (load-theme 'material t))))
+      ;; (load-theme 'ample t))))
       ;; (load-theme 'misterioso t))))
       ;; (load-theme 'doom-city-lights t))))
 ;; (load-theme 'material t))))
@@ -600,35 +616,32 @@
 
 (add-hook 'rjsx-mode-hook
   (lambda ()
-    ;; (load-file "~/.emacs.d/emacs-flow-jsx-mode.el")
-    ;; (flow-jsx-mode)
-    ;; (flow-minor-mode)
+    (require 'lsp-mode)
     (setq-default indent-tabs-mode t)
     (setq-default tab-width 2)
     (setq-default prettier-js-args
       '( "--single-quote"
          "--tab-width" "2"
-         "--print-width" "100"
+         "--print-width" "80"
          "--jsx-bracket-same-line"
-         "--trailing-comma" "es5"
-         ))
+         "--trailing-comma" "es5"))
     (setq-local show-trailing-whitespace t)
     (setq-local js2-basic-offset 2)
     (visual-line-mode)
-    ;; These two because flow support is shit and get syntax errors.
-    (setq-local js2-mode-show-parse-errors nil)
-    ;; (setq-local js2-mode-show-strict-warnings nil)
-	  (setq-local js2-global-externs
-      '("fetch" "async" "Headers" "await" "WebSocket"
-				"Blob" "FileReader" "exports"
-         "__DEV__" "TextEncoder" "TextDecoder"
-         "history" "AudioContext" "Draggable" "TweenLite"
-         "FormData" "URLSearchParams" "URL"))
+    (setq-local js2-global-externs
+		'("fetch" "async" "Headers" "await" "WebSocket"
+		  "require" "module" "process" "Buffer"
+		  "Blob" "FileReader" "exports"
+		  "__DEV__" "TextEncoder" "TextDecoder"
+		  "history" "AudioContext" "Draggable" "TweenLite"
+		  "FormData" "URLSearchParams" "URL"
+		  ))
     (add-to-list 'write-file-functions 'delete-trailing-whitespace)
     (prettify-symbols-mode)
+    (lsp-mode)
     (company-mode)
+    (company-box-mode)
     (tern-mode)
-    ;; (flow-minor-mode)
     (define-key tern-mode-keymap (kbd "C-c C-c") nil)
     (define-key js2-mode-map (kbd "M-/") 'company-tern)
     (define-key js2-mode-map (kbd "M-.") nil)
@@ -663,12 +676,12 @@
     (define-key company-mode-map (kbd "M-h") 'company-c-headers)
     (abbrev-mode -1)))
 
-(add-hook
- 'c-mode-common-hook
- (lambda ()
-   (add-hook 'before-save-hook 'clang-format-buffer nil 'local)
-   )
- )
+;; (add-hook
+;;  'c-mode-common-hook
+;;  (lambda ()
+;;    (add-hook 'before-save-hook 'clang-format-buffer nil 'local)
+;;    )
+;;  )
 
 (add-hook 'c++-mode-hook
   (lambda ()
@@ -734,21 +747,6 @@
 	  '(lambda ()
 	     (define-key mips-mode-map (kbd "M-/") 'dabbrev-expand)
 	     ))
-
-(require 'company-lsp)
-(push 'company-lsp company-backends)
-
-(use-package lsp-mode
-  :commands lsp
-  :config (require 'lsp-clients))
-(use-package lsp-ui)
-(use-package rust-mode
-  :hook (rust-mode . lsp))
-(use-package toml-mode)
-(use-package cargo
-  :hook (rust-mode . cargo-minor-mode))
-(use-package flycheck-rust
-  :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
 
 (require 'rust-mode)
@@ -1047,18 +1045,17 @@
         '(nil nil)))))
 
 
-(setq solidity-solc-path "/usr/bin/solc")
-(setq solidity-solium-path "/snap/bin/solium")
-(setq solidity-flycheck-solc-checker-active t)
-(setq solidity-flycheck-solium-checker-active t)
-(setq flycheck-solidity-solc-addstd-contracts t)
-(add-to-list 'flycheck-checkers 'solidity-checker)
 
 ;; smart contract crap
 (add-hook 'solidity-mode-hook
 	  (lambda ()
+			(require 'solidity-flycheck)
+			(require 'company-solidity)
 	    (company-mode)
+			(prettier-js-mode)
+			(add-hook 'before-save-hook 'prettier-js)
+			(add-to-list 'flycheck-checkers 'solidity-checker)
 	    (set (make-local-variable 'company-backends)
-		 (append '((company-solidity company-capf company-dabbrev-code))
-			 company-backends))
+					 (append '((company-solidity company-capf company-dabbrev-code))
+									 company-backends))
 	    (local-set-key (kbd "M-/") 'company-solidity)))
