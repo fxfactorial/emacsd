@@ -281,6 +281,15 @@
 (add-to-list 'auto-mode-alist '("\\zshrc\\'" . shell-script-mode))
 ;; (add-to-list 'auto-mode-alist '("\\BUILD\\'" . bazel-mode))
 
+
+(add-hook
+ 'sh-mode-hook
+ (lambda ()
+   (setq-local indent-tabs-mode nil)
+   (setq-local sh-indentation 2)
+   (setq-local sh-basic-offset 2)
+   ))
+
 (global-set-key (kbd "C-M-e") 'irc-connect)
 (global-set-key (kbd "C-M-p") 'run-python)
 ;; Love ido, idiot for not using it earlier.
@@ -415,8 +424,8 @@
   'python-mode-hook
   (lambda ()
     (setq-default indent-tabs-mode t)
-	(setq-local python-shell-interpreter "ipython3")
-	(setq-local python-shell-interpreter-args "-i")
+		(setq-local python-shell-interpreter "ipython3")
+		(setq-local python-shell-interpreter-args "-i")
     (setq-default tab-width 4)
     (setq-default py-indent-tabs-mode t)
     (define-key python-mode-map (kbd "M-q") 'python-fill-paren)
@@ -445,7 +454,7 @@
     (setq-local company-idle-delay .3)                         ; decrease delay before autocompletion popup shows
     (setq-local company-echo-delay 0)                          ; remove annoying blinking
     (setq-local company-begin-commands '(self-insert-command))
-    (add-hook 'before-save-hook #'gofmt-before-save)
+    (add-hook 'before-save-hook #'gofmt-before-save nil t)
     (local-set-key (kbd "M-.") 'godef-jump)
     (local-set-key (kbd "M-,") 'pop-tag-mark)
     (local-set-key (kbd "M-]") 'next-error)
@@ -638,7 +647,7 @@
 		  ))
     (add-to-list 'write-file-functions 'delete-trailing-whitespace)
     (prettify-symbols-mode)
-    (lsp-mode)
+    ;; (lsp-mode)
     (company-mode)
     (company-box-mode)
     (tern-mode)
@@ -1040,11 +1049,8 @@
     (progn
       (set-fringe-style
        (max (/ (* (- (window-total-width) 140) (frame-char-width)) 2) 8))
-
       (setcdr (assq 'continuation fringe-indicator-alist)
         '(nil nil)))))
-
-
 
 ;; smart contract crap
 (add-hook 'solidity-mode-hook
@@ -1053,7 +1059,7 @@
 			(require 'company-solidity)
 	    (company-mode)
 			(prettier-js-mode)
-			(add-hook 'before-save-hook 'prettier-js)
+			(add-hook 'before-save-hook 'prettier-js nil t)
 			(add-to-list 'flycheck-checkers 'solidity-checker)
 	    (set (make-local-variable 'company-backends)
 					 (append '((company-solidity company-capf company-dabbrev-code))
