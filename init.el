@@ -28,8 +28,8 @@
 	    flycheck-c/c++-clang-executable "/usr/bin/clang"
 	    mac-command-modifier 'meta))
   (set-face-attribute 'default nil :height 110)
-  (setq company-clang-executable "/usr/bin/clang++-4.0"
-		flycheck-c/c++-clang-executable "/usr/bin/clang++-4.0"
+  (setq company-clang-executable "/usr/bin/clang++"
+		flycheck-c/c++-clang-executable "/usr/bin/clang++"
 		company-clang-rguments '("-std=c++17" "-stdlib=libc++")))
 
 (set-face-attribute 'default nil
@@ -90,7 +90,7 @@
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(custom-safe-themes
-	 '("c9ddf33b383e74dac7690255dd2c3dfa1961a8e8a1d20e401c6572febef61045" "d4f8fcc20d4b44bf5796196dbeabec42078c2ddb16dcb6ec145a1c610e0842f3" "7f1d414afda803f3244c6fb4c2c64bea44dac040ed3731ec9d75275b9e831fe5" "c560237b7505f67a271def31c706151afd7aa6eba9f69af77ec05bde5408dbcd" "36ca8f60565af20ef4f30783aa16a26d96c02df7b4e54e9900a5138fb33808da" "00445e6f15d31e9afaa23ed0d765850e9cd5e929be5e8e63b114a3346236c44c" "bf798e9e8ff00d4bf2512597f36e5a135ce48e477ce88a0764cfb5d8104e8163" "2809bcb77ad21312897b541134981282dc455ccd7c14d74cc333b6e549b824f3" "c433c87bd4b64b8ba9890e8ed64597ea0f8eb0396f4c9a9e01bd20a04d15d358" "1068ae7acf99967cc322831589497fee6fb430490147ca12ca7dd3e38d9b552a" default))
+   '("c9ddf33b383e74dac7690255dd2c3dfa1961a8e8a1d20e401c6572febef61045" "d4f8fcc20d4b44bf5796196dbeabec42078c2ddb16dcb6ec145a1c610e0842f3" "7f1d414afda803f3244c6fb4c2c64bea44dac040ed3731ec9d75275b9e831fe5" "c560237b7505f67a271def31c706151afd7aa6eba9f69af77ec05bde5408dbcd" "36ca8f60565af20ef4f30783aa16a26d96c02df7b4e54e9900a5138fb33808da" "00445e6f15d31e9afaa23ed0d765850e9cd5e929be5e8e63b114a3346236c44c" "bf798e9e8ff00d4bf2512597f36e5a135ce48e477ce88a0764cfb5d8104e8163" "2809bcb77ad21312897b541134981282dc455ccd7c14d74cc333b6e549b824f3" "c433c87bd4b64b8ba9890e8ed64597ea0f8eb0396f4c9a9e01bd20a04d15d358" "1068ae7acf99967cc322831589497fee6fb430490147ca12ca7dd3e38d9b552a" default))
  '(display-time-mode t)
  '(fill-column 100)
  '(go-guru-hl-identifier-idle-time 0.25)
@@ -105,7 +105,7 @@
  '(lsp-ui-sideline-show-hover t)
  '(menu-bar-mode nil)
  '(package-selected-packages
-	 '(company-box spacegray-theme vyper-mode company-web xref-js2 solidity-flycheck solidity-mode lsp-treemacs systemd protobuf-mode magit yaml-mode dockerfile-mode tide typescript-mode vue-mode vue-html-mode company-tern rainbow-mode cuda-mode blacken yasnippet lsp-ui flycheck-rust use-package company-racer toml-mode cargo lsp-mode racer web-mode tern exec-path-from-shell go-imports ido-vertical-mode json-mode prettier-js multiple-cursors ag neotree go-guru company-solidity company-quickhelp company-jedi solaire-mode rust-mode hlinum indent-guide which-key rjsx-mode flycheck ample-theme material-theme jedi company-c-headers company-go solarized-theme zerodark-theme window-number powerline company go-mode))
+   '(clang-format company-box spacegray-theme vyper-mode company-web xref-js2 solidity-flycheck solidity-mode lsp-treemacs systemd protobuf-mode magit yaml-mode dockerfile-mode tide typescript-mode vue-mode vue-html-mode company-tern rainbow-mode cuda-mode blacken yasnippet lsp-ui flycheck-rust use-package company-racer toml-mode cargo lsp-mode racer web-mode tern exec-path-from-shell go-imports ido-vertical-mode json-mode prettier-js multiple-cursors ag neotree go-guru company-solidity company-quickhelp company-jedi solaire-mode rust-mode hlinum indent-guide which-key rjsx-mode flycheck ample-theme material-theme jedi company-c-headers company-go solarized-theme zerodark-theme window-number powerline company go-mode))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
@@ -640,7 +640,8 @@
     (setq-local js2-global-externs
 		'("fetch" "async" "Headers" "await" "WebSocket"
 		  "require" "module" "process" "Buffer"
-		  "Blob" "FileReader" "exports"
+			"contract" "artifacts" "it" "assert"
+		  "Blob" "FileReader" "exports" "web3"
 		  "__DEV__" "TextEncoder" "TextDecoder"
 		  "history" "AudioContext" "Draggable" "TweenLite"
 		  "FormData" "URLSearchParams" "URL"
@@ -1055,13 +1056,17 @@
 ;; smart contract crap
 (add-hook 'solidity-mode-hook
 	  (lambda ()
-			(require 'solidity-flycheck)
-			(require 'company-solidity)
+	    (require 'solidity-flycheck)
+	    (require 'company-solidity)
+	    (setq-default prettier-js-args
+			  '( "--single-quote"
+			     "--tab-width" "2"
+			     "--print-width" "80"))
 	    (company-mode)
-			(prettier-js-mode)
-			(add-hook 'before-save-hook 'prettier-js nil t)
-			(add-to-list 'flycheck-checkers 'solidity-checker)
+	    (prettier-js-mode)
+	    (add-hook 'before-save-hook 'prettier-js nil t)
+	    (add-to-list 'flycheck-checkers 'solidity-checker)
 	    (set (make-local-variable 'company-backends)
-					 (append '((company-solidity company-capf company-dabbrev-code))
-									 company-backends))
+		 (append '((company-solidity company-capf company-dabbrev-code))
+			 company-backends))
 	    (local-set-key (kbd "M-/") 'company-solidity)))

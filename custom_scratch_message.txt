@@ -106,3 +106,8 @@ degrees away from the old vector. This is a form of stability,
 not in the length of the new vector (the eigenvalues of A could
 be large, so vectors could grow very large when A is applied to
 them), but in the direction of the new vector.
+
+
+To re-compile all packages, type
+M-: (byte-recompile-directory package-user-dir nil 'force).
+After restarting Emacs, packages should work fine again.
