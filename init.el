@@ -71,6 +71,7 @@
      (insert-file-contents "~/.emacs.d/custom_scratch_message.txt")
      (setq initial-scratch-message (buffer-string)))))
 (package-initialize)
+(exec-path-from-shell-initialize)
 (which-key-mode)
 ;; (powerline-center-theme)
 (autoload 'window-number-mode "window-number")
@@ -102,6 +103,8 @@
  '(lsp-rust-analyzer-lru-capacity 256)
  '(lsp-rust-analyzer-server-command '("/home/edgar/.local/bin/rust-analyzer"))
  '(lsp-rust-analyzer-server-display-inlay-hints t)
+ '(lsp-ui-doc-max-height 80)
+ '(lsp-ui-doc-max-width 120)
  '(lsp-ui-sideline-show-hover t)
  '(menu-bar-mode nil)
  '(package-selected-packages
@@ -297,8 +300,8 @@
 (ido-mode 1)
 (ido-vertical-mode)
 ;; Use the path set up by zsh, aka the ~/.zshrc.
-(when (memq window-system '(mac ns))
-  (exec-path-from-shell-initialize))
+;; (when (memq window-system '(mac ns))
+  ;; (exec-path-from-shell-initialize))
 ;; Annoying issue with TRAMP constantly asking for password
 (setq tramp-default-method "ssh")
 (setq password-cache-expiry nil)
@@ -438,6 +441,40 @@
     (company-mode)
     (company-quickhelp-mode)
     (setq-local show-trailing-whitespace t)))
+
+
+(setq lsp-gopls-staticcheck t)
+(setq lsp-eldoc-render-all t)
+(setq lsp-gopls-complete-unimported t)
+
+(use-package lsp-mode
+  :ensure t
+  :commands (lsp lsp-deferred)
+  :hook (go-mode . lsp-deferred))
+
+;;Set up before-save hooks to format buffer and add/delete imports.
+;;Make sure you don't have other gofmt/goimports hooks enabled.
+
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+
+;;Optional - provides fancier overlays.
+
+(use-package lsp-ui
+  :ensure t
+  :commands lsp-ui-mode
+  :init
+)
+
+
+(setq lsp-ui-doc-enable t
+      lsp-ui-peek-enable t
+      lsp-ui-sideline-enable nil
+      lsp-ui-imenu-enable t
+      lsp-ui-flycheck-enable t)
+
 
 ;; Go Code things
 (add-hook 'go-mode-hook

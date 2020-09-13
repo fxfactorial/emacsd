@@ -111,3 +111,17 @@ them), but in the direction of the new vector.
 To re-compile all packages, type
 M-: (byte-recompile-directory package-user-dir nil 'force).
 After restarting Emacs, packages should work fine again.
+
+installing go crap
+
+go get golang.org/x/tools/cmd/goimports; \
+go get golang.org/x/lint/golint; \
+go get github.com/rogpeppe/godef; \
+go get github.com/go-delve/delve/cmd/dlv; \
+go get github.com/golang/mock/mockgen; \
+go get github.com/stamblerre/gocode; \
+go get golang.org/x/tools/gopls@latest; \
+go get golang.org/x/tools/...
+
+
+for lsp, need to do lsp-workspace-add 
