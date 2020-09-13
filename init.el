@@ -475,7 +475,6 @@
       lsp-ui-imenu-enable t
       lsp-ui-flycheck-enable t)
 
-
 ;; Go Code things
 (add-hook 'go-mode-hook
   (lambda ()
@@ -487,6 +486,7 @@
     (visual-line-mode)
     (powerline-default-theme)
     (setq-local tab-width 2)
+    (setq-local company-tooltip-align-annotations t)
     (setq-local company-tooltip-limit 20)                      ; bigger popup window
     (setq-local company-idle-delay .3)                         ; decrease delay before autocompletion popup shows
     (setq-local company-echo-delay 0)                          ; remove annoying blinking
