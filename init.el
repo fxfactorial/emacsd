@@ -1,5 +1,6 @@
+(global-so-long-mode 1)
+(setq bidi-inhibit-bpa t)
 (setq solidity-solc-path "/usr/bin/solc")
-(setq solidity-solium-path "/snap/bin/solium")
 (setq solidity-flycheck-solc-checker-active t)
 (setq solidity-flycheck-solium-checker-active t)
 (setq flycheck-solidity-solc-addstd-contracts t)
@@ -10,6 +11,7 @@
 ;disable auto save
 (setq auto-save-default nil)
 (setq make-backup-files nil)
+(setq lsp-file-watch-threshold nil)
 
 (defvar osx-base-path
   "/Applications/Xcode.app/Contents/Developer/Platforms/")
@@ -60,9 +62,7 @@
 (setq
   use-dialog-box nil
   ring-bell-function 'ignore
-  company-async-timeout 10
-  user-full-name "Edgar Aroutiounian"
-  user-mail-address "edgar.aroutiounian@getcruise.com")
+  company-async-timeout 10)
 
 ;; Giving myself this helpful buffer, otherwise way to many damn key
 ;; bindings to remember!
@@ -91,7 +91,7 @@
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(custom-safe-themes
-   '("c9ddf33b383e74dac7690255dd2c3dfa1961a8e8a1d20e401c6572febef61045" "d4f8fcc20d4b44bf5796196dbeabec42078c2ddb16dcb6ec145a1c610e0842f3" "7f1d414afda803f3244c6fb4c2c64bea44dac040ed3731ec9d75275b9e831fe5" "c560237b7505f67a271def31c706151afd7aa6eba9f69af77ec05bde5408dbcd" "36ca8f60565af20ef4f30783aa16a26d96c02df7b4e54e9900a5138fb33808da" "00445e6f15d31e9afaa23ed0d765850e9cd5e929be5e8e63b114a3346236c44c" "bf798e9e8ff00d4bf2512597f36e5a135ce48e477ce88a0764cfb5d8104e8163" "2809bcb77ad21312897b541134981282dc455ccd7c14d74cc333b6e549b824f3" "c433c87bd4b64b8ba9890e8ed64597ea0f8eb0396f4c9a9e01bd20a04d15d358" "1068ae7acf99967cc322831589497fee6fb430490147ca12ca7dd3e38d9b552a" default))
+   '("7922b14d8971cce37ddb5e487dbc18da5444c47f766178e5a4e72f90437c0711" "edb73be436e0643727f15ebee8ad107e899ea60a3a70020dfa68ae00b0349a87" "c9ddf33b383e74dac7690255dd2c3dfa1961a8e8a1d20e401c6572febef61045" "d4f8fcc20d4b44bf5796196dbeabec42078c2ddb16dcb6ec145a1c610e0842f3" "7f1d414afda803f3244c6fb4c2c64bea44dac040ed3731ec9d75275b9e831fe5" "c560237b7505f67a271def31c706151afd7aa6eba9f69af77ec05bde5408dbcd" "36ca8f60565af20ef4f30783aa16a26d96c02df7b4e54e9900a5138fb33808da" "00445e6f15d31e9afaa23ed0d765850e9cd5e929be5e8e63b114a3346236c44c" "bf798e9e8ff00d4bf2512597f36e5a135ce48e477ce88a0764cfb5d8104e8163" "2809bcb77ad21312897b541134981282dc455ccd7c14d74cc333b6e549b824f3" "c433c87bd4b64b8ba9890e8ed64597ea0f8eb0396f4c9a9e01bd20a04d15d358" "1068ae7acf99967cc322831589497fee6fb430490147ca12ca7dd3e38d9b552a" default))
  '(display-time-mode t)
  '(fill-column 100)
  '(go-guru-hl-identifier-idle-time 0.25)
@@ -108,7 +108,7 @@
  '(lsp-ui-sideline-show-hover t)
  '(menu-bar-mode nil)
  '(package-selected-packages
-   '(clang-format company-box spacegray-theme vyper-mode company-web xref-js2 solidity-flycheck solidity-mode lsp-treemacs systemd protobuf-mode magit yaml-mode dockerfile-mode tide typescript-mode vue-mode vue-html-mode company-tern rainbow-mode cuda-mode blacken yasnippet lsp-ui flycheck-rust use-package company-racer toml-mode cargo lsp-mode racer web-mode tern exec-path-from-shell go-imports ido-vertical-mode json-mode prettier-js multiple-cursors ag neotree go-guru company-solidity company-quickhelp company-jedi solaire-mode rust-mode hlinum indent-guide which-key rjsx-mode flycheck ample-theme material-theme jedi company-c-headers company-go solarized-theme zerodark-theme window-number powerline company go-mode))
+   '(cmake-mode all-the-icons-gnus all-the-icons-ivy all-the-icons-dired all-the-icons-ibuffer go-dlv clang-format company-box spacegray-theme vyper-mode company-web xref-js2 solidity-flycheck solidity-mode lsp-treemacs systemd protobuf-mode magit yaml-mode dockerfile-mode tide typescript-mode vue-mode vue-html-mode company-tern rainbow-mode cuda-mode blacken yasnippet lsp-ui flycheck-rust use-package company-racer toml-mode cargo lsp-mode racer web-mode tern exec-path-from-shell go-imports ido-vertical-mode json-mode prettier-js multiple-cursors ag neotree go-guru company-solidity company-quickhelp company-jedi solaire-mode rust-mode hlinum indent-guide which-key rjsx-mode flycheck ample-theme material-theme jedi company-c-headers company-go solarized-theme zerodark-theme window-number powerline company go-mode))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
@@ -378,7 +378,7 @@
     (lambda ()
       (global-hl-line-mode 1)
       (solaire-mode)
-      (load-theme 'ample t))))
+      (load-theme 'material t))))
       ;; (load-theme 'material t))))
       ;; (load-theme 'ample t))))
       ;; (load-theme 'misterioso t))))
@@ -482,7 +482,7 @@
     (company-mode)
     (company-quickhelp-mode)
     (flycheck-mode)
-    (go-guru-hl-identifier-mode)
+    ;; (go-guru-hl-identifier-mode)
     (visual-line-mode)
     (powerline-default-theme)
     (setq-local tab-width 2)
@@ -490,12 +490,14 @@
     (setq-local company-tooltip-limit 20)                      ; bigger popup window
     (setq-local company-idle-delay .3)                         ; decrease delay before autocompletion popup shows
     (setq-local company-echo-delay 0)                          ; remove annoying blinking
-    (setq-local company-begin-commands '(self-insert-command))
+    ;; (setq-local company-begin-commands '(self-insert-command))
     (add-hook 'before-save-hook #'gofmt-before-save nil t)
     (local-set-key (kbd "M-.") 'godef-jump)
     (local-set-key (kbd "M-,") 'pop-tag-mark)
     (local-set-key (kbd "M-]") 'next-error)
     (local-set-key (kbd "M-[") 'previous-error)
+    (local-set-key (kbd "M-n") 'forward-paragraph)
+    (local-set-key (kbd "M-p") 'backward-paragraph)
     (local-set-key (kbd "M-/") 'company-go)))
 
 ;; SQL Stuff
@@ -644,6 +646,8 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
 ;; (add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
 (add-to-list 'auto-mode-alist '("\\.json\\'" . json-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . rjsx-mode))
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
 (add-to-list 'auto-mode-alist '("\\.flow\\'" . rjsx-mode))
 (add-to-list 'interpreter-mode-alist '("node" . rjsx-mode))
@@ -666,9 +670,9 @@
     (setq-default indent-tabs-mode t)
     (setq-default tab-width 2)
     (setq-default prettier-js-args
-      '( "--single-quote"
-         "--tab-width" "2"
+      '( "--tab-width" "2"
          "--print-width" "80"
+       ;;"--single-quote"
          "--jsx-bracket-same-line"
          "--trailing-comma" "es5"))
     (setq-local show-trailing-whitespace t)
@@ -821,6 +825,12 @@
 	  )
 
 (require 'tramp)
+(add-to-list 'tramp-remote-path "/home/edgar/go/bin:/home/edgar/bin:/home/edgar/.gimme/versions/go1.15.8.linux.amd64/bin:/home/edgar/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/edgar/bin:/home/edgar/bin
+")
+
+(add-to-list 'tramp-remote-path 'tramp-default-remote-path)
+(add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+
 (add-to-list 'tramp-methods
 			 '("gssh"
 			   (tramp-login-program        "gcloud compute ssh")
@@ -1096,9 +1106,9 @@
 	    (require 'solidity-flycheck)
 	    (require 'company-solidity)
 	    (setq-default prettier-js-args
-			  '( "--single-quote"
-			     "--tab-width" "2"
-			     "--print-width" "80"))
+										'( "--single-quote" "false"
+											 "--tab-width" "2"
+											 "--print-width" "80"))
 	    (company-mode)
 	    (prettier-js-mode)
 	    (add-hook 'before-save-hook 'prettier-js nil t)
