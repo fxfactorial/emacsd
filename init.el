@@ -110,7 +110,7 @@
  '(lsp-ui-sideline-show-hover t)
  '(menu-bar-mode nil)
  '(package-selected-packages
-   '(clang-format+ doom-themes cmake-mode all-the-icons-gnus all-the-icons-ivy all-the-icons-dired all-the-icons-ibuffer go-dlv clang-format company-box spacegray-theme vyper-mode company-web xref-js2 solidity-flycheck solidity-mode lsp-treemacs systemd protobuf-mode magit yaml-mode dockerfile-mode tide typescript-mode vue-mode vue-html-mode company-tern rainbow-mode cuda-mode blacken yasnippet lsp-ui flycheck-rust use-package company-racer toml-mode cargo lsp-mode racer web-mode tern exec-path-from-shell go-imports ido-vertical-mode json-mode prettier-js multiple-cursors ag neotree go-guru company-solidity company-quickhelp company-jedi solaire-mode rust-mode hlinum indent-guide which-key rjsx-mode flycheck ample-theme material-theme jedi company-c-headers company-go solarized-theme zerodark-theme window-number powerline company go-mode))
+   '(golint go-gopath flycheck-golangci-lint clang-format+ doom-themes cmake-mode all-the-icons-gnus all-the-icons-ivy all-the-icons-dired all-the-icons-ibuffer go-dlv clang-format company-box spacegray-theme vyper-mode company-web xref-js2 solidity-flycheck solidity-mode lsp-treemacs systemd protobuf-mode magit yaml-mode dockerfile-mode tide typescript-mode vue-mode vue-html-mode company-tern rainbow-mode cuda-mode blacken yasnippet lsp-ui flycheck-rust use-package company-racer toml-mode cargo lsp-mode racer web-mode tern exec-path-from-shell go-imports ido-vertical-mode json-mode prettier-js multiple-cursors ag neotree go-guru company-solidity company-quickhelp company-jedi solaire-mode rust-mode hlinum indent-guide which-key rjsx-mode flycheck ample-theme material-theme jedi company-c-headers company-go solarized-theme zerodark-theme window-number powerline company go-mode))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
@@ -439,7 +439,7 @@
     (define-key python-mode-map (kbd "M-/") 'company-jedi)
     (define-key python-mode-map (kbd "M-[") 'jedi:goto-definition-pop-marker)
     (jedi:setup)
-	(blacken-mode)
+    (blacken-mode)
     (flycheck-mode)
     (company-mode)
     (company-quickhelp-mode)
@@ -472,12 +472,6 @@
 )
 
 
-(setq lsp-ui-doc-enable t
-      lsp-ui-peek-enable t
-      lsp-ui-sideline-enable nil
-      lsp-ui-imenu-enable t
-      lsp-ui-flycheck-enable t)
-
 ;; Go Code things
 (add-hook 'go-mode-hook
   (lambda ()
@@ -485,13 +479,20 @@
     (company-mode)
     (company-quickhelp-mode)
     (flycheck-mode)
-    ;(go-guru-hl-identifier-mode)
+    (flycheck-golangci-lint-setup)
+    (go-guru-hl-identifier-mode)
     (visual-line-mode)
     (powerline-default-theme)
+    (setq-local lsp-ui-doc-enable t
+		lsp-ui-peek-enable t
+		lsp-ui-sideline-enable t
+		lsp-ui-doc-max-width 120
+		lsp-ui-imenu-enable t
+		lsp-ui-flycheck-enable t)
     (setq-local tab-width 2)
     (setq-local company-tooltip-align-annotations t)
-    (setq-local company-tooltip-limit 20)                      ; bigger popup window
-    (setq-local company-idle-delay .3)                         ; decrease delay before autocompletion popup shows
+    (setq-local company-tooltip-limit 10)                      ; bigger popup window
+    (setq-local company-idle-delay .4)                         ; decrease delay before autocompletion popup shows
     (setq-local company-echo-delay 0)                          ; remove annoying blinking
     (setq-local company-begin-commands '(self-insert-command))
     (add-hook 'before-save-hook #'gofmt-before-save nil t)
@@ -501,7 +502,7 @@
     (local-set-key (kbd "M-[") 'previous-error)
     ;; (local-set-key (kbd "M-n") 'forward-paragraph)
     ;; (local-set-key (kbd "M-p") 'backward-paragraph)
-    ;; (yas-minor-mode)
+    (yas-minor-mode)
     (local-set-key (kbd "M-/") 'company-go)))
 
 ;; SQL Stuff
@@ -831,7 +832,7 @@
 
 (add-to-list 'tramp-remote-path "/home/mev/go/bin")
 (add-to-list 'tramp-remote-path "/home/mev/.gimme/versions/go1.17.5.linux.amd64/bin")
-
+;; (setq lsp-log-io t)
 ;; (add-to-list 'tramp-remote-path "")
 (add-to-list 'tramp-remote-path 'tramp-default-remote-path)
 (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
