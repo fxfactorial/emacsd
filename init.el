@@ -23,11 +23,14 @@
       ;; Forgot what this was for..think some os x issues.
       (setenv "LC_CTYPE" "UTF-8")
       (setq mac-option-modifier 'super
-	    flycheck-make-executable "/usr/local/bin/make"
-	    company-clang-executable "/usr/bin/clang"
+	    flycheck-make-executable "/usr/bin/make"
+	    company-clang-executable "/usr/bin/clang++"
 	    company-clang-arguments
-	    `("-std=c++20")
-	    flycheck-c/c++-clang-executable "/usr/bin/clang"
+	    `("-std=c++20"
+	      "-I/opt/homebrew/Cellar/boost/1.79.0_1/include"
+	      "-I/Users/edgar/repos/kerak/libdevcore"
+	      "-I/Users/edgar/repos/kerak/libdevcrypto"
+	      "-I/Users/edgar/repos/kerak/libp2p")
 	    mac-command-modifier 'meta))
   (set-face-attribute 'default nil :height 110)
   (setq company-clang-executable "/usr/bin/clang++"
@@ -93,7 +96,7 @@
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(custom-safe-themes
-   '("f149d9986497e8877e0bd1981d1bef8c8a6d35be7d82cba193ad7e46f0989f6a" "90a6f96a4665a6a56e36dec873a15cbedf761c51ec08dd993d6604e32dd45940" "fee7287586b17efbfda432f05539b58e86e059e78006ce9237b8732fde991b4c" "51ec7bfa54adf5fff5d466248ea6431097f5a18224788d0bd7eb1257a4f7b773" "d89e15a34261019eec9072575d8a924185c27d3da64899905f8548cbd9491a36" "f5b6be56c9de9fd8bdd42e0c05fecb002dedb8f48a5f00e769370e4517dde0e8" "4c56af497ddf0e30f65a7232a8ee21b3d62a8c332c6b268c81e9ea99b11da0d3" "aff12479ae941ea8e790abb1359c9bb21ab10acd15486e07e64e0e10d7fdab38" "75a8194e6aa3ef759e8512fb6149137e2ada5947a7424e4278c395e374835afe" "a0be7a38e2de974d1598cf247f607d5c1841dbcef1ccd97cded8bea95a7c7639" "97db542a8a1731ef44b60bc97406c1eb7ed4528b0d7296997cbb53969df852d6" "f0b0416502d80b1f21153df6f4dcb20614b9992cde4d5a5688053a271d0e8612" "b1fdecc1b2757584db81547f8886f88654b2423ebca7816f1797ff9613283a2d" "7922b14d8971cce37ddb5e487dbc18da5444c47f766178e5a4e72f90437c0711" "edb73be436e0643727f15ebee8ad107e899ea60a3a70020dfa68ae00b0349a87" "c9ddf33b383e74dac7690255dd2c3dfa1961a8e8a1d20e401c6572febef61045" "d4f8fcc20d4b44bf5796196dbeabec42078c2ddb16dcb6ec145a1c610e0842f3" "7f1d414afda803f3244c6fb4c2c64bea44dac040ed3731ec9d75275b9e831fe5" "c560237b7505f67a271def31c706151afd7aa6eba9f69af77ec05bde5408dbcd" "36ca8f60565af20ef4f30783aa16a26d96c02df7b4e54e9900a5138fb33808da" "00445e6f15d31e9afaa23ed0d765850e9cd5e929be5e8e63b114a3346236c44c" "bf798e9e8ff00d4bf2512597f36e5a135ce48e477ce88a0764cfb5d8104e8163" "2809bcb77ad21312897b541134981282dc455ccd7c14d74cc333b6e549b824f3" "c433c87bd4b64b8ba9890e8ed64597ea0f8eb0396f4c9a9e01bd20a04d15d358" "1068ae7acf99967cc322831589497fee6fb430490147ca12ca7dd3e38d9b552a" default))
+   '("90a6f96a4665a6a56e36dec873a15cbedf761c51ec08dd993d6604e32dd45940" "7922b14d8971cce37ddb5e487dbc18da5444c47f766178e5a4e72f90437c0711" "edb73be436e0643727f15ebee8ad107e899ea60a3a70020dfa68ae00b0349a87" "c9ddf33b383e74dac7690255dd2c3dfa1961a8e8a1d20e401c6572febef61045" "d4f8fcc20d4b44bf5796196dbeabec42078c2ddb16dcb6ec145a1c610e0842f3" "7f1d414afda803f3244c6fb4c2c64bea44dac040ed3731ec9d75275b9e831fe5" "c560237b7505f67a271def31c706151afd7aa6eba9f69af77ec05bde5408dbcd" "36ca8f60565af20ef4f30783aa16a26d96c02df7b4e54e9900a5138fb33808da" "00445e6f15d31e9afaa23ed0d765850e9cd5e929be5e8e63b114a3346236c44c" "bf798e9e8ff00d4bf2512597f36e5a135ce48e477ce88a0764cfb5d8104e8163" "2809bcb77ad21312897b541134981282dc455ccd7c14d74cc333b6e549b824f3" "c433c87bd4b64b8ba9890e8ed64597ea0f8eb0396f4c9a9e01bd20a04d15d358" "1068ae7acf99967cc322831589497fee6fb430490147ca12ca7dd3e38d9b552a" default))
  '(display-time-mode t)
  '(fill-column 100)
  '(go-guru-hl-identifier-idle-time 0.25)
@@ -103,7 +106,7 @@
  '(lsp-rust-analyzer-display-chaining-hints t)
  '(lsp-rust-analyzer-display-parameter-hints t)
  '(lsp-rust-analyzer-lru-capacity 256)
- '(lsp-rust-analyzer-server-command '("/home/edgar/.local/bin/rust-analyzer"))
+ '(lsp-rust-analyzer-server-command '("/usr/local/bin/rust-analyzer"))
  '(lsp-rust-analyzer-server-display-inlay-hints t)
  '(lsp-ui-doc-max-height 80)
  '(lsp-ui-doc-max-width 120)
@@ -380,8 +383,7 @@
     (lambda ()
       (global-hl-line-mode 1)
       (solaire-mode)
-      (load-theme 'spacegray t))))
-;;      (load-theme 'material t))))
+      (load-theme 'solarized-dark-high-contrast t))))
       ;; (load-theme 'material t))))
       ;; (load-theme 'ample t))))
       ;; (load-theme 'misterioso t))))
@@ -730,6 +732,7 @@
     (company-mode)
     (add-to-list 'company-backends 'company-c-headers)
     (define-key company-mode-map (kbd "M-h") 'company-c-headers)
+    (add-hook 'before-save-hook 'clang-format-buffer nil 'local)
     (abbrev-mode -1)))
 
 (add-hook
@@ -806,21 +809,26 @@
 
 
 (require 'rust-mode)
-(add-hook 'rust-mode-hook
-	  '(lambda ()
-	     (lsp-ui-sideline)
-	     (yas-minor-mode)
-	     (define-key rust-mode-map (kbd "M-/") #'company-indent-or-complete-common)
-	     (define-key rust-mode-map (kbd "M-[") #'cargo-process-build)
-	     (define-key rust-mode-map (kbd "M-]") #'cargo-process-run)
-	     (define-key rust-mode-map (kbd "M-|") #'racer-describe-tooltip)
-	     ; Don't need flymake anymore
-	     (lsp-treemacs-sync-mode 1)
-	     (setq company-tooltip-align-annotations t)
-	     (setq company-minimum-prefix-length 1)
-	     (setq rust-format-on-save t)
-	     )
-	  )
+(add-hook
+ 'rust-mode-hook
+ '(lambda ()
+    (setq-local lsp-ui-sideline-delay 10)
+    (setq-local lsp-ui-sideline-show-hover nil)
+    (lsp-ui-sideline)
+    (lsp-ui-peek-mode)
+    (yas-minor-mode)
+    (define-key rust-mode-map (kbd "M-/") #'company-indent-or-complete-common)
+    (define-key rust-mode-map (kbd "M-[") #'cargo-process-build)
+    (define-key rust-mode-map (kbd "M-]") #'cargo-process-run)
+    (define-key rust-mode-map (kbd "M-|") #'racer-describe-tooltip)
+    ;; (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+    ;; (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+    ;; (lsp-treemacs-sync-mode 1)
+    (setq-local company-tooltip-align-annotations t)
+    (setq-local company-minimum-prefix-length 1)
+    (setq-local rust-format-on-save t)
+    )
+ )
 
 (add-hook 'typescript-mode
 	  '(lambda()
