@@ -113,7 +113,7 @@
  '(lsp-ui-sideline-show-hover t)
  '(menu-bar-mode nil)
  '(package-selected-packages
-   '(golint go-gopath flycheck-golangci-lint clang-format+ doom-themes cmake-mode all-the-icons-gnus all-the-icons-ivy all-the-icons-dired all-the-icons-ibuffer go-dlv clang-format company-box spacegray-theme vyper-mode company-web xref-js2 solidity-flycheck solidity-mode lsp-treemacs systemd protobuf-mode magit yaml-mode dockerfile-mode tide typescript-mode vue-mode vue-html-mode company-tern rainbow-mode cuda-mode blacken yasnippet lsp-ui flycheck-rust use-package company-racer toml-mode cargo lsp-mode racer web-mode tern exec-path-from-shell go-imports ido-vertical-mode json-mode prettier-js multiple-cursors ag neotree go-guru company-solidity company-quickhelp company-jedi solaire-mode rust-mode hlinum indent-guide which-key rjsx-mode flycheck ample-theme material-theme jedi company-c-headers company-go solarized-theme zerodark-theme window-number powerline company go-mode))
+   '(dap-mode golint go-gopath flycheck-golangci-lint clang-format+ doom-themes cmake-mode all-the-icons-gnus all-the-icons-ivy all-the-icons-dired all-the-icons-ibuffer go-dlv clang-format company-box spacegray-theme vyper-mode company-web xref-js2 solidity-flycheck solidity-mode lsp-treemacs systemd protobuf-mode magit yaml-mode dockerfile-mode tide typescript-mode vue-mode vue-html-mode company-tern rainbow-mode cuda-mode blacken yasnippet lsp-ui flycheck-rust use-package company-racer toml-mode cargo lsp-mode racer web-mode tern exec-path-from-shell go-imports ido-vertical-mode json-mode prettier-js multiple-cursors ag neotree go-guru company-solidity company-quickhelp company-jedi solaire-mode rust-mode hlinum indent-guide which-key rjsx-mode flycheck ample-theme material-theme jedi company-c-headers company-go solarized-theme zerodark-theme window-number powerline company go-mode))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
@@ -645,6 +645,11 @@
   (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
   (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil)))
 
+(with-eval-after-load 'lsp-mode
+  (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
+  (require 'dap-cpptools)
+  (yas-global-mode))
+
 (add-hook 'scss-mode-hook (lambda ()
 														(add-hook 'before-save-hook 'prettier-js)
 														(prettier-js-mode)))
@@ -739,15 +744,20 @@
  'c-mode-common-hook
  (lambda ()
    (add-hook 'before-save-hook 'clang-format-buffer nil 'local)
-   )
- )
+   ))
 
 (add-hook 'c++-mode-hook
   (lambda ()
     (setq-local flycheck-clang-language-standard "c++20")
     (setq-local company-async-timeout 5)
-    (define-key c++-mode-map (kbd "C-=") 'ff-find-other-file)
     (setq-local company-async-wait 0.10)
+    (setq-local gc-cons-threshold (* 100 1024 1024))
+    (setq-local read-process-output-max (* 1024 1024))
+    (setq-local treemacs-space-between-root-nodes nil)
+    (setq-local company-idle-delay 0.0)
+    (setq-local company-minimum-prefix-length 1)
+    (setq-local lsp-idle-delay 0.1)
+    (define-key c++-mode-map (kbd "C-=") 'ff-find-other-file)
     (add-to-list
       'company-c-headers-path-system
       "/Users/Edgar/.opam/fresh/lib/ocaml")
@@ -758,7 +768,7 @@
 (add-to-list 'auto-mode-alist '("\\.xm\\'" . objc-mode))
 
 (add-hook 'objc-mode-hook
-  '(lambda ()
+  (lambda ()
      (abbrev-mode nil)
      (company-mode)))
 (custom-set-faces
