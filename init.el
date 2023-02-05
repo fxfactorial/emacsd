@@ -1,3 +1,8 @@
+(setq package-archives
+  '(("melpa" . "https://melpa.org/packages/")
+    ("org" . "https://orgmode.org/elpa/")
+    ("elpa" . "https://elpa.gnu.org/packages/")))
+
 (global-so-long-mode 1)
 (setq bidi-inhibit-bpa t)
 (setq solidity-solc-path "/usr/bin/solc")
@@ -12,6 +17,7 @@
 (setq auto-save-default nil)
 (setq make-backup-files nil)
 (setq lsp-file-watch-threshold nil)
+(global-display-line-numbers-mode)
 
 (defvar osx-base-path
   "/Applications/Xcode.app/Contents/Developer/Platforms/")
@@ -27,10 +33,20 @@
 	    company-clang-executable "/usr/bin/clang++"
 	    company-clang-arguments
 	    `("-std=c++20"
-	      "-I/opt/homebrew/Cellar/boost/1.79.0_1/include"
-	      "-I/Users/edgar/repos/kerak/libdevcore"
-	      "-I/Users/edgar/repos/kerak/libdevcrypto"
-	      "-I/Users/edgar/repos/kerak/libp2p")
+	      ;; "-I/opt/homebrew/Cellar/boost/1.79.0_1/include"
+	      "-I/Users/edgar/blanc/kerak/libdevcore"
+	      "-I/Users/edgar/blanc/kerak/libdevcrypto"
+	      "-I/Users/edgar/blanc/kerak/libethashseal"
+	      "-I/Users/edgar/blanc/kerak/libethcore"
+	      "-I/Users/edgar/blanc/kerak/blanc-node"
+	      "-I/Users/edgar/blanc/kerak/libethereum"
+	      "-I/Users/edgar/blanc/kerak/cryptopp/"
+	      "-I/Users/edgar/blanc/kerak/evmc/include"
+	      "-I/Users/edgar/blanc/kerak/libp2p"
+	      "-I/Users/edgar/blanc/kerak/rlp"
+	      "-I/Users/edgar/blanc/kerak"
+	      "-I/Users/edgar/blanc/kerak/build/rust-abi-handle/cxxbridge"
+	      "-I/Users/edgar/.hunter/_Base/10738b5/d09e60e/b8c831c/Install/include")
 	    mac-command-modifier 'meta))
   (set-face-attribute 'default nil :height 110)
   (setq company-clang-executable "/usr/bin/clang++"
@@ -57,17 +73,18 @@
   ;; 	  "-I/usr/local/lib/ocaml/")))
 
 (setq company-backends '(company-clang
-			 company-capf
 			 company-c-headers
+			 company-capf
 			 company-jedi))
+
 ;;(global-set-key (kbd "M-n") 'forward-paragraph)
 ;;(global-set-key (kbd "M-p") 'backward-paragraph)
 ;; Not sure why but dialog box still locks up emacs on OSX.
 ;; in any case, I dislike dialog boxes.
 (setq
   use-dialog-box nil
-  ring-bell-function 'ignore
-  company-async-timeout 10)
+  ring-bell-function 'ignore)
+;  company-async-timeout 10)
 
 ;; Giving myself this helpful buffer, otherwise way to many damn key
 ;; bindings to remember!
@@ -84,8 +101,17 @@
 
 ;;Melpa stuff, elpa is the offical package archive, melpa is the
 ;;community extension with stuff on github and melpa itself.
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/") t)
+;; (add-to-list 'package-archives
+;;              '("melpa" . "https://melpa.org/packages/") t)
+
+
+
+(with-eval-after-load 'company
+  (dolist (map (list company-active-map company-search-map))
+    (define-key map (kbd "C-n") nil)
+    (define-key map (kbd "C-p") nil)
+    (define-key map (kbd "M-n") #'company-select-next)
+    (define-key map (kbd "M-p") #'company-select-previous)))
 
 
 ;; ;;Getting custom in before we set the tron theme
@@ -96,7 +122,7 @@
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(custom-safe-themes
-   '("90a6f96a4665a6a56e36dec873a15cbedf761c51ec08dd993d6604e32dd45940" "7922b14d8971cce37ddb5e487dbc18da5444c47f766178e5a4e72f90437c0711" "edb73be436e0643727f15ebee8ad107e899ea60a3a70020dfa68ae00b0349a87" "c9ddf33b383e74dac7690255dd2c3dfa1961a8e8a1d20e401c6572febef61045" "d4f8fcc20d4b44bf5796196dbeabec42078c2ddb16dcb6ec145a1c610e0842f3" "7f1d414afda803f3244c6fb4c2c64bea44dac040ed3731ec9d75275b9e831fe5" "c560237b7505f67a271def31c706151afd7aa6eba9f69af77ec05bde5408dbcd" "36ca8f60565af20ef4f30783aa16a26d96c02df7b4e54e9900a5138fb33808da" "00445e6f15d31e9afaa23ed0d765850e9cd5e929be5e8e63b114a3346236c44c" "bf798e9e8ff00d4bf2512597f36e5a135ce48e477ce88a0764cfb5d8104e8163" "2809bcb77ad21312897b541134981282dc455ccd7c14d74cc333b6e549b824f3" "c433c87bd4b64b8ba9890e8ed64597ea0f8eb0396f4c9a9e01bd20a04d15d358" "1068ae7acf99967cc322831589497fee6fb430490147ca12ca7dd3e38d9b552a" default))
+   '("fee7287586b17efbfda432f05539b58e86e059e78006ce9237b8732fde991b4c" "4c56af497ddf0e30f65a7232a8ee21b3d62a8c332c6b268c81e9ea99b11da0d3" "90a6f96a4665a6a56e36dec873a15cbedf761c51ec08dd993d6604e32dd45940" "7922b14d8971cce37ddb5e487dbc18da5444c47f766178e5a4e72f90437c0711" "edb73be436e0643727f15ebee8ad107e899ea60a3a70020dfa68ae00b0349a87" "c9ddf33b383e74dac7690255dd2c3dfa1961a8e8a1d20e401c6572febef61045" "d4f8fcc20d4b44bf5796196dbeabec42078c2ddb16dcb6ec145a1c610e0842f3" "7f1d414afda803f3244c6fb4c2c64bea44dac040ed3731ec9d75275b9e831fe5" "c560237b7505f67a271def31c706151afd7aa6eba9f69af77ec05bde5408dbcd" "36ca8f60565af20ef4f30783aa16a26d96c02df7b4e54e9900a5138fb33808da" "00445e6f15d31e9afaa23ed0d765850e9cd5e929be5e8e63b114a3346236c44c" "bf798e9e8ff00d4bf2512597f36e5a135ce48e477ce88a0764cfb5d8104e8163" "2809bcb77ad21312897b541134981282dc455ccd7c14d74cc333b6e549b824f3" "c433c87bd4b64b8ba9890e8ed64597ea0f8eb0396f4c9a9e01bd20a04d15d358" "1068ae7acf99967cc322831589497fee6fb430490147ca12ca7dd3e38d9b552a" default))
  '(display-time-mode t)
  '(fill-column 100)
  '(go-guru-hl-identifier-idle-time 0.25)
@@ -113,14 +139,14 @@
  '(lsp-ui-sideline-show-hover t)
  '(menu-bar-mode nil)
  '(package-selected-packages
-   '(dap-mode golint go-gopath flycheck-golangci-lint clang-format+ doom-themes cmake-mode all-the-icons-gnus all-the-icons-ivy all-the-icons-dired all-the-icons-ibuffer go-dlv clang-format company-box spacegray-theme vyper-mode company-web xref-js2 solidity-flycheck solidity-mode lsp-treemacs systemd protobuf-mode magit yaml-mode dockerfile-mode tide typescript-mode vue-mode vue-html-mode company-tern rainbow-mode cuda-mode blacken yasnippet lsp-ui flycheck-rust use-package company-racer toml-mode cargo lsp-mode racer web-mode tern exec-path-from-shell go-imports ido-vertical-mode json-mode prettier-js multiple-cursors ag neotree go-guru company-solidity company-quickhelp company-jedi solaire-mode rust-mode hlinum indent-guide which-key rjsx-mode flycheck ample-theme material-theme jedi company-c-headers company-go solarized-theme zerodark-theme window-number powerline company go-mode))
+   '(yasnippet-snippets 0blayout magit-popup company-rtags flycheck-rtags helm-xref helm dap-mode golint go-gopath flycheck-golangci-lint clang-format+ doom-themes cmake-mode all-the-icons-gnus all-the-icons-ivy all-the-icons-dired all-the-icons-ibuffer go-dlv clang-format company-box spacegray-theme vyper-mode company-web xref-js2 solidity-flycheck solidity-mode lsp-treemacs systemd protobuf-mode magit yaml-mode dockerfile-mode tide typescript-mode vue-mode vue-html-mode company-tern rainbow-mode cuda-mode blacken yasnippet lsp-ui flycheck-rust use-package company-racer toml-mode cargo lsp-mode racer web-mode tern exec-path-from-shell go-imports ido-vertical-mode json-mode prettier-js multiple-cursors ag neotree go-guru company-solidity company-quickhelp company-jedi solaire-mode rust-mode hlinum indent-guide which-key rjsx-mode flycheck ample-theme material-theme jedi company-c-headers company-go solarized-theme zerodark-theme window-number powerline company go-mode))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
 ;; Skeletons definitions for common includes.
 
-(use-package lsp-mode)
-(use-package lsp-ui)
+;; (use-package lsp-mode)
+;; (use-package lsp-ui)
 (use-package rust-mode
   :hook (rust-mode . lsp))
 (use-package toml-mode)
@@ -301,7 +327,7 @@
 (global-set-key (kbd "C-M-e") 'irc-connect)
 (global-set-key (kbd "C-M-p") 'run-python)
 ;; Love ido, idiot for not using it earlier.
-(setq ido-everywhere t)
+; (setq ido-everywhere t)
 (ido-mode 1)
 (ido-vertical-mode)
 ;; Use the path set up by zsh, aka the ~/.zshrc.
@@ -374,8 +400,8 @@
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
 
-(global-linum-mode 1)
-(hlinum-activate)
+;; (global-linum-mode 1)
+;; (hlinum-activate)
 (fringe-mode -1)
 
 (when window-system
@@ -651,8 +677,8 @@
   (yas-global-mode))
 
 (add-hook 'scss-mode-hook (lambda ()
-														(add-hook 'before-save-hook 'prettier-js)
-														(prettier-js-mode)))
+			    (add-hook 'before-save-hook 'prettier-js)
+			    (prettier-js-mode)))
 
 ;;Javascript hook, this is a better major mode than default one
 (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
@@ -727,27 +753,28 @@
      (global-unset-key (kbd "C-x c"))))
 
 ;; ;; Common things wanted in all C like languages.
-(add-hook
- 'c-mode-common-hook
- '(lambda ()
-    (add-to-list 'write-file-functions 'delete-trailing-whitespace)
-    (flycheck-mode)
-    (define-key c-mode-map (kbd "C-=") 'ff-find-other-file)
-    (setq-local show-trailing-whitespace t)
-    (company-mode)
-    (add-to-list 'company-backends 'company-c-headers)
-    (define-key company-mode-map (kbd "M-h") 'company-c-headers)
-    (add-hook 'before-save-hook 'clang-format-buffer nil 'local)
-    (abbrev-mode -1)))
+;; (add-hook
+;;  'c-mode-common-hook
+;;  '(lambda ()
+;;     (add-to-list 'write-file-functions 'delete-trailing-whitespace)
+;;     (flycheck-mode)
+;;     (define-key c-mode-map (kbd "C-=") 'ff-find-other-file)
+;;     (setq-local show-trailing-whitespace t)
+;;     (company-mode)
+;;     (lsp-mode)
+;;     (add-to-list 'company-backends 'company-c-headers)
+;;     (define-key company-mode-map (kbd "M-h") 'company-c-headers)
+;;     (add-hook 'before-save-hook 'clang-format-buffer nil 'local)
+;;     (abbrev-mode -1)))
 
-(add-hook
- 'c-mode-common-hook
- (lambda ()
-   (add-hook 'before-save-hook 'clang-format-buffer nil 'local)
-   ))
+;; (add-hook
+;;  'c-mode-common-hook
+;;  (lambda ()
+;;    (add-hook 'before-save-hook 'clang-format-buffer nil 'local)
+;;    ))
 
 (add-hook 'c++-mode-hook
-  (lambda ()
+  '(lambda ()
     (setq-local flycheck-clang-language-standard "c++20")
     (setq-local company-async-timeout 5)
     (setq-local company-async-wait 0.10)
@@ -757,12 +784,25 @@
     (setq-local company-idle-delay 0.0)
     (setq-local company-minimum-prefix-length 1)
     (setq-local lsp-idle-delay 0.1)
-    (define-key c++-mode-map (kbd "C-=") 'ff-find-other-file)
-    (add-to-list
-      'company-c-headers-path-system
-      "/Users/Edgar/.opam/fresh/lib/ocaml")
-    (add-to-list 'company-c-headers-path-system
-      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1")))
+    (lsp-mode)
+    (lsp-completion-mode)
+    (lsp-ui-mode)
+    (flycheck-mode)
+    (add-to-list 'write-file-functions 'delete-trailing-whitespace)
+    (add-hook 'before-save-hook 'clang-format-buffer nil 'local)
+    (helm-mode)
+    (require 'helm-xref)
+    (define-key c++-mode-map [remap find-file] #'helm-find-files)
+    (define-key c++-mode-map [remap execute-extended-command] #'helm-M-x)
+    (define-key c++-mode-map [remap switch-to-buffer] #'helm-mini)
+    (abbrev-mode -1)
+    ;; (define-key c++-mode-map (kbd "C-=") 'ff-find-other-file)
+    ;; (add-to-list
+    ;;   'company-c-headers-path-system
+    ;;   "/Users/Edgar/.opam/fresh/lib/ocaml")
+    ;; (add-to-list 'company-c-headers-path-system
+    ;; 		 "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"))
+  ))
 
 (add-to-list 'auto-mode-alist '("\\.mm\\'" . objc-mode))
 (add-to-list 'auto-mode-alist '("\\.xm\\'" . objc-mode))
@@ -856,16 +896,16 @@
 (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
 (setq prettify-symbols-unprettify-at-point 'right-edge)
 
-(require 'lsp-mode)
-(lsp-register-client
- (make-lsp-client :new-connection (lsp-tramp-connection
-                                   (lambda ()
-				     (cons "gopls" lsp-gopls-server-args)))
-                  :major-modes '(go-mode)
-                  :priority 10
-                  :server-id 'gopls-remote
-                  :remote? t
-                  ))
+;; (require 'lsp-mode)
+;; (lsp-register-client
+;;  (make-lsp-client :new-connection (lsp-tramp-connection
+;;                                    (lambda ()
+;; 				     (cons "gopls" lsp-gopls-server-args)))
+;;                   :major-modes '(go-mode)
+;;                   :priority 10
+;;                   :server-id 'gopls-remote
+;;                   :remote? t
+;;                   ))
 
 ;; https://github.com/lumiknit/emacs-pragmatapro-ligatures/blob/master/pragmatapro-lig.el
 (load "~/.emacs.d/pragmatapro-lig")
@@ -903,6 +943,6 @@
 	    (add-hook 'before-save-hook 'prettier-js nil t)
 	    (add-to-list 'flycheck-checkers 'solidity-checker)
 	    (set (make-local-variable 'company-backends)
-		 (append '((company-solidity company-capf company-dabbrev-code))
+		 (append '((company-solidity company-dabbrev-code))
 			 company-backends))
 	    (local-set-key (kbd "M-/") 'company-solidity)))
