@@ -136,7 +136,7 @@
  '(lsp-rust-analyzer-server-display-inlay-hints t)
  '(lsp-ui-doc-max-height 80)
  '(lsp-ui-doc-max-width 120)
- '(lsp-ui-sideline-show-hover t)
+ ;; '(lsp-ui-sideline-show-hover t)
  '(menu-bar-mode nil)
  '(package-selected-packages
    '(yasnippet-snippets 0blayout magit-popup company-rtags flycheck-rtags helm-xref helm dap-mode golint go-gopath flycheck-golangci-lint clang-format+ doom-themes cmake-mode all-the-icons-gnus all-the-icons-ivy all-the-icons-dired all-the-icons-ibuffer go-dlv clang-format company-box spacegray-theme vyper-mode company-web xref-js2 solidity-flycheck solidity-mode lsp-treemacs systemd protobuf-mode magit yaml-mode dockerfile-mode tide typescript-mode vue-mode vue-html-mode company-tern rainbow-mode cuda-mode blacken yasnippet lsp-ui flycheck-rust use-package company-racer toml-mode cargo lsp-mode racer web-mode tern exec-path-from-shell go-imports ido-vertical-mode json-mode prettier-js multiple-cursors ag neotree go-guru company-solidity company-quickhelp company-jedi solaire-mode rust-mode hlinum indent-guide which-key rjsx-mode flycheck ample-theme material-theme jedi company-c-headers company-go solarized-theme zerodark-theme window-number powerline company go-mode))
@@ -513,7 +513,7 @@
     (powerline-default-theme)
     (setq-local lsp-ui-doc-enable t
 		lsp-ui-peek-enable t
-		lsp-ui-sideline-enable t
+		;; lsp-ui-sideline-enable t
 		lsp-ui-doc-max-width 120
 		lsp-ui-imenu-enable t
 		lsp-ui-flycheck-enable t)
