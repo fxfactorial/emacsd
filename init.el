@@ -1,3 +1,4 @@
+(add-to-list 'image-types 'svg)
 (setq package-archives
   '(("melpa" . "https://melpa.org/packages/")
     ("org" . "https://orgmode.org/elpa/")
@@ -48,6 +49,10 @@
 	      "-I/Users/edgar/blanc/kerak/build/rust-abi-handle/cxxbridge"
 	      "-I/Users/edgar/.hunter/_Base/10738b5/d09e60e/b8c831c/Install/include")
 	    mac-command-modifier 'meta))
+  (use-package lsp-sourcekit
+    :after lsp-mode
+    :config
+    (setq lsp-sourcekit-executable "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp"))
   (set-face-attribute 'default nil :height 110)
   (setq company-clang-executable "/usr/bin/clang++"
 	flycheck-c/c++-clang-executable "/usr/bin/clang++"
@@ -121,13 +126,23 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
+ '(company-minimum-prefix-length 2)
+ '(company-tooltip-limit 20)
  '(connection-local-criteria-alist
-   '(((:application tramp :protocol "flatpak")
+   '(((:application eshell)
+      eshell-connection-default-profile)
+     ((:application tramp :machine "localhost")
+      tramp-connection-local-darwin-ps-profile)
+     ((:application tramp :machine "Edgars-MBP.attlocal.net")
+      tramp-connection-local-darwin-ps-profile)
+     ((:application tramp :protocol "flatpak")
       tramp-container-connection-local-default-flatpak-profile)
      ((:application tramp)
       tramp-connection-local-default-system-profile tramp-connection-local-default-shell-profile)))
  '(connection-local-profile-alist
-   '((tramp-container-connection-local-default-flatpak-profile
+   '((eshell-connection-default-profile
+      (eshell-path-env-list))
+     (tramp-container-connection-local-default-flatpak-profile
       (tramp-remote-path "/app/bin" tramp-default-remote-path "/bin" "/usr/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin" "/local/bin" "/local/freeware/bin" "/local/gnu/bin" "/usr/freeware/bin" "/usr/pkg/bin" "/usr/contrib/bin" "/opt/bin" "/opt/sbin" "/opt/local/bin"))
      (tramp-connection-local-darwin-ps-profile
       (tramp-process-attributes-ps-args "-acxww" "-o" "pid,uid,user,gid,comm=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" "-o" "state=abcde" "-o" "ppid,pgid,sess,tty,tpgid,minflt,majflt,time,pri,nice,vsz,rss,etime,pcpu,pmem,args")
@@ -218,9 +233,13 @@
  '(lsp-ui-doc-max-width 120)
  '(menu-bar-mode nil)
  '(package-selected-packages
-   '(swift-mode yasnippet-snippets 0blayout magit-popup company-rtags flycheck-rtags helm-xref helm dap-mode golint go-gopath flycheck-golangci-lint clang-format+ doom-themes cmake-mode all-the-icons-gnus all-the-icons-ivy all-the-icons-dired all-the-icons-ibuffer go-dlv clang-format company-box spacegray-theme vyper-mode company-web xref-js2 solidity-flycheck solidity-mode lsp-treemacs systemd protobuf-mode magit yaml-mode dockerfile-mode tide typescript-mode vue-mode vue-html-mode company-tern rainbow-mode cuda-mode blacken yasnippet lsp-ui flycheck-rust use-package company-racer toml-mode cargo lsp-mode racer web-mode tern exec-path-from-shell go-imports ido-vertical-mode json-mode prettier-js multiple-cursors ag neotree go-guru company-solidity company-quickhelp company-jedi solaire-mode rust-mode hlinum indent-guide which-key rjsx-mode flycheck ample-theme material-theme jedi company-c-headers company-go solarized-theme zerodark-theme window-number powerline company go-mode))
+   '(swift-helpful helm-mode-manager lsp-sourcekit swift-mode yasnippet-snippets 0blayout magit-popup company-rtags flycheck-rtags helm-xref helm dap-mode golint go-gopath flycheck-golangci-lint clang-format+ doom-themes cmake-mode all-the-icons-gnus all-the-icons-ivy all-the-icons-dired all-the-icons-ibuffer go-dlv clang-format company-box spacegray-theme vyper-mode company-web xref-js2 solidity-flycheck solidity-mode lsp-treemacs systemd protobuf-mode magit yaml-mode dockerfile-mode tide typescript-mode vue-mode vue-html-mode company-tern rainbow-mode cuda-mode blacken yasnippet lsp-ui flycheck-rust use-package company-racer toml-mode cargo lsp-mode racer web-mode tern exec-path-from-shell go-imports ido-vertical-mode json-mode prettier-js multiple-cursors ag neotree go-guru company-solidity company-quickhelp company-jedi solaire-mode rust-mode hlinum indent-guide which-key rjsx-mode flycheck ample-theme material-theme jedi company-c-headers company-go solarized-theme zerodark-theme window-number powerline company go-mode))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
+
+
+(use-package swift-mode
+  :hook (swift-mode . (lambda () (lsp))))
 
 ;; Skeletons definitions for common includes.
 
@@ -532,6 +551,15 @@
 ;;     (company-quickhelp-mode)
 ;; 	(company-anaconda)
 ;;     (setq-local show-trailing-whitespace t)))
+
+
+(add-hook
+ 'swift-mode-hook
+ (lambda()
+   (add-hook 'before-save-hook #'lsp-format-buffer t t)
+   )
+ )
+
 
 (add-hook
   'python-mode-hook
@@ -895,7 +923,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(go-guru-hl-identifier-face ((t (:inherit highlight :foreground "goldenrod2" :box nil :slant normal)))))
+ )
 
 (add-hook 'markdown-mode-hook
   (lambda ()
@@ -1014,9 +1042,10 @@
 	    (require 'solidity-flycheck)
 	    (require 'company-solidity)
 	    (setq-default prettier-js-args
-										'( "--single-quote" "false"
-											 "--tab-width" "2"
-											 "--print-width" "80"))
+			  '( "--single-quote" "false"
+			     "--tab-width" "2"
+			     "--plugin" "/Users/edgararoutiounian/.nvm/versions/node/v20.3.0/lib/node_modules/prettier-plugin-solidity/dist/standalone.cjs"
+			     "--print-width" "80"))
 	    (company-mode)
 	    (prettier-js-mode)
 	    (add-hook 'before-save-hook 'prettier-js nil t)
