@@ -233,7 +233,7 @@
  '(lsp-ui-doc-max-width 120)
  '(menu-bar-mode nil)
  '(package-selected-packages
-   '(swift-helpful helm-mode-manager lsp-sourcekit swift-mode yasnippet-snippets 0blayout magit-popup company-rtags flycheck-rtags helm-xref helm dap-mode golint go-gopath flycheck-golangci-lint clang-format+ doom-themes cmake-mode all-the-icons-gnus all-the-icons-ivy all-the-icons-dired all-the-icons-ibuffer go-dlv clang-format company-box spacegray-theme vyper-mode company-web xref-js2 solidity-flycheck solidity-mode lsp-treemacs systemd protobuf-mode magit yaml-mode dockerfile-mode tide typescript-mode vue-mode vue-html-mode company-tern rainbow-mode cuda-mode blacken yasnippet lsp-ui flycheck-rust use-package company-racer toml-mode cargo lsp-mode racer web-mode tern exec-path-from-shell go-imports ido-vertical-mode json-mode prettier-js multiple-cursors ag neotree go-guru company-solidity company-quickhelp company-jedi solaire-mode rust-mode hlinum indent-guide which-key rjsx-mode flycheck ample-theme material-theme jedi company-c-headers company-go solarized-theme zerodark-theme window-number powerline company go-mode))
+   '(company-quickhelp-terminal dash swift-helpful helm-mode-manager lsp-sourcekit swift-mode yasnippet-snippets 0blayout magit-popup company-rtags flycheck-rtags helm-xref helm dap-mode golint go-gopath flycheck-golangci-lint clang-format+ doom-themes cmake-mode all-the-icons-gnus all-the-icons-ivy all-the-icons-dired all-the-icons-ibuffer go-dlv clang-format company-box spacegray-theme vyper-mode company-web xref-js2 solidity-flycheck solidity-mode lsp-treemacs systemd protobuf-mode magit yaml-mode dockerfile-mode tide typescript-mode vue-mode vue-html-mode company-tern rainbow-mode cuda-mode blacken yasnippet lsp-ui use-package company-racer toml-mode cargo lsp-mode racer web-mode tern exec-path-from-shell go-imports ido-vertical-mode json-mode prettier-js multiple-cursors ag neotree go-guru company-solidity company-quickhelp company-jedi solaire-mode rust-mode hlinum indent-guide which-key rjsx-mode flycheck ample-theme material-theme jedi company-c-headers company-go solarized-theme zerodark-theme window-number powerline company go-mode))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
@@ -250,8 +250,8 @@
 (use-package toml-mode)
 (use-package cargo
   :hook (rust-mode . cargo-minor-mode))
-(use-package flycheck-rust
-  :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+;; (use-package flycheck-rust
+;;   :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
 
 (define-skeleton my-html-defaults
@@ -1042,10 +1042,10 @@
 	    (require 'solidity-flycheck)
 	    (require 'company-solidity)
 	    (setq-default prettier-js-args
-			  '( "--single-quote" "false"
-			     "--tab-width" "2"
-			     "--plugin" "/Users/edgararoutiounian/.nvm/versions/node/v20.3.0/lib/node_modules/prettier-plugin-solidity/dist/standalone.cjs"
-			     "--print-width" "80"))
+			  '("--single-quote" "false"
+			    "--tab-width" "2"
+			    "--plugin" "/home/edgar/.nvm/versions/node/v19.6.0/lib/node_modules/prettier-plugin-solidity/dist/standalone.cjs"
+			    "--print-width" "80"))
 	    (company-mode)
 	    (prettier-js-mode)
 	    (add-hook 'before-save-hook 'prettier-js nil t)
