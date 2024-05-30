@@ -129,95 +129,84 @@
  '(company-minimum-prefix-length 2)
  '(company-tooltip-limit 20)
  '(connection-local-criteria-alist
-   '(((:application eshell)
-      eshell-connection-default-profile)
-     ((:application tramp :machine "localhost")
-      tramp-connection-local-darwin-ps-profile)
-     ((:application tramp :machine "Edgars-MBP.attlocal.net")
-      tramp-connection-local-darwin-ps-profile)
+   '(((:application tramp :protocol "kubernetes") tramp-kubernetes-connection-local-default-profile)
+     ((:application eshell) eshell-connection-default-profile)
+     ((:application tramp :machine "localhost") tramp-connection-local-darwin-ps-profile)
      ((:application tramp :protocol "flatpak")
-      tramp-container-connection-local-default-flatpak-profile)
-     ((:application tramp)
-      tramp-connection-local-default-system-profile tramp-connection-local-default-shell-profile)))
+      tramp-container-connection-local-default-flatpak-profile
+      tramp-flatpak-connection-local-default-profile)
+     ((:application tramp) tramp-connection-local-default-system-profile
+      tramp-connection-local-default-shell-profile)))
  '(connection-local-profile-alist
-   '((eshell-connection-default-profile
-      (eshell-path-env-list))
+   '((tramp-flatpak-connection-local-default-profile
+      (tramp-remote-path "/app/bin" tramp-default-remote-path "/bin" "/usr/bin" "/sbin" "/usr/sbin"
+			 "/usr/local/bin" "/usr/local/sbin" "/local/bin" "/local/freeware/bin"
+			 "/local/gnu/bin" "/usr/freeware/bin" "/usr/pkg/bin" "/usr/contrib/bin"
+			 "/opt/bin" "/opt/sbin" "/opt/local/bin"))
+     (tramp-kubernetes-connection-local-default-profile
+      (tramp-config-check . tramp-kubernetes--current-context-data)
+      (tramp-extra-expand-args 97 (tramp-kubernetes--container (car tramp-current-connection)) 104
+			       (tramp-kubernetes--pod (car tramp-current-connection)) 120
+			       (tramp-kubernetes--context-namespace (car tramp-current-connection))))
+     (eshell-connection-default-profile (eshell-path-env-list))
      (tramp-container-connection-local-default-flatpak-profile
-      (tramp-remote-path "/app/bin" tramp-default-remote-path "/bin" "/usr/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin" "/local/bin" "/local/freeware/bin" "/local/gnu/bin" "/usr/freeware/bin" "/usr/pkg/bin" "/usr/contrib/bin" "/opt/bin" "/opt/sbin" "/opt/local/bin"))
+      (tramp-remote-path "/app/bin" tramp-default-remote-path "/bin" "/usr/bin" "/sbin" "/usr/sbin"
+			 "/usr/local/bin" "/usr/local/sbin" "/local/bin" "/local/freeware/bin"
+			 "/local/gnu/bin" "/usr/freeware/bin" "/usr/pkg/bin" "/usr/contrib/bin"
+			 "/opt/bin" "/opt/sbin" "/opt/local/bin"))
      (tramp-connection-local-darwin-ps-profile
-      (tramp-process-attributes-ps-args "-acxww" "-o" "pid,uid,user,gid,comm=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" "-o" "state=abcde" "-o" "ppid,pgid,sess,tty,tpgid,minflt,majflt,time,pri,nice,vsz,rss,etime,pcpu,pmem,args")
-      (tramp-process-attributes-ps-format
-       (pid . number)
-       (euid . number)
-       (user . string)
-       (egid . number)
-       (comm . 52)
-       (state . 5)
-       (ppid . number)
-       (pgrp . number)
-       (sess . number)
-       (ttname . string)
-       (tpgid . number)
-       (minflt . number)
-       (majflt . number)
-       (time . tramp-ps-time)
-       (pri . number)
-       (nice . number)
-       (vsize . number)
-       (rss . number)
-       (etime . tramp-ps-time)
-       (pcpu . number)
-       (pmem . number)
-       (args)))
+      (tramp-process-attributes-ps-args "-acxww" "-o"
+					"pid,uid,user,gid,comm=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+					"-o" "state=abcde" "-o"
+					"ppid,pgid,sess,tty,tpgid,minflt,majflt,time,pri,nice,vsz,rss,etime,pcpu,pmem,args")
+      (tramp-process-attributes-ps-format (pid . number) (euid . number) (user . string)
+					  (egid . number) (comm . 52) (state . 5) (ppid . number)
+					  (pgrp . number) (sess . number) (ttname . string)
+					  (tpgid . number) (minflt . number) (majflt . number)
+					  (time . tramp-ps-time) (pri . number) (nice . number)
+					  (vsize . number) (rss . number) (etime . tramp-ps-time)
+					  (pcpu . number) (pmem . number) (args)))
      (tramp-connection-local-busybox-ps-profile
-      (tramp-process-attributes-ps-args "-o" "pid,user,group,comm=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" "-o" "stat=abcde" "-o" "ppid,pgid,tty,time,nice,etime,args")
-      (tramp-process-attributes-ps-format
-       (pid . number)
-       (user . string)
-       (group . string)
-       (comm . 52)
-       (state . 5)
-       (ppid . number)
-       (pgrp . number)
-       (ttname . string)
-       (time . tramp-ps-time)
-       (nice . number)
-       (etime . tramp-ps-time)
-       (args)))
+      (tramp-process-attributes-ps-args "-o"
+					"pid,user,group,comm=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+					"-o" "stat=abcde" "-o" "ppid,pgid,tty,time,nice,etime,args")
+      (tramp-process-attributes-ps-format (pid . number) (user . string) (group . string)
+					  (comm . 52) (state . 5) (ppid . number) (pgrp . number)
+					  (ttname . string) (time . tramp-ps-time) (nice . number)
+					  (etime . tramp-ps-time) (args)))
      (tramp-connection-local-bsd-ps-profile
-      (tramp-process-attributes-ps-args "-acxww" "-o" "pid,euid,user,egid,egroup,comm=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" "-o" "state,ppid,pgid,sid,tty,tpgid,minflt,majflt,time,pri,nice,vsz,rss,etimes,pcpu,pmem,args")
-      (tramp-process-attributes-ps-format
-       (pid . number)
-       (euid . number)
-       (user . string)
-       (egid . number)
-       (group . string)
-       (comm . 52)
-       (state . string)
-       (ppid . number)
-       (pgrp . number)
-       (sess . number)
-       (ttname . string)
-       (tpgid . number)
-       (minflt . number)
-       (majflt . number)
-       (time . tramp-ps-time)
-       (pri . number)
-       (nice . number)
-       (vsize . number)
-       (rss . number)
-       (etime . number)
-       (pcpu . number)
-       (pmem . number)
-       (args)))
-     (tramp-connection-local-default-shell-profile
-      (shell-file-name . "/bin/sh")
-      (shell-command-switch . "-c"))
-     (tramp-connection-local-default-system-profile
-      (path-separator . ":")
-      (null-device . "/dev/null"))))
+      (tramp-process-attributes-ps-args "-acxww" "-o"
+					"pid,euid,user,egid,egroup,comm=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+					"-o"
+					"state,ppid,pgid,sid,tty,tpgid,minflt,majflt,time,pri,nice,vsz,rss,etimes,pcpu,pmem,args")
+      (tramp-process-attributes-ps-format (pid . number) (euid . number) (user . string)
+					  (egid . number) (group . string) (comm . 52)
+					  (state . string) (ppid . number) (pgrp . number)
+					  (sess . number) (ttname . string) (tpgid . number)
+					  (minflt . number) (majflt . number) (time . tramp-ps-time)
+					  (pri . number) (nice . number) (vsize . number)
+					  (rss . number) (etime . number) (pcpu . number)
+					  (pmem . number) (args)))
+     (tramp-connection-local-default-shell-profile (shell-file-name . "/bin/sh")
+						   (shell-command-switch . "-c"))
+     (tramp-connection-local-default-system-profile (path-separator . ":")
+						    (null-device . "/dev/null"))))
  '(custom-safe-themes
-   '("fee7287586b17efbfda432f05539b58e86e059e78006ce9237b8732fde991b4c" "4c56af497ddf0e30f65a7232a8ee21b3d62a8c332c6b268c81e9ea99b11da0d3" "90a6f96a4665a6a56e36dec873a15cbedf761c51ec08dd993d6604e32dd45940" "7922b14d8971cce37ddb5e487dbc18da5444c47f766178e5a4e72f90437c0711" "edb73be436e0643727f15ebee8ad107e899ea60a3a70020dfa68ae00b0349a87" "c9ddf33b383e74dac7690255dd2c3dfa1961a8e8a1d20e401c6572febef61045" "d4f8fcc20d4b44bf5796196dbeabec42078c2ddb16dcb6ec145a1c610e0842f3" "7f1d414afda803f3244c6fb4c2c64bea44dac040ed3731ec9d75275b9e831fe5" "c560237b7505f67a271def31c706151afd7aa6eba9f69af77ec05bde5408dbcd" "36ca8f60565af20ef4f30783aa16a26d96c02df7b4e54e9900a5138fb33808da" "00445e6f15d31e9afaa23ed0d765850e9cd5e929be5e8e63b114a3346236c44c" "bf798e9e8ff00d4bf2512597f36e5a135ce48e477ce88a0764cfb5d8104e8163" "2809bcb77ad21312897b541134981282dc455ccd7c14d74cc333b6e549b824f3" "c433c87bd4b64b8ba9890e8ed64597ea0f8eb0396f4c9a9e01bd20a04d15d358" "1068ae7acf99967cc322831589497fee6fb430490147ca12ca7dd3e38d9b552a" default))
+   '("fee7287586b17efbfda432f05539b58e86e059e78006ce9237b8732fde991b4c"
+     "4c56af497ddf0e30f65a7232a8ee21b3d62a8c332c6b268c81e9ea99b11da0d3"
+     "90a6f96a4665a6a56e36dec873a15cbedf761c51ec08dd993d6604e32dd45940"
+     "7922b14d8971cce37ddb5e487dbc18da5444c47f766178e5a4e72f90437c0711"
+     "edb73be436e0643727f15ebee8ad107e899ea60a3a70020dfa68ae00b0349a87"
+     "c9ddf33b383e74dac7690255dd2c3dfa1961a8e8a1d20e401c6572febef61045"
+     "d4f8fcc20d4b44bf5796196dbeabec42078c2ddb16dcb6ec145a1c610e0842f3"
+     "7f1d414afda803f3244c6fb4c2c64bea44dac040ed3731ec9d75275b9e831fe5"
+     "c560237b7505f67a271def31c706151afd7aa6eba9f69af77ec05bde5408dbcd"
+     "36ca8f60565af20ef4f30783aa16a26d96c02df7b4e54e9900a5138fb33808da"
+     "00445e6f15d31e9afaa23ed0d765850e9cd5e929be5e8e63b114a3346236c44c"
+     "bf798e9e8ff00d4bf2512597f36e5a135ce48e477ce88a0764cfb5d8104e8163"
+     "2809bcb77ad21312897b541134981282dc455ccd7c14d74cc333b6e549b824f3"
+     "c433c87bd4b64b8ba9890e8ed64597ea0f8eb0396f4c9a9e01bd20a04d15d358"
+     "1068ae7acf99967cc322831589497fee6fb430490147ca12ca7dd3e38d9b552a" default))
  '(display-time-mode t)
  '(fill-column 100)
  '(go-guru-hl-identifier-idle-time 0.25)
@@ -233,7 +222,19 @@
  '(lsp-ui-doc-max-width 120)
  '(menu-bar-mode nil)
  '(package-selected-packages
-   '(company-quickhelp-terminal dash swift-helpful helm-mode-manager lsp-sourcekit swift-mode yasnippet-snippets 0blayout magit-popup company-rtags flycheck-rtags helm-xref helm dap-mode golint go-gopath flycheck-golangci-lint clang-format+ doom-themes cmake-mode all-the-icons-gnus all-the-icons-ivy all-the-icons-dired all-the-icons-ibuffer go-dlv clang-format company-box spacegray-theme vyper-mode company-web xref-js2 solidity-flycheck solidity-mode lsp-treemacs systemd protobuf-mode magit yaml-mode dockerfile-mode tide typescript-mode vue-mode vue-html-mode company-tern rainbow-mode cuda-mode blacken yasnippet lsp-ui use-package company-racer toml-mode cargo lsp-mode racer web-mode tern exec-path-from-shell go-imports ido-vertical-mode json-mode prettier-js multiple-cursors ag neotree go-guru company-solidity company-quickhelp company-jedi solaire-mode rust-mode hlinum indent-guide which-key rjsx-mode flycheck ample-theme material-theme jedi company-c-headers company-go solarized-theme zerodark-theme window-number powerline company go-mode))
+   '(0blayout ag all-the-icons-dired all-the-icons-gnus all-the-icons-ibuffer all-the-icons-ivy
+	      ample-theme blacken cargo clang-format clang-format+ cmake-mode company company-box
+	      company-c-headers company-go company-jedi company-quickhelp company-quickhelp-terminal
+	      company-racer company-rtags company-solidity company-tern company-web cuda-mode
+	      dap-mode dash dockerfile-mode doom-themes exec-path-from-shell flycheck
+	      flycheck-golangci-lint flycheck-rtags go-dlv go-gopath go-guru go-imports go-mode
+	      golint helm helm-mode-manager helm-xref hlinum ido-vertical-mode indent-guide jedi
+	      json-mode lsp-mode lsp-sourcekit lsp-treemacs lsp-ui magit magit-popup material-theme
+	      multiple-cursors neotree powerline prettier prettier-js protobuf-mode racer
+	      rainbow-mode rjsx-mode rust-mode solaire-mode solarized-theme solidity-flycheck
+	      solidity-mode spacegray-theme swift-helpful swift-mode systemd tern terraform-mode
+	      tide toml-mode typescript-mode use-package vue-html-mode vue-mode vyper-mode web-mode
+	      which-key window-number xref-js2 yaml-mode yasnippet yasnippet-snippets zerodark-theme))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
@@ -611,6 +612,7 @@
 (add-hook 'go-mode-hook
   (lambda ()
     (setq-local gofmt-command "goimports")
+    (setq-local flycheck-golangci-lint-executable "golangci-lint-langserver")
     (company-mode)
     (company-quickhelp-mode)
     (flycheck-mode)
@@ -620,7 +622,7 @@
     (powerline-default-theme)
     (setq-local lsp-ui-doc-enable t
 		lsp-ui-peek-enable t
-		;; lsp-ui-sideline-enable t
+		lsp-ui-sideline-enable t
 		lsp-ui-doc-max-width 120
 		lsp-ui-imenu-enable t
 		lsp-ui-flycheck-enable t)
@@ -631,7 +633,10 @@
     (setq-local company-echo-delay 0)                          ; remove annoying blinking
     (setq-local company-begin-commands '(self-insert-command))
     (add-hook 'before-save-hook #'gofmt-before-save nil t)
-    (local-set-key (kbd "M-.") 'godef-jump)
+    ;; (local-set-key (kbd "M-.") 'godef-jump)
+    (local-set-key (kbd "C-.") 'lsp-find-definition)
+    (local-set-key (kbd "C-,") 'pop-tag-mark)
+    (local-set-key (kbd "M-.") 'lsp-goto-type-definition)
     (local-set-key (kbd "M-,") 'pop-tag-mark)
     (local-set-key (kbd "M-]") 'next-error)
     (local-set-key (kbd "M-[") 'previous-error)
@@ -1044,7 +1049,7 @@
 	    (setq-default prettier-js-args
 			  '("--single-quote" "false"
 			    "--tab-width" "2"
-			    "--plugin" "/home/edgar/.nvm/versions/node/v19.6.0/lib/node_modules/prettier-plugin-solidity/dist/standalone.cjs"
+			    "--plugin" "/Users/edgararout/.nvm/versions/node/v21.5.0/lib/node_modules/prettier-plugin-solidity/dist/standalone.cjs"
 			    "--print-width" "80"))
 	    (company-mode)
 	    (prettier-js-mode)
