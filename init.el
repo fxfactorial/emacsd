@@ -226,12 +226,12 @@
 	      ample-theme blacken cargo clang-format clang-format+ cmake-mode company company-box
 	      company-c-headers company-go company-jedi company-quickhelp company-quickhelp-terminal
 	      company-racer company-rtags company-solidity company-tern company-web cuda-mode
-	      dap-mode dash dockerfile-mode doom-themes exec-path-from-shell flycheck
-	      flycheck-golangci-lint flycheck-rtags go-dlv go-gopath go-guru go-imports go-mode
-	      golint helm helm-mode-manager helm-xref hlinum ido-vertical-mode indent-guide jedi
-	      json-mode lsp-mode lsp-sourcekit lsp-treemacs lsp-ui magit magit-popup material-theme
-	      multiple-cursors neotree powerline prettier prettier-js protobuf-mode racer
-	      rainbow-mode rjsx-mode rust-mode solaire-mode solarized-theme solidity-flycheck
+	      dap-mode dash docker-compose-mode dockerfile-mode doom-themes exec-path-from-shell
+	      flycheck flycheck-golangci-lint flycheck-rtags go-dlv go-gopath go-guru go-imports
+	      go-mode golint helm helm-mode-manager helm-xref hlinum ido-vertical-mode indent-guide
+	      jedi json-mode lsp-mode lsp-sourcekit lsp-treemacs lsp-ui magit magit-popup
+	      material-theme multiple-cursors neotree powerline prettier prettier-js protobuf-mode
+	      racer rainbow-mode rjsx-mode rust-mode solaire-mode solarized-theme solidity-flycheck
 	      solidity-mode spacegray-theme swift-helpful swift-mode systemd tern terraform-mode
 	      tide toml-mode typescript-mode use-package vue-html-mode vue-mode vyper-mode web-mode
 	      which-key window-number xref-js2 yaml-mode yasnippet yasnippet-snippets zerodark-theme))
@@ -634,9 +634,9 @@
     (setq-local company-begin-commands '(self-insert-command))
     (add-hook 'before-save-hook #'gofmt-before-save nil t)
     ;; (local-set-key (kbd "M-.") 'godef-jump)
-    (local-set-key (kbd "C-.") 'lsp-find-definition)
+    (local-set-key (kbd "M-.") 'lsp-find-definition)
     (local-set-key (kbd "C-,") 'pop-tag-mark)
-    (local-set-key (kbd "M-.") 'lsp-goto-type-definition)
+    (local-set-key (kbd "C-.") 'lsp-goto-type-definition)
     (local-set-key (kbd "M-,") 'pop-tag-mark)
     (local-set-key (kbd "M-]") 'next-error)
     (local-set-key (kbd "M-[") 'previous-error)
@@ -1049,7 +1049,7 @@
 	    (setq-default prettier-js-args
 			  '("--single-quote" "false"
 			    "--tab-width" "2"
-			    "--plugin" "/Users/edgararout/.nvm/versions/node/v21.5.0/lib/node_modules/prettier-plugin-solidity/dist/standalone.cjs"
+			    "--plugin" "/Users/edgar/.nvm/versions/node/v21.5.0/lib/node_modules/prettier-plugin-solidity/dist/standalone.cjs"
 			    "--print-width" "80"))
 	    (company-mode)
 	    (prettier-js-mode)
