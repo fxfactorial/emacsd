@@ -127,3 +127,36 @@ for lsp, need to do lsp-workspace-add
 
 
  go  install golang.org/x/tools/cmd/goimports@latest; go  install golang.org/x/lint/golint@latest; go  install github.com/rogpeppe/godef@latest; go  install github.com/go-delve/delve/cmd/dlv@latest; go  install github.com/golang/mock/mockgen@latest; go  install github.com/stamblerre/gocode@latest; go  install golang.org/x/tools/gopls@latest; go install golang.org/x/tools/...
+
+
+
+# git submodules
+
+if cloned and forgot --recursive, can do
+git submodule init
+git submodule update
+
+
+
+# SQL Things
+A left join is quite simple. It keeps all rows in the first (left) table plus all rows in the second (right) table, when the on clause evaluates to "true".
+
+# sync status on op-node
+curl -H "Content-Type: application/json" -X POST http://localhost:9545 -d '{"jsonrpc":"2.0","id":"1","method":"optimism_syncStatus","params":[]}' | jq .result
+
+
+
+# Get block , knows earliest, latest, safe, finalized, pending. bool parameter is whether to include txs
+~ curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["latest", true],"id":67}' localhost:8546
+
+
+# attach to container
+
+docker exec -it op-geth /bin/sh
+geth attach /root/.ethereum/geth.ipc
+debug.setHead('0x' + Number(SOME_NUMBER).toString(16))
+
+
+ lsof -iTCP -sTCP:LISTEN -n -P
+
+cast rpc optimism_syncStatus --rpc-url=localhost:2745 | jq '.unsafe_l2.timestamp | strftime("%Y-%m-%d-%s")'
