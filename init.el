@@ -120,8 +120,8 @@
   (dolist (map (list company-active-map company-search-map))
     (define-key map (kbd "C-n") nil)
     (define-key map (kbd "C-p") nil)
-    (define-key map (kbd "M-n") 'company-select-next)
-    (define-key map (kbd "M-p") 'company-select-previous)))
+    (define-key map (kbd "M-n") #'company-select-next)
+    (define-key map (kbd "M-p") #'company-select-previous)))
 
 
 ;; ;;Getting custom in before we set the tron theme
@@ -139,8 +139,6 @@
      ((:application tramp :protocol "kubernetes") tramp-kubernetes-connection-local-default-profile)
      ((:application eshell) eshell-connection-default-profile)
      ((:application tramp :machine "localhost") tramp-connection-local-darwin-ps-profile)
-     ((:application tramp :machine "Edgars-MBP.attlocal.net")
-      tramp-connection-local-darwin-ps-profile)
      ((:application tramp :protocol "flatpak")
       tramp-container-connection-local-default-flatpak-profile
       tramp-flatpak-connection-local-default-profile)
@@ -568,7 +566,7 @@
 (add-hook
  'swift-mode-hook
  (lambda()
-   (add-hook 'before-save-hook 'lsp-format-buffer t t)))
+   (add-hook 'before-save-hook #'lsp-format-buffer t t)))
 
 (add-hook
   'python-mode-hook
@@ -626,6 +624,7 @@
 (add-hook 'go-mode-hook
   (lambda ()
     (setq-local gofmt-command "goimports")
+    (setq-local flycheck-golangci-lint-executable "golangci-lint-langserver")
     (company-mode)
     (company-quickhelp-mode)
     (flycheck-mode)
@@ -645,7 +644,7 @@
     (setq-local company-idle-delay .4)                         ; decrease delay before autocompletion popup shows
     (setq-local company-echo-delay 0)                          ; remove annoying blinking
     (setq-local company-begin-commands '(self-insert-command))
-    (add-hook 'before-save-hook 'gofmt-before-save nil t)
+    (add-hook 'before-save-hook #'gofmt-before-save nil t)
     ;; (local-set-key (kbd "M-.") 'godef-jump)
     (local-set-key (kbd "M-.") 'lsp-ui-peek-find-definitions)
     (local-set-key (kbd "M-,") 'pop-tag-mark)

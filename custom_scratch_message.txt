@@ -160,3 +160,4 @@ debug.setHead('0x' + Number(SOME_NUMBER).toString(16))
  lsof -iTCP -sTCP:LISTEN -n -P
 
 cast rpc optimism_syncStatus --rpc-url=localhost:2745 | jq '.unsafe_l2.timestamp | strftime("%Y-%m-%d-%s")'
+printf "%d\n" $(cast rpc --rpc-url=ws://localhost:4500 eth_getBlockByNumber "finalized" false | jq -r .number)
