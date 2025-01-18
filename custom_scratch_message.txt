@@ -161,3 +161,10 @@ debug.setHead('0x' + Number(SOME_NUMBER).toString(16))
 
 cast rpc optimism_syncStatus --rpc-url=localhost:2745 | jq '.unsafe_l2.timestamp | strftime("%Y-%m-%d-%s")'
 printf "%d\n" $(cast rpc --rpc-url=ws://localhost:4500 eth_getBlockByNumber "finalized" false | jq -r .number)
+
+and also - when pushing a local repo with maybe a different key, might need to use this one:
+
+GIT_SSH_COMMAND='ssh -i $HOME/.ssh/personal-keys/fxfactorial_id_ed25519  -o IdentitiesOnly=yes -F
+/dev/null'   git push --set-upstream origin master
+
+notice how the -F is there to override ssh configs that might be interfering
