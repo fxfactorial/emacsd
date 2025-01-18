@@ -11,7 +11,7 @@
 
 (global-so-long-mode 1)
 (setq bidi-inhibit-bpa t)
-(setq solidity-solc-path "/usr/bin/solc")
+(setq solidity-solc-path "/opt/homebrew/bin/solc")
 (setq solidity-flycheck-solc-checker-active t)
 (setq solidity-flycheck-solium-checker-active t)
 (setq flycheck-solidity-solc-addstd-contracts t)
@@ -24,7 +24,7 @@
 (setq make-backup-files nil)
 (setq lsp-file-watch-threshold nil)
 (global-display-line-numbers-mode)
-
+(setq sqlformat-command 'pgformatter)
 (defvar osx-base-path
   "/Applications/Xcode.app/Contents/Developer/Platforms/")
 
@@ -133,17 +133,6 @@
  '(column-number-mode t)
  '(company-minimum-prefix-length 2)
  '(company-tooltip-limit 20)
- '(connection-local-criteria-alist
-   '(((:application tramp :machine "ip-192-168-1-83.ca-central-1.compute.internal")
-      tramp-connection-local-darwin-ps-profile)
-     ((:application tramp :protocol "kubernetes") tramp-kubernetes-connection-local-default-profile)
-     ((:application eshell) eshell-connection-default-profile)
-     ((:application tramp :machine "localhost") tramp-connection-local-darwin-ps-profile)
-     ((:application tramp :protocol "flatpak")
-      tramp-container-connection-local-default-flatpak-profile
-      tramp-flatpak-connection-local-default-profile)
-     ((:application tramp) tramp-connection-local-default-system-profile
-      tramp-connection-local-default-shell-profile)))
  '(connection-local-profile-alist
    '((tramp-flatpak-connection-local-default-profile
       (tramp-remote-path "/app/bin" tramp-default-remote-path "/bin" "/usr/bin" "/sbin" "/usr/sbin"
@@ -237,13 +226,13 @@
 	      dap-mode dash docker-compose-mode dockerfile-mode doom-themes exec-path-from-shell
 	      flycheck flycheck-golangci-lint flycheck-rtags go-dlv go-gopath go-guru go-imports
 	      go-mode golint helm helm-mode-manager helm-xref hlinum ido-vertical-mode indent-guide
-	      jedi json-mode lsp-mode lsp-sourcekit lsp-treemacs lsp-ui magit magit-popup
+	      jedi json-mode just-mode lsp-mode lsp-sourcekit lsp-treemacs lsp-ui magit magit-popup
 	      material-theme multiple-cursors neotree powerline prettier prettier-js protobuf-mode
 	      racer rainbow-mode rjsx-mode rust-mode solaire-mode solarized-theme solidity-flycheck
-	      solidity-mode spacegray-theme sql-indent sqlup-mode ssh-config-mode swift-helpful
-	      swift-mode systemd tern terraform-mode tide toml-mode tree-sitter typescript-mode
-	      use-package vue-html-mode vue-mode vyper-mode web-mode which-key window-number
-	      xref-js2 yaml-mode yasnippet yasnippet-snippets zerodark-theme))
+	      solidity-mode spacegray-theme sql-indent sqlformat sqlup-mode ssh-config-mode
+	      swift-helpful swift-mode systemd tern terraform-mode tide toml-mode tree-sitter
+	      typescript-mode use-package vue-html-mode vue-mode vyper-mode web-mode which-key
+	      window-number xref-js2 yaml-mode yasnippet yasnippet-snippets zerodark-theme))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
@@ -581,7 +570,7 @@
     (define-key python-mode-map (kbd "M-/") 'company-jedi)
     (define-key python-mode-map (kbd "M-[") 'jedi:goto-definition-pop-marker)
     (jedi:setup)
-    (blacken-mode)
+    ;; (blacken-mode)
     (flycheck-mode)
     (company-mode)
     (company-quickhelp-mode)
@@ -666,6 +655,7 @@
     (sql-highlight-postgres-keywords)
     (load-library "sql-indent")
     (sqlup-mode)
+    (sqlformat-on-save-mode)
     (define-key sql-mode-map (kbd "C-u")
       'sqlup-capitalize-keywords-in-region)))
 
@@ -1040,7 +1030,7 @@
 
 ;; https://github.com/lumiknit/emacs-pragmatapro-ligatures/blob/master/pragmatapro-lig.el
 (load "~/.emacs.d/pragmatapro-lig")
-; (pragmatapro-lig-global-mode)
+(pragmatapro-lig-global-mode)
 
 (defvar bzg-big-fringe-mode nil)
 (define-minor-mode bzg-big-fringe-mode
@@ -1060,18 +1050,28 @@
       (setcdr (assq 'continuation fringe-indicator-alist)
         '(nil nil)))))
 
-;; smart contract crap
+
+
 (add-hook 'solidity-mode-hook
 	  (lambda ()
 	    (require 'solidity-flycheck)
 	    (require 'company-solidity)
-	    (setq-default prettier-js-args
-			  '("--single-quote" "false"
-			    "--tab-width" "2"
-			    "--plugin" "/Users/edgararout/.nvm/versions/node/v21.5.0/lib/node_modules/prettier-plugin-solidity/dist/standalone.cjs"
-			    "--print-width" "140"))
+	    ;; Recall that the let* is like nested lets, so you can refer to prior bindings in the later ones
+	    ;; otherwise the other value binding comes up void (empty)
+	    ;; because let's form is
+	    ;; (let ((a 10)
+	    ;;       (b 20)
+	    ;; (body) and need to use the (list ) because its not a list literal anymore, it also requires usage of evaling the "plugin_path"
+	    (let* ((expanded (expand-file-name "~/"))
+		   (plugin_path (concat expanded ".nvm/versions/node/v21.6.1/lib/node_modules/prettier-plugin-solidity/dist/standalone.cjs")))
+	      (setq-default prettier-js-args
+			    (list "--single-quote" "false"
+				  "--tab-width" "2"
+				  "--plugin" plugin_path
+				  "--print-width" "120")))
 	    (company-mode)
 	    (prettier-js-mode)
+	    (lsp)
 	    (add-hook 'before-save-hook 'prettier-js nil t)
 	    (add-to-list 'flycheck-checkers 'solidity-checker)
 	    (set (make-local-variable 'company-backends)
