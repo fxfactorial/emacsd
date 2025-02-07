@@ -6,15 +6,11 @@
 (add-to-list 'image-types 'svg)
 (setq package-archives
   '(("melpa" . "https://melpa.org/packages/")
-    ("org" . "https://orgmode.org/elpa/")
+    ;; ("org" . "https://orgmode.org/elpa/")
     ("elpa" . "https://elpa.gnu.org/packages/")))
 
 (global-so-long-mode 1)
 (setq bidi-inhibit-bpa t)
-(setq solidity-solc-path "/opt/homebrew/bin/solc")
-(setq solidity-flycheck-solc-checker-active t)
-(setq solidity-flycheck-solium-checker-active t)
-(setq flycheck-solidity-solc-addstd-contracts t)
 (setq create-lockfiles nil)
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 ;disable backup
@@ -102,8 +98,8 @@
    (with-temp-buffer
      (insert-file-contents "~/.emacs.d/custom_scratch_message.txt")
      (setq initial-scratch-message (buffer-string)))))
-(package-initialize)
-(exec-path-from-shell-initialize)
+;(package-initialize)
+;(exec-path-from-shell-initialize)
 (which-key-mode)
 ;; (powerline-center-theme)
 (autoload 'window-number-mode "window-number")
@@ -581,6 +577,8 @@
 (setq lsp-eldoc-render-all t)
 (setq lsp-gopls-complete-unimported t)
 
+;; so have these for the modes when you want it running already, so you dont
+;; have to do pacakge-initialize
 (use-package lsp-mode
   :ensure t
   :commands (lsp lsp-deferred)
@@ -590,6 +588,11 @@
   :ensure t
   :commands (lsp lsp-deferred)
   :hook (typescript-mode . lsp-deferred))
+
+(use-package lsp-mode
+  :ensure t
+  :commands (lsp lsp-deferred)
+  :hook (c++-mode . lsp-deferred))
 
 
 ;;Set up before-save hooks to format buffer and add/delete imports.
@@ -800,6 +803,7 @@
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
 (add-to-list 'auto-mode-alist '("\\.flow\\'" . rjsx-mode))
+(add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
 (add-to-list 'interpreter-mode-alist '("node" . rjsx-mode))
 
 (add-hook 'java-mode-hook
@@ -902,11 +906,11 @@
     (flycheck-mode)
     (add-to-list 'write-file-functions 'delete-trailing-whitespace)
     (add-hook 'before-save-hook 'clang-format-buffer nil 'local)
-    (helm-mode)
-    (require 'helm-xref)
-    (define-key c++-mode-map [remap find-file] 'helm-find-files)
-    (define-key c++-mode-map [remap execute-extended-command] 'helm-M-x)
-    (define-key c++-mode-map [remap switch-to-buffer] 'helm-mini)
+    ;;(helm-mode)
+    ;;(require 'helm-xref)
+    ;; (define-key c++-mode-map [remap find-file] 'helm-find-files)
+    ;; (define-key c++-mode-map [remap execute-extended-command] 'helm-M-x)
+    ;; (define-key c++-mode-map [remap switch-to-buffer] 'helm-mini)
     (abbrev-mode -1)
     ;; (define-key c++-mode-map (kbd "C-=") 'ff-find-other-file)
     ;; (add-to-list
@@ -997,9 +1001,9 @@
 	     (tern-mode)
 	     (js2-mode)
 	     (lsp-mode)
-	     (setq javascript-indent-level 2)
-	     (setq js-indent-level 2)
-	     (setq js2-basic-offset 2)
+	     (setq-local javascript-indent-level 2)
+	     (setq-local js-indent-level 2)
+	     (setq-local js2-basic-offset 2)
 	     (setq-local indent-tabs-mode t)
 	     (setq-local tab-width 2)
 	     (setq typescript-indent-level 2)
@@ -1010,7 +1014,10 @@
 (require 'tramp)
 
 (add-to-list 'tramp-remote-path "/home/mev/go/bin")
+(add-to-list 'tramp-remote-path "/home/edgar/go/bin")
 (add-to-list 'tramp-remote-path "/home/mev/.gimme/versions/go1.17.5.linux.amd64/bin")
+(add-to-list 'tramp-remote-path "/home/edgar/.gimme/versions/go1.22.5.linux.amd64/bin")
+
 ;; (setq lsp-log-io t)
 ;; (add-to-list 'tramp-remote-path "")
 (add-to-list 'tramp-remote-path 'tramp-default-remote-path)
@@ -1069,6 +1076,12 @@
 				  "--tab-width" "2"
 				  "--plugin" plugin_path
 				  "--print-width" "120")))
+	    (setq-local solidity-solc-path "/opt/homebrew/bin/solc")
+	    (setq-local solidity-flycheck-solc-checker-active t)
+	    (setq-local solidity-flycheck-solium-checker-active t)
+	    (setq-local solidity-flycheck-use-project t)
+	    (setq-local solidity-flycheck-solc-additional-allow-paths '("src" "lib" "test" "tests"))
+	    (setq-local flycheck-solidity-solc-addstd-contracts t)
 	    (company-mode)
 	    (prettier-js-mode)
 	    (lsp)
