@@ -27,7 +27,7 @@
 (if (equal system-type 'darwin)
     (progn
       ;; Amazing font
-      (set-face-attribute 'default nil :family "PragmataPro Mono Liga" :height 140)
+;;      (set-face-attribute 'default nil :family "PragmataPro Mono Liga" :height 140)
       ;; Forgot what this was for..think some os x issues.
       (setenv "LC_CTYPE" "UTF-8")
       (setq mac-option-modifier 'super
@@ -63,7 +63,7 @@
 
 (set-face-attribute 'default nil
 		    :family "PragmataPro Mono Liga"
-		    :height 140
+		    :height 120
 		    :width 'ultra-condensed)
 
   ;; (setq flycheck-c/c++-clang-executable "armv7-apple-darwin11-clang")
