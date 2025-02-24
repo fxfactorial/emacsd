@@ -130,7 +130,8 @@
  '(company-minimum-prefix-length 2)
  '(company-tooltip-limit 20)
  '(connection-local-profile-alist
-   '((tramp-flatpak-connection-local-default-profile
+   '((vc-git-connection-default-profile (vc-git--program-version))
+     (tramp-flatpak-connection-local-default-profile
       (tramp-remote-path "/app/bin" tramp-default-remote-path "/bin" "/usr/bin" "/sbin" "/usr/sbin"
 			 "/usr/local/bin" "/usr/local/sbin" "/local/bin" "/local/freeware/bin"
 			 "/local/gnu/bin" "/usr/freeware/bin" "/usr/pkg/bin" "/usr/contrib/bin"
@@ -214,24 +215,8 @@
  '(lsp-ui-doc-max-height 80)
  '(lsp-ui-doc-max-width 120)
  '(menu-bar-mode nil)
- '(package-selected-packages
-   '(0blayout ag all-the-icons-dired all-the-icons-gnus all-the-icons-ibuffer all-the-icons-ivy
-	      ample-theme blacken cargo clang-format clang-format+ cmake-mode company company-box
-	      company-c-headers company-go company-jedi company-quickhelp company-quickhelp-terminal
-	      company-racer company-rtags company-solidity company-tern company-web cuda-mode
-	      dap-mode dash docker-compose-mode dockerfile-mode doom-themes exec-path-from-shell
-	      flycheck flycheck-golangci-lint flycheck-rtags go-dlv go-gopath go-guru go-imports
-	      go-mode golint helm helm-mode-manager helm-xref hlinum ido-vertical-mode indent-guide
-	      jedi json-mode just-mode lsp-mode lsp-sourcekit lsp-treemacs lsp-ui magit magit-popup
-	      material-theme multiple-cursors neotree powerline prettier prettier-js protobuf-mode
-	      racer rainbow-mode rjsx-mode rust-mode solaire-mode solarized-theme solidity-flycheck
-	      solidity-mode spacegray-theme sql-indent sqlformat sqlup-mode ssh-config-mode
-	      swift-helpful swift-mode systemd tern terraform-mode tide toml-mode tree-sitter
-	      typescript-mode use-package vue-html-mode vue-mode vyper-mode web-mode which-key
-	      window-number xref-js2 yaml-mode yasnippet yasnippet-snippets zerodark-theme))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
-
 
 (use-package swift-mode
   :hook (swift-mode . (lambda () (lsp))))
@@ -594,6 +579,11 @@
   :commands (lsp lsp-deferred)
   :hook (c++-mode . lsp-deferred))
 
+(use-package lsp-mode
+  :ensure t
+  :commands (lsp lsp-deferred)
+  :hook (solidity-mode . lsp-deferred))
+
 
 ;;Set up before-save hooks to format buffer and add/delete imports.
 ;;Make sure you don't have other gofmt/goimports hooks enabled.
@@ -860,6 +850,13 @@
 (add-to-list 'auto-mode-alist '("\\.cc\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
 
+;; generic load auto mode for .env files
+(add-to-list 'auto-mode-alist '("\\.env\\'" . conf-mode))
+(add-to-list 'auto-mode-alist '("\\.sysctl\\'" . conf-mode))
+(add-to-list 'auto-mode-alist '("\\.conf\\'" . conf-mode))
+(add-to-list 'auto-mode-alist '("\\.gitconfig\\'" . conf-mode))
+(add-to-list 'auto-mode-alist '("\\.gitmodules\\'" . conf-mode))
+
 ;; emacs lisp stuff
 (add-hook 'emacs-lisp-mode-hook
   '(lambda ()
@@ -1062,7 +1059,7 @@
 (add-hook 'solidity-mode-hook
 	  (lambda ()
 	    (require 'solidity-flycheck)
-	    (require 'company-solidity)
+	    ;; (require 'company-solidity)
 	    ;; Recall that the let* is like nested lets, so you can refer to prior bindings in the later ones
 	    ;; otherwise the other value binding comes up void (empty)
 	    ;; because let's form is
@@ -1087,7 +1084,8 @@
 	    (lsp)
 	    (add-hook 'before-save-hook 'prettier-js nil t)
 	    (add-to-list 'flycheck-checkers 'solidity-checker)
-	    (set (make-local-variable 'company-backends)
-		 (append '((company-solidity company-dabbrev-code))
-			 company-backends))
-	    (local-set-key (kbd "M-/") 'company-solidity)))
+	    ))
+	    ;; (set (make-local-variable 'company-backends)
+	    ;; 	 (append '((company-solidity company-dabbrev-code))
+	    ;; 		 company-backends))
+	    ;; (local-set-key (kbd "M-/") 'company-solidity)))

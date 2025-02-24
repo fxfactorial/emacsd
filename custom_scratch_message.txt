@@ -178,3 +178,7 @@ quickly test a node for p2p connectivity
 
 ## emacs if too many open files, do
 M-x file-notify-rm-all-watches
+
+## ag gets confused 
+
+ag -Q -- '->my function('
