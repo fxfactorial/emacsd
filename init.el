@@ -215,6 +215,12 @@
  '(lsp-ui-doc-max-height 80)
  '(lsp-ui-doc-max-width 120)
  '(menu-bar-mode nil)
+ '(package-selected-packages
+   '(ag cargo cargo-mode company-c-headers company-jedi company-quickhelp company-solidity dap-mode
+	docker-compose-mode flycheck-golangci-lint go-guru ido-vertical-mode indent-guide json-mode
+	lsp-ui magit neotree powerline prettier-js racer rust-mode solaire-mode solarized-theme
+	solidity-flycheck sql-indent sqlup-mode swift-mode toml-mode tree-sitter typescript-mode
+	undo-tree window-number yasnippet))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
@@ -230,8 +236,9 @@
 (use-package toml-mode)
 (use-package cargo
   :hook (rust-mode . cargo-minor-mode))
-;; (use-package flycheck-rust
-;;   :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+
+(use-package flycheck-rust
+  :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
 
 (define-skeleton my-html-defaults
@@ -408,6 +415,7 @@
 ; (setq ido-everywhere t)
 (ido-mode 1)
 (ido-vertical-mode)
+(global-undo-tree-mode)
 ;; Use the path set up by zsh, aka the ~/.zshrc.
 ;; (when (memq window-system '(mac ns))
   ;; (exec-path-from-shell-initialize))
@@ -583,6 +591,11 @@
   :ensure t
   :commands (lsp lsp-deferred)
   :hook (solidity-mode . lsp-deferred))
+
+(use-package lsp-mode
+  :ensure t
+  :commands (lsp lsp-deferred)
+  :hook (rust-mode . lsp-deferred))
 
 
 ;;Set up before-save hooks to format buffer and add/delete imports.
@@ -963,18 +976,20 @@
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 
-; rust code, it finally happened.
-
 (add-hook 'mips-mode-hook
 	  '(lambda ()
 	     (define-key mips-mode-map (kbd "M-/") 'dabbrev-expand)
 	     ))
 
-
 (require 'rust-mode)
 (add-hook
  'rust-mode-hook
  (lambda ()
+    (require 'lsp-ui-sideline)
+    (require 'lsp-ui-peek)
+    (require 'cargo)
+    (require 'cargo-minor-mode)
+    (setq-local rust-cargo-bin "/Users/edgar/.cargo/bin/cargo")
     (setq-local lsp-ui-sideline-delay 10)
     (setq-local lsp-ui-sideline-show-hover nil)
     (lsp-ui-sideline)
@@ -1054,7 +1069,7 @@
       (setcdr (assq 'continuation fringe-indicator-alist)
         '(nil nil)))))
 
-
+(bzg-big-fringe-mode)
 
 (add-hook 'solidity-mode-hook
 	  (lambda ()
@@ -1072,7 +1087,7 @@
 			    (list "--single-quote" "false"
 				  "--tab-width" "2"
 				  "--plugin" plugin_path
-				  "--print-width" "120")))
+				  "--print-width" "110")))
 	    (setq-local solidity-solc-path "/opt/homebrew/bin/solc")
 	    (setq-local solidity-flycheck-solc-checker-active t)
 	    (setq-local solidity-flycheck-solium-checker-active t)
