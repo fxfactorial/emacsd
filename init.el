@@ -216,11 +216,12 @@
  '(lsp-ui-doc-max-width 120)
  '(menu-bar-mode nil)
  '(package-selected-packages
-   '(ag cargo cargo-mode company-c-headers company-jedi company-quickhelp company-solidity dap-mode
-	docker-compose-mode flycheck-golangci-lint go-guru ido-vertical-mode indent-guide json-mode
-	lsp-ui magit neotree powerline prettier-js racer rust-mode solaire-mode solarized-theme
-	solidity-flycheck sql-indent sqlup-mode swift-mode toml-mode tree-sitter typescript-mode
-	undo-tree window-number yasnippet))
+   '(ag blacken cargo clang-format company-box company-c-headers company-jedi company-quickhelp
+	company-solidity dap-mode dockerfile-mode flycheck-golangci-lint go-guru ido-vertical-mode
+	indent-guide jedi json-mode just-mode lsp-sourcekit lsp-ui magit neotree powerline
+	prettier-js rjsx-mode rust-mode solaire-mode solarized-theme solidity-flycheck
+	spacegray-theme sql-indent sqlformat sqlup-mode swift-mode tern terraform-mode toml-mode
+	typescript-mode undo-tree web-mode which-key window-number yaml-mode yasnippet))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
@@ -415,6 +416,8 @@
 ; (setq ido-everywhere t)
 (ido-mode 1)
 (ido-vertical-mode)
+;; means that undo tree will only stay for the in-memory session
+(setq undo-tree-auto-save-history nil)
 (global-undo-tree-mode)
 ;; Use the path set up by zsh, aka the ~/.zshrc.
 ;; (when (memq window-system '(mac ns))
