@@ -871,6 +871,7 @@
 (add-to-list 'auto-mode-alist '("\\.sysctl\\'" . conf-mode))
 (add-to-list 'auto-mode-alist '("\\.conf\\'" . conf-mode))
 (add-to-list 'auto-mode-alist '("\\.gitconfig\\'" . conf-mode))
+(add-to-list 'auto-mode-alist '("\\.gitconfig-common\\'" . conf-mode))
 (add-to-list 'auto-mode-alist '("\\.gitmodules\\'" . conf-mode))
 
 ;; emacs lisp stuff
