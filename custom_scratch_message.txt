@@ -182,3 +182,7 @@ M-x file-notify-rm-all-watches
 ## ag gets confused 
 
 ag -Q -- '->my function('
+
+
+## python formating for big number, no scientific notation
+ f'{+141738170014 / 1e18:.20f}'
