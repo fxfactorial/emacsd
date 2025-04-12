@@ -185,7 +185,11 @@
      (tramp-connection-local-default-system-profile (path-separator . ":")
 						    (null-device . "/dev/null"))))
  '(custom-safe-themes
-   '("c7f838704d7caa88bc337464867c22af0a502e32154558b0f6c9c3c6e8650122"
+   '("51ec7bfa54adf5fff5d466248ea6431097f5a18224788d0bd7eb1257a4f7b773"
+     "57a29645c35ae5ce1660d5987d3da5869b048477a7801ce7ab57bfb25ce12d3e"
+     "d89e15a34261019eec9072575d8a924185c27d3da64899905f8548cbd9491a36"
+     "833ddce3314a4e28411edf3c6efde468f6f2616fc31e17a62587d6a9255f4633"
+     "c7f838704d7caa88bc337464867c22af0a502e32154558b0f6c9c3c6e8650122"
      "fee7287586b17efbfda432f05539b58e86e059e78006ce9237b8732fde991b4c"
      "4c56af497ddf0e30f65a7232a8ee21b3d62a8c332c6b268c81e9ea99b11da0d3"
      "90a6f96a4665a6a56e36dec873a15cbedf761c51ec08dd993d6604e32dd45940"
@@ -210,18 +214,19 @@
  '(lsp-rust-analyzer-display-chaining-hints t)
  '(lsp-rust-analyzer-display-parameter-hints t)
  '(lsp-rust-analyzer-lru-capacity 256)
- '(lsp-rust-analyzer-server-command '("/usr/local/bin/rust-analyzer"))
+;; '(lsp-rust-analyzer-server-command '("/usr/local/bin/rust-analyzer"))
  '(lsp-rust-analyzer-server-display-inlay-hints t)
  '(lsp-ui-doc-max-height 80)
  '(lsp-ui-doc-max-width 120)
  '(menu-bar-mode nil)
  '(package-selected-packages
-   '(ag blacken cargo clang-format company-box company-c-headers company-jedi company-quickhelp
-	company-solidity dap-mode dockerfile-mode flycheck-golangci-lint go-guru ido-vertical-mode
-	indent-guide jedi json-mode just-mode lsp-sourcekit lsp-ui magit neotree powerline
-	prettier-js rjsx-mode rust-mode solaire-mode solarized-theme solidity-flycheck
-	spacegray-theme sql-indent sqlformat sqlup-mode swift-mode tern terraform-mode toml-mode
-	typescript-mode undo-tree web-mode which-key window-number yaml-mode yasnippet))
+   '(ag blacken cargo cargo-mode clang-format company-box company-c-headers company-jedi
+	company-quickhelp company-solidity dap-mode dockerfile-mode flycheck-golangci-lint
+	flycheck-rust go-guru ido-vertical-mode indent-guide jedi json-mode just-mode lsp-sourcekit
+	lsp-ui magit neotree powerline prettier-js rjsx-mode rust-mode solaire-mode solarized-theme
+	solidity-flycheck spacegray-theme sql-indent sqlformat sqlup-mode swift-mode tern
+	terraform-mode toml-mode typescript-mode undo-tree web-mode which-key window-number
+	yaml-mode yasnippet))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
@@ -235,8 +240,8 @@
 (use-package rust-mode
   :hook (rust-mode . lsp))
 (use-package toml-mode)
-(use-package cargo
-  :hook (rust-mode . cargo-minor-mode))
+;; (use-package cargo
+;;   :hook (rust-mode . cargo-minor-mode))
 
 (use-package flycheck-rust
   :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
@@ -623,25 +628,31 @@
   (lambda ()
     (setq-local gofmt-command "goimports")
     (setq-local flycheck-golangci-lint-executable "golangci-lint-langserver")
-    (company-mode)
-    (company-quickhelp-mode)
+    ;; (company-mode)
+    ;; (company-quickhelp-mode)
     (flycheck-mode)
     (flycheck-golangci-lint-setup)
     (go-guru-hl-identifier-mode)
     (visual-line-mode)
-    (powerline-default-theme)
+    (powerline-center-theme)
     (setq-local lsp-ui-doc-enable t
 		lsp-ui-peek-enable t
 		lsp-ui-sideline-enable t
+		lsp-ui-doc-include-signature t
+		lsp-ui-doc-show-with-cursor t
+		lsp-ui-doc-show-with-mouse t
 		lsp-ui-doc-max-width 120
+		tab-width 2
+		standard-indent 2
+		indent-tabs-mode nil
 		lsp-ui-imenu-enable t
 		lsp-ui-flycheck-enable t)
     (setq-local tab-width 2)
-    (setq-local company-tooltip-align-annotations t)
-    (setq-local company-tooltip-limit 10)                      ; bigger popup window
-    (setq-local company-idle-delay .4)                         ; decrease delay before autocompletion popup shows
-    (setq-local company-echo-delay 0)                          ; remove annoying blinking
-    (setq-local company-begin-commands '(self-insert-command))
+    ;; (setq-local company-tooltip-align-annotations t)
+    ;; (setq-local company-tooltip-limit 10)                      ; bigger popup window
+    ;; (setq-local company-idle-delay .2)                         ; decrease delay before autocompletion popup shows
+    ;; (setq-local company-echo-delay 0)                          ; remove annoying blinking
+    ;; (setq-local company-begin-commands '(self-insert-command))
     (add-hook 'before-save-hook #'gofmt-before-save nil t)
     ;; (local-set-key (kbd "M-.") 'godef-jump)
     (local-set-key (kbd "M-.") 'lsp-ui-peek-find-definitions)
@@ -650,8 +661,9 @@
     (local-set-key (kbd "M-[") 'previous-error)
     ;; (local-set-key (kbd "M-n") 'forward-paragraph)
     ;; (local-set-key (kbd "M-p") 'backward-paragraph)
-    (yas-minor-mode)
-    (local-set-key (kbd "M-/") 'company-go)))
+    ;; (yas-minor-mode)
+    ;; (local-set-key (kbd "M-/") 'company-go)),
+  ))
 
 ;; SQL Stuff
 ;; Just remember,
@@ -986,31 +998,34 @@
 	     ))
 
 (require 'rust-mode)
-(add-hook
- 'rust-mode-hook
- (lambda ()
-    (require 'lsp-ui-sideline)
-    (require 'lsp-ui-peek)
-    (require 'cargo)
-    (require 'cargo-minor-mode)
-    (setq-local rust-cargo-bin "/Users/edgar/.cargo/bin/cargo")
-    (setq-local lsp-ui-sideline-delay 10)
-    (setq-local lsp-ui-sideline-show-hover nil)
-    (lsp-ui-sideline)
-    (lsp-ui-peek-mode)
-    (yas-minor-mode)
-    (define-key rust-mode-map (kbd "M-/") 'company-indent-or-complete-common)
-    (define-key rust-mode-map (kbd "M-[") 'cargo-process-build)
-    (define-key rust-mode-map (kbd "M-]") 'cargo-process-run)
-    (define-key rust-mode-map (kbd "M-|") 'racer-describe-tooltip)
-    ;; (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-    ;; (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
-    ;; (lsp-treemacs-sync-mode 1)
-    (setq-local company-tooltip-align-annotations t)
-    (setq-local company-minimum-prefix-length 1)
-    (setq-local rust-format-on-save t)
-    )
- )
+
+(add-hook 'rust-mode-hook
+	  (lambda ()
+	    (require 'lsp-ui-sideline)
+	    (require 'lsp-ui-peek)
+	    (require 'cargo)
+	    ;;    (require 'cargo-minor-mode)
+	    (let* ((expanded (expand-file-name "~/"))
+		   (cargo_path (concat expanded ".cargo/bin/cargo")))
+;;	      (setq-local lsp-rust-analyzer-server-command
+	      (setq-local rust-cargo-bin cargo_path))
+	    (setq-local lsp-ui-sideline-delay 10)
+	    (setq-local lsp-ui-sideline-show-hover nil)
+	    (lsp-ui-sideline)
+	    (lsp-ui-peek-mode)
+	    (yas-minor-mode)
+	    (define-key rust-mode-map (kbd "M-/") 'company-indent-or-complete-common)
+	    (define-key rust-mode-map (kbd "M-[") 'cargo-process-build)
+	    (define-key rust-mode-map (kbd "M-]") 'cargo-process-run)
+	    (define-key rust-mode-map (kbd "M-|") 'racer-describe-tooltip)
+	    ;; (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+	    ;; (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+	    ;; (lsp-treemacs-sync-mode 1)
+	    (setq-local company-tooltip-align-annotations t)
+	    (setq-local company-minimum-prefix-length 1)
+	    (setq-local rust-format-on-save t)
+	    )
+	  )
 
 (add-hook 'typescript-mode
 	  (lambda()
