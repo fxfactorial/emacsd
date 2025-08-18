@@ -185,4 +185,51 @@ ag -Q -- '->my function('
 
 
 ## python formating for big number, no scientific notation
- f'{+141738170014 / 1e18:.20f}'
+ f'{+141738170014 / 1e18:.20f}' just use eth function, its at ~/.ipython/profile_default/startup,
+ everyuthing there just blindly runs
+
+# CoreElec
+
+On the CoreElec-21 branch
+
+DEVICE=Amlogic-ng ./scripts/clean kodi
+DEVICE=Amlogic-ng ./scripts/build kodi
+DEVICE=Amlogic-ng make image
+# or just create .tar only for update
+DEVICE=Amlogic-ng make
+
+
+// quick bit reader
+
+class CBitStream
+{
+public:
+  // opens an existing byte array as bitstream
+  CBitStream(const uint8_t* bytes, int _size)
+  {
+    data = bytes;
+    size = _size;
+  }
+
+  // reads bits from bitstream
+  int ReadBits(int bits)
+  {
+    int dat = 0;
+    for (int i = index; i < index + bits; i++)
+    {
+      dat = dat * 2 + getbit(data[i / 8], i % 8);
+    }
+    index += bits;
+    return dat;
+  }
+
+  // skip bits from bitstream
+  void SkipBits(int bits) { index += bits; }
+
+private:
+  uint8_t getbit(uint8_t x, int y) { return (x >> (7 - y)) & 1; }
+
+  const uint8_t* data{nullptr};
+  int size{0};
+  int index{0};
+};

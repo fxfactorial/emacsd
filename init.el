@@ -465,7 +465,7 @@
 (window-number-mode)
 (window-number-meta-mode)
 
-(fringe-mode 10)
+;(fringe-mode 10)
 (tool-bar-mode -1)
 ;; Gives me the full name of the buffer, hate just having foo.c
 (add-hook 'find-file-hooks
@@ -496,8 +496,8 @@
 
 ;; (global-linum-mode 1)
 ;; (hlinum-activate)
-(fringe-mode -1)
-
+; (fringe-mode -1)
+(fringe-mode)
 (when window-system
   (add-hook 'after-init-hook
     (lambda ()
@@ -558,8 +558,8 @@
   'python-mode-hook
   (lambda ()
     (setq-default indent-tabs-mode t)
-		(setq-local python-shell-interpreter "ipython3")
-		(setq-local python-shell-interpreter-args "-i")
+	(setq-local python-shell-interpreter "ipython3")
+	(setq-local python-shell-interpreter-args "-i")
     (setq-default tab-width 4)
     (setq-default py-indent-tabs-mode t)
     (define-key python-mode-map (kbd "M-q") 'python-fill-paren)
@@ -567,7 +567,7 @@
     (define-key python-mode-map (kbd "M-/") 'company-jedi)
     (define-key python-mode-map (kbd "M-[") 'jedi:goto-definition-pop-marker)
     (jedi:setup)
-    ;; (blacken-mode)
+    (blacken-mode)
     (flycheck-mode)
     (company-mode)
     (company-quickhelp-mode)
@@ -1101,7 +1101,7 @@
 	    ;;       (b 20)
 	    ;; (body) and need to use the (list ) because its not a list literal anymore, it also requires usage of evaling the "plugin_path"
 	    (let* ((expanded (expand-file-name "~/"))
-		   (plugin_path (concat expanded ".nvm/versions/node/v21.6.1/lib/node_modules/prettier-plugin-solidity/dist/standalone.cjs")))
+		   (plugin_path (concat expanded ".nvm/versions/node/v21.6.1/lib/node_modules/prettier-plugin-solidity/dist/index.js")))
 	      (setq-default prettier-js-args
 			    (list "--single-quote" "false"
 				  "--tab-width" "2"
