@@ -216,6 +216,7 @@
  '(lsp-rust-analyzer-lru-capacity 256)
  '(lsp-rust-analyzer-server-display-inlay-hints t)
  '(lsp-semgrep-metrics-enabled nil)
+ '(lsp-semgrep-server-command '("semgrep" "--disable-version-check" "lsp"))
  '(lsp-ui-doc-max-height 80)
  '(lsp-ui-doc-max-width 120)
  '(menu-bar-mode nil)
