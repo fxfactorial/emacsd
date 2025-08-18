@@ -183,7 +183,7 @@
      (tramp-connection-local-default-shell-profile (shell-file-name . "/bin/sh")
 						   (shell-command-switch . "-c"))
      (tramp-connection-local-default-system-profile (path-separator . ":")
-						    (null-device . "/dev/null"))))
+						    (null-device . "/dev/null") (exec-suffixes ""))))
  '(custom-safe-themes
    '("51ec7bfa54adf5fff5d466248ea6431097f5a18224788d0bd7eb1257a4f7b773"
      "57a29645c35ae5ce1660d5987d3da5869b048477a7801ce7ab57bfb25ce12d3e"
@@ -214,8 +214,8 @@
  '(lsp-rust-analyzer-display-chaining-hints t)
  '(lsp-rust-analyzer-display-parameter-hints t)
  '(lsp-rust-analyzer-lru-capacity 256)
-;; '(lsp-rust-analyzer-server-command '("/usr/local/bin/rust-analyzer"))
  '(lsp-rust-analyzer-server-display-inlay-hints t)
+ '(lsp-semgrep-metrics-enabled nil)
  '(lsp-ui-doc-max-height 80)
  '(lsp-ui-doc-max-width 120)
  '(menu-bar-mode nil)
