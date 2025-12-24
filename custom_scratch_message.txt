@@ -123,7 +123,18 @@ go install github.com/stamblerre/gocode@latest; \
 go install golang.org/x/tools/gopls@latest; \
 go install golang.org/x/tools/...
 
-for lsp, need to do lsp-workspace-add 
+
+gotip install golang.org/x/tools/cmd/goimports@latest; \
+gotip install golang.org/x/lint/golint@latest; \
+gotip install github.com/rogpeppe/godef@latest; \
+gotip install github.com/go-delve/delve/cmd/dlv@latest; \
+gotip install github.com/golang/mock/mockgen@latest; \
+gotip install github.com/stamblerre/gocode@latest; \
+gotip install golang.org/x/tools/gopls@latest; \
+gotip install golang.org/x/tools/...
+
+
+for lsp, need to do lsp-workspace-add
 
 
  go  install golang.org/x/tools/cmd/goimports@latest; go  install golang.org/x/lint/golint@latest; go  install github.com/rogpeppe/godef@latest; go  install github.com/go-delve/delve/cmd/dlv@latest; go  install github.com/golang/mock/mockgen@latest; go  install github.com/stamblerre/gocode@latest; go  install golang.org/x/tools/gopls@latest; go install golang.org/x/tools/...
@@ -171,7 +182,7 @@ notice how the -F is there to override ssh configs that might be interfering
 
 ## ethereum
 
-quickly test a node for p2p connectivity 
+quickly test a node for p2p connectivity
 
 ./devp2p rlpx ping "enode://9d7b3d47108f99fabc6739e625fa842b47161d9a9c2bf6abe9765a0a95f2b51b46b482b2a1e68d5dc87fcbadbdd6fbde2f5c7737f7a2f913509047a96128de90@127.0.0.1:30303"
 
@@ -179,7 +190,7 @@ quickly test a node for p2p connectivity
 ## emacs if too many open files, do
 M-x file-notify-rm-all-watches
 
-## ag gets confused 
+## ag gets confused
 
 ag -Q -- '->my function('
 
