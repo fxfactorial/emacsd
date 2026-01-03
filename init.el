@@ -231,11 +231,11 @@
  '(package-selected-packages
    '(ag applescript-mode blacken cargo cargo-mode clang-format cmake-mode company-box company-c-headers
 	company-jedi company-quickhelp company-solidity company-web dap-mode dockerfile-mode
-	flycheck-golangci-lint flycheck-rust go-guru ido-vertical-mode indent-guide jedi json-mode
-	just-mode lsp-sourcekit lsp-ui magit neotree powerline prettier-js rainbow-mode rjsx-mode
-	rust-mode solaire-mode solarized-theme solidity-flycheck spacegray-theme sql-indent
-	sqlformat sqlup-mode swift-mode tern terraform-mode toml-mode typescript-mode undo-tree
-	web-mode which-key window-number window-numbering winum yaml-mode yasnippet))
+	flycheck-golangci-lint flycheck-rust go-guru ido-vertical-mode indent-bars indent-guide jedi
+	json-mode just-mode lsp-sourcekit lsp-ui magit neotree powerline prettier-js rainbow-mode
+	rjsx-mode rust-mode solaire-mode solarized-theme solidity-flycheck spacegray-theme
+	sql-indent sqlformat sqlup-mode swift-mode tern terraform-mode toml-mode typescript-mode
+	undo-tree web-mode which-key window-number window-numbering winum yaml-mode yasnippet))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
@@ -475,8 +475,11 @@
 (set-scroll-bar-mode nil)
 ;; Visuals, but note that some visuals also set in custom.
 ;; Cool vertical indentation guides.
-(indent-guide-global-mode)
+; (indent-guide-global-mode)
 ;; (setq indent-guide-recursive t)
+(use-package indent-bars
+  :hook ((python-mode go-mode) . indent-bars-mode)) ; or whichever modes you prefer
+
 (show-paren-mode)
 (auto-insert-mode)
 (abbrev-mode -1)
