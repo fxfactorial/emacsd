@@ -65,8 +65,9 @@
 
 (set-face-attribute 'default nil
 		    :family "PragmataPro Mono Liga"
-		    :height 120
-		    :width 'ultra-condensed)
+;;		    :height 120
+;;		    :width 'ultra-condensed
+		    )
 
   ;; (setq flycheck-c/c++-clang-executable "armv7-apple-darwin11-clang")
   ;; (setq flycheck-clang-include-path
@@ -229,12 +230,12 @@
  '(menu-bar-mode nil)
  '(package-selected-packages
    '(ag applescript-mode blacken cargo cargo-mode clang-format cmake-mode company-box company-c-headers
-	company-jedi company-quickhelp company-solidity dap-mode dockerfile-mode
+	company-jedi company-quickhelp company-solidity company-web dap-mode dockerfile-mode
 	flycheck-golangci-lint flycheck-rust go-guru ido-vertical-mode indent-guide jedi json-mode
-	just-mode lsp-sourcekit lsp-ui magit neotree powerline prettier-js rjsx-mode rust-mode
-	solaire-mode solarized-theme solidity-flycheck spacegray-theme sql-indent sqlformat
-	sqlup-mode swift-mode tern terraform-mode toml-mode typescript-mode undo-tree web-mode
-	which-key window-number window-numbering winum yaml-mode yasnippet))
+	just-mode lsp-sourcekit lsp-ui magit neotree powerline prettier-js rainbow-mode rjsx-mode
+	rust-mode solaire-mode solarized-theme solidity-flycheck spacegray-theme sql-indent
+	sqlformat sqlup-mode swift-mode tern terraform-mode toml-mode typescript-mode undo-tree
+	web-mode which-key window-number window-numbering winum yaml-mode yasnippet))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
@@ -636,7 +637,12 @@
   :ensure t
   :commands (lsp lsp-deferred)
   :hook (rjsx-mode . lsp-deferred))
+;; needed ` npm install -g vscode-html-languageserver-bin`'
 
+(use-package lsp-mode
+  :ensure t
+  :commands (lsp lsp-deferred)
+  :hook (html-mode . lsp-deferred))
 
 ;;Set up before-save hooks to format buffer and add/delete imports.
 ;;Make sure you don't have other gofmt/goimports hooks enabled.
@@ -799,7 +805,8 @@
 (add-hook 'html-mode-hook
   (lambda ()
     (web-mode)
-    (company-mode)
+    ;; (company-mode)
+    (setq-default prettier-js-args '("--print-width" "120"))
     (prettier-js-mode)
     (add-to-list 'write-file-functions 'delete-trailing-whitespace)
     (define-key web-mode-map (kbd "M-/") 'company-web-html)))
