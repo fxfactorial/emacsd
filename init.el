@@ -216,6 +216,7 @@
  '(fill-column 100)
  '(go-guru-hl-identifier-idle-time 0.25)
  '(go-guru-scope "github.com/...")
+ '(indent-bars-treesit-support t)
  '(lsp-rust-all-features t)
  '(lsp-rust-analyzer-cargo-all-targets t)
  '(lsp-rust-analyzer-display-chaining-hints t)
@@ -809,7 +810,7 @@
   (lambda ()
     (web-mode)
     ;; (company-mode)
-    (setq-default prettier-js-args '("--print-width" "120"))
+    (setq-default prettier-js-args '("--print-width" "160"))
     (prettier-js-mode)
     (add-to-list 'write-file-functions 'delete-trailing-whitespace)
     (define-key web-mode-map (kbd "M-/") 'company-web-html)))
@@ -851,9 +852,13 @@
   (require 'dap-cpptools)
   (yas-global-mode))
 
-(add-hook 'scss-mode-hook (lambda ()
-			    (add-hook 'before-save-hook 'prettier-js)
-			    (prettier-js-mode)))
+;; (add-hook 'scss-mode-hook (lambda ()
+;; 			    (add-hook 'before-save-hook 'prettier-js)
+;; 			    (prettier-js-mode)))
+
+;; (add-hook 'css-mode-hook (lambda ()
+;; 			    (add-hook 'before-save-hook 'prettier-js)
+;; 			    (prettier-js-mode)))
 
 ;;Javascript hook, this is a better major mode than default one
 (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
@@ -886,7 +891,7 @@
     (setq-default tab-width 2)
     (setq-default prettier-js-args
       '( "--tab-width" "2"
-         "--print-width" "120"
+         "--print-width" "160"
        ;;"--single-quote"
          "--jsx-bracket-same-line"
          "--trailing-comma" "es5"))
@@ -900,7 +905,8 @@
 		  "Blob" "FileReader" "exports" "web3"
 		  "__DEV__" "TextEncoder" "TextDecoder"
 		  "history" "AudioContext" "Draggable" "TweenLite"
-		  "FormData" "URLSearchParams" "URL"
+		  "FormData" "URLSearchParams" "URL" "chrome" "EventSource"
+			"MutationObserver"
 		  ))
     (add-to-list 'write-file-functions 'delete-trailing-whitespace)
     (prettify-symbols-mode)
@@ -1149,7 +1155,7 @@
 			    (list "--single-quote" "false"
 				  "--tab-width" "2"
 				  "--plugin" plugin_path
-				  "--print-width" "110")))
+				  "--print-width" "160")))
 	    (setq-local solidity-solc-path "/opt/homebrew/bin/solc")
 	    (setq-local solidity-flycheck-solc-checker-active t)
 	    (setq-local solidity-flycheck-solium-checker-active t)
