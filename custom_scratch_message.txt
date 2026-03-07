@@ -1,0 +1,246 @@
+Semantic, Company Tips:
+1) When you're in in a foreign land, say linux kernel, be sure to
+update the system headers include path, see the example on
+os-vm, which calls os-s
+
+Org-Mode Tips:
+1) C-e is basically the start of all export abilities.
+
+LaTeX Tips: (Basically not used since using Org-mode)
+1) LaTeX is set up with math mode already on, so doing `-<something>
+gives you math macros, to get them enclosed in $$, do C-u
+`-<something>
+2) C-c compiles, and hitting C-c again will open the PDF in evince.
+3) C-c C-e gives you an easy way to make environments, its also smart
+that it remembers the last environment you made.
+4) Doing C-c C-f C-i shows all possible things like emphasis or
+bolding. For example, C-c C-f C-b provides bold, C-e provides emphasis
+
+Helm Tips:
+1) Helm beginning KBD is C-c C-f, key one is C-c C-f i, that opens up
+Semantic Tags for that file.
+2) M-s opens up all the available gtags, nice thing is it will make
+gtags if you don't have them already.
+
+Misc Tips:
+1) C-' is always available and will swap two buffers.
+3) C-c C-c will call compile, then do C-x ` to go to errors, if any.
+4) Remember that you can sudo open a file via tramp, just try opening
+as usual, just add prefix of /sudo:: and emacs will ask for password.
+5) Add prefixes to block of highlighted code with C-x r t.
+6) In C code, do C-c C-i for all those common #includes
+7) You can redirect stuff in eshell directly to a buffer, like so
+ls > #<buffer *scratch*>
+8) Do C-c C-g to google for whatever is under point.
+9) With a rectange, can add prefix to all lines with C-x r t
+10) You can open emacs on a specific line of a file, like after grep
+use with: emacs "+<LINE_NUMER>" "FILE_NAME" note, quotes are needed.
+11) You can go back to where you last were with "C-u C-space"
+12) C-return will cycle through the buffers
+13) M-return toggles the full screen
+14) Find all references of tag with M--
+15) Similar to 1, swap buffers top and bottom with M-'
+16) Pretty cool is M-\, dels white space between two words.
+17) C-l l will restart point to become the top of the buffer.
+18) M-+ gives a count of lines, words and characters, pretty neat.
+
+Python Code
+1) C-c . is going to a definition.
+2) C-c , is coming back from where you were.
+3) M-., regular tags works but you need to use ctags with:
+ctags -e -R --languages=python.
+4) C-c C-< will indent a region to the left.
+
+DevOps stuff
+1) s3cmd uses environment variables inside zshrc, aws I think makes
+its own dot file
+2) do s3cmd ls to get the machines, can do s3cmd ls <specific_machine>
+3) do aws redshift describe-clusters to see what clusters are out
+there, everything for can do aws redshift
+4) Create arbtiary sized file:  dd if=/dev/zero of=output.dat  bs=1M  count=10
+
+OCaml
+1) #use will read, compile and execute source code given.
+2) #load is like loading compiled stuff, so example:
+#load "unix.cma" for libraries or #load "compiled.cmo" for an
+executable.
+load's path includes ~/.opam/<current_compiler>/lib/ocaml
+3) #require is like loading up a package, so #require "netstring"
+4) Do padding with : printf "%*s" 20 "hi";;
+
+JavaScript
+1) Using tern, go to the defintion with M-. and comeback with M-,
+2) Using tern, get the type with C-c C-c
+3) Hide function defintions with C-c C-f
+
+Nix
+1) source ~/.nix-profile/etc/profile.d/nix.sh
+
+ReactNative:
+Cover is like use the image size as it is and make it cover the given spacing
+
+Stretch is like take the image and make it fit the dimensions given, force it
+
+contain is like keep the ratio for the given sizing
+
+
+
+
+Notes: A tree is a graph with no loops
+
+
+A geometric interpretation of the quadratic form that hasn't been
+mentioned so far in the course: if x is a vector in R^n, and A is
+square, then Ax is also a vector in R^n. You can think of A as a
+function that changes one vector x in the space to a new vector
+Ax in the space. The quadratic form x^TAx is the inner product of
+the old vector x with the new vector Ax. A positive definite
+matrix guarantees that this inner product is positive. But the
+inner product is the product of the lengths of the two vectors, x
+and Ax, and the cosine of the angle between them. Ignoring their
+lengths, the fact that the quadratic form is always positive says
+that the cosine of the angle between them is always positive,
+which means that the angle is between -pi/2 and pi/2. Thus,
+whatever A does to x, the new vector can't be more than 90
+degrees away from the old vector. This is a form of stability,
+not in the length of the new vector (the eigenvalues of A could
+be large, so vectors could grow very large when A is applied to
+them), but in the direction of the new vector.
+
+
+To re-compile all packages, type
+M-: (byte-recompile-directory package-user-dir nil 'force).
+After restarting Emacs, packages should work fine again.
+
+installing go crap
+
+go install golang.org/x/tools/cmd/goimports@latest; \
+go install golang.org/x/lint/golint@latest; \
+go install github.com/rogpeppe/godef@latest; \
+go install github.com/go-delve/delve/cmd/dlv@latest; \
+go install github.com/golang/mock/mockgen@latest; \
+go install github.com/stamblerre/gocode@latest; \
+go install golang.org/x/tools/gopls@latest; \
+go install golang.org/x/tools/...
+
+
+gotip install golang.org/x/tools/cmd/goimports@latest; \
+gotip install golang.org/x/lint/golint@latest; \
+gotip install github.com/rogpeppe/godef@latest; \
+gotip install github.com/go-delve/delve/cmd/dlv@latest; \
+gotip install github.com/golang/mock/mockgen@latest; \
+gotip install github.com/stamblerre/gocode@latest; \
+gotip install golang.org/x/tools/gopls@latest; \
+gotip install golang.org/x/tools/...
+
+
+for lsp, need to do lsp-workspace-add
+
+
+ go  install golang.org/x/tools/cmd/goimports@latest; go  install golang.org/x/lint/golint@latest; go  install github.com/rogpeppe/godef@latest; go  install github.com/go-delve/delve/cmd/dlv@latest; go  install github.com/golang/mock/mockgen@latest; go  install github.com/stamblerre/gocode@latest; go  install golang.org/x/tools/gopls@latest; go install golang.org/x/tools/...
+
+
+
+# git submodules
+
+if cloned and forgot --recursive, can do
+git submodule init
+git submodule update
+
+
+
+# SQL Things
+A left join is quite simple. It keeps all rows in the first (left) table plus all rows in the second (right) table, when the on clause evaluates to "true".
+
+# sync status on op-node
+curl -H "Content-Type: application/json" -X POST http://localhost:9545 -d '{"jsonrpc":"2.0","id":"1","method":"optimism_syncStatus","params":[]}' | jq .result
+
+
+
+# Get block , knows earliest, latest, safe, finalized, pending. bool parameter is whether to include txs
+~ curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["latest", true],"id":67}' localhost:8546
+
+
+# attach to container
+
+docker exec -it op-geth /bin/sh
+geth attach /root/.ethereum/geth.ipc
+debug.setHead('0x' + Number(SOME_NUMBER).toString(16))
+
+
+ lsof -iTCP -sTCP:LISTEN -n -P
+
+cast rpc optimism_syncStatus --rpc-url=localhost:2745 | jq '.unsafe_l2.timestamp | strftime("%Y-%m-%d-%s")'
+printf "%d\n" $(cast rpc --rpc-url=ws://localhost:4500 eth_getBlockByNumber "finalized" false | jq -r .number)
+
+and also - when pushing a local repo with maybe a different key, might need to use this one:
+
+GIT_SSH_COMMAND='ssh -i $HOME/.ssh/personal-keys/fxfactorial_id_ed25519  -o IdentitiesOnly=yes -F
+/dev/null'   git push --set-upstream origin master
+
+notice how the -F is there to override ssh configs that might be interfering
+
+## ethereum
+
+quickly test a node for p2p connectivity
+
+./devp2p rlpx ping "enode://9d7b3d47108f99fabc6739e625fa842b47161d9a9c2bf6abe9765a0a95f2b51b46b482b2a1e68d5dc87fcbadbdd6fbde2f5c7737f7a2f913509047a96128de90@127.0.0.1:30303"
+
+
+## emacs if too many open files, do
+M-x file-notify-rm-all-watches
+
+## ag gets confused
+
+ag -Q -- '->my function('
+
+
+## python formating for big number, no scientific notation
+ f'{+141738170014 / 1e18:.20f}' just use eth function, its at ~/.ipython/profile_default/startup,
+ everyuthing there just blindly runs
+
+# CoreElec
+
+On the CoreElec-21 branch
+
+DEVICE=Amlogic-ng ./scripts/clean kodi
+DEVICE=Amlogic-ng ./scripts/build kodi
+DEVICE=Amlogic-ng make image
+# or just create .tar only for update
+DEVICE=Amlogic-ng make
+
+
+// quick bit reader
+
+class CBitStream
+{
+public:
+  // opens an existing byte array as bitstream
+  CBitStream(const uint8_t* bytes, int _size)
+  {
+    data = bytes;
+    size = _size;
+  }
+
+  // reads bits from bitstream
+  int ReadBits(int bits)
+  {
+    int dat = 0;
+    for (int i = index; i < index + bits; i++)
+    {
+      dat = dat * 2 + getbit(data[i / 8], i % 8);
+    }
+    index += bits;
+    return dat;
+  }
+
+  // skip bits from bitstream
+  void SkipBits(int bits) { index += bits; }
+
+private:
+  uint8_t getbit(uint8_t x, int y) { return (x >> (7 - y)) & 1; }
+
+  const uint8_t* data{nullptr};
+  int size{0};
+  int index{0};
+};

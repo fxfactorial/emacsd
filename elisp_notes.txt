@@ -1,0 +1,23 @@
+Example (let ((zebra 'stripes)
+             (tiger 'fierce))
+             (message "One kind of animal has %s and another is %s."
+                      zebra tiger))
+Here, the varlist is  ((zebra 'stripes) (tiger 'fierce)) .
+
+See, using the ' makes it a literal symbol, it doesn't evaluate
+it..aka doing '(concat "first" "second") doesn't actually give back
+"firstsecond", it gives back the symbol '(concat "first" "second"), 
+but if you drop the ', then the function will evaluate. 
+(defun file-string (file)
+    "Read the contents of a file and return as a string."
+    (with-temp-buffer
+      (insert-file-contents file)
+      (buffer-string)))
+((lambda ()
+   ;; notes-buffer now holds our message, 
+   ;; might refactor later to with-temp-buffer?
+   (let ((notes-buffer (find-file "custom_scratch_message.txt")))
+     ;; Now we need to get it into the scratch buffer. 
+     ;; Let's clear out the scratch buffer first. 
+     (setq initial-scratch-message nil)
+     (message "test %s" foo))))
