@@ -6,3 +6,7 @@ history
 ido.last
 ielm-history
 transient
+projects
+*.elc
+ielm-history.eld
+.lsp-session-*
