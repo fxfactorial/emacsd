@@ -541,7 +541,6 @@
 
 ;; (global-linum-mode 1)
 ;; (hlinum-activate)
-; (fringe-mode -1)
 (fringe-mode)
 (when window-system
   (add-hook 'after-init-hook
@@ -578,20 +577,6 @@
       ;; Just like killing the shell without asking me.
       (get-process "Python") nil)))
 
-;; (add-hook
-;;   'python-mode-hook
-;;   (lambda ()
-;;     (setq-default indent-tabs-mode t)
-;;     (setq-default tab-width 4)
-;;     (setq-default py-indent-tabs-mode t)
-;; 	(anaconda-mode)
-;; 	(anaconda-eldoc-mode)
-;; 	(blacken-mode)
-;;     (flycheck-mode)
-;;     (company-mode)
-;;     (company-quickhelp-mode)
-;; 	(company-anaconda)
-;;     (setq-local show-trailing-whitespace t)))
 
 
 (add-hook
@@ -618,9 +603,6 @@
     (company-quickhelp-mode)
     (setq-local show-trailing-whitespace t)))
 
-
-
-
 ;;Set up before-save hooks to format buffer and add/delete imports.
 ;;Make sure you don't have other gofmt/goimports hooks enabled.
 
@@ -641,6 +623,7 @@
   (lambda ()
     (setq-local lsp-ui-doc-enable t
 		gofmt-command "goimports"
+;;		lsp-go-gopls-server-path
 		flycheck-golangci-lint-executable "golangci-lint-langserver"
 		lsp-gopls-staticcheck t
 		lsp-eldoc-render-all t
