@@ -620,37 +620,35 @@
 
 ;; Go Code things
 (add-hook 'go-mode-hook
-  (lambda ()
-    (setq-local lsp-ui-doc-enable t
-		gofmt-command "goimports"
-;;		lsp-go-gopls-server-path
-		flycheck-golangci-lint-executable "golangci-lint-langserver"
-		lsp-gopls-staticcheck t
-		lsp-eldoc-render-all t
-		lsp-gopls-complete-unimported t
-		lsp-ui-peek-enable t
-		lsp-ui-sideline-enable t
-		lsp-ui-doc-include-signature t
-		lsp-ui-doc-show-with-cursor t
-		lsp-ui-doc-show-with-mouse t
-		lsp-ui-doc-max-width 120
-		tab-width 2
-		standard-indent 2
-		indent-tabs-mode nil
-		lsp-ui-imenu-enable t
-		lsp-ui-flycheck-enable t)
-    (lsp-go-install-save-hooks)
-    (flycheck-mode)
-    (flycheck-golangci-lint-setup)
-    (visual-line-mode)
-    (powerline-center-theme)
-    (add-hook 'before-save-hook #'gofmt-before-save nil t)
-    (local-set-key (kbd "M-.") 'lsp-ui-peek-find-definitions)
-    (local-set-key (kbd "M-,") 'pop-tag-mark)
-    (local-set-key (kbd "M-]") 'next-error)
-    (local-set-key (kbd "M-[") 'previous-error)
-    (yas-minor-mode)
-  ))
+	  (lambda ()
+	    (setq-local lsp-ui-doc-enable t
+			;;		lsp-go-gopls-server-path
+			flycheck-golangci-lint-executable "golangci-lint-langserver"
+			lsp-gopls-staticcheck t
+			lsp-eldoc-render-all t
+			lsp-gopls-complete-unimported t
+			lsp-ui-peek-enable t
+			lsp-ui-sideline-enable t
+			lsp-ui-doc-include-signature t
+			lsp-ui-doc-show-with-cursor t
+			lsp-ui-doc-show-with-mouse t
+			lsp-ui-doc-max-width 120
+			tab-width 2
+			standard-indent 2
+			indent-tabs-mode nil
+			lsp-ui-imenu-enable t
+			lsp-ui-flycheck-enable t)
+	    (lsp-go-install-save-hooks)
+	    (flycheck-mode)
+	    (flycheck-golangci-lint-setup)
+	    (visual-line-mode)
+	    (powerline-center-theme)
+	    (local-set-key (kbd "M-.") 'lsp-ui-peek-find-definitions)
+	    (local-set-key (kbd "M-,") 'pop-tag-mark)
+	    (local-set-key (kbd "M-]") 'next-error)
+	    (local-set-key (kbd "M-[") 'previous-error)
+	    (yas-minor-mode)
+	    ))
 
 ;; SQL Stuff
 ;; Just remember,
@@ -755,7 +753,7 @@
   (lambda ()
     (web-mode)
     ;; (company-mode)
-    (setq-default prettier-js-args '("--print-width" "160"))
+    (setq-local prettier-js-args '("--print-width" "160"))
     (prettier-js-mode)
     (add-to-list 'write-file-functions 'delete-trailing-whitespace)
     (define-key web-mode-map (kbd "M-/") 'company-web-html)))
@@ -834,7 +832,7 @@
     (require 'lsp-mode)
     (setq-default indent-tabs-mode t)
     (setq-default tab-width 2)
-    (setq-default prettier-js-args
+    (setq-local prettier-js-args
       '( "--tab-width" "2"
          "--print-width" "160"
        ;;"--single-quote"

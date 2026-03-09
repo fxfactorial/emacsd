@@ -10,3 +10,4 @@ projects
 *.elc
 ielm-history.eld
 .lsp-session-*
+.dap-breakpoints
