@@ -1,7 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
-
 (setq warning-minimum-level :emergency);; turn off if actually trying to debug something
-(setq gc-cons-threshold (* 100 1024 1024))
+(setq gc-cons-threshold (* 150 1024 1024))
 (setq-default mode-line-buffer-identification
               (list 'buffer-file-name
                     (propertized-buffer-identification "%12f")
@@ -233,8 +232,8 @@
  '(package-selected-packages
    '(ag applescript-mode blacken cargo cargo-mode clang-format cmake-mode company-box company-c-headers
 	company-jedi company-quickhelp company-solidity company-web dap-mode dockerfile-mode
-	go-mode	flycheck-golangci-lint flycheck-rust ido-vertical-mode indent-bars indent-guide jedi
-	json-mode just-mode lsp-sourcekit lsp-ui magit neotree powerline prettier-js rainbow-mode
+	go-mode	flycheck-golangci-lint flycheck-rust indent-bars indent-guide jedi
+	json-mode just-mode lsp-sourcekit lsp-ui magit powerline prettier-js rainbow-mode
 	rjsx-mode rust-mode solaire-mode solarized-theme solidity-flycheck spacegray-theme
 	sql-indent sqlformat sqlup-mode swift-mode terraform-mode toml-mode typescript-mode
 	undo-tree web-mode which-key window-number window-numbering winum yaml-mode yasnippet))
@@ -459,10 +458,10 @@
 
 (global-set-key (kbd "C-M-e") 'irc-connect)
 (global-set-key (kbd "C-M-p") 'run-python)
-;; Love ido, idiot for not using it earlier.
-; (setq ido-everywhere t)
-(ido-mode 1)
-(ido-vertical-mode)
+
+
+
+
 ;; means that undo tree will only stay for the in-memory session
 (setq undo-tree-auto-save-history nil)
 (global-undo-tree-mode)
@@ -484,8 +483,27 @@
 ;; Don't prompt me when I want to clear the buffer
 (put 'erase-buffer 'disabled nil)
 
-;; Tree
-(global-set-key (kbd "s-1") 'neotree-toggle)
+(use-package treemacs
+  :ensure t
+  :bind
+  ("s-1" . treemacs)
+  :config
+  (setq treemacs-width 35))
+
+(use-package lsp-treemacs
+  :ensure t
+  :after (lsp-mode treemacs)
+  :commands lsp-treemacs-errors-list)
+
+(use-package vertico
+  :ensure t
+  :init
+  (vertico-mode)
+  ;; Grow and shrink the Vertico minibuffer automatically
+  (setq vertico-resize t)
+  ;; Optionally enable cycling for `vertico-next' and `vertico-previous'
+  (setq vertico-cycle t))
+
 (set-scroll-bar-mode nil)
 ;; Visuals, but note that some visuals also set in custom.
 ;; Cool vertical indentation guides.
@@ -617,6 +635,17 @@
   :commands lsp-ui-mode
   :init
 )
+
+(setq lsp-go-analyses '((nilness . t)
+                        (shadow . t)
+                        (unusedparams . t)
+                        (unusedwrite . t))
+      lsp-gopls-staticcheck t
+      lsp-eldoc-render-all t
+      lsp-gopls-complete-unimported t
+      lsp-gopls-use-placeholders t
+      lsp-inlay-hint-enable t
+      lsp-lens-enable t)
 
 ;; Go Code things
 (add-hook 'go-mode-hook
@@ -1109,6 +1138,6 @@
 	    ;; 		 company-backends))
 	    ;; (local-set-key (kbd "M-/") 'company-solidity)))
 
-(add-hook 'after-init-hook
-          (lambda ()
-            (setq gc-cons-threshold (* 16 1024 1024))))
+;; (add-hook 'after-init-hook
+;;           (lambda ()
+;;             (setq gc-cons-threshold (* 48 1024 1024))))
