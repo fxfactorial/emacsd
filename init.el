@@ -1108,3 +1108,7 @@
 	    ;; 	 (append '((company-solidity company-dabbrev-code))
 	    ;; 		 company-backends))
 	    ;; (local-set-key (kbd "M-/") 'company-solidity)))
+
+(add-hook 'after-init-hook
+          (lambda ()
+            (setq gc-cons-threshold (* 16 1024 1024))))
