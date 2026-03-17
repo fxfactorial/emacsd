@@ -11,3 +11,4 @@ projects
 ielm-history.eld
 .lsp-session-*
 .dap-breakpoints
+.cache

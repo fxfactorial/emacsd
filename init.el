@@ -232,11 +232,11 @@
  '(package-selected-packages
    '(ag applescript-mode blacken cargo cargo-mode clang-format cmake-mode company-box company-c-headers
 	company-jedi company-quickhelp company-solidity company-web dap-mode dockerfile-mode
-	go-mode	flycheck-golangci-lint flycheck-rust indent-bars indent-guide jedi
-	json-mode just-mode lsp-sourcekit lsp-ui magit powerline prettier-js rainbow-mode
-	rjsx-mode rust-mode solaire-mode solarized-theme solidity-flycheck spacegray-theme
-	sql-indent sqlformat sqlup-mode swift-mode terraform-mode toml-mode typescript-mode
-	undo-tree web-mode which-key window-number window-numbering winum yaml-mode yasnippet))
+	flycheck-golangci-lint flycheck-rust go-mode indent-bars indent-guide jedi json-mode
+	just-mode lsp-sourcekit lsp-ui magit powerline prettier-js rainbow-mode rjsx-mode rust-mode
+	solaire-mode solarized-theme solidity-flycheck spacegray-theme sql-indent sqlformat
+	sqlup-mode swift-mode terraform-mode toml-mode typescript-mode undo-tree vertico web-mode
+	which-key window-number window-numbering winum yaml-mode yasnippet))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
