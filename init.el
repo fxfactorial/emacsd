@@ -24,7 +24,7 @@
 (global-display-line-numbers-mode)
 (setq sqlformat-command 'pgformatter)
 ;; (setq sqlformat-args `("-s" "2" "-u" "2" "-U" "1" "-w" "160"))
-
+(setq lsp-go-golangci-lint-args ["--output.json.path" "stdout" "--show-stats=false" "--issues-exit-code=1"])
 (defvar osx-base-path
   "/Applications/Xcode.app/Contents/Developer/Platforms/")
 
@@ -253,7 +253,9 @@
           solidity-mode
           rust-mode
           rjsx-mode
-          html-mode) . lsp-deferred))
+          html-mode) . lsp-deferred)
+  (setq lsp-go-golangci-lint-enabled t)
+  )
 
 (use-package swift-mode
   :hook (swift-mode . (lambda () (lsp))))
