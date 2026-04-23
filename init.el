@@ -194,7 +194,8 @@
      (tramp-connection-local-default-system-profile (path-separator . ":")
 						    (null-device . "/dev/null") (exec-suffixes ""))))
  '(custom-safe-themes
-   '("51ec7bfa54adf5fff5d466248ea6431097f5a18224788d0bd7eb1257a4f7b773"
+   '("46433a4be67ff0f415175d0876ef9435d190f3aa57bb00670febd70ba0ba52e1"
+     "51ec7bfa54adf5fff5d466248ea6431097f5a18224788d0bd7eb1257a4f7b773"
      "57a29645c35ae5ce1660d5987d3da5869b048477a7801ce7ab57bfb25ce12d3e"
      "d89e15a34261019eec9072575d8a924185c27d3da64899905f8548cbd9491a36"
      "833ddce3314a4e28411edf3c6efde468f6f2616fc31e17a62587d6a9255f4633"
@@ -253,6 +254,7 @@
           solidity-mode
           rust-mode
           rjsx-mode
+		  python-mode
           html-mode) . lsp-deferred)
   (setq lsp-go-golangci-lint-enabled t)
   )
@@ -605,23 +607,24 @@
    (add-hook 'before-save-hook #'lsp-format-buffer t t)))
 
 (add-hook
-  'python-mode-hook
-  (lambda ()
-    (setq-default indent-tabs-mode t)
-	(setq-local python-shell-interpreter "ipython3")
-	(setq-local python-shell-interpreter-args "-i")
-    (setq-default tab-width 4)
-    (setq-default py-indent-tabs-mode t)
-    (define-key python-mode-map (kbd "M-q") 'python-fill-paren)
-    (define-key python-mode-map (kbd "M-]") 'jedi:goto-definition)
-    (define-key python-mode-map (kbd "M-/") 'company-jedi)
-    (define-key python-mode-map (kbd "M-[") 'jedi:goto-definition-pop-marker)
-    (jedi:setup)
-    (blacken-mode)
-    (flycheck-mode)
-    (company-mode)
-    (company-quickhelp-mode)
-    (setq-local show-trailing-whitespace t)))
+ 'python-mode-hook
+ (lambda ()
+   (setq-local indent-tabs-mode nil)
+   (setq-local tab-width 4)
+   (setq-local python-indent-offset 4)
+
+   (setq-local python-shell-interpreter "ipython3")
+   (setq-local python-shell-interpreter-args "-i")
+
+   ;; 3. Keybindings (Using LSP to query Jedi)
+   (define-key python-mode-map (kbd "M-q") 'python-fill-paren)
+   (local-set-key (kbd "M-.") 'lsp-ui-peek-find-definitions) ;; Matches your Go config
+   (local-set-key (kbd "M-,") 'pop-tag-mark)
+
+
+   (blacken-mode)
+   (flycheck-mode)
+   (setq-local show-trailing-whitespace t)))
 
 ;;Set up before-save hooks to format buffer and add/delete imports.
 ;;Make sure you don't have other gofmt/goimports hooks enabled.
@@ -799,6 +802,7 @@
   'css-mode-hook (lambda ()
                    (company-mode)
                    (rainbow-mode)
+				   (prettier-js-mode)
                    (add-to-list 'write-file-functions 'delete-trailing-whitespace)
                    (define-key css-mode-map (kbd "M-/") 'company-css)))
 
