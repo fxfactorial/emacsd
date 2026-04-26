@@ -11,7 +11,10 @@
     ;; ("org" . "https://orgmode.org/elpa/")
     ("elpa" . "https://elpa.gnu.org/packages/")))
 
+(setenv "LSP_USE_PLISTS" "true")
+(setq lsp-use-plists t)
 (global-so-long-mode 1)
+(setq read-process-output-max (* 1024 1024))
 (setq bidi-inhibit-bpa t)
 (setq create-lockfiles nil)
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
@@ -116,6 +119,8 @@
 ;;              '("melpa" . "https://melpa.org/packages/") t)
 
 
+(with-eval-after-load 'project
+  (setq project-vc-ignores '("*.pyc" "build/" "dist/" ".venv/" "node_modules/")))
 
 (with-eval-after-load 'company
   (dolist (map (list company-active-map company-search-map))
@@ -219,11 +224,11 @@
  '(fill-column 100)
  '(indent-bars-treesit-support t)
  '(lsp-rust-all-features t)
- '(lsp-rust-analyzer-cargo-all-targets t)
+ '(lsp-rust-analyzer-cargo-all-targets nil)
  '(lsp-rust-analyzer-display-chaining-hints t)
  '(lsp-rust-analyzer-display-parameter-hints t)
- '(lsp-rust-analyzer-lru-capacity 256)
- '(lsp-rust-analyzer-server-display-inlay-hints t)
+ '(lsp-rust-analyzer-lru-capacity 1024)
+ '(lsp-rust-analyzer-server-display-inlay-hints nil)
  '(lsp-ui-doc-max-height 80)
  '(lsp-ui-doc-max-width 120)
  '(lsp-ui-sideline-diagnostic-max-line-length 200)
@@ -827,8 +832,15 @@
 
 (with-eval-after-load 'lsp-mode
   (add-hook 'lsp-mode-hook 'lsp-enable-which-key-integration)
-  (require 'dap-cpptools)
-  (yas-global-mode))
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]target\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]venv\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]build\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]node_modules\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]dist\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\].venv\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.env\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.tox\\'")
+  (require 'dap-cpptools))
 
 ;; (add-hook 'scss-mode-hook (lambda ()
 ;; 			    (add-hook 'before-save-hook 'prettier-js)
@@ -942,7 +954,6 @@
     (setq-local flycheck-clang-language-standard "c++20")
     (setq-local company-async-timeout 5)
     (setq-local company-async-wait 0.10)
-    (setq-local read-process-output-max (* 1024 1024))
     (setq-local treemacs-space-between-root-nodes nil)
     (setq-local company-idle-delay 0.0)
     (setq-local company-minimum-prefix-length 1)
@@ -1144,6 +1155,6 @@
 	    ;; 		 company-backends))
 	    ;; (local-set-key (kbd "M-/") 'company-solidity)))
 
-;; (add-hook 'after-init-hook
-;;           (lambda ()
-;;             (setq gc-cons-threshold (* 48 1024 1024))))
+(add-hook 'after-init-hook
+          (lambda ()
+            (setq gc-cons-threshold (* 48 1024 1024))))
