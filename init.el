@@ -1,6 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 (setq warning-minimum-level :emergency);; turn off if actually trying to debug something
-(setq gc-cons-threshold (* 150 1024 1024))
+(setq native-comp-speed 2)
+(setq gc-cons-threshold most-negative-fixnum)
 (setq-default mode-line-buffer-identification
               (list 'buffer-file-name
                     (propertized-buffer-identification "%12f")
@@ -1157,4 +1158,4 @@
 
 (add-hook 'after-init-hook
           (lambda ()
-            (setq gc-cons-threshold (* 48 1024 1024))))
+            (setq gc-cons-threshold (* 256 1024 1024))))
