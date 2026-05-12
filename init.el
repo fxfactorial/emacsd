@@ -1,7 +1,12 @@
 ;;; -*- lexical-binding: t; -*-
+
+;; Temporary hotfix for a broken third-party package
+;; (defun set-local (sym val)
+;;   (set (make-local-variable sym) val))
+
 (setq warning-minimum-level :emergency);; turn off if actually trying to debug something
 (setq native-comp-speed 2)
-(setq gc-cons-threshold most-negative-fixnum)
+(setq gc-cons-threshold most-positive-fixnum)
 (setq-default mode-line-buffer-identification
               (list 'buffer-file-name
                     (propertized-buffer-identification "%12f")
@@ -15,7 +20,7 @@
 (setenv "LSP_USE_PLISTS" "true")
 (setq lsp-use-plists t)
 (global-so-long-mode 1)
-(setq read-process-output-max (* 1024 1024))
+(setq read-process-output-max (* 4096 1024))
 (setq bidi-inhibit-bpa t)
 (setq create-lockfiles nil)
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
@@ -119,6 +124,10 @@
 ;; (add-to-list 'package-archives
 ;;              '("melpa" . "https://melpa.org/packages/") t)
 
+(with-eval-after-load 'flycheck
+  (setq-default flycheck-disabled-checkers
+                (append flycheck-disabled-checkers
+                        '(python-flake8 python-pylint python-pycompile))))
 
 (with-eval-after-load 'project
   (setq project-vc-ignores '("*.pyc" "build/" "dist/" ".venv/" "node_modules/")))
@@ -224,12 +233,20 @@
  '(display-time-mode t)
  '(fill-column 100)
  '(indent-bars-treesit-support t)
- '(lsp-rust-all-features t)
+ '(lsp-restart 'ignore)
+ '(lsp-ui-sideline-show-hover nil)
+ '(lsp-rust-all-features nil)
  '(lsp-rust-analyzer-cargo-all-targets nil)
  '(lsp-rust-analyzer-display-chaining-hints t)
  '(lsp-rust-analyzer-display-parameter-hints t)
- '(lsp-rust-analyzer-lru-capacity 1024)
+ '(lsp-rust-analyzer-cargo-all-targets nil)
+ '(lsp-rust-analyzer-display-type-hints nil)
+ '(lsp-rust-analyzer-proc-macro-enable t)
+ '(lsp-rust-analyzer-cargo-watch-command "clippy")
+ '(lsp-rust-analyzer-display-lifetime-elision-hints-enable t)
+ '(lsp-rust-analyzer-lru-capacity 2048)
  '(lsp-rust-analyzer-server-display-inlay-hints nil)
+ '(lsp-ui-sideline-delay 10)
  '(lsp-ui-doc-max-height 80)
  '(lsp-ui-doc-max-width 120)
  '(lsp-ui-sideline-diagnostic-max-line-length 200)
@@ -237,19 +254,22 @@
  '(lsp-ui-sideline-show-hover nil)
  '(menu-bar-mode nil)
  '(package-selected-packages
-   '(ag applescript-mode blacken cargo cargo-mode clang-format cmake-mode company-box company-c-headers
+   '(ag applescript-mode cargo cargo-mode clang-format cmake-mode company-box company-c-headers
 	company-jedi company-quickhelp company-solidity company-web dap-mode dockerfile-mode
 	flycheck-golangci-lint flycheck-rust go-mode indent-bars indent-guide jedi json-mode
-	just-mode lsp-sourcekit lsp-ui magit powerline prettier-js rainbow-mode rjsx-mode rust-mode
-	solaire-mode solarized-theme solidity-flycheck spacegray-theme sql-indent sqlformat
-	sqlup-mode swift-mode terraform-mode toml-mode typescript-mode undo-tree vertico web-mode
-	which-key window-number window-numbering winum yaml-mode yasnippet))
+	just-mode lsp-sourcekit lsp-ui magit powerline prettier-js rainbow-mode rjsx-mode
+	ruff-format rust-mode solaire-mode solarized-theme solidity-flycheck spacegray-theme
+	sql-indent sqlformat sqlup-mode swift-mode terraform-mode toml-mode typescript-mode
+	undo-tree vertico web-mode which-key window-number window-numbering winum yaml-mode
+	yasnippet))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
 ;; '(lsp-semgrep-metrics-enabled nil)
  '(lsp-semgrep-server-command '("semgrep" "--disable-version-check" "lsp"))
 
+(use-package spinner
+  :ensure t)
 
 (use-package lsp-mode
   :ensure t
@@ -260,20 +280,16 @@
           solidity-mode
           rust-mode
           rjsx-mode
-		  python-mode
+	  swift-mode
+	  python-mode
           html-mode) . lsp-deferred)
-  (setq lsp-go-golangci-lint-enabled t)
-  )
+  :config
+  (setq lsp-go-golangci-lint-enabled t))
 
-(use-package swift-mode
-  :hook (swift-mode . (lambda () (lsp))))
 
-;; Skeletons definitions for common includes.
 
 
 ;; (use-package lsp-ui)
-(use-package rust-mode
-  :hook (rust-mode . lsp))
 (use-package toml-mode)
 ;; (use-package cargo
 ;;   :hook (rust-mode . cargo-minor-mode))
@@ -470,8 +486,6 @@
 (global-set-key (kbd "C-M-p") 'run-python)
 
 
-
-
 ;; means that undo tree will only stay for the in-memory session
 (setq undo-tree-auto-save-history nil)
 (global-undo-tree-mode)
@@ -605,8 +619,6 @@
       ;; Just like killing the shell without asking me.
       (get-process "Python") nil)))
 
-
-
 (add-hook
  'swift-mode-hook
  (lambda()
@@ -615,21 +627,22 @@
 (add-hook
  'python-mode-hook
  (lambda ()
+   (require 'lsp-ruff)
    (setq-local indent-tabs-mode nil)
    (setq-local tab-width 4)
    (setq-local python-indent-offset 4)
-
    (setq-local python-shell-interpreter "ipython3")
    (setq-local python-shell-interpreter-args "-i")
+   (setq-local lsp-pylsp-plugins-autopep8-enabled nil)
+   (setq-local lsp-pylsp-plugins-yapf-enabled nil)
+   (setq-local lsp-pylsp-plugins-flake8-enabled nil)
+   (setq-local lsp-pylsp-plugins-pycodestyle-enabled nil)
+   (setq-local lsp-pylsp-plugins-symbols-enabled nil)
 
-   ;; 3. Keybindings (Using LSP to query Jedi)
-   (define-key python-mode-map (kbd "M-q") 'python-fill-paren)
    (local-set-key (kbd "M-.") 'lsp-ui-peek-find-definitions) ;; Matches your Go config
    (local-set-key (kbd "M-,") 'pop-tag-mark)
-
-
-   (blacken-mode)
    (flycheck-mode)
+   (ruff-format-on-save-mode)
    (setq-local show-trailing-whitespace t)))
 
 ;;Set up before-save hooks to format buffer and add/delete imports.
@@ -655,7 +668,7 @@
       lsp-eldoc-render-all t
       lsp-gopls-complete-unimported t
       lsp-gopls-use-placeholders t
-      lsp-inlay-hint-enable t
+      lsp-inlay-hint-enable nil
       lsp-lens-enable t)
 
 ;; Go Code things
@@ -669,6 +682,7 @@
 			lsp-gopls-complete-unimported t
 			lsp-ui-peek-enable t
 			lsp-ui-sideline-enable t
+			lsp-inlay-hint-enable t
 			lsp-ui-doc-include-signature t
 			lsp-ui-doc-show-with-cursor t
 			lsp-ui-doc-show-with-mouse t
@@ -1030,7 +1044,6 @@
 	     (define-key mips-mode-map (kbd "M-/") 'dabbrev-expand)
 	     ))
 
-(require 'rust-mode)
 
 (add-hook 'rust-mode-hook
 	  (lambda ()
@@ -1038,12 +1051,10 @@
 	    (require 'lsp-ui-peek)
 	    (require 'cargo)
 	    ;;    (require 'cargo-minor-mode)
+;;	      (setq-local lsp-rust-analyzer-server-command
 	    (let* ((expanded (expand-file-name "~/"))
 		   (cargo_path (concat expanded ".cargo/bin/cargo")))
-;;	      (setq-local lsp-rust-analyzer-server-command
 	      (setq-local rust-cargo-bin cargo_path))
-	    (setq-local lsp-ui-sideline-delay 10)
-	    (setq-local lsp-ui-sideline-show-hover nil)
 	    (lsp-ui-sideline)
 	    (lsp-ui-peek-mode)
 	    (yas-minor-mode)
@@ -1081,7 +1092,7 @@
 (add-to-list 'tramp-remote-path "/home/mev/.gimme/versions/go1.17.5.linux.amd64/bin")
 (add-to-list 'tramp-remote-path "/home/edgar/.gimme/versions/go1.22.5.linux.amd64/bin")
 
-;; (setq lsp-log-io t)
+(setq lsp-log-io nil)
 ;; (add-to-list 'tramp-remote-path "")
 (add-to-list 'tramp-remote-path 'tramp-default-remote-path)
 (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
@@ -1158,4 +1169,4 @@
 
 (add-hook 'after-init-hook
           (lambda ()
-            (setq gc-cons-threshold (* 256 1024 1024))))
+            (setq gc-cons-threshold (* 64 1024 1024))))
