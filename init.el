@@ -236,12 +236,13 @@
  '(display-time-mode t)
  '(fill-column 100)
  '(indent-bars-treesit-support t)
+ '(lsp-auto-register-remote-clients t)
  '(lsp-idle-delay 0.1)
  '(lsp-restart 'ignore)
  '(lsp-rust-all-features nil)
  '(lsp-rust-analyzer-cache-priming-enable t)
  '(lsp-rust-analyzer-cargo-all-targets nil)
- '(lsp-rust-analyzer-cargo-watch-command nil)
+ '(lsp-rust-analyzer-cargo-watch-command "check")
  '(lsp-rust-analyzer-display-chaining-hints t)
  '(lsp-rust-analyzer-display-lifetime-elision-hints-enable t)
  '(lsp-rust-analyzer-display-parameter-hints t)
@@ -249,8 +250,6 @@
  '(lsp-rust-analyzer-lru-capacity 256)
  '(lsp-rust-analyzer-proc-macro-enable t)
  '(lsp-rust-analyzer-server-display-inlay-hints t)
- '(lsp-semgrep-metrics-enabled nil)
- '(lsp-semgrep-server-command '("semgrep" "lsp"))
  '(lsp-ui-doc-delay 1)
  '(lsp-ui-doc-max-height 80)
  '(lsp-ui-doc-max-width 120)
@@ -280,8 +279,6 @@
           html-mode) . lsp-deferred)
   :config
   (setq lsp-go-golangci-lint-enabled t))
-
-
 
 
 ;; (use-package lsp-ui)
@@ -488,7 +485,6 @@
 ;; (when (memq window-system '(mac ns))
   ;; (exec-path-from-shell-initialize))
 ;; Annoying issue with TRAMP constantly asking for password
-(setq tramp-default-method "ssh")
 (setq password-cache-expiry nil)
 
 ;; Keep the history between sessions, very nice to have.
@@ -659,6 +655,8 @@
                         (shadow . t)
                         (unusedparams . t)
                         (unusedwrite . t)))
+
+(setq lsp-disabled-clients '(semgrep-ls semgrep-ls-tramp))
 
 (use-package doom-modeline
   :ensure t
@@ -1089,18 +1087,24 @@
 	  )
 
 (with-eval-after-load 'tramp
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
   (dolist (path '("~/.local/bin"
                   "/usr/local/bin"
                   "~/.cargo/bin"
-		  "/home/mev/go/bin"
-		  "/home/edgar/go/bin"
-		  "/home/rtx/go/bin"
-		  "/home/rtx/llm/.venv/bin"
-		  ))
-    (add-to-list 'tramp-remote-path path)))
+                  "/home/mev/go/bin"
+                  "/home/edgar/go/bin"
+                  "/home/rtx/go/bin"
+                  "/home/rtx/llm/.venv/bin"))
+    (add-to-list 'tramp-remote-path path t)))  ;; t = append
+
+(setq tramp-default-method "ssh"
+      tramp-use-ssh-controlmaster-options nil ;; let your ~/.ssh/config control this
+      remote-file-name-inhibit-cache 60      ;; cache file stats for 60s
+      vc-handled-backends '(Git)
+      tramp-verbose 10)
 
 ;; (require 'tramp)
-(setq tramp-verbose 10)
+
 ;; (add-to-list 'tramp-remote-path "/home/mev/go/bin")
 ;; (add-to-list 'tramp-remote-path "/home/edgar/go/bin")
 ;; (add-to-list 'tramp-remote-path "/home/mev/.gimme/versions/go1.17.5.linux.amd64/bin")
