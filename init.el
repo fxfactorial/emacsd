@@ -280,6 +280,15 @@
   :config
   (setq lsp-go-golangci-lint-enabled t))
 
+(use-package prettier-js
+  :ensure t
+  :hook ((typescript-mode . prettier-js-mode)
+         (typescript-ts-mode . prettier-js-mode)
+         (tsx-ts-mode . prettier-js-mode)
+         (js-mode . prettier-js-mode)
+         (js-ts-mode . prettier-js-mode)
+         (json-mode . prettier-js-mode)
+         (web-mode . prettier-js-mode)))
 
 ;; (use-package lsp-ui)
 (use-package toml-mode)
@@ -464,7 +473,7 @@
 (add-to-list 'auto-mode-alist '("\\zshrc\\'" . shell-script-mode))
 ;; (add-to-list 'auto-mode-alist '("\\BUILD\\'" . bazel-mode))
 (add-to-list 'auto-mode-alist '("\\env.mainnet\\'" . conf-mode))
-
+(add-to-list 'auto-mode-alist '("\\env\\'" . conf-mode))
 
 (add-hook
  'sh-mode-hook
@@ -883,6 +892,44 @@
     )
   )
 
+;; ============= web-mode for Liquid =============
+(use-package web-mode
+  :ensure t
+  :mode (("\\.liquid\\'" . web-mode)
+         ("\\.html\\.liquid\\'" . web-mode))
+  :custom
+  (web-mode-engines-alist '(("liquid" . "\\.liquid\\'")))
+  (web-mode-markup-indent-offset 2)
+  (web-mode-css-indent-offset 2)
+  (web-mode-code-indent-offset 2)
+  (web-mode-enable-auto-pairing t)
+  (web-mode-enable-css-colorization t)
+  (web-mode-enable-current-element-highlight t)
+  (web-mode-enable-current-column-highlight t))
+
+;; ============= LSP for Shopify Liquid =============
+(with-eval-after-load 'lsp-mode
+  (add-to-list 'lsp-language-id-configuration
+               '(".*\\.liquid$" . "liquid"))
+
+  (lsp-register-client
+   (make-lsp-client
+    :new-connection (lsp-stdio-connection
+                     '("shopify-theme-language-server" "--stdio"))
+    :major-modes '(web-mode)
+    :activation-fn (lambda (file-name _mode)
+                     (string-match-p "\\.liquid\\'" file-name))
+    :server-id 'shopify-theme-ls
+    :priority -1))                       ;; low priority so it doesn't fight other web-mode servers
+
+(add-hook 'web-mode-hook
+  (lambda ()
+    (when (and buffer-file-name
+               (string-match-p "\\.liquid\\'" buffer-file-name))
+      (lsp-deferred)
+      (setq-local web-mode-engine "liquid")
+      (prettier-js-mode 1))))
+
 (add-hook 'json-mode-hook
   (lambda ()
     (prettier-js-mode)))
@@ -1038,9 +1085,21 @@
 
 (add-hook 'mips-mode-hook
 	  '(lambda ()
-	     (define-key mips-mode-map (kbd "M-/") 'dabbrev-expand)
-	     ))
+	     (define-key mips-mode-map (kbd "M-/") 'dabbrev-expand)))
 
+
+(dolist (hook '(yaml-mode-hook yaml-ts-mode-hook))
+  (add-hook hook
+    (lambda ()
+      ;; No auto line-breaking — YAML is whitespace-sensitive
+      (auto-fill-mode -1)
+      ;; No visual wrapping — long lines extend off the right
+      (visual-line-mode -1)
+      (setq-local truncate-lines t)
+      ;; Belt and suspenders: if anything turns on fill, threshold is unreachable
+      (setq-local fill-column 9999)
+      ;; YAML doesn't play well with electric-indent
+      (electric-indent-local-mode -1))))
 
 (add-hook 'rust-mode-hook
 	  (lambda ()
