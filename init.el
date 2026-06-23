@@ -124,7 +124,6 @@
 ;(exec-path-from-shell-initialize)
 (which-key-mode)
 ;; (powerline-center-theme)
-(autoload 'window-number-mode "window-number")
 (autoload 'company-mode "company")
 
 ;;Melpa stuff, elpa is the offical package archive, melpa is the
@@ -255,15 +254,14 @@
  '(lsp-rust-analyzer-lru-capacity 256)
  '(lsp-rust-analyzer-proc-macro-enable t)
  '(lsp-rust-analyzer-server-display-inlay-hints t)
- '(lsp-ui-doc-delay 1)
- '(lsp-ui-doc-max-height 80)
- '(lsp-ui-doc-max-width 120)
- '(lsp-ui-sideline-delay 1)
- '(lsp-ui-sideline-diagnostic-max-line-length 200)
- '(lsp-ui-sideline-diagnostic-max-lines 5)
- '(lsp-ui-sideline-show-hover nil)
+ '(lsp-ui-doc-delay 1 nil nil "Customized with use-package lsp-ui")
+ '(lsp-ui-doc-max-height 80 nil nil "Customized with use-package lsp-ui")
+ '(lsp-ui-doc-max-width 120 nil nil "Customized with use-package lsp-ui")
+ '(lsp-ui-sideline-delay 1 nil nil "Customized with use-package lsp-ui")
+ '(lsp-ui-sideline-diagnostic-max-line-length 200 nil nil "Customized with use-package lsp-ui")
+ '(lsp-ui-sideline-diagnostic-max-lines 5 nil nil "Customized with use-package lsp-ui")
+ '(lsp-ui-sideline-show-hover nil nil nil "Customized with use-package lsp-ui")
  '(menu-bar-mode nil)
- '(package-selected-packages nil)
  '(rust-format-on-save t)
  '(show-paren-mode t)
  '(tool-bar-mode nil))
@@ -344,7 +342,7 @@
       (define-key map (kbd "M-7") 'winum-select-window-7)
       (define-key map (kbd "M-8") 'winum-select-window-8)
       map))
-
+(winum-mode 1)
 
 (define-skeleton my-html-defaults
   "Minimum HTML needed"
@@ -581,8 +579,6 @@
 (setq inhibit-startup-message t
   scroll-step 1)
 
-(window-number-mode)
-(window-number-meta-mode)
 
 ;(fringe-mode 10)
 (tool-bar-mode -1)
