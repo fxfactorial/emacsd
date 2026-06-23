@@ -243,6 +243,7 @@
  '(lsp-rust-analyzer-cache-priming-enable t)
  '(lsp-rust-analyzer-cargo-all-targets nil)
  '(lsp-rust-analyzer-cargo-watch-command "check")
+ '(lsp-rust-analyzer-cargo-watch-enable t)
  '(lsp-rust-analyzer-display-chaining-hints t)
  '(lsp-rust-analyzer-display-lifetime-elision-hints-enable t)
  '(lsp-rust-analyzer-display-parameter-hints t)
@@ -259,6 +260,7 @@
  '(lsp-ui-sideline-show-hover nil)
  '(menu-bar-mode nil)
  '(package-selected-packages nil)
+ '(rust-format-on-save t)
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
@@ -289,6 +291,15 @@
          (js-ts-mode . prettier-js-mode)
          (json-mode . prettier-js-mode)
          (web-mode . prettier-js-mode)))
+
+(use-package yasnippet
+  :ensure t
+  :config
+  (yas-global-mode 1))
+
+(use-package yasnippet-snippets
+  :ensure t
+  :after yasnippet)
 
 ;; (use-package lsp-ui)
 (use-package toml-mode)
@@ -707,9 +718,7 @@
 	    (local-set-key (kbd "M-.") 'lsp-ui-peek-find-definitions)
 	    (local-set-key (kbd "M-,") 'pop-tag-mark)
 	    (local-set-key (kbd "M-]") 'next-error)
-	    (local-set-key (kbd "M-[") 'previous-error)
-	    (yas-minor-mode)
-	    ))
+	    (local-set-key (kbd "M-[") 'previous-error)))
 
 ;; SQL Stuff
 ;; Just remember,
@@ -920,7 +929,7 @@
     :activation-fn (lambda (file-name _mode)
                      (string-match-p "\\.liquid\\'" file-name))
     :server-id 'shopify-theme-ls
-    :priority -1))                       ;; low priority so it doesn't fight other web-mode servers
+    :priority -1)))                       ;; close lsp-register-client AND with-eval-after-load
 
 (add-hook 'web-mode-hook
   (lambda ()
@@ -956,7 +965,7 @@
 		  "__DEV__" "TextEncoder" "TextDecoder"
 		  "history" "AudioContext" "Draggable" "TweenLite"
 		  "FormData" "URLSearchParams" "URL" "chrome" "EventSource"
-			"MutationObserver"
+			"MutationObserver" "katex" "hljs" "echarts"
 		  ))
     (add-to-list 'write-file-functions 'delete-trailing-whitespace)
     (prettify-symbols-mode)
@@ -1106,22 +1115,13 @@
 	    (require 'lsp-ui-sideline)
 	    (require 'lsp-ui-peek)
 	    (require 'cargo)
-	    (yas-minor-mode)
-	    (let* ((expanded (expand-file-name "~/"))
-		   (cargo_path (concat expanded ".cargo/bin/cargo")))
-	      (setq-local rust-cargo-bin cargo_path
-			  company-tooltip-align-annotations t
-			  company-minimum-prefix-length 1
-			  rust-format-on-save t
-			  lsp-lens-enable t
-			  lsp-eldoc-render-all t
-			  compilation-environment '("RUSTFLAGS=-Awarnings")
-			  ))
+	    (setq-local company-tooltip-align-annotations t
+			company-minimum-prefix-length 1
+			lsp-lens-enable t
+			lsp-eldoc-render-all t
+			compilation-environment '("RUSTFLAGS=-Awarnings"))
 	    (lsp-ui-sideline-mode)
-	    (lsp-ui-peek-mode)
-	    (yas-minor-mode)
-	    (flycheck-mode -1)
-	  ))
+	    (flycheck-mode -1)))
 
 (with-eval-after-load 'rust-mode
   (define-key rust-mode-map (kbd "C-c C-l")
@@ -1132,18 +1132,15 @@
   (define-key rust-mode-map (kbd "M-]") 'cargo-process-run)
   (define-key rust-mode-map (kbd "M-|") 'lsp-describe-thing-at-point))
 
-(add-hook 'typescript-ts-mode
+(add-hook 'typescript-ts-mode-hook
 	  (lambda()
-	    (yas-minor-mode)
 	    (setq-local javascript-indent-level 2
 			js-indent-level 2
 			js2-basic-offset 2
 			indent-tabs-mode nil
 			tab-width 2
-			typescript-indent-level 2)
-	    (prettier-js-mode)
-	    )
-	  )
+			typescript-ts-mode-indent-offset 2)
+	    (prettier-js-mode)))
 
 (with-eval-after-load 'tramp
   (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
