@@ -83,6 +83,7 @@
 ;;		    :height 120
 ;;		    :width 'ultra-condensed
 		    )
+(load (expand-file-name "my-packages.el" user-emacs-directory))
 
   ;; (setq flycheck-c/c++-clang-executable "armv7-apple-darwin11-clang")
   ;; (setq flycheck-clang-include-path
@@ -281,6 +282,23 @@
           html-mode) . lsp-deferred)
   :config
   (setq lsp-go-golangci-lint-enabled t))
+
+(use-package lsp-ui
+  :ensure t
+  :commands lsp-ui-mode
+  :hook (lsp-mode . lsp-ui-mode)
+  :custom
+  (lsp-ui-doc-delay 1)
+  (lsp-ui-doc-max-height 80)
+  (lsp-ui-doc-max-width 120)
+  (lsp-ui-sideline-delay 1)
+  (lsp-ui-sideline-diagnostic-max-line-length 200)
+  (lsp-ui-sideline-diagnostic-max-lines 5)
+  (lsp-ui-sideline-show-hover nil))
+
+(use-package cargo
+  :ensure t
+  :hook (rust-mode . cargo-minor-mode))
 
 (use-package prettier-js
   :ensure t
@@ -662,14 +680,6 @@
 (defun lsp-go-install-save-hooks ()
   (add-hook 'before-save-hook 'lsp-format-buffer t t)
   (add-hook 'before-save-hook 'lsp-organize-imports t t))
-
-;;Optional - provides fancier overlays.
-
-(use-package lsp-ui
-  :ensure t
-  :commands lsp-ui-mode
-  :init
-)
 
 (setq lsp-go-analyses '((nilness . t)
                         (shadow . t)
@@ -1112,9 +1122,6 @@
 
 (add-hook 'rust-mode-hook
 	  (lambda ()
-	    (require 'lsp-ui-sideline)
-	    (require 'lsp-ui-peek)
-	    (require 'cargo)
 	    (setq-local company-tooltip-align-annotations t
 			company-minimum-prefix-length 1
 			lsp-lens-enable t
