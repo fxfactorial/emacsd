@@ -1,5 +1,6 @@
-;;; my-packages.el ---
+;;; my-packages.el --- Package list -*- lexical-binding: t; -*-
 
+(require 'package)
 (setq package-selected-packages '(
 				  ace-window ag applescript-mode auto-complete avy bui cargo cargo-mode cfrs clang-format
 				  cmake-mode company company-box company-c-headers company-jedi company-quickhelp
@@ -13,5 +14,10 @@
 				  sql-indent sqlformat sqlup-mode swift-mode systemd terraform-mode toml-mode
 				  transient treemacs typescript-mode undo-tree vertico web-completion-data web-mode which-key window-number
 				  window-numbering winum with-editor yaml yaml-mode yasnippet yasnippet-snippets))
-(unless package-archive-contents (package-refresh-contents))
-(package-install-selected-packages :noconfirm)
+
+(let ((missing (seq-remove #'package-installed-p package-selected-packages)))
+  (when missing
+    (unless package-archive-contents
+      (package-refresh-contents))
+    (dolist (pkg missing)
+      (package-install pkg))))

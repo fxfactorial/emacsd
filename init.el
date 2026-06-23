@@ -1,5 +1,8 @@
 ;;; -*- lexical-binding: t; -*-
 
+(setq package-enable-at-startup t)
+(setq package-quickstart t)
+
 ;; Temporary hotfix for a broken third-party package
 ;; (defun set-local (sym val)
 ;;   (set (make-local-variable sym) val))
