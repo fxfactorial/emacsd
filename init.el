@@ -1126,7 +1126,6 @@
 			lsp-lens-enable t
 			lsp-eldoc-render-all t
 			compilation-environment '("RUSTFLAGS=-Awarnings"))
-	    (lsp-ui-sideline-mode)
 	    (flycheck-mode -1)))
 
 (with-eval-after-load 'rust-mode
