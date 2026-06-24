@@ -981,6 +981,7 @@
 	    (flycheck-mode -1)))
 
 (with-eval-after-load 'rust-mode
+  (setq-local rust-format-on-save t)
   (define-key rust-mode-map (kbd "C-c C-l")
     (lambda () (interactive)
       (compile "cargo clippy --workspace --all-targets")))
