@@ -38,8 +38,13 @@
 (setq-default display-line-numbers-width 4)
 (setq display-line-numbers-grow-only t)
 
-(setq sqlformat-command 'pgformatter)
-;; (setq sqlformat-args `("-s" "2" "-u" "2" "-U" "1" "-w" "160"))
+(setq sqlformat-command 'pgformatter
+    sqlformat-args '("--spaces" "2"
+                       "--keyword-case" "1"      ;; 1 = uppercase keywords
+                       "--function-case" "2"     ;; 2 = lowercase function names
+                       "--wrap-limit" "120"
+                       "--no-extra-line"))
+
 (setq lsp-go-golangci-lint-args ["--output.json.path" "stdout" "--show-stats=false" "--issues-exit-code=1"])
 (defvar osx-base-path
   "/Applications/Xcode.app/Contents/Developer/Platforms/")
@@ -149,6 +154,11 @@
 (when (file-exists-p custom-file)
   (load custom-file))
 
+(use-package shfmt
+  :hook (sh-mode . shfmt-on-save-mode)
+  :custom
+  (shfmt-arguments '("-i" "2" "-s")))
+
 (use-package lsp-mode
   :ensure t
   :commands (lsp lsp-deferred)
@@ -157,7 +167,6 @@
           c++-mode
           solidity-mode
           rust-mode
-          rjsx-mode
 	  swift-mode
 	  python-mode
           html-mode) . lsp-deferred)
@@ -177,14 +186,13 @@
   (lsp-ui-sideline-diagnostic-max-lines 5)
   (lsp-ui-sideline-show-hover nil))
 
-(use-package cargo
-  :ensure t
-  :hook (rust-mode . cargo-minor-mode))
+;; (use-package cargo
+;;   :ensure t
+;;   :hook (rust-mode . cargo-minor-mode))
 
 (use-package prettier-js
   :ensure t
-  :hook ((typescript-mode . prettier-js-mode)
-         (typescript-ts-mode . prettier-js-mode)
+  :hook ((typescript-ts-mode . prettier-js-mode)
          (tsx-ts-mode . prettier-js-mode)
          (js-mode . prettier-js-mode)
          (js-ts-mode . prettier-js-mode)
@@ -504,26 +512,30 @@
  (lambda()
    (add-hook 'before-save-hook #'lsp-format-buffer t t)))
 
-(add-hook
- 'python-mode-hook
- (lambda ()
-   (require 'lsp-ruff)
-   (setq-local indent-tabs-mode nil)
-   (setq-local tab-width 4)
-   (setq-local python-indent-offset 4)
-   (setq-local python-shell-interpreter "ipython3")
-   (setq-local python-shell-interpreter-args "-i")
-   (setq-local lsp-pylsp-plugins-autopep8-enabled nil)
-   (setq-local lsp-pylsp-plugins-yapf-enabled nil)
-   (setq-local lsp-pylsp-plugins-flake8-enabled nil)
-   (setq-local lsp-pylsp-plugins-pycodestyle-enabled nil)
-   (setq-local lsp-pylsp-plugins-symbols-enabled nil)
+(add-hook 'python-mode-hook
+  (lambda ()
+    (setq-local indent-tabs-mode nil
+                tab-width 4
+                python-indent-offset 4
+                python-shell-interpreter "ipython3"
+                python-shell-interpreter-args "-i"
+                lsp-pylsp-plugins-autopep8-enabled nil
+                lsp-pylsp-plugins-yapf-enabled nil
+                lsp-pylsp-plugins-flake8-enabled nil
+                lsp-pylsp-plugins-pycodestyle-enabled nil
+                lsp-pylsp-plugins-symbols-enabled nil
+                show-trailing-whitespace t)
+    (local-set-key (kbd "M-.") 'lsp-ui-peek-find-definitions)
+    (local-set-key (kbd "M-,") 'pop-tag-mark)
 
-   (local-set-key (kbd "M-.") 'lsp-ui-peek-find-definitions) ;; Matches your Go config
-   (local-set-key (kbd "M-,") 'pop-tag-mark)
-   (flycheck-mode)
-   (ruff-format-on-save-mode)
-   (setq-local show-trailing-whitespace t)))
+    (if (file-remote-p default-directory)
+        ;; Remote — let LSP handle formatting/diagnostics
+        (setq-local flycheck-disabled-checkers
+                    '(python-ruff python-flake8 python-pylint
+                      python-mypy python-pyright python-pycompile))
+      ;; Local — use local ruff formatter and flycheck
+      (flycheck-mode)
+      (ruff-format-on-save-mode))))
 
 ;;Set up before-save hooks to format buffer and add/delete imports.
 ;;Make sure you don't have other gofmt/goimports hooks enabled.
@@ -532,7 +544,8 @@
   (add-hook 'before-save-hook 'lsp-format-buffer t t)
   (add-hook 'before-save-hook 'lsp-organize-imports t t))
 
-(setq lsp-go-analyses '((nilness . t)
+;;(nilness . t)
+(setq lsp-go-analyses '(
                         (shadow . t)
                         (unusedparams . t)
                         (unusedwrite . t)))
@@ -547,6 +560,11 @@
   (doom-modeline-buffer-file-name-style 'relative-to-project)
   (doom-modeline-lsp t)
   (doom-modeline-icon t))
+
+;; gopls 0.23: -remote=auto = separate backend daemon; use in-process
+;; mode — same code path as `gopls check`, which works in 1.5s.
+;; (with-eval-after-load 'lsp-gopls
+;;   (setq lsp-gopls-server-args '()))
 
 ;; Go Code things
 (add-hook 'go-mode-hook
@@ -743,16 +761,16 @@
 ;; 			    (prettier-js-mode)))
 
 ;;Javascript hook, this is a better major mode than default one
-(add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
-(add-to-list 'auto-mode-alist '("\\.mjs\\'" . rjsx-mode))
+;; (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
+;; (add-to-list 'auto-mode-alist '("\\.mjs\\'" . rjsx-mode))
 ;; (add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
 (add-to-list 'auto-mode-alist '("\\.json\\'" . json-mode))
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . rjsx-mode))
+;; (add-to-list 'auto-mode-alist '("\\.tsx\\'" . rjsx-mode))
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
-(add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
-(add-to-list 'auto-mode-alist '("\\.flow\\'" . rjsx-mode))
+;; (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
+;; (add-to-list 'auto-mode-alist '("\\.flow\\'" . rjsx-mode))
 (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
-(add-to-list 'interpreter-mode-alist '("node" . rjsx-mode))
+;; (add-to-list 'interpreter-mode-alist '("node" . rjsx-mode))
 
 (add-hook 'java-mode-hook
   (lambda ()
@@ -804,7 +822,9 @@
   (lambda ()
     (prettier-js-mode)))
 
-(add-hook 'rjsx-mode-hook
+(setq-default js2-basic-offset 2)
+
+(add-hook 'js-ts-mode-hook
   (lambda ()
     (require 'lsp-mode)
     (setq-default indent-tabs-mode t)
@@ -816,7 +836,6 @@
          "--jsx-bracket-same-line"
          "--trailing-comma" "es5"))
     (setq-local show-trailing-whitespace t)
-    (setq-local js2-basic-offset 2)
     (visual-line-mode)
     (setq-local js2-global-externs
 		'("fetch" "async" "Headers" "await" "WebSocket"
@@ -827,6 +846,7 @@
 		  "history" "AudioContext" "Draggable" "TweenLite"
 		  "FormData" "URLSearchParams" "URL" "chrome" "EventSource"
 			"MutationObserver" "katex" "hljs" "echarts"
+			"ClipboardItem" "Intl"
 		  ))
     (add-to-list 'write-file-functions 'delete-trailing-whitespace)
     (prettify-symbols-mode)
@@ -977,11 +997,15 @@
 			company-minimum-prefix-length 1
 			lsp-lens-enable t
 			lsp-eldoc-render-all t
+			rust-format-on-save t
+			lsp-rust-analyzer-cargo-watch-command "check"
+			lsp-rust-analyzer-cargo-watch-args ["--bin" "prism"]
+			lsp-rust-analyzer-cargo-all-targets nil
+			lsp-rust-analyzer-cargo-watch-enable t
 			compilation-environment '("RUSTFLAGS=-Awarnings"))
 	    (flycheck-mode -1)))
 
 (with-eval-after-load 'rust-mode
-  (setq-local rust-format-on-save t)
   (define-key rust-mode-map (kbd "C-c C-l")
     (lambda () (interactive)
       (compile "cargo clippy --workspace --all-targets")))
@@ -994,7 +1018,6 @@
 	  (lambda()
 	    (setq-local javascript-indent-level 2
 			js-indent-level 2
-			js2-basic-offset 2
 			indent-tabs-mode nil
 			tab-width 2
 			typescript-ts-mode-indent-offset 2)
@@ -1003,6 +1026,7 @@
 (with-eval-after-load 'tramp
   (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
   (dolist (path '("~/.local/bin"
+		  "/home/rtx/.gimme/versions/go1.26.8.linux.amd64/bin"
                   "/usr/local/bin"
                   "~/.cargo/bin"
                   "/home/mev/go/bin"
@@ -1024,22 +1048,22 @@
 ;; (add-to-list 'tramp-remote-path "/home/mev/.gimme/versions/go1.17.5.linux.amd64/bin")
 ;; (add-to-list 'tramp-remote-path "/home/edgar/.gimme/versions/go1.22.5.linux.amd64/bin")
 
-(setq lsp-log-io nil)
+;;(setq lsp-log-io t)
 ;; (add-to-list 'tramp-remote-path "")
 ;; (add-to-list 'tramp-remote-path 'tramp-default-remote-path)
 ;; (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
 (setq prettify-symbols-unprettify-at-point 'right-edge)
 
 ;; (require 'lsp-mode)
-;; (lsp-register-client
-;;  (make-lsp-client :new-connection (lsp-tramp-connection
-;;                                    (lambda ()
-;; 				     (cons "gopls" lsp-gopls-server-args)))
-;;                   :major-modes '(go-mode)
-;;                   :priority 10
-;;                   :server-id 'gopls-remote
-;;                   :remote? t
-;;                   ))
+(lsp-register-client
+ (make-lsp-client :new-connection (lsp-tramp-connection
+                                   (lambda ()
+				     (cons "gopls" "serve")))
+                  :major-modes '(go-mode)
+                  :priority 10
+                  :server-id 'gopls-remote
+                  :remote? t
+                  ))
 
 ;; https://github.com/lumiknit/emacs-pragmatapro-ligatures/blob/master/pragmatapro-lig.el
 (load "~/.emacs.d/pragmatapro-lig")
@@ -1102,3 +1126,4 @@
 (add-hook 'after-init-hook
           (lambda ()
             (setq gc-cons-threshold (* 64 1024 1024))))
+(put 'scroll-left 'disabled nil)
